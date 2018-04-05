@@ -1,0 +1,159 @@
+﻿<!--===================================================================================================================
+Released under the MIT License.
+    
+Copyright (c) 2018 Ntreev Soft co., Ltd.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the 
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit 
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the 
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+====================================================================================================================-->
+<ResourceDictionary x:Class="Ntreev.ModernUI.Framework.Assets.FilterBox"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
+                    xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.Properties">
+
+    <Style x:Key="FilterBox_EditableTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource ComboBoxEditableTextBox}">
+        <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
+    </Style>
+
+    <ControlTemplate x:Key="FilterBox_Template" TargetType="{x:Type nmfc:FilterBox}">
+        <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="PART_Popup" 
+                   AllowsTransparency="true" 
+                   Grid.ColumnSpan="2" 
+                   Placement="Bottom"
+                   Margin="1"
+                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}">
+                    <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
+                    <Border Background="#0A000000" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
+
+                    <Border x:Name="DropDownBorder" 
+                            Background="{DynamicResource PopupBackground}" 
+                            BorderBrush="{DynamicResource WindowBorderActive}"
+                            BorderThickness="1"
+                            Margin="0 -1 0 0">
+                        <!-- popup border thickness not dependent on BorderThickness property-->
+                        <ScrollViewer Name="DropDownScrollViewer">
+                            <Grid RenderOptions.ClearTypeHint="Enabled">
+                                <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <Rectangle x:Name="OpaqueRect"
+                                               Height="{Binding ElementName=DropDownBorder,Path=ActualHeight}" 
+                                               Width="{Binding ElementName=DropDownBorder,Path=ActualWidth}" 
+                                               Fill="{Binding ElementName=DropDownBorder,Path=Background}" />
+                                </Canvas>
+                                <StackPanel>
+                                    <CheckBox IsChecked="{Binding CaseSensitive, RelativeSource={RelativeSource TemplatedParent}}"
+                                              Content="{x:Static p:Resources.Label_CaseSensitive}" ClickMode="Press" HorizontalAlignment="Left" 
+                                              HorizontalContentAlignment="Left" Margin="2" />
+                                    <CheckBox IsChecked="{Binding GlobPattern, RelativeSource={RelativeSource TemplatedParent}}" 
+                                              Content="{x:Static p:Resources.Label_UseGlobPattern}" ClickMode="Press" HorizontalAlignment="Left" 
+                                              HorizontalContentAlignment="Left" Margin="2" />
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Popup>
+            
+            <ToggleButton Grid.ColumnSpan="3"
+                          Background="{TemplateBinding Background}" 
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          IsChecked="{Binding Path=IsOpen, Mode=TwoWay, ElementName=PART_Popup}"
+                          Padding="0 0 0 10" />
+            <nmfc:IconButton Grid.Column="1" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" 
+                             Tag="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                             Click="IconButton_Click"
+                             Focusable="False"
+                             BorderThickness="0" Margin="0 1 3 1" />
+            <Path Name="Arrow"
+                  Grid.ColumnSpan="3"
+                  Margin="3 1 6 0"
+                  Fill="{TemplateBinding Foreground}"
+                  Data="{DynamicResource DownArrowGeometry}"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center" IsHitTestVisible="False" />
+
+            <TextBlock x:Name="watermark" Text="{TemplateBinding Comment}" Padding="2 0 0 1" Visibility="Hidden"
+                       Margin="{TemplateBinding Padding}" Foreground="{DynamicResource InputTextDisabled}" />
+            <TextBox x:Name="PART_EditableTextBox"
+                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                     Margin="{TemplateBinding Padding}" CaretBrush="{DynamicResource InputText}"
+                     Padding="2 0 0 1"
+                     Style="{StaticResource FilterBox_EditableTextBox}"
+                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!--<Trigger Property="HasItems" Value="false">
+                <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
+            </Trigger>-->
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{DynamicResource InputBackgroundHover}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="true">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger SourceName="PART_EditableTextBox" Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Text" Value="" />
+                    <Condition SourceName="PART_EditableTextBox" Property="IsFocused" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="watermark" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+            <!--<Trigger Property="IsGrouping" Value="true">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </Trigger>
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false" >
+                <Setter TargetName="OpaqueRect" 
+                        Property="Canvas.Top" 
+                        Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}" />
+                <Setter TargetName="OpaqueRect" 
+                        Property="Canvas.Left" 
+                        Value="{Binding ElementName=DropDownScrollViewer, Path=HorizontalOffset}" />
+            </Trigger>-->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type nmfc:FilterBox}">
+        <Setter Property="Foreground" Value="{DynamicResource InputText}" />
+        <Setter Property="Background" Value="{DynamicResource InputBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InputBorder}" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Template" Value="{StaticResource FilterBox_Template}" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,120 @@
+﻿<!--===================================================================================================================
+Released under the MIT License.
+    
+Copyright (c) 2018 Ntreev Soft co., Ltd.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the 
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit 
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the 
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+====================================================================================================================-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters"
+                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
+                    xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
+
+    <ResourceDictionary.MergedDictionaries>
+
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml" />
+        
+    </ResourceDictionary.MergedDictionaries>
+
+    <nmfv:ComplementaryConverter x:Key="complementaryConverter" />
+
+    <SolidColorBrush x:Key="BlackBrush" Color="{DynamicResource WindowText}" />
+    <SolidColorBrush x:Key="Complementary" Color="{Binding Color, Source={StaticResource WindowText}, Converter={StaticResource complementaryConverter}}" />
+    <SolidColorBrush x:Key="WindowBorderActiveComplementary" Color="{Binding Color, Source={StaticResource WindowBorderActive}, Converter={StaticResource complementaryConverter}}" />
+    <SolidColorBrush x:Key="WindowBackgroundComplementary" Color="{Binding Color, Source={StaticResource WindowBackground}, Converter={StaticResource complementaryConverter}}" />
+    <SolidColorBrush x:Key="ItemTextDisabledComplementary" Color="{Binding Color, Source={StaticResource ItemTextDisabled}, Converter={StaticResource complementaryConverter}}" />
+
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundCurrent" Color="{DynamicResource AccentColor}" Opacity="0.5" />
+    <SolidColorBrush x:Key="DataGridHeaderForegroundCurrent" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundSelected" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="DataGridHeaderForegroundSelected" Color="{DynamicResource WindowBackgroundColor}" />
+
+    <SolidColorBrush x:Key="DataGridCellBackgroundCurrent" Color="{DynamicResource AccentColor}" Opacity="0.5" />
+    <SolidColorBrush x:Key="DataGridCellForegroundCurrent" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="DataGridCellBackgroundSelected" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="DataGridCellForegroundSelected" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="DataGridCellBackgroundInactivated" Color="{Binding Color, Source={StaticResource WindowText}}" Opacity="0.05" />
+
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{Binding Color, Source={StaticResource WindowText}}" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowTextBrushKey}" Color="{Binding Color, Source={StaticResource WindowText}}" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{Binding Color, Source={StaticResource WindowBackground}}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ControlNormalBackgroundKey}" Color="{Binding Color, Source={StaticResource WindowBackground}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ControlDisabledBackgroundKey}" Color="{Binding Color, Source={StaticResource WindowBackground}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ControlNormalBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorder}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ControlMouseOverBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorderHover}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ControlSelectedBorderKey}" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ControlFocusedBorderKey}" Color="{DynamicResource AccentColor}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonNormalOuterBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorder}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonNormalInnerBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorder}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonNormalBackgroundKey}" Color="{Binding Color, Source={StaticResource ButtonBackground}}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonMouseOverBackgroundKey}" Color="{Binding Color, Source={StaticResource ButtonBackgroundHover}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonMouseOverOuterBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorderHover}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonMouseOverInnerBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorderHover}}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonPressedOuterBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorderPressed}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonPressedInnerBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorderPressed}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonPressedBackgroundKey}" Color="{Binding Color, Source={StaticResource ButtonBorderPressed}}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonFocusedOuterBorderKey}" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonFocusedInnerBorderKey}" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonFocusedBackgroundKey}" Color="{Binding Color, Source={StaticResource ButtonBackground}}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonDisabledOuterBorderKey}" Color="{Binding Color, Source={StaticResource ButtonBorder}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.ButtonInnerBorderDisabledKey}" Color="{Binding Color, Source={StaticResource ButtonBorder}}" />
+
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.GlyphNormalForegroundKey}" Color="{Binding Color, Source={StaticResource ItemText}}" />
+    <SolidColorBrush x:Key="{x:Static xctk:ResourceKeys.GlyphDisabledForegroundKey}" Color="{Binding Color, Source={StaticResource ItemTextDisabled}}" />
+
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.ForegroundKey}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.BackgroundKey}" Color="#FFFFFF" />
+
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.BlackForegroundKey}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkBlueForegroundKey}" Color="#000080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkGreenForegroundKey}" Color="#008000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkCyanForegroundKey}" Color="#008080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkRedForegroundKey}" Color="#800000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkMagentaForegroundKey}" Color="#800080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkYellowForegroundKey}" Color="#CCCC00" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.GrayForegroundKey}" Color="#C0C0C0" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkGrayForegroundKey}" Color="#808080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.BlueForegroundKey}" Color="#0000FF" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.GreenForegroundKey}" Color="#00FF00" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.CyanForegroundKey}" Color="#00FFFF" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.RedForegroundKey}" Color="#FF0000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.MagentaForegroundKey}" Color="#FF00FF" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.YellowForegroundKey}" Color="#FFFF00" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.WhiteForegroundKey}" Color="#FFFFFF" />
+
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.BlackBackgroundKey}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkBlueBackgroundKey}" Color="#000080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkGreenBackgroundKey}" Color="#008000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkCyanBackgroundKey}" Color="#008080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkRedBackgroundKey}" Color="#800000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkMagentaBackgroundKey}" Color="#800080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkYellowBackgroundKey}" Color="#CCCC00" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.GrayBackgroundKey}" Color="#C0C0C0" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.DarkGrayBackgroundKey}" Color="#808080" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.BlueBackgroundKey}" Color="#0000FF" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.GreenBackgroundKey}" Color="#00FF00" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.CyanBackgroundKey}" Color="#00FFFF" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.RedBackgroundKey}" Color="#FF0000" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.MagentaBackgroundKey}" Color="#FF00FF" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.YellowBackgroundKey}" Color="#FFFF00" />
+    <SolidColorBrush x:Key="{x:Static nmfc:TerminalColors.WhiteBackgroundKey}" Color="#FFFFFF" />
+
+</ResourceDictionary>

@@ -1,0 +1,56 @@
+﻿<!--===================================================================================================================
+Released under the MIT License.
+    
+Copyright (c) 2018 Ntreev Soft co., Ltd.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the 
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit 
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the 
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+====================================================================================================================-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+
+    <Style x:Key="PART_TextBox_Style" TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}">
+        <Setter Property="IsReadOnlyCaretVisible" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Style.Resources>
+            <Style TargetType="{x:Type Paragraph}">
+                <Setter Property="Margin" Value="0" />
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <!--<Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+            </Trigger>-->
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate x:Key="TerminalControl_Template" TargetType="{x:Type nmfc:TerminalControl}">
+        <RichTextBox x:Name="PART_TextBox" BorderThickness="{TemplateBinding BorderThickness}" Style="{StaticResource PART_TextBox_Style}"
+                     Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}"
+                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        </RichTextBox>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type nmfc:TerminalControl}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static nmfc:TerminalColors.ForegroundKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static nmfc:TerminalColors.BackgroundKey}}" />
+        <Setter Property="OutputForeground" Value="{DynamicResource {x:Static nmfc:TerminalColors.ForegroundKey}}" />
+        <Setter Property="OutputBackground" Value="{DynamicResource {x:Static nmfc:TerminalColors.BackgroundKey}}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="굴림체" />
+        <Setter Property="Template" Value="{StaticResource TerminalControl_Template}" />
+    </Style>
+
+</ResourceDictionary>

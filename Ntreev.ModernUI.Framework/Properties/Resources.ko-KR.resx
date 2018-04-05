@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>취소(_C)</value>
+    <comment>1</comment>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>닫기(_C)</value>
+  </data>
+  <data name="Button_Create" xml:space="preserve">
+    <value>생성(_O)</value>
+  </data>
+  <data name="Button_Delete" xml:space="preserve">
+    <value>삭제(_D)</value>
+  </data>
+  <data name="Button_Move" xml:space="preserve">
+    <value>이동(_M)</value>
+  </data>
+  <data name="Button_No" xml:space="preserve">
+    <value>아니오(_N)</value>
+  </data>
+  <data name="Button_OK" xml:space="preserve">
+    <value>확인(_O)</value>
+  </data>
+  <data name="Button_Rename" xml:space="preserve">
+    <value>변경(_R)</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>재시도(_R)</value>
+  </data>
+  <data name="Button_Select" xml:space="preserve">
+    <value>선택(_S)</value>
+  </data>
+  <data name="Button_Yes" xml:space="preserve">
+    <value>예(_Y)</value>
+  </data>
+  <data name="Label_CaseSensitive" xml:space="preserve">
+    <value>대소문자 구분</value>
+  </data>
+  <data name="Label_CategoryName" xml:space="preserve">
+    <value>폴더 이름</value>
+  </data>
+  <data name="Label_CategoryPath" xml:space="preserve">
+    <value>폴더 경로</value>
+  </data>
+  <data name="Label_Comment" xml:space="preserve">
+    <value>설명</value>
+  </data>
+  <data name="Label_CurrentName" xml:space="preserve">
+    <value>현재 이름</value>
+  </data>
+  <data name="Label_CurrentPath" xml:space="preserve">
+    <value>현재 경로</value>
+  </data>
+  <data name="Label_CurrentTargetPath" xml:space="preserve">
+    <value>현재 폴더</value>
+  </data>
+  <data name="Label_NewName" xml:space="preserve">
+    <value>새 이름</value>
+  </data>
+  <data name="Label_TargetPath" xml:space="preserve">
+    <value>대상 폴더</value>
+  </data>
+  <data name="Label_UseGlobPattern" xml:space="preserve">
+    <value>Glob 패턴 사용</value>
+  </data>
+  <data name="Title_Confirm" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Title_Delete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="Title_EditFilter" xml:space="preserve">
+    <value>필터 편집</value>
+  </data>
+  <data name="Title_Move" xml:space="preserve">
+    <value>이동</value>
+  </data>
+  <data name="Title_NewCategory" xml:space="preserve">
+    <value>새 폴더 추가</value>
+  </data>
+  <data name="Title_Rename" xml:space="preserve">
+    <value>이름 변경</value>
+  </data>
+  <data name="Title_SelectColor" xml:space="preserve">
+    <value>색상 선택</value>
+  </data>
+  <data name="Comment_Filter" xml:space="preserve">
+    <value>검색어를 입력하세요.</value>
+  </data>
+  <data name="Comment_TypeText" xml:space="preserve">
+    <value>'{0}'을(를) 입력하세요</value>
+  </data>
+  <data name="Text_DeleteNow" xml:space="preserve">
+    <value>지금삭제</value>
+  </data>
+  <data name="Message_Deleting" xml:space="preserve">
+    <value>삭제중입니다.</value>
+  </data>
+  <data name="Message_Moving" xml:space="preserve">
+    <value>이동중입니다.</value>
+  </data>
+  <data name="Message_CreatingCategory" xml:space="preserve">
+    <value>폴더를 생성중입니다.</value>
+  </data>
+  <data name="Message_Renaming" xml:space="preserve">
+    <value>이름을 변경중입니다.</value>
+  </data>
+  <data name="Message_ConfirmToCreate" xml:space="preserve">
+    <value>생성 하시겠습니까?</value>
+  </data>
+  <data name="Message_ConfirmToDelete" xml:space="preserve">
+    <value>삭제 하시겠습니까?</value>
+  </data>
+  <data name="Message_ConfirmToSave" xml:space="preserve">
+    <value>저장 하시겠습니까?</value>
+  </data>
+  <data name="Message_Deleted" xml:space="preserve">
+    <value>삭제되었습니다.</value>
+  </data>
+  <data name="Command_NextSearchedItem" xml:space="preserve">
+    <value>다음</value>
+  </data>
+  <data name="Command_PrevSearchedItem" xml:space="preserve">
+    <value>이전</value>
+  </data>
+  <data name="Command_Show" xml:space="preserve">
+    <value>보이기</value>
+  </data>
+  <data name="Command_Hide" xml:space="preserve">
+    <value>감추기</value>
+  </data>
+</root>

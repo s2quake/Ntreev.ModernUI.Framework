@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.ModernUI.Framework", "Ntreev.ModernUI.Framework\Ntreev.ModernUI.Framework.csproj", "{20C3D3DD-DE99-4126-9449-BCA12E4D255D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.ModernUI.Shell", "Ntreev.ModernUI.Shell\Ntreev.ModernUI.Shell.csproj", "{08EDE278-EE1B-4A91-9CB8-4608AA4BD072}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ntreev.ModernUI.AssemblyInfo", "Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.shproj", "{4E611E55-7AEB-45D8-AA12-587EFF9DD78E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.Library", "..\Ntreev.Library\Ntreev.Library\Ntreev.Library.csproj", "{1918437F-4FBF-4731-AC5B-981A4A4CB1F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.Library.Random", "..\Ntreev.Library\Ntreev.Library.Random\Ntreev.Library.Random.csproj", "{83F1180F-F170-48CF-BE1E-CA60D6851800}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{08ede278-ee1b-4a91-9cb8-4608aa4bd072}*SharedItemsImports = 4
+		..\Ntreev.Library\Ntreev.Library.AssemblyInfo\Ntreev.Library.AssemblyInfo.projitems*{1918437f-4fbf-4731-ac5b-981a4a4cb1f1}*SharedItemsImports = 4
+		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{20c3d3dd-de99-4126-9449-bca12e4d255d}*SharedItemsImports = 4
+		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{4e611e55-7aeb-45d8-aa12-587eff9dd78e}*SharedItemsImports = 13
+		..\Ntreev.Library\Ntreev.Library.AssemblyInfo\Ntreev.Library.AssemblyInfo.projitems*{83f1180f-f170-48cf-be1e-ca60d6851800}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20C3D3DD-DE99-4126-9449-BCA12E4D255D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C3D3DD-DE99-4126-9449-BCA12E4D255D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C3D3DD-DE99-4126-9449-BCA12E4D255D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C3D3DD-DE99-4126-9449-BCA12E4D255D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08EDE278-EE1B-4A91-9CB8-4608AA4BD072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EDE278-EE1B-4A91-9CB8-4608AA4BD072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08EDE278-EE1B-4A91-9CB8-4608AA4BD072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08EDE278-EE1B-4A91-9CB8-4608AA4BD072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1918437F-4FBF-4731-AC5B-981A4A4CB1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1918437F-4FBF-4731-AC5B-981A4A4CB1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1918437F-4FBF-4731-AC5B-981A4A4CB1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1918437F-4FBF-4731-AC5B-981A4A4CB1F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54CC952A-2368-49C9-9FFC-D8258D7CF54E}
+	EndGlobalSection
+EndGlobal
