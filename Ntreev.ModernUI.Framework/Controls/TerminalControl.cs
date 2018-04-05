@@ -45,7 +45,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         public readonly static DependencyProperty TextProperty = TextPropertyKey.DependencyProperty;
 
         public readonly static DependencyProperty OutputForegroundProperty =
-            DependencyProperty.Register(nameof(OutputForeground), typeof(Brush), typeof(TerminalControl), 
+            DependencyProperty.Register(nameof(OutputForeground), typeof(Brush), typeof(TerminalControl),
                 new FrameworkPropertyMetadata(OutputForegroundPropertyChangedCallback));
 
         public readonly static DependencyProperty OutputBackgroundProperty =
@@ -62,7 +62,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         private Run prompt;
         private Run command;
         private Run output;
-        //private Paragraph outputBlock;
         private string promptText;
         private string inputText = string.Empty;
         private int refStack = 0;
@@ -88,7 +87,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
             if (this.textBox != null)
             {
-                this.prompt = new Run();
+                this.prompt = new Run() { IsEnabled = false, };
                 this.command = new Run();
                 this.promptBlock = new Paragraph();
                 this.promptBlock.Inlines.Add(this.prompt);
@@ -119,7 +118,6 @@ namespace Ntreev.ModernUI.Framework.Controls
                 }
 
                 this.AppendLine(this.prompt.Text + this.command.Text);
-                //this.outputBlock = this.promptBlock;
                 this.command.Text = string.Empty;
                 this.textBox.CaretPosition = this.command.ContentEnd;
                 this.inputText = string.Empty;
@@ -384,7 +382,7 @@ namespace Ntreev.ModernUI.Framework.Controls
                 if (matchText != string.Empty)
                     argList.Add(matchText);
             }
-            
+
             var completions = this.GetCompletion(argList.ToArray(), find);
             if (completions != null && completions.Any())
             {
@@ -544,6 +542,11 @@ namespace Ntreev.ModernUI.Framework.Controls
                 }
             }
 
+            if (this.command.Text == string.Empty && this.textBox.CaretPosition.CompareTo(this.prompt.ContentEnd) == 0)
+            {
+                this.textBox.CaretPosition = this.command.ContentEnd;
+            }
+
             if (this.refStack == 0)
             {
                 this.inputText = this.command.Text;
@@ -564,7 +567,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         private void AppendInternal(string text)
         {
             this.refStack++;
-
             if (this.output == null || this.isChanged == true)
             {
                 var oldOutput = this.output;
@@ -584,7 +586,6 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
 
             this.output.Text += text;
-
             this.refStack--;
         }
     }

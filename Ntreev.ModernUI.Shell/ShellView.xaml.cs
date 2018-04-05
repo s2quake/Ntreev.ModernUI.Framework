@@ -1,6 +1,8 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using Ntreev.ModernUI.Framework;
 using Ntreev.ModernUI.Framework.Controls;
+using Ntreev.ModernUI.Framework.Dialogs.ViewModels;
+using Ntreev.ModernUI.Framework.Dialogs.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +28,12 @@ namespace Ntreev.ModernUI.Shell
         public ShellView()
         {
             this.InitializeComponent();
-            var ss = 1 | 2 | 4;
+            this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-        
+
         }
 
         private void Editor_Executed(object sender, RoutedEventArgs e)
@@ -61,6 +63,19 @@ namespace Ntreev.ModernUI.Shell
                     this.editor.Prompt = "c:>";
                 }
             });
+        }
+
+        private void PickColor_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new SelectColorViewModel()
+            {
+                CurrentColor = FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor,
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor = dialog.CurrentColor;
+                this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
+            }
         }
     }
 }

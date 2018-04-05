@@ -34,7 +34,16 @@
                         <nmfc:FlagControlItem Value="4" Content="C" />
                         <nmfc:FlagControlItem Value="7" Content="All" />
                     </nmfc:FlagControl>
-                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
+                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
+                    <StackPanel Orientation="Horizontal" nmfc:PropertyItemsControl.Header="IconImage" >
+                        <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
+                                        HorizontalAlignment="Left" />
+                        <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
+                                        HorizontalAlignment="Left" Background="{DynamicResource Accent}" />
+                        <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
+                                        HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
+                    </StackPanel>
+                    <Button nmfc:PropertyItemsControl.Header="ColorPicker" x:Name="PickColor" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
                 </nmfc:PropertyItemsControl>
             </Grid>
         </TabItem>
@@ -53,7 +62,7 @@
                     <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
                 </StackPanel>
                 <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
-                    <Button Background="Red"  Width="50" HorizontalAlignment="Left" BorderThickness="0" />
+                    <Button Background="{Binding Background, ElementName=PickColor}" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
                     <Border Width="4" />
                     <ComboBox Width="122" />
                 </StackPanel>
