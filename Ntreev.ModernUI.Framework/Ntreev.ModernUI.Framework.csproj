@@ -136,7 +136,6 @@
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ToolBarItemStyleSelector.cs" />
     <Compile Include="Controls\MenuItemStyleSelector.cs" />
-    <None Include="Controls\ModernBlankWindow.cs" />
     <Compile Include="Controls\ModernColumnManagerCell.cs" />
     <Compile Include="Controls\ModernColumnManagerRow.cs" />
     <Compile Include="Controls\ModernDataCell.cs" />
@@ -291,7 +290,6 @@
     <Compile Include="ViewModels\ListBoxViewModel.cs" />
     <Compile Include="ViewModels\TreeViewViewModel.cs" />
     <Compile Include="Views\MessageBoxView.cs" />
-    <None Include="Controls\SimpleWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -376,10 +374,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <None Include="Assets\ModernBlankWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
     <Page Include="Assets\ModernUI.Dark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -436,10 +430,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <None Include="Assets\SimpleWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
     <Page Include="Assets\TabControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
