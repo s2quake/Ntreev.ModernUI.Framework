@@ -53,10 +53,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="TreeViewItemSelector.xaml" />
         <ResourceDictionary Source="ErrorBlinker.xaml" />
         <ResourceDictionary Source="ProgressRing.xaml" />
-        <ResourceDictionary Source="ModernBlankWindow.xaml" />
+        <!--<ResourceDictionary Source="ModernBlankWindow.xaml" />-->
         <ResourceDictionary Source="MessageBoxView.xaml" />
         <ResourceDictionary Source="ModernWindow.xaml" />
-        <ResourceDictionary Source="SimpleWindow.xaml" />
+        <!--<ResourceDictionary Source="SimpleWindow.xaml" />-->
         <ResourceDictionary Source="DialogWindow.xaml" />
 
     </ResourceDictionary.MergedDictionaries>

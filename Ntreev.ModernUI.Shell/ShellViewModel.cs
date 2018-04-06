@@ -16,7 +16,7 @@ namespace Ntreev.ModernUI.Shell
     {
         public ShellViewModel()
         {
-            
+            this.DisplayName = "Controls";
         }
     }
 }

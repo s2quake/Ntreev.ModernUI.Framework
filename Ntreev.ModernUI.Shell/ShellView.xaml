@@ -1,12 +1,13 @@
-﻿<Window x:Class="Ntreev.ModernUI.Shell.ShellView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
-        Title="MainWindow" Height="550" Width="525" Loaded="Window_Loaded">
-    
-    <Window.Resources>
+﻿<mui:ModernWindow x:Class="Ntreev.ModernUI.Shell.ShellView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
+                  Height="550" Width="525" Loaded="Window_Loaded" Style="{StaticResource ModernWindow_Style}">
 
-    </Window.Resources>
+    <mui:ModernWindow.Resources>
+
+    </mui:ModernWindow.Resources>
 
     <TabControl Style="{StaticResource TabControl_Page_Style}">
         <TabItem Header="Base">
@@ -47,7 +48,7 @@
                 </nmfc:PropertyItemsControl>
             </Grid>
         </TabItem>
-        <TabItem Header="Treminal">
+        <TabItem Header="Terminal">
             <nmfc:TerminalControl x:Name="editor" Executed="Editor_Executed" Loaded="Editor_Loaded" />
         </TabItem>
         <TabItem Header="PropertyItemsControl">
@@ -78,4 +79,4 @@
         </TabItem>
     </TabControl>
     
-</Window>
+</mui:ModernWindow>
