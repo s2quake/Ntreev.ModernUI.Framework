@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ntreev.ModernUI.Framework.DataGrid</RootNamespace>
+    <AssemblyName>Ntreev.ModernUI.Framework.DataGrid</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Controls.v5.7, Version=5.7.15459.10040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL" />
+    <Reference Include="Xceed.Wpf.DataGrid.v5.7, Version=5.7.15459.10040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL" />
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.17280.14430, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Toolkit.3.4.17280.14430\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\ModernDataGridControl.xaml.cs">
+      <DependentUpon>ModernDataGridControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DomainRowsFromClipboard.cs" />
+    <Compile Include="Controls\ItemDeletingEventArgs.cs" />
+    <Compile Include="Controls\ItemDeletingEventHandler.cs" />
+    <Compile Include="Controls\ItemInsertingEventArgs.cs" />
+    <Compile Include="Controls\ItemInsertingEventHandler.cs" />
+    <Compile Include="Controls\ModernColumnManagerCell.cs" />
+    <Compile Include="Controls\ModernColumnManagerRow.cs" />
+    <Compile Include="Controls\ModernCurrentItemElement.cs" />
+    <Compile Include="Controls\ModernDataCell.cs" />
+    <Compile Include="Controls\ModernDataCellContentTemplateSelector.cs" />
+    <Compile Include="Controls\ModernDataCellTextBox.cs" />
+    <Compile Include="Controls\ModernDataGridCommands.cs" />
+    <Compile Include="Controls\ModernDataGridControl.cs" />
+    <Compile Include="Controls\ModernDataGridExtensions.cs" />
+    <Compile Include="Controls\ModernDataGridUpdateSourceException.cs" />
+    <Compile Include="Controls\ModernDataRow.cs" />
+    <Compile Include="Controls\ModernDragEventArgs.cs" />
+    <Compile Include="Controls\ModernDragEventHandler.cs" />
+    <Compile Include="Controls\ModernInsertionCell.cs" />
+    <Compile Include="Controls\ModernInsertionRow.cs" />
+    <Compile Include="Controls\ModernItemInfo.cs" />
+    <Compile Include="Controls\ModernScrollBar.cs" />
+    <Compile Include="Controls\ModernSearchedItems.cs" />
+    <Compile Include="Controls\ModernTableViewItemsHost.cs" />
+    <Compile Include="Controls\ModernTableViewScrollViewer.cs" />
+    <Compile Include="Controls\ModernTextClipboardExporter.cs" />
+    <Compile Include="Controls\ModernTextClipboardParser.cs" />
+    <None Include="Converters\ContentToStringConverter.cs" />
+    <Compile Include="Controls\TimeSpanUpDown.cs" />
+    <Compile Include="Controls\ValueChangingEventArgs.cs" />
+    <Compile Include="Controls\ValueChangingEventHandler.cs" />
+    <Compile Include="Converters\IndexToColorBrushConverter.cs" />
+    <None Include="Converters\TypeToEnumMembersConverter.cs" />
+    <Compile Include="Markup\ContentBindingExtension.cs" />
+    <Compile Include="Markup\EditingContentBindingExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library\Ntreev.Library.csproj">
+      <Project>{1918437f-4fbf-4731-ac5b-981a4a4cb1f1}</Project>
+      <Name>Ntreev.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ntreev.ModernUI.Framework\Ntreev.ModernUI.Framework.csproj">
+      <Project>{20c3d3dd-de99-4126-9449-bca12e4d255d}</Project>
+      <Name>Ntreev.ModernUI.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Assets\DateTimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\ModernDataGridControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\TimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\TimeSpanUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="..\Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

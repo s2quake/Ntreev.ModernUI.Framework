@@ -74,12 +74,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.Controls.v5.7, Version=5.7.15459.10040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL" />
-    <Reference Include="Xceed.Wpf.DataGrid.v5.7, Version=5.7.15459.10040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL" />
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.17280.14430, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Xceed.Wpf.Toolkit.3.4.17280.14430\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
@@ -94,9 +88,6 @@
     </Compile>
     <Compile Include="Assets\ListBox.xaml.cs">
       <DependentUpon>ListBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Assets\ModernDataGridControl.xaml.cs">
-      <DependentUpon>ModernDataGridControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\TabControl.xaml.cs">
       <DependentUpon>TabControl.xaml</DependentUpon>
@@ -115,7 +106,6 @@
     </Compile>
     <Compile Include="Controls\CommandStringUtility.cs" />
     <Compile Include="Controls\DialogContentControl.cs" />
-    <Compile Include="Controls\DomainRowsFromClipboard.cs" />
     <Compile Include="Controls\DragDropUtility.cs" />
     <Compile Include="Controls\ErrorBlinker.cs" />
     <Compile Include="Controls\ExpandableToolBar.cs" />
@@ -130,38 +120,14 @@
     <Compile Include="Controls\IconToggleButton.cs" />
     <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\IconImage.cs" />
-    <Compile Include="Controls\ItemDeletingEventArgs.cs" />
-    <Compile Include="Controls\ItemDeletingEventHandler.cs" />
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ToolBarItemStyleSelector.cs" />
     <Compile Include="Controls\MenuItemStyleSelector.cs" />
-    <Compile Include="Controls\ModernColumnManagerCell.cs" />
-    <Compile Include="Controls\ModernColumnManagerRow.cs" />
-    <Compile Include="Controls\ModernDataCell.cs" />
-    <Compile Include="Controls\ModernDataCellContentTemplateSelector.cs" />
-    <Compile Include="Controls\ModernDataCellTextBox.cs" />
-    <Compile Include="Controls\ModernDataGridControl.cs" />
-    <Compile Include="Controls\ModernDataGridCommands.cs" />
-    <Compile Include="Controls\ModernDataGridExtensions.cs" />
-    <Compile Include="Controls\ModernDataGridUpdateSourceException.cs" />
-    <Compile Include="Controls\ModernDataRow.cs" />
-    <Compile Include="Controls\ModernDragEventArgs.cs" />
-    <Compile Include="Controls\ModernDragEventHandler.cs" />
-    <Compile Include="Controls\ModernCurrentItemElement.cs" />
-    <Compile Include="Controls\ModernSearchedItems.cs" />
-    <Compile Include="Controls\ModernInsertionCell.cs" />
-    <Compile Include="Controls\ModernInsertionRow.cs" />
-    <Compile Include="Controls\ModernItemInfo.cs" />
-    <Compile Include="Controls\ModernScrollBar.cs" />
-    <Compile Include="Controls\ModernTableViewItemsHost.cs" />
-    <Compile Include="Controls\ModernTextClipboardExporter.cs" />
-    <Compile Include="Controls\ModernTextClipboardParser.cs" />
     <Compile Include="Controls\ModernTreeViewItem.cs" />
     <Compile Include="Controls\ModernTreeView.cs" />
     <Compile Include="Controls\PasswordBoxUtility.cs" />
     <Compile Include="Controls\ProgressContent.cs" />
-    <Compile Include="Controls\ModernTableViewScrollViewer.cs" />
     <Compile Include="Controls\ProgressRing.cs" />
     <Compile Include="Controls\ProgressType.cs" />
     <Compile Include="Controls\PropertyItemsControl.cs" />
@@ -169,23 +135,16 @@
     <Compile Include="Controls\SelectedFlags.cs" />
     <Compile Include="Controls\TabControlContentControl.cs" />
     <Compile Include="Controls\TextBlockService.cs" />
-    <Compile Include="Controls\TimeSpanUpDown.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
-    <Compile Include="Controls\ItemInsertingEventArgs.cs" />
     <Compile Include="Controls\TreeViewItemSelector.cs" />
     <Compile Include="Controls\TreeViewUtility.cs" />
-    <Compile Include="Controls\ValueChangingEventArgs.cs" />
-    <Compile Include="Controls\ItemInsertingEventHandler.cs" />
-    <Compile Include="Controls\ValueChangingEventHandler.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\RoutedUICommandToStringConverter.cs" />
     <Compile Include="Converters\ComplementaryConverter.cs" />
     <Compile Include="Converters\ContentToStringConverter.cs" />
     <Compile Include="Converters\HasFlagConverter.cs" />
-    <Compile Include="Converters\TypeToEnumMembersConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EnumerableToVisibilityConverter.cs" />
-    <Compile Include="Converters\IndexToColorBrushConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Converters\DepthToIndentConverter.cs" />
@@ -245,17 +204,12 @@
     <Compile Include="IMenuItem.cs" />
     <Compile Include="ISelectable.cs" />
     <Compile Include="ISelector.cs" />
-    <None Include="Controls\ExceptionWindow.xaml.cs">
-      <DependentUpon>ExceptionWindow.xaml</DependentUpon>
-    </None>
     <Compile Include="IAppConfiguration.cs" />
     <Compile Include="IModalDialog.cs" />
     <Compile Include="IUndo.cs" />
     <Compile Include="IUndoService.cs" />
     <Compile Include="IUndoTransaction.cs" />
     <Compile Include="Markup\VisibilityBindingExtension.cs" />
-    <Compile Include="Markup\ContentBindingExtension.cs" />
-    <Compile Include="Markup\EditingContentBindingExtension.cs" />
     <Compile Include="ToolBarItemUtility.cs" />
     <Compile Include="ToolBarItemBase.cs" />
     <Compile Include="MenuItemUtility.cs" />
@@ -326,10 +280,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\DateTimePicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Assets\ErrorBlinker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -379,10 +329,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\ModernUI.Light.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\ModernDataGridControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -442,14 +388,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\TimePicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Assets\TimeSpanUpDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Assets\ToggleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -466,10 +404,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <None Include="Controls\ExceptionWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </None>
     <Page Include="Dialogs\Views\ProgressView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

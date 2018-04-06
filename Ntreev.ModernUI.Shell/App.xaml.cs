@@ -16,16 +16,16 @@ namespace Ntreev.ModernUI.Shell
     {
         public App()
         {
-            var toolkitLicensePath = Environment.GetEnvironmentVariable("xceed_toolkit_license", EnvironmentVariableTarget.User);
-            if (File.Exists(toolkitLicensePath) == true)
-            {
-                Xceed.Wpf.Toolkit.Licenser.LicenseKey = File.ReadAllText(toolkitLicensePath);
-            }
-            var datagridLicensePath = Environment.GetEnvironmentVariable("xceed_datagrid_license", EnvironmentVariableTarget.User);
-            if (File.Exists(datagridLicensePath) == true)
-            {
-                Xceed.Wpf.DataGrid.Licenser.LicenseKey = File.ReadAllText(datagridLicensePath);
-            }
+            //var toolkitLicensePath = Environment.GetEnvironmentVariable("xceed_toolkit_license", EnvironmentVariableTarget.User);
+            //if (File.Exists(toolkitLicensePath) == true)
+            //{
+            //    Xceed.Wpf.Toolkit.Licenser.LicenseKey = File.ReadAllText(toolkitLicensePath);
+            //}
+            //var datagridLicensePath = Environment.GetEnvironmentVariable("xceed_datagrid_license", EnvironmentVariableTarget.User);
+            //if (File.Exists(datagridLicensePath) == true)
+            //{
+            //    Xceed.Wpf.DataGrid.Licenser.LicenseKey = File.ReadAllText(datagridLicensePath);
+            //}
         }
     }
 }

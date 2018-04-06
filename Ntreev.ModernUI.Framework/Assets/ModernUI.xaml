@@ -28,7 +28,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="PasswordBox.xaml" />
         <ResourceDictionary Source="ExpandableContextMenu.xaml" />
         <ResourceDictionary Source="ToggleButton.xaml" />
-        <ResourceDictionary Source="ModernDataGridControl.xaml" />
+        <!--<ResourceDictionary Source="ModernDataGridControl.xaml" />-->
         <ResourceDictionary Source="IconButton.xaml" />
         <ResourceDictionary Source="IconToggleButton.xaml" />
         <ResourceDictionary Source="IconImage.xaml" />
@@ -46,9 +46,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="TabControl.xaml" />
         <ResourceDictionary Source="GroupBox.xaml" />
         <ResourceDictionary Source="ProgressContent.xaml" />
-        <ResourceDictionary Source="TimePicker.xaml" />
-        <ResourceDictionary Source="DateTimePicker.xaml" />
-        <ResourceDictionary Source="TimeSpanUpDown.xaml" />
+        <!--<ResourceDictionary Source="TimePicker.xaml" />-->
+        <!--<ResourceDictionary Source="DateTimePicker.xaml" />-->
+        <!--<ResourceDictionary Source="TimeSpanUpDown.xaml" />-->
         <ResourceDictionary Source="FlagControl.xaml" />
         <ResourceDictionary Source="TreeViewItemSelector.xaml" />
         <ResourceDictionary Source="ErrorBlinker.xaml" />

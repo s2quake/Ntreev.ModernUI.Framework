@@ -13,10 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.Library", "..\Ntreev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.Library.Random", "..\Ntreev.Library\Ntreev.Library.Random\Ntreev.Library.Random.csproj", "{83F1180F-F170-48CF-BE1E-CA60D6851800}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ntreev.ModernUI.Framework.DataGrid", "Ntreev.ModernUI.Framework.DataGrid\Ntreev.ModernUI.Framework.DataGrid.csproj", "{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{08ede278-ee1b-4a91-9cb8-4608aa4bd072}*SharedItemsImports = 4
 		..\Ntreev.Library\Ntreev.Library.AssemblyInfo\Ntreev.Library.AssemblyInfo.projitems*{1918437f-4fbf-4731-ac5b-981a4a4cb1f1}*SharedItemsImports = 4
+		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{1c55fed2-99eb-469d-9dac-a1f7b9e7c790}*SharedItemsImports = 4
 		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{20c3d3dd-de99-4126-9449-bca12e4d255d}*SharedItemsImports = 4
 		Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems*{4e611e55-7aeb-45d8-aa12-587eff9dd78e}*SharedItemsImports = 13
 		..\Ntreev.Library\Ntreev.Library.AssemblyInfo\Ntreev.Library.AssemblyInfo.projitems*{83f1180f-f170-48cf-be1e-ca60d6851800}*SharedItemsImports = 4
@@ -42,6 +45,10 @@ Global
 		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F1180F-F170-48CF-BE1E-CA60D6851800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
     </Style>
 
-    <ControlTemplate x:Key="DataCell_Editable_ComboBox_Template" TargetType="{x:Type ComboBox}">
+    <!--<ControlTemplate x:Key="DataCell_Editable_ComboBox_Template" TargetType="{x:Type ComboBox}">
         <Grid Name="MainGrid" SnapsToDevicePixels="true">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -49,7 +49,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             BorderBrush="{DynamicResource WindowBorderActive}"
                             BorderThickness="1"
                             Margin="0,-1,0,0">
-                        <!-- popup border thickness not dependent on BorderThickness property-->
+                        --><!-- popup border thickness not dependent on BorderThickness property--><!--
                         <ScrollViewer Name="DropDownScrollViewer">
                             <Grid RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -94,13 +94,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                      Margin="{TemplateBinding Padding}"
                                      Padding="4,0,0,1"
                                      Visibility="Collapsed" />
-            <!--<TextBox x:Name="PART_EditableTextBox"
+            --><!--<TextBox x:Name="PART_EditableTextBox"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                      IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
                      Margin="{TemplateBinding Padding}"
                      Padding="2,0,0,1"
                      Style="{StaticResource ComboBoxEditableTextBox}"
-                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />-->
+                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />--><!--
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasItems" Value="false">
@@ -130,10 +130,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <MultiDataTrigger >
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HasSearchText, RelativeSource={RelativeSource Self}}" Value="True" />
-                    <Condition Binding="{Binding IsCurrent, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernDataCell}}}" Value="True" />
-                    <Condition Binding="{Binding IsBeingEdited, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernDataCell}}}" Value="False" />
+                    <Condition Binding="{Binding IsCurrent, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="True" />
+                    <Condition Binding="{Binding IsBeingEdited, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
-                <!--<Setter TargetName="htb" Property="Highlight" Value="{DynamicResource WindowBackground}" />-->
+                --><!--<Setter TargetName="htb" Property="Highlight" Value="{DynamicResource WindowBackground}" />--><!--
                 <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Hidden" />
                 <Setter TargetName="htb" Property="Visibility" Value="Visible" />
                 <Setter TargetName="htb" Property="Pattern" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SearchText, RelativeSource={RelativeSource Self}}" />
@@ -141,7 +141,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter TargetName="htb" Property="Foreground" Value="{DynamicResource WindowText}" />
             </MultiDataTrigger>
         </ControlTemplate.Triggers>
-    </ControlTemplate>
+    </ControlTemplate>-->
 
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
         <EventSetter Event="Loaded" Handler="ComboBox_Loaded" />
