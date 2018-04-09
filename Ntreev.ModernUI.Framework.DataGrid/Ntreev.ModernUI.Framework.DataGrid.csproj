@@ -88,6 +88,14 @@
     <Compile Include="Controls\ModernTableViewScrollViewer.cs" />
     <Compile Include="Controls\ModernTextClipboardExporter.cs" />
     <Compile Include="Controls\ModernTextClipboardParser.cs" />
+    <Page Include="Assets\DataGridUI.Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\DataGridUI.Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <None Include="Converters\ContentToStringConverter.cs" />
     <Compile Include="Controls\TimeSpanUpDown.cs" />
     <Compile Include="Controls\ValueChangingEventArgs.cs" />
@@ -130,6 +138,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\DataGridUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\DateTimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

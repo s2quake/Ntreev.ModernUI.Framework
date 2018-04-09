@@ -22,6 +22,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
                     xmlns:vm="clr-namespace:Ntreev.ModernUI.Framework.ViewModels">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="TreeView.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <HierarchicalDataTemplate DataType="{x:Type vm:CategoryTreeViewItemViewModel}" ItemsSource="{Binding Items}">
         <Grid Margin="2">
             <StackPanel Orientation="Horizontal">
