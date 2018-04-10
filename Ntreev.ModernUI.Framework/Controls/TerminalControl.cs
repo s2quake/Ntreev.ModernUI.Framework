@@ -59,11 +59,10 @@ namespace Ntreev.ModernUI.Framework.Controls
         private int historyIndex;
 
         private Paragraph promptBlock;
-        private Run prompt;
-        private Run command;
+        private Paragraph outputBlock;
         private Run output;
-        private string promptText;
         private string inputText = string.Empty;
+        private string outputLeftText = string.Empty;
         private int refStack = 0;
         private string completion;
 
@@ -72,6 +71,11 @@ namespace Ntreev.ModernUI.Framework.Controls
         public readonly static RoutedEvent ExecutedEvent =
             EventManager.RegisterRoutedEvent(nameof(Executed), RoutingStrategy.Bubble,
                 typeof(RoutedEventHandler), typeof(TerminalControl));
+
+        public TerminalControl()
+        {
+
+        }
 
         public event RoutedEventHandler Executed
         {
@@ -87,17 +91,14 @@ namespace Ntreev.ModernUI.Framework.Controls
 
             if (this.textBox != null)
             {
-                this.prompt = new Run() { IsEnabled = false, };
-                this.command = new Run();
-                this.promptBlock = new Paragraph();
-                this.promptBlock.Inlines.Add(this.prompt);
-                this.promptBlock.Inlines.Add(this.command);
                 this.textBox.Document.Blocks.Clear();
+                this.promptBlock = new Paragraph();
                 this.textBox.Document.Blocks.Add(this.promptBlock);
-                this.textBox.CaretPosition = this.textBox.Document.ContentEnd;
+                this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
+                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
                 this.textBox.TextChanged += TextBox_TextChanged;
                 this.textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
-                this.textBox.Selection.Changed += TextBox_Selection_Changed;
+                this.textBox.SelectionChanged += TextBox_SelectionChanged;
             }
         }
 
@@ -106,7 +107,8 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.refStack++;
             try
             {
-                this.SetValue(TextPropertyKey, this.command.Text);
+                var commandText = this.CommandText;
+                this.SetValue(TextPropertyKey, commandText);
                 if (this.histories.Contains(this.Text) == false)
                 {
                     this.histories.Add(this.Text);
@@ -117,13 +119,14 @@ namespace Ntreev.ModernUI.Framework.Controls
                     this.historyIndex = this.histories.LastIndexOf(this.Text) + 1;
                 }
 
-                this.AppendLine(this.prompt.Text + this.command.Text);
-                this.command.Text = string.Empty;
-                this.textBox.CaretPosition = this.command.ContentEnd;
+                this.AppendLine(this.Prompt + commandText);
+
+                this.promptBlock.Inlines.Clear();
+                this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
                 this.inputText = string.Empty;
                 this.completion = string.Empty;
                 this.OnExecuted(new RoutedEventArgs(ExecutedEvent));
-                this.textBox.CaretPosition = this.command.ContentEnd;
+                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
             }
             finally
             {
@@ -133,22 +136,43 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public void Clear()
         {
-            this.textBox.Selection.Select(this.prompt.ContentEnd, this.textBox.Document.ContentEnd);
-            this.textBox.Selection.Text = string.Empty;
+            this.promptBlock.Inlines.Clear();
+            this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
+            this.inputText = string.Empty;
+            this.completion = string.Empty;
         }
 
         public void MoveToFirst()
         {
-            this.textBox.CaretPosition = this.prompt.ContentEnd;
+            var contentStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
+            if (contentStart == null)
+                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
+            else
+                this.textBox.CaretPosition = contentStart;
+        }
+
+        public void MoveToLast()
+        {
+            this.textBox.CaretPosition = this.promptBlock.Inlines.LastInline.ContentEnd;
         }
 
         public void Reset()
         {
-            this.output = null;
-            this.promptBlock.Inlines.Clear();
-            this.promptBlock.Inlines.Add(this.prompt);
-            this.promptBlock.Inlines.Add(this.command);
-            this.textBox.CaretPosition = this.command.ContentEnd;
+            this.refStack++;
+            try
+            {
+                this.output = null;
+                this.outputBlock = null;
+                this.outputLeftText = string.Empty;
+                this.textBox.Document.Blocks.Clear();
+                this.promptBlock = new Paragraph();
+                this.textBox.Document.Blocks.Add(this.promptBlock);
+                this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
+            }
+            finally
+            {
+                this.refStack--;
+            }
         }
 
         public void Append(string text)
@@ -159,21 +183,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         public void AppendLine(string text)
         {
             this.AppendInternal(text + Environment.NewLine);
-            //using (var sr = new StringReader(text))
-            //{
-            //    var line = string.Empty;
-            //    var count = 0;
-            //    while ((line = sr.ReadLine()) != null)
-            //    {
-            //        if (count > 0)
-            //        {
-            //            this.InsertNewLine();
-            //        }
-            //        this.AppendInternal(line);
-            //        count++;
-            //    }
-            //}
-            //this.InsertNewLine();
         }
 
         public string Text => (string)this.GetValue(TextProperty);
@@ -202,7 +211,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             try
             {
                 this.CompletionImpl(NextCompletion);
-                this.textBox.CaretPosition = this.command.ContentEnd;
+                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
             }
             finally
             {
@@ -216,7 +225,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             try
             {
                 this.CompletionImpl(PrevCompletion);
-                this.textBox.CaretPosition = this.command.ContentEnd;
+                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
             }
             finally
             {
@@ -228,7 +237,8 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.historyIndex + 1 < this.histories.Count)
             {
-                this.command.Text = this.histories[this.historyIndex + 1];
+                this.inputText = this.CommandText = this.histories[this.historyIndex + 1];
+                this.MoveToLast();
                 this.historyIndex++;
             }
         }
@@ -237,12 +247,14 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.historyIndex > 0)
             {
-                this.command.Text = this.histories[this.historyIndex - 1];
+                this.inputText = this.CommandText = this.histories[this.historyIndex - 1];
+                this.MoveToLast();
                 this.historyIndex--;
             }
             else if (this.histories.Count == 1)
             {
-                this.command.Text = this.histories[0];
+                this.inputText = this.CommandText = this.histories[0];
+                this.MoveToLast();
                 this.historyIndex = 0;
             }
         }
@@ -388,13 +400,22 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 this.completion = func(completions, this.completion);
                 var inputText = this.inputText;
+
                 if (prefix == true || postfix == true)
                 {
-                    this.command.Text = leftText + "\"" + this.completion + "\"";
+                    this.promptBlock.Inlines.Clear();
+                    this.promptBlock.Inlines.Add(new Run()
+                    {
+                        Text = this.Prompt + leftText + "\"" + this.completion + "\"",
+                    });
                 }
                 else
                 {
-                    this.command.Text = leftText + this.completion;
+                    this.promptBlock.Inlines.Clear();
+                    this.promptBlock.Inlines.Add(new Run()
+                    {
+                        Text = this.Prompt + leftText + this.completion,
+                    });
                 }
                 this.inputText = inputText;
             }
@@ -434,13 +455,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             if (this.refStack > 0)
                 return;
 
-            if (this.promptBlock.Inlines.Contains(this.command) == false)
-            {
-                this.promptBlock.Inlines.Add(this.command);
-                this.textBox.CaretPosition = this.command.ContentEnd;
-            }
-
-            this.inputText = this.command.Text;
+            this.inputText = this.CommandText;
             this.completion = string.Empty;
         }
 
@@ -456,7 +471,8 @@ namespace Ntreev.ModernUI.Framework.Controls
                 else if (Keyboard.Modifiers == ModifierKeys.Shift)
                 {
                     e.Handled = true;
-                    this.textBox.Selection.Select(this.command.ContentStart, this.textBox.Selection.Start);
+                    var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
+                    this.textBox.Selection.Select(commandStart, this.textBox.Selection.Start);
                 }
             }
             else if (e.Key == Key.Escape && Keyboard.Modifiers == ModifierKeys.None)
@@ -501,7 +517,8 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
             else if (e.Key == Key.Back && Keyboard.Modifiers == ModifierKeys.None)
             {
-                if (this.textBox.CaretPosition.CompareTo(this.command.ContentStart) <= 0)
+                var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
+                if (this.textBox.CaretPosition.CompareTo(commandStart) <= 0)
                 {
                     e.Handled = true;
                 }
@@ -524,15 +541,12 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
         }
 
-        private void TextBox_Selection_Changed(object sender, EventArgs e)
+        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (this.promptBlock != this.textBox.CaretPosition.Paragraph)
+            var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
+            if (commandStart != null)
             {
-                this.textBox.IsReadOnly = true;
-            }
-            else
-            {
-                if (this.textBox.Selection.Start.CompareTo(this.prompt.ContentEnd) < 0 || this.textBox.Selection.End.CompareTo(this.prompt.ContentEnd) < 0)
+                if (this.textBox.Selection.Start.CompareTo(commandStart) < 0 || this.textBox.Selection.End.CompareTo(commandStart) < 0)
                 {
                     this.textBox.IsReadOnly = true;
                 }
@@ -541,15 +555,9 @@ namespace Ntreev.ModernUI.Framework.Controls
                     this.textBox.IsReadOnly = false;
                 }
             }
-
-            if (this.command.Text == string.Empty && this.textBox.CaretPosition.CompareTo(this.prompt.ContentEnd) == 0)
+            else
             {
-                this.textBox.CaretPosition = this.command.ContentEnd;
-            }
-
-            if (this.refStack == 0)
-            {
-                this.inputText = this.command.Text;
+                this.textBox.IsReadOnly = false;
             }
         }
 
@@ -558,8 +566,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             if (this.textBox != null)
             {
                 this.refStack++;
-                this.promptText = prompt;
-                this.prompt.Text = prompt;
+                this.Clear();
                 this.refStack--;
             }
         }
@@ -567,26 +574,74 @@ namespace Ntreev.ModernUI.Framework.Controls
         private void AppendInternal(string text)
         {
             this.refStack++;
-            if (this.output == null || this.isChanged == true)
+            try
             {
-                var oldOutput = this.output;
-                this.output = new Run
+                if (this.output == null || this.isChanged == true)
                 {
-                    Foreground = this.OutputForeground,
-                    Background = this.OutputBackground
-                };
-                if (oldOutput == null)
+                    var oldOutput = this.output;
+                    this.output = new Run
+                    {
+                        Foreground = this.OutputForeground,
+                        Background = this.OutputBackground
+                    };
+                    if (oldOutput == null)
+                    {
+                        this.outputBlock = new Paragraph(this.output);
+                        this.textBox.Document.Blocks.InsertBefore(this.promptBlock, this.outputBlock);
+                    }
+                    else
+                    {
+                        this.outputBlock.Inlines.InsertAfter(oldOutput, this.output);
+                    }
+                }
+                if (text.EndsWith(Environment.NewLine) == true)
                 {
-                    this.promptBlock.Inlines.InsertBefore(this.prompt, this.output);
+                    text = text.Substring(0, text.Length - Environment.NewLine.Length);
+                    this.output.Text += this.outputLeftText + text;
+                    this.outputLeftText = Environment.NewLine;
                 }
                 else
                 {
-                    this.promptBlock.Inlines.InsertAfter(oldOutput, this.output);
+                    this.output.Text += this.outputLeftText + text;
+                    this.outputLeftText = string.Empty;
                 }
             }
+            finally
+            {
+                this.refStack--;
+            }
+        }
 
-            this.output.Text += text;
-            this.refStack--;
+        private string CommandText
+        {
+            get
+            {
+                var text = string.Empty;
+                foreach (var item in this.promptBlock.Inlines)
+                {
+                    if (item is Run run)
+                    {
+                        text += run.Text;
+                    }
+                }
+                return text.Substring(this.Prompt.Length);
+            }
+            set
+            {
+                this.refStack++;
+                try
+                {
+                    this.promptBlock.Inlines.Clear();
+                    this.promptBlock.Inlines.Add(new Run()
+                    {
+                        Text = this.Prompt + value,
+                    });
+                }
+                finally
+                {
+                    this.refStack--;
+                }
+            }
         }
     }
 }
