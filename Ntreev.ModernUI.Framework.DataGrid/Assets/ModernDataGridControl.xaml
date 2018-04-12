@@ -245,8 +245,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="VerticalGridLineBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="HorizontalGridLineBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="ColumnVirtualizationMode" Value="Recycling" />
-        <Setter Property="VerticalGridLineBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="HorizontalGridLineBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="VerticalGridLineThickness" Value="1" />
         <Setter Property="HorizontalGridLineThickness" Value="1" />
         <Setter Property="IsAlternatingRowStyleEnabled" Value="False" />
@@ -721,10 +719,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <ControlTemplate x:Key="Cell_Template" TargetType="{x:Type xcdg:Cell}">
         <Grid>
             <Border Padding="{TemplateBinding Padding}" 
-                    BorderBrush="{Binding RelativeSource={RelativeSource Self}, 
-                                          Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineBrush}"
-                    BorderThickness="{Binding RelativeSource={RelativeSource Self},
-                                              Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness,
+                    BorderBrush="{Binding Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineBrush, RelativeSource={RelativeSource Self}}"
+                    BorderThickness="{Binding Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness, RelativeSource={RelativeSource Self}, 
                                               Converter={StaticResource thicknessConverter}, ConverterParameter='Bottom'}" 
                     Background="{TemplateBinding Background}">
                 <xcdg:CellContentPresenter x:Name="PART_CellContentPresenter" 
@@ -734,8 +730,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Image x:Name="error_Image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Stretch="None" Margin="5 0" Visibility="Hidden" />
             <Border x:Name="verticalGridLineBorder"
-                    BorderBrush="{Binding RelativeSource={RelativeSource Self}, 
-                                          Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush}"
+                    BorderBrush="{Binding Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush, RelativeSource={RelativeSource Self}}"
                     BorderThickness="{Binding RelativeSource={RelativeSource Self},
                                               Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness,
                                               Converter={StaticResource thicknessConverter}, ConverterParameter='Right'}" />

@@ -75,6 +75,8 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public virtual int CompareTo(object obj)
         {
+            if (obj == null)
+                throw new ArgumentNullException(nameof(obj));
             if (object.ReferenceEquals(this, obj) == true)
                 return 0;
 

@@ -27,7 +27,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Separator}">
-                    <Border Width="2" Background="{DynamicResource SeparatorBackground}" BorderThickness="0 0 1 0 " BorderBrush="{DynamicResource WindowTextReadOnly}" />
+                    <Border Width="1" Background="{DynamicResource WindowTextReadOnly}" BorderThickness="0 0 1 0 " BorderBrush="{DynamicResource SeparatorBackground}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
