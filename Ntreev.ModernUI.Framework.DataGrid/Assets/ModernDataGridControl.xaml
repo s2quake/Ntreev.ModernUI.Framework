@@ -270,27 +270,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Grid>
             <Border x:Name="horizontalBorder"
                     Background="{TemplateBinding Background}"
-                    BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineBrush}"
-                    BorderThickness="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness, Converter={StaticResource thicknessConverter}, ConverterParameter='Bottom'}" />
+                    BorderBrush="{DynamicResource DataGridGridLines}"
+                    BorderThickness="0 0 0 1" />
             <Border x:Name="verticalBorder"
-                    BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush}"
+                    BorderBrush="{DynamicResource DataGridGridLines}"
                     Padding="{TemplateBinding Padding}"
                     BorderThickness="0 0 1 0">
                 <StackPanel x:Name="PART_GroupLevelIndicatorHost" Orientation="Horizontal" />
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
-            <!--<MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsLeaf" Value="True" />
-                    <Condition Property="xcdg:ViewBase.IsLastItem" Value="True" />
-                    <Condition Property="xcdg:DataGridControl.HasExpandedDetails" Value="False" />
-                </MultiTrigger.Conditions>
-                <Setter TargetName="horizontalBorder" Property="BorderThickness"
-                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness, Converter={StaticResource thicknessConverter}, ConverterParameter='Bottom'}" />
-                <Setter TargetName="verticalBorder" Property="Margin"
-                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness, Converter={StaticResource thicknessConverter}, ConverterParameter='Bottom'}" />
-            </MultiTrigger>-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="CurrentIndicatorCount" Value="0" />
@@ -343,11 +332,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <ControlTemplate x:Key="RowSelector_Template" TargetType="{x:Type xcdg:RowSelector}" >
         <Grid>
             <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
-                    BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineBrush}"
-                    BorderThickness="{Binding RelativeSource={RelativeSource Self}, 
-                                              Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness, 
-                                              Converter={StaticResource thicknessConverter}, 
-                                              ConverterParameter='Bottom'}">
+                    BorderBrush="{DynamicResource DataGridGridLines}"
+                    BorderThickness="0 0 0 1">
                 <Grid>
                     <Viewbox MaxHeight="16"
                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -718,11 +704,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ControlTemplate x:Key="Cell_Template" TargetType="{x:Type xcdg:Cell}">
         <Grid>
-            <Border Padding="{TemplateBinding Padding}" 
-                    BorderBrush="{Binding Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineBrush, RelativeSource={RelativeSource Self}}"
-                    BorderThickness="{Binding Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness, RelativeSource={RelativeSource Self}, 
-                                              Converter={StaticResource thicknessConverter}, ConverterParameter='Bottom'}" 
-                    Background="{TemplateBinding Background}">
+            <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                    BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
                 <xcdg:CellContentPresenter x:Name="PART_CellContentPresenter" 
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -730,10 +713,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Image x:Name="error_Image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Stretch="None" Margin="5 0" Visibility="Hidden" />
             <Border x:Name="verticalGridLineBorder"
-                    BorderBrush="{Binding Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush, RelativeSource={RelativeSource Self}}"
-                    BorderThickness="{Binding RelativeSource={RelativeSource Self},
-                                              Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness,
-                                              Converter={StaticResource thicknessConverter}, ConverterParameter='Right'}" />
+                    BorderBrush="{DynamicResource DataGridGridLines}"
+                    BorderThickness="0 0 1 0" />
             <Border x:Name="InnerBorder" BorderThickness="1" BorderBrush="#8597bc" Visibility="Hidden" />
         </Grid>
         <ControlTemplate.Triggers>
@@ -747,25 +728,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Setter Property="Foreground" Value="{DynamicResource DataGridCellForegroundSelected}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
-            <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsCurrent" Value="True" />
-                                <Condition Property="IsSelected" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <MultiTrigger.Setters>
-                                <Setter Property="Background" Value="#85cdf9" />
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter TargetName="InnerBorder" Property="Visibility" Value="Hidden" />
-                            </MultiTrigger.Setters>
-                        </MultiTrigger>-->
-            <!--<Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundSelected}" />
-                            <Setter Property="Foreground" Value="{DynamicResource DataGridCellForegroundSelected}" />
-                        </Trigger>-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, 
-                                                 Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SelectionUnit}"
+                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SelectionUnit, RelativeSource={RelativeSource Self}}"
                                Value="Cell" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ParentRow.IsSelected}"
                                Value="True" />
@@ -792,16 +757,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Foreground" Value="{DynamicResource DataGridCellForegroundCurrent}" />
                 <Setter TargetName="InnerBorder" Property="Visibility" Value="Hidden" />
             </Trigger>
-
-            <!--<Trigger Property="IsCurrent" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DataGridCellBackground}" />
-                            <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />
-                            <Setter TargetName="InnerBorder" Property="Visibility" Value="Hidden" />
-                        </Trigger>-->
             <Trigger Property="IsBeingEdited" Value="True">
                 <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
                 <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />
-                <!--<Setter TargetName="InnerBorder" Property="Visibility" Value="Hidden" />-->
             </Trigger>
             <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError), RelativeSource={RelativeSource Self}}" Value="True">
                 <Setter TargetName="error_Image" Property="Visibility" Value="Visible" />
@@ -813,8 +771,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="UseLayoutRounding" Value="False" />
         <Setter Property="MinHeight" Value="22" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <!--<Setter Property="Background" Value="{DynamicResource DataGridCellBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />-->
         <Setter Property="CellErrorStyle" Value="{x:Null}" />
         <Setter Property="Padding" Value="5 2" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -972,8 +928,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ControlTemplate TargetType="{x:Type xcdg:ColumnManagerCell}">
                     <Grid>
                         <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineBrush}" 
-                                BorderThickness="{Binding RelativeSource={RelativeSource Self},Path=(xcdg:DataGridControl.DataGridContext).HorizontalGridLineThickness,Converter={StaticResource thicknessConverter},ConverterParameter='Bottom'}" 
+                                BorderBrush="{DynamicResource DataGridGridLines}" 
+                                BorderThickness="0 0 0 1" 
                                 Padding ="{TemplateBinding Padding}">
                             <Grid x:Name="containerGrid" Margin="5 0" >
                                 <Grid.ColumnDefinitions>
@@ -995,9 +951,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             </Grid>
                         </Border>
                         <Thumb x:Name="PART_ColumnResizerThumb" HorizontalAlignment="Right" Style="{StaticResource invisibleThumbStyle}" />
-                        <Border x:Name="verticalGridLineBorder"
-                                BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush}"
-                                BorderThickness="{Binding RelativeSource={RelativeSource Self},Path=(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness,Converter={StaticResource thicknessConverter},ConverterParameter='Right'}" />
+                        <Border x:Name="verticalGridLineBorder" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 1 0" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Path=ParentColumn.HasFixedWidth, RelativeSource={RelativeSource Self}}" Value="True">

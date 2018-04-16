@@ -87,16 +87,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        [Obsolete]
-        public ObservableCollection<TreeViewItemViewModel> ItemsSource
-        {
-            get
-            {
-                System.Diagnostics.Debugger.Break();
-                return this.items;
-            }
-        }
-
         public ObservableCollection<TreeViewItemViewModel> Items
         {
             get { return this.items; }

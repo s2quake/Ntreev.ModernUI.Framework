@@ -70,7 +70,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            this.RefreshItemsSource(Enumerable.Empty<object>());
+            this.RefreshItemsSource(this.ItemsSource ?? Enumerable.Empty<object>());
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)
@@ -88,13 +88,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
             base.PrepareContainerForItemOverride(element, item);
-
-            //if (item is IToolBarItem && element is Button button)
-            //{
-            //    var be = BindingOperations.GetBindingExpression(button, Button.CommandProperty);
-            //    be.UpdateTarget();
-
-            //}
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)

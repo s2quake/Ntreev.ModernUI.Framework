@@ -27,8 +27,6 @@ namespace Ntreev.ModernUI.Framework
     {
         void Commit(object target);
 
-        //bool Parse<T>(Type type, string key, ref T value);
-
         bool TryParse<T>(Type type, string key, out T value);
 
         object this[Type type, string key]

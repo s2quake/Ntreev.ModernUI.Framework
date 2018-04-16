@@ -579,11 +579,11 @@ namespace Ntreev.ModernUI.Framework.Controls
                 if (this.output == null || this.isChanged == true)
                 {
                     var oldOutput = this.output;
-                    this.output = new Run
-                    {
-                        Foreground = this.OutputForeground,
-                        Background = this.OutputBackground
-                    };
+                    this.output = new Run();
+                    if (this.OutputForeground != null)
+                        this.output.Foreground = this.OutputForeground;
+                    if (this.OutputBackground != null)
+                        this.output.Background = this.OutputBackground;
                     if (oldOutput == null)
                     {
                         this.outputBlock = new Paragraph(this.output);
