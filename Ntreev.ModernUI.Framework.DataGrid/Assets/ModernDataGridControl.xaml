@@ -1346,6 +1346,54 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
+    <Style x:Key="DataGridContext_HierarchicalGroupByControlNode_Style" TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
+                    <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
+                        <Border x:Name="bd" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="1" Padding="5 3" Margin="0,0,10,0" 
+                                Background="{DynamicResource ButtonBackground}">
+                            <TextBlock x:Name="titleTextBlock" Text="{TemplateBinding Title}" />
+                        </Border>
+                        <ItemsPresenter />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
+                            <Setter TargetName="titleTextBlock" Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Detail_HierarchicalGroupByControlNode_Style" TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
+                    <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
+                        <Border x:Name="bd" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="1" Padding="5 3" Margin="0,0,10,0" 
+                                Background="{DynamicResource ButtonBackground}">
+                            <TextBlock x:Name="titleTextBlock" Text="{TemplateBinding Title}" />
+                        </Border>
+                        <ItemsPresenter />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
+                            <Setter TargetName="titleTextBlock" Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <HierarchicalDataTemplate x:Key="detailConfigurationTemplate" DataType="{x:Type xcdg:DetailConfiguration}"
                               ItemsSource="{Binding Path=DetailConfigurations}">
         <xcdg:HierarchicalGroupByControlNode x:Name="groupByControlNode" Style="{StaticResource Detail_HierarchicalGroupByControlNode_Style}"
@@ -1522,54 +1570,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
         <Setter Property="Padding" Value="5 3" />
         <Setter Property="Template" Value="{StaticResource HierarchicalGroupByItem_Template}" />
-    </Style>
-
-    <Style x:Key="DataGridContext_HierarchicalGroupByControlNode_Style" TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-                    <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
-                        <Border x:Name="bd" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="1" Padding="5 3" Margin="0,0,10,0" 
-                                Background="{DynamicResource ButtonBackground}">
-                            <TextBlock x:Name="titleTextBlock" Text="{TemplateBinding Title}" />
-                        </Border>
-                        <ItemsPresenter />
-                    </StackPanel>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="True">
-                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
-                            <Setter TargetName="titleTextBlock" Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="Detail_HierarchicalGroupByControlNode_Style" TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-                    <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
-                        <Border x:Name="bd" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="1" Padding="5 3" Margin="0,0,10,0" 
-                                Background="{DynamicResource ButtonBackground}">
-                            <TextBlock x:Name="titleTextBlock" Text="{TemplateBinding Title}" />
-                        </Border>
-                        <ItemsPresenter />
-                    </StackPanel>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="True">
-                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
-                            <Setter TargetName="titleTextBlock" Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style TargetType="{x:Type xcdg:GroupByControl}">
