@@ -26,6 +26,7 @@ using System.Windows.Media;
 using System.Windows.Shell;
 using Ntreev.ModernUI.Framework.Controls;
 using System.ComponentModel.Composition;
+using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -70,9 +71,16 @@ namespace Ntreev.ModernUI.Framework
 
                     window.Loaded += (s, e) =>
                     {
-                        this.UpdatePosition(model, window, owner);
-                        this.UpdateSize(model, window);
-                        this.UpdateState(model, window);
+                        if (Keyboard.IsKeyDown(Key.LeftShift) == false)
+                        {
+                            this.UpdatePosition(model, window, owner);
+                            this.UpdateSize(model, window);
+                            this.UpdateState(model, window);
+                        }
+                        if (window is DialogWindow dialogWindow)
+                        {
+                            dialogWindow.Dispatcher.InvokeAsync(() => dialogWindow.IsEnsured = true);
+                        }
                     };
                 }
                 else

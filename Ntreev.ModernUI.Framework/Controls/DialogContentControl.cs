@@ -39,10 +39,17 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 var desiredWidth = DialogWindow.GetDesiredWidth(this.Content as FrameworkElement);
                 var desiredHeight = DialogWindow.GetDesiredHeight(this.Content as FrameworkElement);
-                if (double.IsNaN(desiredWidth) == false)
-                    size.Width = desiredWidth;
-                if (double.IsNaN(desiredHeight) == false)
-                    size.Height = desiredHeight;
+                if (this.Parent is DialogWindow window && window.IsEnsured == false)
+                {
+                    if (double.IsNaN(desiredWidth) == false)
+                    {
+                        size.Width = Math.Min(constraint.Width, desiredWidth);
+                    }
+                    if (double.IsNaN(desiredHeight) == false)
+                    {
+                        size.Height = Math.Min(constraint.Height, desiredHeight);
+                    }
+                }
             }
             return size;
         }
@@ -54,15 +61,5 @@ namespace Ntreev.ModernUI.Framework.Controls
                 Caliburn.Micro.Bind.SetModel(this.Content as DependencyObject, e.NewValue);
             }
         }
-
-        //internal ResizeMode ResizeMode
-        //{
-        //    get
-        //    {
-        //        if (this.Content is FrameworkElement)
-        //            return DialogWindow.GetDesiredResizeMode(this.Content as FrameworkElement);
-        //        return (ResizeMode)DialogWindow.DesiredResizeModeProperty.DefaultMetadata.DefaultValue;
-        //    }
-        //}
     }
 }

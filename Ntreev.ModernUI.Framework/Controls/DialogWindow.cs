@@ -203,5 +203,7 @@ namespace Ntreev.ModernUI.Framework.Controls
                 d.SetValue(FrameworkElement.HeightProperty, e.NewValue);
             }
         }
+
+        internal bool IsEnsured { get; set; }
     }
 }
