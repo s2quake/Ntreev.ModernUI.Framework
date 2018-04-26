@@ -77,8 +77,9 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             var query = from item in EnumerableUtility.FamilyTree(this.Items, item => item.Items)
                         join setting in settings on this.GetPath(item) equals setting
                         select item;
+            var items = query.ToArray();
 
-            foreach (var item in query)
+            foreach (var item in items)
             {
                 await this.Dispatcher.InvokeAsync(() =>
                 {
