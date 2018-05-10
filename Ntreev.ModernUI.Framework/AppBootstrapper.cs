@@ -179,7 +179,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected override object GetInstance(Type service, string key)
         {
-            string contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(service) : key;
+            var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(service) : key;
             var exports = this.container.GetExportedValues<object>(contract);
 
             if (exports.Count() > 0)
