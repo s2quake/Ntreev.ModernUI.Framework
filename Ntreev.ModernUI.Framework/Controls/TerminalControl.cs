@@ -108,6 +108,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             try
             {
                 var commandText = this.CommandText;
+                var args = new RoutedEventArgs(ExecutedEvent);
                 this.SetValue(TextPropertyKey, commandText);
                 if (this.histories.Contains(this.Text) == false)
                 {
@@ -122,11 +123,17 @@ namespace Ntreev.ModernUI.Framework.Controls
                 this.AppendLine(this.Prompt + commandText);
 
                 this.promptBlock.Inlines.Clear();
-                this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
                 this.inputText = string.Empty;
                 this.completion = string.Empty;
-                this.OnExecuted(new RoutedEventArgs(ExecutedEvent));
-                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
+                this.textBox.IsReadOnly = true;
+
+                this.OnExecuted(args);
+                if (args.Handled == false)
+                {
+                    this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
+                    this.textBox.CaretPosition = this.promptBlock.ContentEnd;
+                    this.textBox.IsReadOnly = false;
+                }
             }
             finally
             {
@@ -256,6 +263,29 @@ namespace Ntreev.ModernUI.Framework.Controls
                 this.inputText = this.CommandText = this.histories[0];
                 this.MoveToLast();
                 this.historyIndex = 0;
+            }
+        }
+
+        public void InsertPrompt()
+        {
+            this.refStack++;
+            try
+            {
+                var textRange = new TextRange(this.promptBlock.ContentStart, this.promptBlock.ContentEnd);
+                var isEnd = this.textBox.CaretPosition.CompareTo(this.promptBlock.ContentEnd) == 0;
+                if (textRange.Text != string.Empty)
+                    this.AppendLine(textRange.Text);
+                this.promptBlock.Inlines.Clear();
+                this.inputText = string.Empty;
+                this.completion = string.Empty;
+                this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
+                if (isEnd == true)
+                    this.textBox.CaretPosition = this.promptBlock.ContentEnd;
+                this.textBox.IsReadOnly = false;
+            }
+            finally
+            {
+                this.refStack--;
             }
         }
 
@@ -543,21 +573,24 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
-            if (commandStart != null)
+            if (this.promptBlock.Inlines.FirstInline != null)
             {
-                if (this.textBox.Selection.Start.CompareTo(commandStart) < 0 || this.textBox.Selection.End.CompareTo(commandStart) < 0)
+                var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
+                if (commandStart != null)
                 {
-                    this.textBox.IsReadOnly = true;
+                    if (this.textBox.Selection.Start.CompareTo(commandStart) < 0 || this.textBox.Selection.End.CompareTo(commandStart) < 0)
+                    {
+                        this.textBox.IsReadOnly = true;
+                    }
+                    else
+                    {
+                        this.textBox.IsReadOnly = false;
+                    }
                 }
                 else
                 {
                     this.textBox.IsReadOnly = false;
                 }
-            }
-            else
-            {
-                this.textBox.IsReadOnly = false;
             }
         }
 
@@ -576,6 +609,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.refStack++;
             try
             {
+                var isEnd = this.textBox.CaretPosition.CompareTo(this.promptBlock.ContentEnd) == 0;
                 if (this.output == null || this.isChanged == true)
                 {
                     var oldOutput = this.output;
@@ -605,6 +639,8 @@ namespace Ntreev.ModernUI.Framework.Controls
                     this.output.Text += this.outputLeftText + text;
                     this.outputLeftText = string.Empty;
                 }
+                if (isEnd == true)
+                    this.textBox.CaretPosition = this.promptBlock.ContentEnd;
             }
             finally
             {
