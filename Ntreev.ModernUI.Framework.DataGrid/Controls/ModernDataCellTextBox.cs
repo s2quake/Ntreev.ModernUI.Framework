@@ -24,7 +24,7 @@ using System.Windows;
 using System.Windows.Input;
 using Xceed.Wpf.Controls;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     class ModernDataCellTextBox : AutoSelectTextBox
     {

@@ -31,7 +31,7 @@ using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 using Xceed.Wpf.DataGrid.Views;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernDataCell : DataCell
     {

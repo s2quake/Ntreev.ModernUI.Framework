@@ -29,7 +29,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     class ModernSearchedItems : FrameworkElement
     {

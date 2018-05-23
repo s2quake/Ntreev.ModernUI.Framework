@@ -28,7 +28,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernInsertionRow : InsertionRow
     {

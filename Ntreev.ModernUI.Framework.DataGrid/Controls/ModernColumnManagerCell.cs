@@ -27,7 +27,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernColumnManagerCell : ColumnManagerCell
     {

@@ -31,7 +31,7 @@ using Xceed.Wpf.DataGrid;
 using Xceed.Wpf.DataGrid.Export;
 using Xceed.Wpf.DataGrid.Views;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     /// <summary>
     /// 구현 의도

@@ -23,7 +23,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Ntreev.ModernUI.Framework.Converters
+namespace Ntreev.ModernUI.Framework.DataGrid.Converters
 {
     class TypeToEnumMembersConverter : IValueConverter
     {

@@ -26,7 +26,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernTableViewScrollViewer : Xceed.Wpf.DataGrid.Views.TableViewScrollViewer
     {

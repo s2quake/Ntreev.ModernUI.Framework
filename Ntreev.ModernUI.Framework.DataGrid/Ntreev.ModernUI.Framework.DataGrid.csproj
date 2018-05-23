@@ -103,6 +103,7 @@
       <SubType>Designer</SubType>
     </Page>
     <None Include="Converters\ContentToStringConverter.cs" />
+    <Compile Include="Controls\SelectedFlags.cs" />
     <Compile Include="Controls\TimeSpanUpDown.cs" />
     <Compile Include="Controls\ValueChangingEventArgs.cs" />
     <Compile Include="Controls\ValueChangingEventHandler.cs" />

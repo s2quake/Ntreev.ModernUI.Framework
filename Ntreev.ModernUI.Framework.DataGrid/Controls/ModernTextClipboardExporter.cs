@@ -25,7 +25,7 @@ using System.Windows.Input;
 using Xceed.Wpf.DataGrid;
 using Xceed.Wpf.DataGrid.Export;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernTextClipboardExporter : ClipboardExporterBase
     {

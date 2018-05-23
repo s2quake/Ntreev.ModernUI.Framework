@@ -37,7 +37,7 @@ using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 using Xceed.Wpf.DataGrid.Export;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     /// <summary>
     /// ModernDataGridControl.xaml에 대한 상호 작용 논리

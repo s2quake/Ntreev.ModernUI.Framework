@@ -25,7 +25,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Markup
+namespace Ntreev.ModernUI.Framework.DataGrid.Markup
 {
     [MarkupExtensionReturnType(typeof(object))]
     public class ContentBindingExtension : MarkupExtension

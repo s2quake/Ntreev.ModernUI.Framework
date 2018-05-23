@@ -25,7 +25,7 @@ using System.Windows;
 using System.Windows.Data;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernColumnManagerRow : ColumnManagerRow
     {

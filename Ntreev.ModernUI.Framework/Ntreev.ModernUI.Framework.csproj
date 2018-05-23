@@ -128,7 +128,6 @@
     <Compile Include="Controls\ProgressType.cs" />
     <Compile Include="Controls\PropertyItemsControl.cs" />
     <Compile Include="Controls\SearchBox.cs" />
-    <Compile Include="Controls\SelectedFlags.cs" />
     <Compile Include="Controls\TabControlContentControl.cs" />
     <Compile Include="Controls\TextBlockService.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />

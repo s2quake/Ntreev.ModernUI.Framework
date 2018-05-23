@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.ModernUI.Framework.Controls;
+using Ntreev.ModernUI.Framework.DataGrid.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Assets
+namespace Ntreev.ModernUI.Framework.DataGrid.Assets
 {
     partial class ModernDataGridControl : ResourceDictionary
     {

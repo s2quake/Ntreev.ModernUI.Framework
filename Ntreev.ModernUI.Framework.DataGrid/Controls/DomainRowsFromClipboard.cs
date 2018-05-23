@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     class DomainRowsFromClipboard
     {
