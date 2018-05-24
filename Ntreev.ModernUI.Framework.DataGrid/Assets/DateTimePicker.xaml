@@ -20,9 +20,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework"
-                    xmlns:xctc="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:xctct="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit"
-                    xmlns:xctcc="clr-namespace:Xceed.Wpf.Toolkit.Chromes;assembly=Xceed.Wpf.Toolkit">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <nmfv:InverseBooleanConverter x:Key="InverseBoolConverter" />
 
@@ -35,12 +33,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid SnapsToDevicePixels="True">
-                        <xctcc:ButtonChrome x:Name="ToggleButtonChrome"
-                                            CornerRadius="0"
-                                            RenderChecked="{Binding IsOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=xctc:DateTimePicker}}"
-                                            RenderEnabled="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=xctc:DateTimePicker}}"
-											RenderMouseOver="{TemplateBinding IsMouseOver}"
-											RenderPressed="{TemplateBinding IsPressed}">
+                        <xctk:ButtonChrome x:Name="ToggleButtonChrome" 
+                                           CornerRadius="0"
+                                           RenderChecked="{Binding IsOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=xctk:DateTimePicker}}"
+                                           RenderEnabled="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=xctk:DateTimePicker}}"
+                                           RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                           RenderPressed="{TemplateBinding IsPressed}">
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -54,7 +52,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     <Path x:Name="Arrow" Width="7" Height="4" Data="M 0,1 C0,1 0,0 0,0 0,0 3,0 3,0 3,0 3,1 3,1 3,1 4,1 4,1 4,1 4,0 4,0 4,0 7,0 7,0 7,0 7,1 7,1 7,1 6,1 6,1 6,1 6,2 6,2 6,2 5,2 5,2 5,2 5,3 5,3 5,3 4,3 4,3 4,3 4,4 4,4 4,4 3,4 3,4 3,4 3,3 3,3 3,3 2,3 2,3 2,3 2,2 2,2 2,2 1,2 1,2 1,2 1,1 1,1 1,1 0,1 0,1 z" Fill="{DynamicResource WindowText}" />
                                 </Grid>
                             </Grid>
-                        </xctcc:ButtonChrome>
+                        </xctk:ButtonChrome>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
@@ -66,7 +64,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="DateTimePicker_Style" TargetType="{x:Type xctc:DateTimePicker}">
+    <Style x:Key="DateTimePicker_Style" TargetType="{x:Type xctk:DateTimePicker}">
         <Setter Property="Background" Value="{DynamicResource InputBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource InputText}" />
         <Setter Property="BorderBrush" Value="{DynamicResource InputBorder}" />
@@ -83,7 +81,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="WatermarkTemplate" Value="{StaticResource DefaultWatermark_DataTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xctc:DateTimePicker}">
+                <ControlTemplate TargetType="{x:Type xctk:DateTimePicker}">
                     <Grid>
                         <Border x:Name="rootBorder" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                             <Grid>
@@ -91,7 +89,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <xctc:ButtonSpinner x:Name="PART_Spinner" 
+                                <xctk:ButtonSpinner x:Name="PART_Spinner" 
                                                     IsTabStop="False"
                                                     Background="{TemplateBinding Background}"
                                                     BorderBrush="{TemplateBinding BorderBrush}"
@@ -102,7 +100,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                                     VerticalContentAlignment="Stretch"
                                                     AllowSpin="{TemplateBinding AllowSpin}"
                                                     ShowButtonSpinner="{TemplateBinding ShowButtonSpinner}">
-                                    <xctc:WatermarkTextBox x:Name="PART_TextBox" 
+                                    <xctk:WatermarkTextBox x:Name="PART_TextBox" 
                                                            BorderThickness="0" 
                                                            Background="Transparent"
                                                            ContextMenu="{StaticResource TextBox_ContextMenu}"
@@ -124,7 +122,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                                            TabIndex="{TemplateBinding TabIndex}"
                                                            Watermark="{TemplateBinding Watermark}"
                                                            WatermarkTemplate="{TemplateBinding WatermarkTemplate}" />
-                                </xctc:ButtonSpinner>
+                                </xctk:ButtonSpinner>
                                 <ToggleButton x:Name="_calendarToggleButton"
                                               Grid.Column="1"
                                               Background="White"
@@ -141,7 +139,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     BorderBrush="{DynamicResource WindowBorderActive}">
                                 <StackPanel>
                                     <Calendar x:Name="PART_Calendar" BorderThickness="0" />
-                                    <xctc:TimePicker x:Name="PART_TimeUpDown"
+                                    <xctk:TimePicker x:Name="PART_TimeUpDown"
                                                      Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
                                                      Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" 
                                                      Format="{TemplateBinding TimeFormat}"
@@ -177,7 +175,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             <Setter Property="IsReadOnly" Value="True" TargetName="PART_TextBox" />
                         </DataTrigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static xctct:ResourceKeys.ControlSelectedBorderKey}}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static xctk:ResourceKeys.ControlSelectedBorderKey}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -191,6 +189,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type xctc:DateTimePicker}" BasedOn="{StaticResource DateTimePicker_Style}" />
+    <Style TargetType="{x:Type xctk:DateTimePicker}" BasedOn="{StaticResource DateTimePicker_Style}" />
 
 </ResourceDictionary>
