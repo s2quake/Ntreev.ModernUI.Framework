@@ -165,7 +165,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         protected void RefreshDataContextError()
         {
-            if (this.DataContext is IDataErrorInfo errorInfo && errorInfo[this.FieldName] != string.Empty)
+            if (this.DataContext is IDataErrorInfo errorInfo && this.FieldName != string.Empty && errorInfo[this.FieldName] != string.Empty)
             {
                 ModernDataGridControl.SetDataContextError(this, errorInfo[this.FieldName]);
             }
