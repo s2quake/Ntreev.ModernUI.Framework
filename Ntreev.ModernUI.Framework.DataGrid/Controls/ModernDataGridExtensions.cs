@@ -93,7 +93,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var endIndex = Math.Max(columnRange.StartIndex, columnRange.EndIndex);
             for (var i = startIndex; i <= endIndex; i++)
             {
-                yield return gridContext.VisibleColumns[i].FieldName;
+                foreach (var column in gridContext.Columns)
+                {
+                    if (column.VisiblePosition == i)
+                        yield return column.FieldName;
+                }
             }
         }
 
@@ -103,7 +107,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var endIndex = Math.Max(columnRange.StartIndex, columnRange.EndIndex);
             for (var i = startIndex; i <= endIndex; i++)
             {
-                yield return gridContext.VisibleColumns[i];
+                foreach (var column in gridContext.Columns)
+                {
+                    if (column.VisiblePosition == i)
+                        yield return column;
+                }
             }
         }
 
