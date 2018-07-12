@@ -589,6 +589,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type nmgc:ModernInsertionButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Content" Value="Insert" />
+        <Setter Property="Padding" Value="2" />
+    </Style>
+
     <ControlTemplate x:Key="Cell_Template" TargetType="{x:Type xcdg:Cell}">
         <Grid>
             <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
@@ -1015,7 +1020,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                                Focusable="False">
                     <xcdg:TableViewHeaderFooterPanel xcdg:DataGridControl.IsFixedHeadersHost="True"
                                                      Orientation="Vertical"
-                                                     HorizontalAlignment="Left" />
+                                                     HorizontalAlignment="Stretch" />
                 </xcdg:SynchronizedScrollViewer>
 
                 <xcdg:SynchronizedScrollViewer x:Name="fixedFooterScrollViewer" Grid.Column="1" Grid.Row="2"

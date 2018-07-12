@@ -92,6 +92,7 @@
     <Compile Include="Controls\ModernDataRow.cs" />
     <Compile Include="Controls\ModernDragEventArgs.cs" />
     <Compile Include="Controls\ModernDragEventHandler.cs" />
+    <Compile Include="Controls\ModernInsertionButton.cs" />
     <Compile Include="Controls\ModernItemInfo.cs" />
     <Compile Include="Controls\ModernScrollBar.cs" />
     <Compile Include="Controls\ModernSearchedItems.cs" />

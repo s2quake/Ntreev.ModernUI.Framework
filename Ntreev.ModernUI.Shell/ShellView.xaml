@@ -2,11 +2,13 @@
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
                   xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
+                  xmlns:nmgc="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Controls;assembly=Ntreev.ModernUI.Framework.DataGrid"
                   Height="550" Width="525" Loaded="Window_Loaded" Style="{StaticResource ModernWindow_Style}">
 
     <mui:ModernWindow.Resources>
-
+        <xcdg:DataGridCollectionViewSource x:Key="source" Source="{Binding ItemsSource}" />
     </mui:ModernWindow.Resources>
 
     <TabControl Style="{StaticResource TabControl_Page_Style}">
@@ -77,6 +79,43 @@
                 <ListBoxItem Content="ListBoxItem3" />
                 <ListBoxItem Content="ListBoxItem4" />
             </ListBox>
+        </TabItem>
+        <TabItem Header="GridControl">
+            <nmgc:ModernDataGridControl ItemsSource="{Binding Source={StaticResource source}}">
+                <nmgc:ModernDataGridControl.Columns>
+                    <xcdg:Column FieldName="Column1" Title="Column1" />
+                    <xcdg:Column FieldName="Column2" Title="Column2" />
+                    <xcdg:Column FieldName="Column3" Title="Column3" />
+                </nmgc:ModernDataGridControl.Columns>
+                <nmgc:ModernDataGridControl.View>
+                    <xcdg:TableView UseDefaultHeadersFooters="False">
+                        <xcdg:TableView.FixedHeaders>
+                            <DataTemplate>
+                                <xcdg:HierarchicalGroupByControl/>
+                            </DataTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <nmgc:ModernInsertionButton />
+                                </Grid>
+                            </DataTemplate>
+                            <DataTemplate>
+                                <Grid xcdg:TableView.CanScrollHorizontally="False" Height="3" VerticalAlignment="Bottom" xcdg:RowSelector.RowSelectorStyle="{DynamicResource DataRowSelector_Style}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" Visibility="Hidden" xcdg:GroupLevelIndicatorPane.ShowIndicators="True" />
+                                    <xcdg:GroupLevelIndicatorPane Grid.Column="1" Visibility="Hidden" x:Name="glip" />
+                                    <Border Grid.Column="0" Grid.ColumnSpan="3" Height="1" BorderThickness="1 0 1 0" BorderBrush="{DynamicResource DataGridGridLines}" VerticalAlignment="Bottom" />
+                                    <Border Grid.Column="3" BorderThickness="0 0 1 1" BorderBrush="{DynamicResource DataGridGridLines}" />
+                                </Grid>
+                            </DataTemplate>
+                        </xcdg:TableView.FixedHeaders>
+                    </xcdg:TableView>
+                </nmgc:ModernDataGridControl.View>
+            </nmgc:ModernDataGridControl>
         </TabItem>
     </TabControl>
     

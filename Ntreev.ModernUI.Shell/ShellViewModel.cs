@@ -14,9 +14,17 @@ namespace Ntreev.ModernUI.Shell
     [Export(typeof(IShell))]
     class ShellViewModel : Screen
     {
+        private DataTable table = new DataTable();
         public ShellViewModel()
         {
             this.DisplayName = "Controls";
+            this.table.Columns.Add();
+            this.table.Columns.Add();
+            this.table.Columns.Add();
+
+            this.table.Rows.Add("1", "2", "3");
         }
+
+        public IEnumerable ItemsSource => this.table.DefaultView;
     }
 }
