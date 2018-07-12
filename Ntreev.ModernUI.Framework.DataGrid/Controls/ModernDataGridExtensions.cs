@@ -204,17 +204,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
             if (ignoreChilds == false)
             {
-                foreach (var detail in gridContext.DetailConfigurations)
-                {
-                    var childContext = gridContext.GetChildContext(currentItem, detail);
-                    if (childContext != null)
-                    {
-                        if (childContext.Items.Count > 0)
-                        {
-                            return childContext.Items.GetItemAt(0);
-                        }
-                    }
-                }
+                
             }
 
             if (gridContext.Items.Count <= nextIndex)
@@ -241,18 +231,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
             if (ignoreChilds == false)
             {
-                for (var i = gridContext.DetailConfigurations.Count - 1; i >= 0; i--)
-                {
-                    var detail = gridContext.DetailConfigurations[i];
-                    var childContext = gridContext.GetChildContext(currentItem, detail);
-                    if (childContext != null)
-                    {
-                        if (childContext.Items.Count > 0)
-                        {
-                            return childContext.Items.GetItemAt(childContext.Items.Count - 1);
-                        }
-                    }
-                }
+                
             }
 
             if (prevIndex < 0)
@@ -283,17 +262,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             {
                 yield return item;
 
-                foreach (var detail in gridContext.DetailConfigurations)
-                {
-                    var childContext = gridContext.GetChildContext(item, detail);
-                    if (childContext != null)
-                    {
-                        foreach (var i in GetScrollableItems(childContext))
-                        {
-                            yield return i;
-                        }
-                    }
-                }
+                
             }
 
             foreach (var item in gridContext.Footers)
@@ -313,17 +282,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             {
                 yield return new ModernItemInfo() { GridContext = gridContext, Item = item, };
 
-                foreach (var detail in gridContext.DetailConfigurations)
-                {
-                    var childContext = gridContext.GetChildContext(item, detail);
-                    if (childContext != null)
-                    {
-                        foreach (var i in GetScrollableItemInfos(childContext))
-                        {
-                            yield return i;
-                        }
-                    }
-                }
+                
             }
 
             foreach (var item in gridContext.Footers)

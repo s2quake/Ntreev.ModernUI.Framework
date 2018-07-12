@@ -85,7 +85,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                   Data="{DynamicResource DownArrowGeometry}"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Center" IsHitTestVisible="False" />
-            <xcdg:AutoSelectTextBox x:Name="PART_EditableTextBox" BorderThickness="0" Background="Transparent"
+            <xctk:AutoSelectTextBox x:Name="PART_EditableTextBox" BorderThickness="0" Background="Transparent"
                                     xcdg:DataCell.IsCellFocusScope="True"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
@@ -95,7 +95,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     CaretBrush="{DynamicResource WindowText}"
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                     AutoSelectBehavior="OnFocus">
-            </xcdg:AutoSelectTextBox>
+            </xctk:AutoSelectTextBox>
             <nmfc:HighlightTextBlock x:Name="htb" Text="{Binding Text, ElementName=PART_EditableTextBox}" 
                                      Margin="{TemplateBinding Padding}"
                                      Padding="4,0,0,1"
@@ -149,9 +149,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type xcdg:ColumnChooserContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}" />
-
-    <Style TargetType="{x:Type xcdg:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}" >
+    <Style TargetType="{x:Type nmgc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}" >
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
         <Setter Property="CaretBrush" Value="{DynamicResource WindowText}" />
     </Style>
@@ -511,18 +509,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="FixedColumnSplitter_Style" TargetType="{x:Type xcdg:FixedColumnSplitter}">
-        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
-        <Setter Property="BorderThickness" Value="0 0 1 1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <!--<EventSetter Event="Loaded" Handler="FixedColumnSplitter_Loaded" />-->
-        <!--<Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type xcdg:DataGridControl}}, Path=View.FixedColumnCount}" Value="0">
-                <Setter Property="BorderThickness" Value="0 0 1 1" />
-            </DataTrigger>
-        </Style.Triggers>-->
-    </Style>
-
     <ControlTemplate x:Key="DataRow_Template" TargetType="{x:Type xcdg:DataRow}">
         <Grid x:Name="rootGrid">
             <Grid.ColumnDefinitions>
@@ -538,7 +524,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Border x:Name="detailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
                 <Button x:Name="detailsToggle_Button" Template="{StaticResource detailsExpanderButtonTemplate}" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
             </Border>
-            <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" SplitterStyle="{TemplateBinding xcdg:TableView.FixedColumnSplitterStyle}" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" SplitterWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnSplitterWidth}" ShowSplitter="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ShowFixedColumnSplitter}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
+            <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
             <Border x:Name="bottomBorder" BorderThickness="0 0 0 1" xcdg:TableView.CanScrollHorizontally="False" Grid.ColumnSpan="3" BorderBrush="{TemplateBinding Control.BorderBrush}" Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
@@ -571,21 +557,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableView.FixedColumnCount)}" Value="0" />
-                    <Condition Value="True" Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).GroupLevelDescriptions.Count, Converter={StaticResource greaterThanZeroConverter}, RelativeSource={RelativeSource Self}}" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="PART_CellsHost" Property="xcdg:FixedCellPanel.ShowSplitter" Value="False" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableView.FixedColumnCount)}" Value="0" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="PART_CellsHost" Property="xcdg:FixedCellPanel.ShowSplitter" Value="False" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
                 </MultiDataTrigger.Conditions>
@@ -598,72 +569,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="InsertionRow_Template" TargetType="{x:Type xcdg:InsertionRow}">
-        <Grid x:Name="rootGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Border x:Name="rootBorder" Grid.Column="2" Grid.ColumnSpan="2" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
-            <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" xcdg:TableView.CanScrollHorizontally="False" />
-            <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" />
-            <Border x:Name="detailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
-                <ContentPresenter VerticalAlignment="Top" Visibility="Hidden" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ExpandGroupGlyph}" />
-            </Border>
-            <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" SplitterStyle="{TemplateBinding xcdg:TableView.FixedColumnSplitterStyle}" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" SplitterWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnSplitterWidth}" ShowSplitter="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ShowFixedColumnSplitter}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="rootBorder" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionBackground}" Property="Border.Background" />
-                <Setter TargetName="rootGrid" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionForeground}" Property="TextElement.Foreground" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="False" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HideSelection}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="rootBorder" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveSelectionBackground}" Property="Border.Background" />
-                <Setter TargetName="rootGrid" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveSelectionForeground}" Property="TextElement.Foreground" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableView.FixedColumnCount)}" Value="0" />
-                    <Condition Value="True" Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).GroupLevelDescriptions.Count, Converter={StaticResource greaterThanZeroConverter}, RelativeSource={RelativeSource Self}}" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="PART_CellsHost" Property="xcdg:FixedCellPanel.ShowSplitter" Value="False" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableView.FixedColumnCount)}" Value="0" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="PART_CellsHost" Property="xcdg:FixedCellPanel.ShowSplitter" Value="False" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="detailsToggle" Property="UIElement.Visibility" Value="Visible" />
-            </MultiDataTrigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
     <Style TargetType="{x:Type nmgc:ModernDataRow}">
         <Setter Property="MinHeight" Value="24" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Background" Value="{DynamicResource DataGridCellBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource DataRowSelector_Style}" />
-        <Setter Property="xcdg:TableView.FixedColumnSplitterStyle" Value="{StaticResource FixedColumnSplitter_Style}" />
         <Setter Property="SelectionBackground" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="True" />
@@ -672,30 +583,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Trigger Property="IsDragOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource WindowBorder}" />
             </Trigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
-                <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style TargetType="{x:Type xcdg:InsertionRow}">
-        <Setter Property="MinHeight" Value="24" />
-        <Setter Property="xcdg:TableView.FixedColumnSplitterStyle" Value="{StaticResource FixedColumnSplitter_Style}" />
-        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource InsertionRowSelector_Style}" />
-        <Setter Property="Background" Value="{DynamicResource DataGridCellBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Template" Value="{StaticResource InsertionRow_Template}" />
-        <Style.Triggers>
-            <Trigger Property="IsCurrent" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DataGridCellBackground}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style TargetType="{x:Type nmgc:ModernInsertionRow}" BasedOn="{StaticResource {x:Type xcdg:InsertionRow}}">
-        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ModernInsertionRowSelector_Style}" />
-        <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
@@ -782,8 +669,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type nmgc:ModernInsertionCell}" BasedOn="{StaticResource {x:Type xcdg:Cell}}" />
-
     <nmfv:ContentToStringConverter x:Key="contentToStringConverter" />
 
     <DataTemplate x:Key="ModernDataCell_ContentTemplate">
@@ -844,7 +729,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ColumnManagerRowSelector_Style}" />
         <Setter Property="xcdg:RowSelector.Visible" Value="True" />
-        <Setter Property="xcdg:TableView.FixedColumnSplitterStyle" Value="{StaticResource FixedColumnSplitter_Style}" />
         <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="False" />
     </Style>
 
@@ -862,7 +746,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <ContentPresenter Name="detailsToggle" Grid.Column="2" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ExpandGroupGlyph}" />
             <Border BorderThickness="0 0 0 1" BorderBrush="{DynamicResource DataGridGridLines}" Grid.Column="2" />
             <Decorator Name="indentationDecorator" Grid.Column="3">
-                <xcdg:FixedCellPanel x:Name="PART_CellsHost" SplitterStyle="{TemplateBinding xcdg:TableView.FixedColumnSplitterStyle}" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" SplitterWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnSplitterWidth}" ShowSplitter="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ShowFixedColumnSplitter}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
+                <xcdg:FixedCellPanel x:Name="PART_CellsHost" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
             </Decorator>
         </Grid>
         <ControlTemplate.Triggers>
@@ -1301,7 +1185,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Visibility">
             <Setter.Value>
                 <PriorityBinding>
-                    <Binding Path="." Converter="{StaticResource notDetailConfigConverter}" ConverterParameter="{x:Type xcdg:DetailConfiguration}" />
                     <Binding Path="Visible" Converter="{StaticResource booleanToVisibilityConverter}" />
                 </PriorityBinding>
             </Setter.Value>
@@ -1394,12 +1277,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <HierarchicalDataTemplate x:Key="detailConfigurationTemplate" DataType="{x:Type xcdg:DetailConfiguration}"
-                              ItemsSource="{Binding Path=DetailConfigurations}">
-        <xcdg:HierarchicalGroupByControlNode x:Name="groupByControlNode" Style="{StaticResource Detail_HierarchicalGroupByControlNode_Style}"
-                                             ItemsSource="{Binding Path=GroupLevelDescriptions}" Title="{Binding Title}" />
-    </HierarchicalDataTemplate>
-
     <HierarchicalDataTemplate x:Key="dataGridContextTemplate" DataType="{x:Type xcdg:DataGridContext}"
                               ItemsSource="{Binding Path=DetailConfigurations}">
 
@@ -1455,35 +1332,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <!-- GroupLevelIndicatorPane is a placeholder for individual GroupLevelIndicator elements that are added
                        whenever this Row is part of a group. -->
             <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
-
-            <StackPanel Grid.Column="2" Orientation="Horizontal">
-
-                <TreeView x:Name="PART_HierarchicalGroupByControlTreeView"
-                          ItemContainerStyle="{StaticResource hierarchicalGroupByControlTreeViewItemStyle}"
-                          Background="Transparent"
-                          BorderBrush="Transparent"
-                          Focusable="False">
-
-                    <TreeViewItem Header="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext)}"
-                                  HeaderTemplate="{StaticResource dataGridContextTemplate}"
-                                  ItemsSource="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DetailConfigurations}"
-                                  ItemTemplate="{StaticResource detailConfigurationTemplate}"
-                                  ItemContainerStyle="{StaticResource hierarchicalGroupByControlTreeViewItemStyle}"
-                                  IsExpanded="True" />
-                </TreeView>
-
-                <ContentPresenter x:Name="noGroupContentPresenter"
-                                  Content="{TemplateBinding NoGroupContent}"
-                                  VerticalAlignment="Center"
-                                  Visibility="Collapsed"
-                                  Margin="5,0,0,0" />
-            </StackPanel>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasGroups}" Value="True">
-                <Setter TargetName="noGroupContentPresenter" Property="Visibility" Value="Visible" />
-            </DataTrigger>
-
             <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(xcdg:GroupLevelIndicatorPane.GroupLevel)}" Value="-1">
                 <Setter TargetName="groupLevelIndicatorPane" Property="Visibility" Value="Collapsed" />
             </DataTrigger>-->
@@ -1614,14 +1464,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Single" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      MinValue="{x:Static sys:Single.MinValue}"
                                      MaxValue="{x:Static sys:Single.MaxValue}"
                                      NumberStyles="Float"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding StringFormat=R}">
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1632,14 +1482,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Double" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      MinValue="{x:Static sys:Double.MinValue}"
                                      MaxValue="{x:Static sys:Double.MaxValue}"
                                      NumberStyles="Float"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding StringFormat=R}">
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1650,12 +1500,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.SByte" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1666,12 +1516,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Byte" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1682,12 +1532,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Int16" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1698,14 +1548,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.UInt16" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      MinValue="{x:Static sys:UInt32.MinValue}"
                                      MaxValue="{x:Static sys:UInt32.MaxValue}"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1716,14 +1566,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Int32" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      MinValue="{x:Static sys:Int32.MinValue}"
                                      MaxValue="{x:Static sys:Int32.MaxValue}"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1734,12 +1584,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.UInt32" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1750,12 +1600,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Int64" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
@@ -1766,12 +1616,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.UInt64" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <xcdg:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
-                </xcdg:NumericTextBox>
+                </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>

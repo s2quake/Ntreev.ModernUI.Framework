@@ -22,7 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Xceed.Wpf.Controls;
+using Xceed.Wpf.Toolkit;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {

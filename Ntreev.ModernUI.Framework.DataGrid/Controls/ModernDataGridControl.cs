@@ -45,7 +45,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
     public class ModernDataGridControl : DataGridControl
     {
         private const string contentToStringConverterString = "contentToStringConverter";
-        public static readonly DependencyProperty InsertionRowProperty = DependencyProperty.RegisterAttached("InsertionRow", typeof(InsertionRow), typeof(ModernDataGridControl));
 
         public static readonly DependencyProperty SearchTextProperty =
             DependencyProperty.Register(nameof(SearchText), typeof(string), typeof(ModernDataGridControl),
@@ -85,10 +84,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         public static readonly RoutedEvent ValueChangingEvent =
             EventManager.RegisterRoutedEvent(nameof(ValueChanging), RoutingStrategy.Bubble,
                 typeof(ValueChangingEventHandler), typeof(ModernDataGridControl));
-
-        public static readonly RoutedEvent ItemInsertingEvent =
-            EventManager.RegisterRoutedEvent(nameof(ItemInserting), RoutingStrategy.Bubble,
-                typeof(ItemInsertingEventHandler), typeof(ModernDataGridControl));
 
         public static readonly RoutedEvent ItemDeletingEvent =
             EventManager.RegisterRoutedEvent(nameof(ItemDeleting), RoutingStrategy.Bubble,
@@ -156,7 +151,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             this.AllowDrop = true;
 
             (this.GroupLevelDescriptions as INotifyCollectionChanged).CollectionChanged += GroupLevelDescriptionCollection_CollectionChanged;
-            this.DetailConfigurations.CollectionChanged += DetailConfigurations_CollectionChanged;
             this.UpdateSourceTrigger = DataGridUpdateSourceTrigger.CellContentChanged;
 
             this.AddEditor(typeof(string));
@@ -198,16 +192,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             obj.SetValue(GroupIndexProperty, value);
         }
 
-        public static InsertionRow GetInsertionRow(DataGridContext gridContext)
-        {
-            return (InsertionRow)gridContext.GetValue(InsertionRowProperty);
-        }
-
-        public static void SetInsertionRow(DataGridContext gridContext, InsertionRow value)
-        {
-            gridContext.SetValue(InsertionRowProperty, value);
-        }
-
         public static bool GetHasDataContextError(DependencyObject d)
         {
             return (bool)d.GetValue(HasDataContextErrorProperty);
@@ -237,12 +221,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         {
             add { AddHandler(ValueChangingEvent, value); }
             remove { RemoveHandler(ValueChangingEvent, value); }
-        }
-
-        public event ItemInsertingEventHandler ItemInserting
-        {
-            add { AddHandler(ItemInsertingEvent, value); }
-            remove { RemoveHandler(ItemInsertingEvent, value); }
         }
 
         public event ItemDeletingEventHandler ItemDeleting
@@ -525,17 +503,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 this.selectedGridContext.CurrentItem = this.selectedGridContext.Items.GetItemAt(0);
             if (this.GlobalCurrentColumn == null)
                 this.selectedGridContext.CurrentColumn = this.selectedGridContext.VisibleColumns.FirstOrDefault();
-        }
-
-        private void DetailConfigurations_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (DetailConfiguration item in e.NewItems)
-                {
-                    (item.GroupLevelDescriptions as INotifyCollectionChanged).CollectionChanged += GroupLevelDescriptionCollection_CollectionChanged;
-                }
-            }
         }
 
         private void GroupLevelDescriptionCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -825,15 +792,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 if (this.currentContext != null)
                 {
                     SetIsCurrentContext(this.currentContext, this.currentContext.IsCurrent);
-                    if (this.currentContext.SourceDetailConfiguration != null)
-                        SetIsCurrentContext(this.currentContext.SourceDetailConfiguration, this.currentContext.IsCurrent);
                 }
                 this.currentContext = this.CurrentContext;
                 if (this.currentContext != null)
                 {
                     SetIsCurrentContext(this.currentContext, this.currentContext.IsCurrent);
-                    if (this.currentContext.SourceDetailConfiguration != null)
-                        SetIsCurrentContext(this.currentContext.SourceDetailConfiguration, this.currentContext.IsCurrent);
                 }
             }
             else if (e.PropertyName == nameof(this.GlobalCurrentItem) || e.PropertyName == nameof(this.GlobalCurrentColumn))
@@ -1132,18 +1095,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var e = new ValueChangingEventArgs(cell.ParentRow.DataContext, cell.ParentColumn.FieldName, content)
             {
                 RoutedEvent = ModernDataGridControl.ValueChangingEvent,
-                Source = this,
-            };
-            this.RaiseEvent(e);
-
-            return e.Cancel == false;
-        }
-
-        internal bool InvokeItemInsertingEvent(ModernInsertionRow row)
-        {
-            var e = new ItemInsertingEventArgs(row)
-            {
-                RoutedEvent = ModernDataGridControl.ItemInsertingEvent,
                 Source = this,
             };
             this.RaiseEvent(e);
