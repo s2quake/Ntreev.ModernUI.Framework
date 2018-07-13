@@ -17,6 +17,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         protected override void OnClick()
         {
             base.OnClick();
+            this.Dispatcher.InvokeAsync(() =>
+            {
+                var dialog = new ModernInsertionViewModel();
+                dialog.ShowDialog();
+            });
         }
     }
 }
