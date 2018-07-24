@@ -87,7 +87,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     return 1;
                 return -1;
             }
-            return this.DisplayName.CompareTo(vm.DisplayName);
+            return (this.DisplayName ?? string.Empty).CompareTo(vm.DisplayName);
         }
 
         public void Dispose()
