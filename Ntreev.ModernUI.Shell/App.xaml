@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
                 <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/ModernUI.xaml"/>
                 <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/ModernUI.Dark.xaml"/>
+                <ResourceDictionary Source="/Ntreev.ModernUI.Framework.DataGrid;component/Assets/DataGridUI.xaml"/>
+                <ResourceDictionary Source="/Ntreev.ModernUI.Framework.DataGrid;component/Assets/DataGridUI.Dark.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -37,7 +37,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         public ModernDataRow()
         {
             this.CommandBindings.Insert(0, new CommandBinding(DataGridCommands.EndEdit, this.EndEdit_Execute, this.EndEdit_CanExecute));
-            this.CommandBindings.Add(new CommandBinding(ModernDataGridCommands.SelectInsertion, this.SelectInsertion_Execute, this.SelectInsertion_CanExecute));
 
             this.InputBindings.Add(new InputBinding(DataGridCommands.CollapseDetails, new KeyGesture(Key.F9)));
             this.InputBindings.Add(new InputBinding(DataGridCommands.ExpandDetails, new KeyGesture(Key.F10)));
@@ -195,24 +194,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         private void Delete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
 
-        }
-
-        private void SelectInsertion_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            var insertionRow = ModernDataGridControl.GetInsertionRow(this.GridContext);
-            if (insertionRow == null)
-                return;
-            e.CanExecute = this.IsBeingEdited == false;
-        }
-
-        private void SelectInsertion_Execute(object sender, ExecutedRoutedEventArgs e)
-        {
-            var insertionRow = ModernDataGridControl.GetInsertionRow(this.GridContext);
-            if (insertionRow == null)
-                return;
-
-            this.GridContext.SelectedCellRanges.Clear();
-            this.GridContext.CurrentItem = this.GridContext.GetItemFromContainer(insertionRow);
         }
 
         internal event EventHandler DataContextErrorChanged;
