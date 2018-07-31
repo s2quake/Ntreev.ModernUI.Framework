@@ -953,7 +953,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 var field = property.GetValue(item);
                 if (field == DBNull.Value || field == null)
                     return false;
-                if ($"{this.contentToStringConverter.Convert(field, typeof(string), null, CultureInfo.CurrentUICulture)}".IndexOf(this.SearchText) >= 0)
+                if ($"{this.contentToStringConverter.Convert(field, typeof(string), null, CultureInfo.CurrentUICulture)}".IndexOf(this.SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0)
                     return true;
             }
 
