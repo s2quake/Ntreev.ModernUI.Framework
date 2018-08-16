@@ -35,19 +35,28 @@ namespace Ntreev.ModernUI.Framework
     [Export(typeof(IAppConfiguration))]
     class AppConfiguration : ConfigurationBase, IAppConfiguration
     {
-        public AppConfiguration()
-             : base(GetPath())
-        {
+        private readonly string filename;
 
+        public AppConfiguration()
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var productName = AppInfo.ProductName;
+            this.filename = Path.Combine(path, productName, "app.config");
+            try
+            {
+                this.Read(this.filename);
+            }
+            catch
+            {
+
+            }
         }
 
         public override string Name => "AppConfigs";
 
-        private static string GetPath()
+        public void Write()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string productName = AppInfo.ProductName;
-            return Path.Combine(path, productName, "app.config");
+            this.Write(filename);
         }
     }
 }

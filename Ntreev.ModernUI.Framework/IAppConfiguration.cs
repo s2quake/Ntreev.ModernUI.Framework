@@ -15,6 +15,8 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Ntreev.Library;
+using Ntreev.Library.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +29,55 @@ namespace Ntreev.ModernUI.Framework
     {
         void Commit(object target);
 
-        bool TryParse<T>(Type type, string key, out T value);
+        bool Contains(string name);
 
-        object this[Type type, string key]
-        {
-            get;
-            set;
-        }
+        object this[string name] { get; set; }
 
         void Update(object target);
+    }
+
+    public static class IAppConfigurationExtensions
+    {
+        public static bool TryGetValue<T>(this IAppConfiguration config, Type section, Type type, string key, out T value)
+        {
+            var configItem = new ConfigurationItem(section.Name, type.FullName, key);
+            if (config.Contains(configItem) == true)
+            {
+                try
+                {
+                    if (ConfigurationBase.CanSupportType(typeof(T)) == true)
+                    {
+                        value = (T)config[configItem];
+                        return true;
+                    }
+                    else
+                    {
+                        var text = (string)config[configItem];
+                        value = XmlSerializerUtility.ReadString<T>(text.Decrypt());
+                        return true;
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+
+            value = default(T);
+            return false;
+        }
+
+        public static void SetValue<T>(this IAppConfiguration config, Type section, Type type, string key, T value)
+        {
+            var configItem = new ConfigurationItem(section.Name, type.FullName, key);
+            if (ConfigurationBase.CanSupportType(typeof(T)) == true)
+            {
+                config[configItem] = value;
+            }
+            else
+            {
+                config[configItem] = XmlSerializerUtility.GetString(value).Encrypt();
+            }
+        }
     }
 }
