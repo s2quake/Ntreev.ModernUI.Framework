@@ -29,6 +29,7 @@ using System.Reflection;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Ntreev.Library;
+using Ntreev.Library.IO;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -56,6 +57,7 @@ namespace Ntreev.ModernUI.Framework
 
         public void Write()
         {
+            FileUtility.Prepare(filename);
             this.Write(filename);
         }
     }
