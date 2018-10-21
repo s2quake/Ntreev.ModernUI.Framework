@@ -757,23 +757,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ControlTemplate.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount}" Value="0" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ShowFixedColumnSplitter}" Value="True" />
-                    <Condition Value="True" Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).GroupLevelDescriptions.Count, Converter={StaticResource greaterThanZeroConverter}, RelativeSource={RelativeSource Self}}" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="indentationDecorator" Value="{Binding ElementName=PART_CellsHost, Path=SplitterWidth, Converter={StaticResource inverseThicknessConverter}, ConverterParameter=Left}" Property="FrameworkElement.Margin" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount}" Value="0" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ShowFixedColumnSplitter}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="indentationDecorator" Value="{Binding ElementName=PART_CellsHost, Path=SplitterWidth, Converter={StaticResource inverseThicknessConverter}, ConverterParameter=Left}" Property="FrameworkElement.Margin" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
                 </MultiDataTrigger.Conditions>

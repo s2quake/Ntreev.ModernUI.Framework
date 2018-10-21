@@ -27,6 +27,7 @@ using System.Windows.Shell;
 using Ntreev.ModernUI.Framework.Controls;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using Ntreev.Library;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -156,7 +157,7 @@ namespace Ntreev.ModernUI.Framework
 
         private void UpdateState(object model, Window window)
         {
-            if (this.configs.TryParse<WindowState>(model.GetType(), nameof(WindowState), out WindowState windowState) == true)
+            if (this.configs.TryGetValue<WindowState>(typeof(AppWindowManager), model.GetType(), nameof(WindowState), out var windowState) == true)
             {
                 window.WindowState = windowState;
             }
@@ -167,11 +168,11 @@ namespace Ntreev.ModernUI.Framework
             if (window.ResizeMode.HasFlag(ResizeMode.CanResize) == false)
                 return;
 
-            if (this.configs.TryParse<double>(model.GetType(), nameof(window.Width), out double width) == true)
+            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Width), out var width) == true)
             {
                 window.Width = width;
             }
-            if (this.configs.TryParse<double>(model.GetType(), nameof(window.Height), out double height) == true)
+            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Height), out var height) == true)
             {
                 window.Height = height;
             }
@@ -191,11 +192,11 @@ namespace Ntreev.ModernUI.Framework
                 left = (owner.ActualWidth - window.ActualWidth) / 2;
                 top = (owner.ActualHeight - window.ActualHeight) / 2;
             }
-            if (this.configs.TryParse<double>(model.GetType(), nameof(window.Left), out double l) == true)
+            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Left), out var l) == true)
             {
                 left = l;
             }
-            if (this.configs.TryParse<double>(model.GetType(), nameof(window.Top), out double t) == true)
+            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Top), out var t) == true)
             {
                 top = t;
             }
@@ -212,11 +213,12 @@ namespace Ntreev.ModernUI.Framework
             {
                 try
                 {
-                    this.configs[window.DataContext.GetType(), nameof(window.WindowState)] = window.WindowState;
-                    this.configs[window.DataContext.GetType(), nameof(window.Width)] = window.Width;
-                    this.configs[window.DataContext.GetType(), nameof(window.Height)] = window.Height;
-                    this.configs[window.DataContext.GetType(), nameof(window.Left)] = window.Left;
-                    this.configs[window.DataContext.GetType(), nameof(window.Top)] = window.Top;
+
+                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.WindowState), window.WindowState);
+                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Width), window.Width);
+                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Height), window.Height);
+                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Left), window.Left);
+                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Top), window.Top);
                 }
                 catch
                 {

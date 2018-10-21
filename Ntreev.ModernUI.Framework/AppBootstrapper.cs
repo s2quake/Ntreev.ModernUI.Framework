@@ -239,7 +239,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected override void OnExit(object sender, EventArgs e)
         {
-            this.configs.Commit();
+            this.configs.Write();
             base.OnExit(sender, e);
             this.container.Dispose();
         }
