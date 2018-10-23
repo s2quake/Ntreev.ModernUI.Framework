@@ -29,7 +29,7 @@ namespace Ntreev.ModernUI.Framework.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(this.Inverse == true)
+            if (this.Inverse == true)
                 return value != null;
             return value == null;
         }

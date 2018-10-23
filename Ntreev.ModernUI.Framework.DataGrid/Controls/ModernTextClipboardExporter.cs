@@ -68,13 +68,13 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 this.sb.Append("\t");
             }
 
-            
+
             if (fieldValue is string)
             {
                 var text = fieldValue.ToString();
                 this.sb.Append($"\"{text}\"");
             }
-            else if(fieldValue != null)
+            else if (fieldValue != null)
             {
                 var converter = TypeDescriptor.GetConverter(fieldValue);
                 this.sb.Append(converter.ConvertToString(fieldValue));

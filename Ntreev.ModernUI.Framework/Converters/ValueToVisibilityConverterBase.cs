@@ -36,7 +36,7 @@ namespace Ntreev.ModernUI.Framework.Converters
 
             if (visible == true)
                 return Visibility.Visible;
-            else if(this.IsHidden == true)
+            else if (this.IsHidden == true)
                 return Visibility.Hidden;
             return Visibility.Collapsed;
         }
