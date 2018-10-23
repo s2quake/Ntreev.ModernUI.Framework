@@ -67,6 +67,12 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(PropertyItemsControl),
                 new PropertyMetadata(Orientation.Horizontal));
 
+        public static readonly DependencyProperty ContentTemplateProperty =
+            DependencyProperty.Register(nameof(ContentTemplate), typeof(DataTemplate), typeof(PropertyItemsControl));
+
+        public static readonly DependencyProperty ContentTemplateSelectorProperty =
+            DependencyProperty.Register(nameof(ContentTemplateSelector), typeof(DataTemplateSelector), typeof(PropertyItemsControl));
+
         public PropertyItemsControl()
         {
 
@@ -120,6 +126,18 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             get { return (Orientation)this.GetValue(OrientationProperty); }
             set { this.SetValue(OrientationProperty, value); }
+        }
+
+        public DataTemplate ContentTemplate
+        {
+            get { return (DataTemplate)this.GetValue(ContentTemplateProperty); }
+            set { this.SetValue(ContentTemplateProperty, value); }
+        }
+
+        public DataTemplateSelector ContentTemplateSelector
+        {
+            get { return (DataTemplateSelector)this.GetValue(ContentTemplateSelectorProperty); }
+            set { this.SetValue(ContentTemplateSelectorProperty, value); }
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)

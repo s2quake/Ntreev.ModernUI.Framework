@@ -73,8 +73,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Header" Value="{Binding Path=(nmfc:PropertyItemsControl.Header)}" />
         <Setter Property="nmfc:PropertyItemsControl.Target" Value="{Binding Path=(nmfc:PropertyItemsControl.Target)}" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource HeaderedContentControl_HeaderTemplate}" />
+        
         <Setter Property="Template" Value="{StaticResource HeaderedContentControl_Horizontal_Template}" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource HeaderedContentControl_HeaderTemplate}" />
+        <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
+        <Setter Property="ContentTemplateSelector" Value="{Binding ContentTemplateSelector, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
         <Setter Property="Margin" Value="2" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=Orientation, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" Value="Vertical">
