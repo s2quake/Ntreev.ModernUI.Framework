@@ -133,6 +133,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         protected override void OnEditEnded()
         {
             base.OnEditEnded();
+            this.EditingContent = this.Content;
         }
 
         protected override void OnEditEnding(CancelRoutedEventArgs e)
@@ -146,7 +147,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             }
             else
             {
-                this.EditingContent = this.Content;
+                //this.EditingContent = this.Content;
             }
             base.OnEditEnding(e);
         }
