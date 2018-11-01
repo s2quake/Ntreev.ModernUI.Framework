@@ -1472,8 +1472,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      AutoSelectBehavior="OnFocus"
-                                     MinValue="{x:Static sys:Double.MinValue}"
-                                     MaxValue="{x:Static sys:Double.MaxValue}"
                                      NumberStyles="Float"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding StringFormat=R}">
