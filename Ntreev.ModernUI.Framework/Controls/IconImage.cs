@@ -42,15 +42,15 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(IconImage),
                 new FrameworkPropertyMetadata(Stretch.None, StretchPropertyChangedCallback));
 
-        private static Dictionary<int, WriteableBitmap> items = new Dictionary<int, WriteableBitmap>();
+        private static Dictionary<string, WriteableBitmap> items = new Dictionary<string, WriteableBitmap>();
 
         private Image image;
         private WriteableBitmap imageSource;
+        private bool isChanged = true;
 
         static IconImage()
         {
-            //Control.ForegroundProperty.OverrideMetadata(typeof(IconImage), new FrameworkPropertyMetadata(ForegroundPropertyChangedCallback));
-            //Control.BackgroundProperty.OverrideMetadata(typeof(IconImage), new FrameworkPropertyMetadata(BackgroundPropertyChangedCallback));
+
         }
 
         public IconImage()
@@ -63,12 +63,21 @@ namespace Ntreev.ModernUI.Framework.Controls
             base.OnApplyTemplate();
 
             this.image = this.Template.FindName(PART_Image, this) as Image;
-
             if (this.image != null)
             {
                 BindingOperations.SetBinding(this.image, Image.StretchProperty, new Binding(nameof(this.Stretch)) { Source = this, });
                 this.image.Source = this.imageSource;
             }
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            if (this.isChanged == true)
+            {
+                this.UpdateImage();
+                this.isChanged = false;
+            }
+            base.OnRender(drawingContext);
         }
 
         public static IconImage FromUri(Uri uri)
@@ -87,14 +96,14 @@ namespace Ntreev.ModernUI.Framework.Controls
             get { return (Stretch)this.GetValue(StretchProperty); }
             set { this.SetValue(StretchProperty, value); }
         }
-
+        
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
 
             if (e.Property.Name == nameof(this.Foreground) || e.Property.Name == nameof(this.Background))
             {
-                this.UpdateImage();
+                this.isChanged = true;
             }
         }
 
@@ -103,10 +112,16 @@ namespace Ntreev.ModernUI.Framework.Controls
             base.OnPreviewMouseMove(e);
         }
 
+        protected override Size MeasureOverride(Size constraint)
+        {
+            this.UpdateImage();
+            return base.MeasureOverride(constraint);
+        }
+
         private static void SourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as IconImage;
-            self.UpdateImage();
+            self.InvalidateMeasure();
         }
 
         private static void StretchPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -117,36 +132,35 @@ namespace Ntreev.ModernUI.Framework.Controls
         private static void ForegroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as IconImage;
-            self.UpdateImage();
+            self.InvalidateMeasure();
         }
 
         private static void BackgroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as IconImage;
-            self.UpdateImage();
+            self.InvalidateMeasure();
         }
 
         private static byte[] BitmapSourceToArray(BitmapSource bitmapSource)
         {
             var stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
             var pixels = new byte[(int)bitmapSource.PixelHeight * stride];
-
             bitmapSource.CopyPixels(pixels, stride, 0);
-
             return pixels;
         }
 
-        private static WriteableBitmap ApplyColor(BitmapSource bitmapSource, Brush forground, Brush background)
+        private static WriteableBitmap ApplyColor(DependencyObject d, BitmapSource bitmapSource, Brush foreground, Brush background)
         {
-            var hash = HashUtility.GetHashCode(bitmapSource, forground, background);
+            var hash = HashUtility.GetHashValue($"{bitmapSource}", $"{foreground}", $"{background}");
             if (items.ContainsKey(hash) == true)
                 return items[hash];
+            //System.Diagnostics.Trace.WriteLine($"{bitmapSource}, {forground}, {background}");
             var writableBitmap = new WriteableBitmap(bitmapSource);
             var foregroundColor = Colors.Black;
             var backgroundColor = Colors.White;
-            if (forground is SolidColorBrush == true)
+            if (foreground is SolidColorBrush == true)
             {
-                foregroundColor = (forground as SolidColorBrush).Color;
+                foregroundColor = (foreground as SolidColorBrush).Color;
             }
 
             if (background is SolidColorBrush == true)
@@ -186,7 +200,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.Source is BitmapSource == true)
             {
-                this.imageSource = ApplyColor(this.Source as BitmapSource, this.Foreground, this.Background);
+                this.imageSource = ApplyColor(this, this.Source as BitmapSource, this.Foreground, this.Background);
             }
             else
             {
