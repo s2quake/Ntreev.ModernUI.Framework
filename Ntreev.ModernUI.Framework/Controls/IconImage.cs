@@ -50,8 +50,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         static IconImage()
         {
-            //Control.ForegroundProperty.OverrideMetadata(typeof(IconImage), new FrameworkPropertyMetadata(ForegroundPropertyChangedCallback));
-            //Control.BackgroundProperty.OverrideMetadata(typeof(IconImage), new FrameworkPropertyMetadata(BackgroundPropertyChangedCallback));
+
         }
 
         public IconImage()
@@ -113,10 +112,16 @@ namespace Ntreev.ModernUI.Framework.Controls
             base.OnPreviewMouseMove(e);
         }
 
+        protected override Size MeasureOverride(Size constraint)
+        {
+            this.UpdateImage();
+            return base.MeasureOverride(constraint);
+        }
+
         private static void SourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as IconImage;
-            self.isChanged = true;
+            self.InvalidateMeasure();
         }
 
         private static void StretchPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -127,13 +132,13 @@ namespace Ntreev.ModernUI.Framework.Controls
         private static void ForegroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as IconImage;
-            self.isChanged = true;
+            self.InvalidateMeasure();
         }
 
         private static void BackgroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as IconImage;
-            self.isChanged = true;
+            self.InvalidateMeasure();
         }
 
         private static byte[] BitmapSourceToArray(BitmapSource bitmapSource)
