@@ -194,6 +194,13 @@ namespace Ntreev.ModernUI.Framework
             {
                 Assembly.GetExecutingAssembly()
             };
+
+            var assembliesByName = new Dictionary<string, Assembly>();
+            foreach (var item in assemblyList)
+            {
+                assembliesByName.Add(item.FullName, item);
+            }
+
             if (Execute.InDesignMode == false)
             {
                 var query = from directory in EnumerableUtility.Friends(AppDomain.CurrentDomain.BaseDirectory, this.SelectPath())
@@ -201,12 +208,15 @@ namespace Ntreev.ModernUI.Framework
                             from file in catalog.LoadedFiles
                             select file;
 
-                foreach (var item in query)
+                foreach (var item in query.Distinct())
                 {
                     try
                     {
                         var assembly = Assembly.LoadFrom(item);
-                        assemblyList.Add(assembly);
+                        if (assembliesByName.ContainsKey(assembly.FullName) == false)
+                        {
+                            assembliesByName.Add(assembly.FullName, assembly);
+                        }
                     }
                     catch
                     {
@@ -214,7 +224,7 @@ namespace Ntreev.ModernUI.Framework
                 }
             }
 
-            return assemblyList.Distinct();
+            return assembliesByName.Values.ToArray();
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
