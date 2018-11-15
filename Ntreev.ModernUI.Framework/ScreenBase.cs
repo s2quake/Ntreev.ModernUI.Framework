@@ -34,8 +34,8 @@ namespace Ntreev.ModernUI.Framework
         {
             if (this.IsProgressing == true)
                 return;
-
-            await this.CloseAsync();
+            if (await this.CloseAsync() == false)
+                return;
             callback(true);
             foreach (var item in this.Views)
             {
@@ -110,9 +110,9 @@ namespace Ntreev.ModernUI.Framework
 
         }
 
-        protected virtual Task CloseAsync()
+        protected virtual async Task<bool> CloseAsync()
         {
-            return Task.Delay(1);
+            return await Task.Run(() => true);
         }
     }
 }

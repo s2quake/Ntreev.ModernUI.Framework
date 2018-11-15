@@ -23,6 +23,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:modernui="clr-namespace:FirstFloor.ModernUI;assembly=FirstFloor.ModernUI" 
                     xmlns:nmfm="clr-namespace:Ntreev.ModernUI.Framework.Markup">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/ProgressContent.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style x:Key="Dialog_Button_Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="MinWidth" Value="90" />
         <Setter Property="Height" Value="30" />

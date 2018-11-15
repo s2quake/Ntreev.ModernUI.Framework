@@ -175,6 +175,7 @@ namespace Ntreev.ModernUI.Framework.Controls
                 this.promptBlock = new Paragraph();
                 this.textBox.Document.Blocks.Add(this.promptBlock);
                 this.promptBlock.Inlines.Add(new Run() { Text = this.Prompt, });
+                this.textBox.CaretPosition = this.promptBlock.Inlines.LastInline.ContentEnd;
             }
             finally
             {
