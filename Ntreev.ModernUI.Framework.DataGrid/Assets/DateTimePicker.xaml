@@ -113,16 +113,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                                            Foreground="{TemplateBinding Foreground}" 
                                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                           IsUndoEnabled="{Binding IsUndoEnabled, RelativeSource={RelativeSource TemplatedParent}}"
                                                            MinWidth="20"
                                                            AcceptsReturn="False"
                                                            Padding="{TemplateBinding Padding}"
                                                            TextAlignment="{TemplateBinding TextAlignment}"
                                                            TextWrapping="NoWrap" 
                                                            Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
-                                                           TabIndex="{TemplateBinding TabIndex}"
-                                                           Watermark="{TemplateBinding Watermark}"
-                                                           WatermarkTemplate="{TemplateBinding WatermarkTemplate}" />
+                                                           TabIndex="{TemplateBinding TabIndex}" />
                                 </xctk:ButtonSpinner>
                                 <ToggleButton x:Name="_calendarToggleButton"
                                               Grid.Column="1"
@@ -150,11 +147,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                                      Minimum="{Binding Minimum, RelativeSource={RelativeSource TemplatedParent}}"
                                                      Maximum="{Binding Maximum, RelativeSource={RelativeSource TemplatedParent}}"
                                                      ClipValueToMinMax="{Binding ClipValueToMinMax, RelativeSource={RelativeSource TemplatedParent}}"
-                                                     IsUndoEnabled="{Binding IsUndoEnabled, RelativeSource={RelativeSource TemplatedParent}}"
                                                      AllowSpin="{TemplateBinding TimePickerAllowSpin}"
                                                      ShowButtonSpinner="{TemplateBinding TimePickerShowButtonSpinner}"
-                                                     Watermark="{TemplateBinding TimeWatermark}"
-                                                     WatermarkTemplate="{TemplateBinding TimeWatermarkTemplate}"
                                                      Visibility="{TemplateBinding TimePickerVisibility}" />
                                 </StackPanel>
                             </Border>

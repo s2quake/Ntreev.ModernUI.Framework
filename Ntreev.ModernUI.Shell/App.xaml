@@ -10,6 +10,7 @@
                     <local:AppBootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
                 <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/ModernUI.xaml"/>
                 <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/ModernUI.Dark.xaml"/>
                 <ResourceDictionary Source="/Ntreev.ModernUI.Framework.DataGrid;component/Assets/DataGridUI.xaml"/>

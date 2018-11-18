@@ -66,7 +66,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             DependencyProperty.RegisterAttached("GroupIndex", typeof(int), typeof(ModernDataGridControl), new PropertyMetadata(0));
 
         public static readonly DependencyProperty AllowRowDragProperty =
-            DependencyProperty.Register(nameof(AllowRowDrag), typeof(bool), typeof(ModernDataGridControl), new UIPropertyMetadata(false));
+            DependencyProperty.Register(nameof(AllowRowDrag), typeof(bool), typeof(ModernDataGridControl), new PropertyMetadata(false));
 
         private static readonly DependencyPropertyKey HasDataContextErrorPropertyKey =
             DependencyProperty.RegisterAttachedReadOnly("HasDataContextError", typeof(bool), typeof(ModernDataGridControl),
