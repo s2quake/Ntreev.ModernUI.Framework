@@ -15,6 +15,7 @@ namespace Ntreev.ModernUI.Shell
     class ShellViewModel : Screen
     {
         private DataTable table = new DataTable();
+
         public ShellViewModel()
         {
             this.DisplayName = "Controls";
@@ -26,5 +27,17 @@ namespace Ntreev.ModernUI.Shell
         }
 
         public IEnumerable ItemsSource => this.table.DefaultView;
+
+        public string[] TreeViewItems { get; } = new string[]
+        {
+            "/",
+            "/Root/",
+            "/Root/Types/",
+            "/Root/Types/Type1",
+            "/Root/Types/Type2",
+            "/Root/Tables/",
+            "/Root/Tables/Table1",
+            "/Root/Tables/Table2",
+        };
     }
 }

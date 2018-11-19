@@ -104,6 +104,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                      Style="{DynamicResource ComboBox_EditableTextBox_Style}"
                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
         </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style TargetType="{x:Type nmfc:TreeViewItemSelector}">

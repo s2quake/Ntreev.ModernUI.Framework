@@ -47,7 +47,7 @@
                                         HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
                     </StackPanel>
                     <Button nmfc:PropertyItemsControl.Header="ColorPicker" x:Name="PickColor" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
-                    <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" />
+                    <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" ItemsSource="{Binding TreeViewItems}" />
                 </nmfc:PropertyItemsControl>
             </Grid>
         </TabItem>

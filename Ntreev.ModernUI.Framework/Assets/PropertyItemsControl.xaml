@@ -71,9 +71,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Header" Value="{Binding Path=(nmfc:PropertyItemsControl.Header)}" />
-        <Setter Property="nmfc:PropertyItemsControl.Target" Value="{Binding Path=(nmfc:PropertyItemsControl.Target)}" />
-        
         <Setter Property="Template" Value="{StaticResource HeaderedContentControl_Horizontal_Template}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource HeaderedContentControl_HeaderTemplate}" />
         <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
@@ -83,9 +80,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <DataTrigger Binding="{Binding Path=Orientation, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource HeaderedContentControl_Vertical_Template}" />
             </DataTrigger>
-            <!--<DataTrigger Binding="{Binding Path=Orientation, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" Value="Horizontal">
-                <Setter Property="Height" Value="24" />
-            </DataTrigger>-->
         </Style.Triggers>
     </Style>
 
