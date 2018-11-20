@@ -24,6 +24,8 @@ namespace Ntreev.ModernUI.Shell
             this.table.Columns.Add();
 
             this.table.Rows.Add("1", "2", "3");
+
+            var ss = Guid.NewGuid();
         }
 
         public IEnumerable ItemsSource => this.table.DefaultView;

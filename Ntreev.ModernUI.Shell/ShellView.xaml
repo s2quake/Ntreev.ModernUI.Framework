@@ -3,6 +3,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                   xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+                  xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                   xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
                   xmlns:nmgc="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Controls;assembly=Ntreev.ModernUI.Framework.DataGrid"
                   Height="550" Width="525" Loaded="Window_Loaded" Style="{StaticResource ModernWindow_Style}">
@@ -48,6 +49,8 @@
                     </StackPanel>
                     <Button nmfc:PropertyItemsControl.Header="ColorPicker" x:Name="PickColor" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
                     <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" ItemsSource="{Binding TreeViewItems}" />
+                    <nmfc:GuidControl nmfc:PropertyItemsControl.Header="Guid" Value="d1be6c34-6a65-464f-97aa-9a20ac6cac3d" />
+                    <TextBox nmfc:PropertyItemsControl.Header="TextBox"  />
                 </nmfc:PropertyItemsControl>
             </Grid>
         </TabItem>

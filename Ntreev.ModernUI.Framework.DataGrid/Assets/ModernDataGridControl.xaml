@@ -1544,7 +1544,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <xcdg:CellEditor x:Key="System.Int32" >
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
-                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
+                <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
                                      Text="{nmgm:EditingContentBinding}" >
@@ -1622,9 +1622,22 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <DataTemplate>
                 <nmgc:TimeSpanUpDown Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     
                                      InternalValue="{nmgm:EditingContentBinding}">
                 </nmgc:TimeSpanUpDown>
+            </DataTemplate>
+        </xcdg:CellEditor.EditTemplate>
+        <xcdg:CellEditor.ActivationGestures>
+            <xcdg:TextInputActivationGesture />
+        </xcdg:CellEditor.ActivationGestures>
+    </xcdg:CellEditor>
+
+    <xcdg:CellEditor x:Key="System.Guid" >
+        <xcdg:CellEditor.EditTemplate>
+            <DataTemplate>
+                <nmfc:GuidControl Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
+                                  Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
+                                  Value="{nmgm:EditingContentBinding}">
+                </nmfc:GuidControl>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
         <xcdg:CellEditor.ActivationGestures>
