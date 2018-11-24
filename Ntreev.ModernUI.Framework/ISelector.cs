@@ -25,9 +25,6 @@ namespace Ntreev.ModernUI.Framework
 {
     public interface ISelector
     {
-        object SelectedItem
-        {
-            get; set;
-        }
+        object SelectedItem { get; set; }
     }
 }

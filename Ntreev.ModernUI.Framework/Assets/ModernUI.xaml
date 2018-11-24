@@ -43,6 +43,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="BrowserExpander.xaml" />
         <ResourceDictionary Source="PropertyItemsControl.xaml" />
         <ResourceDictionary Source="TabControl.xaml" />
+        <ResourceDictionary Source="GuidControl.xaml" />
         <ResourceDictionary Source="GroupBox.xaml" />
         <ResourceDictionary Source="ProgressContent.xaml" />
         <ResourceDictionary Source="FlagControl.xaml" />

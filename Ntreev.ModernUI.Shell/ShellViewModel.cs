@@ -15,6 +15,7 @@ namespace Ntreev.ModernUI.Shell
     class ShellViewModel : Screen
     {
         private DataTable table = new DataTable();
+
         public ShellViewModel()
         {
             this.DisplayName = "Controls";
@@ -23,8 +24,22 @@ namespace Ntreev.ModernUI.Shell
             this.table.Columns.Add();
 
             this.table.Rows.Add("1", "2", "3");
+
+            var ss = Guid.NewGuid();
         }
 
         public IEnumerable ItemsSource => this.table.DefaultView;
+
+        public string[] TreeViewItems { get; } = new string[]
+        {
+            "/",
+            "/Root/",
+            "/Root/Types/",
+            "/Root/Types/Type1",
+            "/Root/Types/Type2",
+            "/Root/Tables/",
+            "/Root/Tables/Table1",
+            "/Root/Tables/Table2",
+        };
     }
 }

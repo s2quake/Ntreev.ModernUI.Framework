@@ -57,11 +57,11 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.RegisterAttached(headerString, typeof(object), typeof(PropertyItemsControl),
-                new UIPropertyMetadata(null, HeaderPropertyChangedCallback));
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, HeaderPropertyChangedCallback));
 
         public static readonly DependencyProperty TargetProperty =
             DependencyProperty.RegisterAttached(targetString, typeof(UIElement), typeof(PropertyItemsControl),
-                new UIPropertyMetadata(null));
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(PropertyItemsControl),
@@ -76,6 +76,11 @@ namespace Ntreev.ModernUI.Framework.Controls
         public PropertyItemsControl()
         {
 
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            base.OnPreviewKeyDown(e);
         }
 
         public static object GetHeader(DependencyObject obj)
@@ -153,6 +158,18 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
             base.PrepareContainerForItemOverride(element, item);
+
+            if (item is DependencyObject d)
+            {
+                var header = GetHeader(d);
+                SetHeader(element, header);
+                if (element is HeaderedContentControl control)
+                {
+                    control.Header = header;
+                }
+                var target = GetTarget(d);
+                SetTarget(element, target);
+            }
         }
 
         protected override Size MeasureOverride(Size constraint)

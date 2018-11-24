@@ -96,6 +96,7 @@
     <Compile Include="Controls\FlagControl.cs" />
     <Compile Include="Controls\FlagControlItem.cs" />
     <Compile Include="Controls\FlagControlItemType.cs" />
+    <Compile Include="Controls\GuidControl.cs" />
     <Compile Include="Controls\HighlightTextBlock.cs" />
     <Compile Include="Controls\HighlightTextBox.cs" />
     <Compile Include="Controls\IconToggleButton.cs" />
@@ -278,6 +279,10 @@
     <Page Include="Assets\FlagControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\GuidControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\IconToggleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
