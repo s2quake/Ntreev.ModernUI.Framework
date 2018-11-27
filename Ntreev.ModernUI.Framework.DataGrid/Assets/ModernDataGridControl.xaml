@@ -443,6 +443,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
+    <Style x:Key="HierarchicalGroupByControlRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
+        <Setter Property="BorderThickness" Value="10" />
+    </Style>
+
     <Style x:Key="ColumnManagerRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ColumnManagerRowSelector_PreviewMouseLeftButtonDown" />
     </Style>
@@ -1334,11 +1338,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
         <Setter Property="BorderThickness" Value="0 0 0 1" />
-        <Setter Property="BorderBrush" Value="Red" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ConnectionLinePen" Value="{StaticResource ConnectionLinePen}" />
-        <Setter Property="Template" Value="{StaticResource HierarchicalGroupByControl_Template}" />
-        <!--<EventSetter Event="Loaded" Handler="HierarchicalGroupByControl_Loaded" />-->
+        <!--<Setter Property="Template" Value="{StaticResource HierarchicalGroupByControl_Template}" />-->
+        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource HierarchicalGroupByControlRowSelector_Style}" />
     </Style>
 
     <ControlTemplate x:Key="HierarchicalGroupByItem_Template" TargetType="{x:Type xcdg:HierarchicalGroupByItem}">
