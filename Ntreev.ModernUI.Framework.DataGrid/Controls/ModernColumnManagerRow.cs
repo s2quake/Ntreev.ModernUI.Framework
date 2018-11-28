@@ -22,16 +22,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernColumnManagerRow : ColumnManagerRow
     {
+        private readonly static DependencyPropertyKey ColumnWidthPropertyKey =
+            DependencyProperty.RegisterAttachedReadOnly("ColumnWidth", typeof(double), typeof(ModernColumnManagerRow),
+                new UIPropertyMetadata(double.NaN));
+
+        public readonly static DependencyProperty ColumnWidthProperty = ColumnWidthPropertyKey.DependencyProperty;
+
+        private ScrollContentPresenter scrollContentPresenter;
+
         public ModernColumnManagerRow()
         {
 
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            this.scrollContentPresenter = FindParent<ScrollContentPresenter>(this);
+        }
+
+        public static double GetColumnWidth(DependencyObject d)
+        {
+            return (double)d.GetValue(ColumnWidthProperty);
         }
 
         protected override Cell CreateCell(ColumnBase column)
@@ -42,6 +63,40 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         protected override void PrepareContainer(DataGridContext dataGridContext, object item)
         {
             base.PrepareContainer(dataGridContext, item);
+        }
+
+        protected override Size MeasureOverride(Size constraint)
+        {
+            var size = base.MeasureOverride(constraint);
+            this.Dispatcher.InvokeAsync(this.UpdateColumnWidth, System.Windows.Threading.DispatcherPriority.Render);
+            return size;
+        }
+
+        private void UpdateColumnWidth()
+        {
+            if (DataGridControl.GetDataGridContext(this) is DataGridContext gridContext)
+            {
+                var scrollSize = this.scrollContentPresenter.DesiredSize;
+                if (scrollSize.Width < this.DesiredSize.Width)
+                {
+                    gridContext.SetValue(ColumnWidthPropertyKey, scrollSize.Width + 1);
+                }
+                else
+                {
+                    gridContext.SetValue(ColumnWidthPropertyKey, this.DesiredSize.Width);
+                }
+            }
+        }
+
+        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            var parentObject = VisualTreeHelper.GetParent(child);
+            if (parentObject == null) return null;
+
+            if (parentObject is T parent)
+                return parent;
+            else
+                return FindParent<T>(parentObject);
         }
     }
 }

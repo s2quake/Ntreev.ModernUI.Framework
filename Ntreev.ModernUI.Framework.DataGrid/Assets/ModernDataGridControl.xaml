@@ -648,8 +648,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style TargetType="{x:Type nmgc:ModernInsertionButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Content" Value="Insert" />
+        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Content" Value="Insert..." />
         <Setter Property="Padding" Value="2" />
+        <Setter Property="BorderThickness" Value="1 0 1 1" />
+        <Setter Property="Focusable" Value="False" />
     </Style>
 
     <ControlTemplate x:Key="Cell_Template" TargetType="{x:Type xcdg:Cell}">
