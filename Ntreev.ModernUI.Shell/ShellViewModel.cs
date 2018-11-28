@@ -23,7 +23,8 @@ namespace Ntreev.ModernUI.Shell
             this.table.Columns.Add();
             this.table.Columns.Add();
 
-            this.table.Rows.Add("1", "2", "3");
+            this.table.Rows.Add("1", "Value1", "3");
+            this.table.Rows.Add("2", "Value2", "3");
 
             var ss = Guid.NewGuid();
         }

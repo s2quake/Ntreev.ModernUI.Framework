@@ -27,11 +27,11 @@ using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Converters
 {
-    class IndexToColorBrushConverter : IValueConverter
+    class IndexToBackgroundBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            int index = value is int ? (int)value : 0;
+            var index = value is int ? (int)value : 0;
             return new SolidColorBrush(ModernDataGridControl.GetColor(index));
         }
 

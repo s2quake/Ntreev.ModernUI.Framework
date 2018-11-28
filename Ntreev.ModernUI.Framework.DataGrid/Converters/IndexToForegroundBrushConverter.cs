@@ -15,46 +15,34 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Ntreev.ModernUI.Framework.Controls;
+using Ntreev.ModernUI.Framework.Converters;
+using Ntreev.ModernUI.Framework.DataGrid.Controls;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework.Converters
+namespace Ntreev.ModernUI.Framework.DataGrid.Converters
 {
-    public class ComplementaryConverter : IValueConverter
+    class IndexToForegroundBrushConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private static ComplementaryConverter complementaryConverter = new ComplementaryConverter();
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Color == false)
-                return value;
-            var color = (Color)value;
-            return this.FromArgb(this.ToArgb(color) ^ 0xffffff, color.A);
+            var index = value is int ? (int)value : 0;
+            var color = ModernDataGridControl.GetColor(index);
+            var complementaryColor = (Color)complementaryConverter.Convert(color, typeof(Color), parameter, culture);
+            return new SolidColorBrush(complementaryColor);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
-        }
-
-        private int ToArgb(System.Windows.Media.Color color)
-        {
-            var bytes = new byte[] { color.A, color.R, color.G, color.B };
-            return BitConverter.ToInt32(bytes, 0);
-        }
-
-        private Color FromArgb(int value, byte a)
-        {
-            var bytes = BitConverter.GetBytes(value);
-            var aVal = a;
-            var rVal = bytes[1];
-            var gVal = bytes[2];
-            var bVal = bytes[3];
-            return Color.FromArgb(aVal, rVal, gVal, bVal);
         }
     }
 }

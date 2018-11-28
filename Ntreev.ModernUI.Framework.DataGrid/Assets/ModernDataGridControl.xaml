@@ -28,7 +28,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework">
 
-    <nmgv:IndexToColorBrushConverter x:Key="indexToColorBrushConverter" />
+    <nmgv:IndexToForegroundBrushConverter x:Key="indexToForegroundBrushConverter" />
+    <nmgv:IndexToBackgroundBrushConverter x:Key="indexToBackgroundBrushConverter" />
     <xcdg:ThicknessConverter x:Key="thicknessConverter" />
     <xcdg:GreaterThanZeroConverter x:Key="greaterThanZeroConverter" />
     <xcdg:ThicknessConverter x:Key="inverseThicknessConverter" InverseValue="True" />
@@ -266,6 +267,33 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="GroupHeaderControl_ToggleButton_Template" TargetType="{x:Type ToggleButton}">
+        <ContentPresenter x:Name="expanderGlyphPresenter" Content="{x:Null}" >
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate>
+                    <Border Width="9" Height="9" Background="Transparent">
+                        <Path Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type xcdg:GroupHeaderControl}}}" 
+                              Data="F1 M0,0 L9,0 9,9 0,9 0,0 z M1,1 L1,8 8,8 8,1 1,1 z M2,4 L4,4 4,2 5,2 5,4 7,4 7,5 5,5 5,7 4,7 4,5 2,5 2,4 z" />
+                    </Border>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+        </ContentPresenter>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter TargetName="expanderGlyphPresenter" Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border Width="9" Height="9" Background="Transparent">
+                                <Path Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type xcdg:GroupHeaderControl}}}" 
+                                      Data="F1 M0,0 L9,0 9,9 0,9 0,0 z M1,1 L1,8 8,8 8,1 1,1 z M2,4 L7,4 7,5 2,5 z" />
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <ControlTemplate x:Key="GroupLevelIndicatorPane_Template" TargetType="{x:Type xcdg:GroupLevelIndicatorPane}">
         <Grid>
             <Border x:Name="horizontalBorder"
@@ -293,29 +321,49 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </ControlTemplate>
 
     <Style TargetType="{x:Type xcdg:GroupLevelIndicatorPane}">
-        <Style.Resources>
-            <Style TargetType="{x:Type Border}">
-                <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-            </Style>
-        </Style.Resources>
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Template" Value="{StaticResource GroupLevelIndicatorPane_Template}" />
-        <!--<Setter Property="Visibility" Value="Collapsed" />-->
-        <Style.Triggers>
-            <!--<DataTrigger Binding="{Binding Path=(xcdg:GroupLevelIndicatorPane.CurrentIndicatorCount), RelativeSource={RelativeSource Self}}" Value="0">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </DataTrigger>-->
-        </Style.Triggers>
     </Style>
 
     <!--열 필터링시 생기는 그룹형태의 한줄의 Row-->
     <Style TargetType="{x:Type xcdg:GroupHeaderControl}">
         <Setter Property="BorderThickness" Value="0 0 1 1" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
-        <Setter Property="Background" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToColorBrushConverter}}" />
-
-        <!--<EventSetter Event="Loaded" Handler="GroupHeaderControl_Loaded" />-->
+        <!--<Setter Property="Foreground" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToForegroundBrushConverter}}" />-->
+        <Setter Property="Background" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToBackgroundBrushConverter}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xcdg:GroupHeaderControl}">
+                    <xcdg:PassiveLayoutDecorator Axis="Horizontal">
+                        <DockPanel>
+                            <xcdg:HierarchicalGroupLevelIndicatorPane DockPanel.Dock="Left"/>
+                            <xcdg:GroupLevelIndicatorPane DockPanel.Dock="Left" Indented="False">
+                                <xcdg:GroupLevelIndicatorPane.GroupLevel>
+                                    <Binding ConverterParameter="-1" Path="(xcdg:GroupLevelIndicatorPane.GroupLevel)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <xcdg:IntAdditionConverter/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </xcdg:GroupLevelIndicatorPane.GroupLevel>
+                            </xcdg:GroupLevelIndicatorPane>
+                            <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" FocusVisualStyle="{TemplateBinding FocusVisualStyle}" Focusable="True" Padding="{TemplateBinding Padding}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton Focusable="False" IsChecked="{Binding Group.IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" OverridesDefaultStyle="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Template="{StaticResource GroupHeaderControl_ToggleButton_Template}">
+                                    </ToggleButton>
+                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="3,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </StackPanel>
+                            </Border>
+                        </DockPanel>
+                    </xcdg:PassiveLayoutDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="xcdg:DataGridControl.NavigationBehavior" Value="None">
+                            <Setter Property="Focusable" TargetName="mainBorder" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="Invisible_Thumb_Style" TargetType="{x:Type Thumb}" BasedOn="{StaticResource {x:Type Thumb}}">
@@ -523,15 +571,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Border x:Name="topBorder" Grid.Column="2" Grid.ColumnSpan="2" Margin="0 -1 0 0" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0 1 0 0" Padding="{TemplateBinding Control.Padding}" Visibility="Collapsed" />
-            <Border x:Name="rootBorder" Grid.Column="2" Grid.ColumnSpan="2" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
+            <Border x:Name="topBorder" Grid.Column="2" Grid.ColumnSpan="2" Margin="0 -1 0 0" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" 
+                    BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 1 0 0" Padding="{TemplateBinding Control.Padding}" Visibility="Collapsed" />
+            <Border x:Name="rootBorder" Grid.Column="2" Grid.ColumnSpan="2" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" 
+                    BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
             <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" xcdg:TableView.CanScrollHorizontally="False" />
             <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" />
             <Border x:Name="detailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
                 <Button x:Name="detailsToggle_Button" Template="{StaticResource detailsExpanderButtonTemplate}" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
             </Border>
             <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
-            <Border x:Name="bottomBorder" BorderThickness="0 0 0 1" xcdg:TableView.CanScrollHorizontally="False" Grid.ColumnSpan="3" BorderBrush="{TemplateBinding Control.BorderBrush}" Visibility="Collapsed" />
+            <Border x:Name="bottomBorder" BorderThickness="0 0 0 1" xcdg:TableView.CanScrollHorizontally="False" Grid.ColumnSpan="3" 
+                    BorderBrush="{TemplateBinding Control.BorderBrush}" Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
             <MultiDataTrigger>
@@ -569,9 +620,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter TargetName="detailsToggle_Button" Value="{x:Static xcdg:DataGridCommands.ToggleDetailExpansion}" Property="ButtonBase.Command" />
                 <Setter TargetName="detailsToggle" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
-            <Trigger Property="xcdg:ViewBase.IsLastItem" Value="True">
+            <!--<Trigger Property="xcdg:ViewBase.IsLastItem" Value="True">
                 <Setter TargetName="bottomBorder" Property="Visibility" Value="Visible" />
-            </Trigger>
+            </Trigger>-->
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -596,6 +647,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <Style TargetType="{x:Type nmgc:ModernInsertionButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
         <Setter Property="Content" Value="Insert" />
         <Setter Property="Padding" Value="2" />
     </Style>
@@ -1294,25 +1346,25 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     </HierarchicalDataTemplate>
 
-    <ControlTemplate x:Key="HierarchicalGroupByControl_Template" TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+    <!--<ControlTemplate x:Key="HierarchicalGroupByControl_Template" TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
         <ControlTemplate.Resources>
             <Style TargetType="{x:Type TreeView}" />
         </ControlTemplate.Resources>
 
         <Grid x:Name="rootGrid">
             <Grid.ColumnDefinitions>
-                <!-- HierarchicalGroupLevelIndicatorPane -->
+                --><!-- HierarchicalGroupLevelIndicatorPane --><!--
                 <ColumnDefinition Width="Auto" />
-                <!-- GroupLevelIndicatorPane -->
+                --><!-- GroupLevelIndicatorPane --><!--
                 <ColumnDefinition Width="Auto" />
 
-                <!-- HierarchicalGroupByControl -->
+                --><!-- HierarchicalGroupByControl --><!--
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- The border responsible for the visual outline of the row (gridlines and background)
+            --><!-- The border responsible for the visual outline of the row (gridlines and background)
               spans the GroupLevelIndicatorPane and CellsHost Panel. Those 2 elements are not children of
-              the Border because we don't want the border to be displayed in the GroupLevelIndicatorPane. -->
+              the Border because we don't want the border to be displayed in the GroupLevelIndicatorPane. --><!--
             <Border x:Name="rootBorder"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
@@ -1323,57 +1375,89 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" />
 
-            <!-- GroupLevelIndicatorPane is a placeholder for individual GroupLevelIndicator elements that are added
-                       whenever this Row is part of a group. -->
+            --><!-- GroupLevelIndicatorPane is a placeholder for individual GroupLevelIndicator elements that are added
+                       whenever this Row is part of a group. --><!--
             <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
         </Grid>
         <ControlTemplate.Triggers>
-            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(xcdg:GroupLevelIndicatorPane.GroupLevel)}" Value="-1">
+            --><!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(xcdg:GroupLevelIndicatorPane.GroupLevel)}" Value="-1">
                 <Setter TargetName="groupLevelIndicatorPane" Property="Visibility" Value="Collapsed" />
-            </DataTrigger>-->
+            </DataTrigger>--><!--
         </ControlTemplate.Triggers>
-    </ControlTemplate>
+    </ControlTemplate>-->
 
     <Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="BorderThickness" Value="1 0 0 1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
+        <Setter Property="StairHeight" Value="0"/>
+        <Setter Property="ConnectionLineOffset" Value="0"/>
+        <Setter Property="ConnectionLineAlignment" Value="CenterToCenter"/>
+        <Setter Property="xcdg:RowSelector.Visible" Value="True"/>
+        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                    <Grid x:Name="rootGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="rootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}" Grid.ColumnSpan="2" Grid.Column="1" Padding="{TemplateBinding Padding}">
+                        </Border>
+                        <!--<Border x:Name="verticalGridLineBorder" BorderBrush="{Binding (xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush, RelativeSource={RelativeSource Self}}" Grid.ColumnSpan="2" Grid.Column="1" Visibility="Collapsed">
+                            <Border.BorderThickness>
+                                <Binding ConverterParameter="Right" Path="(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness" RelativeSource="{RelativeSource Self}">
+                                    <Binding.Converter>
+                                        <xcdg:ThicknessConverter InverseValue="False"/>
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.BorderThickness>
+                        </Border>-->
+                        <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0"/>
+                        <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1"/>
+                        <xcdg:GroupByControl AllowSort="{TemplateBinding AllowSort}" AllowGroupingModification="{TemplateBinding AllowGroupingModification}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" xcdg:TableView.CanScrollHorizontally="True" ConnectionLinePen="{TemplateBinding ConnectionLinePen}" Grid.Column="2" NoGroupContent="{TemplateBinding NoGroupContent}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding (xcdg:GroupLevelIndicatorPane.GroupLevel), RelativeSource={RelativeSource TemplatedParent}}" Value="-1">
+                            <Setter Property="Visibility" TargetName="groupLevelIndicatorPane" Value="Collapsed"/>
+                            <!--<Setter Property="BorderThickness" TargetName="verticalGridLineBorder">
+                                <Setter.Value>
+                                    <Binding ConverterParameter="Right, Left" Path="(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness" RelativeSource="{RelativeSource Self}">
+                                        <Binding.Converter>
+                                            <xcdg:ThicknessConverter InverseValue="False"/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Setter.Value>
+                            </Setter>-->
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
         <Setter Property="BorderThickness" Value="0 0 0 1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ConnectionLinePen" Value="{StaticResource ConnectionLinePen}" />
-        <!--<Setter Property="Template" Value="{StaticResource HierarchicalGroupByControl_Template}" />-->
+        <Setter Property="Template" Value="{StaticResource HierarchicalGroupByControl_Template}" />
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource HierarchicalGroupByControlRowSelector_Style}" />
-    </Style>
+    </Style>-->
 
-    <ControlTemplate x:Key="HierarchicalGroupByItem_Template" TargetType="{x:Type xcdg:HierarchicalGroupByItem}">
-
-        <Border x:Name="outerBorder"
-                BorderBrush="{TemplateBinding BorderBrush}"
-                Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}"
-                BorderThickness="{TemplateBinding BorderThickness}">
-
-            <!-- This StackPanel is used to layout the ContentPresenter and the Sort Glyph (when present). -->
+    <ControlTemplate x:Key="GroupByItem_Template" TargetType="{x:Type xcdg:GroupByItem}">
+        <Border x:Name="outerBorder" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
+                Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}">
             <StackPanel x:Name="contentPanel" Orientation="Horizontal">
-
-                <!-- Same ContentPresenter as in the base Cell Template. -->
-                <!--<ContentPresenter Content="{TemplateBinding Content}"
-                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                 ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />-->
                 <TextBlock Text="{Binding Title}" />
-
-                <!-- ContentPresenter that is used to display the sort glyph.
-                    We explicitly set its Content property to Null to prevent the XAML parser
-                    from implicitly setting it to its TemplatedParent's Content. -->
-                <ContentPresenter x:Name="sortGlyphPresenter"
-                                 Content="{x:Null}"
-                                 ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AscendingSortGlyph}"
-                                 Margin="6,0,0,0"
-                                 Visibility="Hidden" />
-
+                <ContentPresenter x:Name="sortGlyphPresenter" Content="{x:Null}" Margin="6,0,0,0" Visibility="Hidden"
+                                 ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AscendingSortGlyph}" />
             </StackPanel>
-
         </Border>
 
         <ControlTemplate.Triggers>
@@ -1406,13 +1490,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     </ControlTemplate>
 
-    <Style TargetType="{x:Type xcdg:HierarchicalGroupByItem}">
-        <Setter Property="Background" Value="{Binding Path=DataContext.(nmgc:ModernDataGridControl.GroupIndex), RelativeSource={RelativeSource Self}, Converter={StaticResource indexToColorBrushConverter}}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+    <Style TargetType="{x:Type xcdg:GroupByItem}">
+        <Setter Property="Background" Value="{Binding Path=DataContext.(nmgc:ModernDataGridControl.GroupIndex), RelativeSource={RelativeSource Self}, Converter={StaticResource indexToBackgroundBrushConverter}}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
         <Setter Property="Padding" Value="5 3" />
-        <Setter Property="Template" Value="{StaticResource HierarchicalGroupByItem_Template}" />
+        <Setter Property="Template" Value="{StaticResource GroupByItem_Template}" />
     </Style>
 
     <Style TargetType="{x:Type xcdg:GroupByControl}">

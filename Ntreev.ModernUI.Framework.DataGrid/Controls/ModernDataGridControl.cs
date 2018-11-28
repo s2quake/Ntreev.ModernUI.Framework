@@ -117,9 +117,9 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         static ModernDataGridControl()
         {
-            colors.Add(Color.FromRgb(0xa4, 0xc4, 0x00));
-            colors.Add(Color.FromRgb(0x60, 0xa9, 0x17));
-            colors.Add(Color.FromRgb(0x00, 0x8a, 0x00));
+            colors.Add(Color.FromRgb(125, 102, 8));
+            colors.Add(Color.FromRgb(20, 90, 50));
+            colors.Add(Color.FromRgb(120, 66, 18));
             colors.Add(Color.FromRgb(0x00, 0xab, 0xa9));
             colors.Add(Color.FromRgb(0x1b, 0xa1, 0xe2));
             colors.Add(Color.FromRgb(0x00, 0x50, 0xef));
