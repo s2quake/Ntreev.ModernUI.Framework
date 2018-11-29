@@ -1426,7 +1426,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <xcdg:GroupByControl AllowSort="{TemplateBinding AllowSort}" AllowGroupingModification="{TemplateBinding AllowGroupingModification}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" xcdg:TableView.CanScrollHorizontally="True" ConnectionLinePen="{TemplateBinding ConnectionLinePen}" Grid.Column="2" NoGroupContent="{TemplateBinding NoGroupContent}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding (xcdg:GroupLevelIndicatorPane.GroupLevel), RelativeSource={RelativeSource TemplatedParent}}" Value="-1">
+                        <DataTrigger Binding="{Binding Path=(xcdg:GroupLevelIndicatorPane.GroupLevel), RelativeSource={RelativeSource TemplatedParent}}" Value="-1">
                             <Setter Property="Visibility" TargetName="groupLevelIndicatorPane" Value="Collapsed"/>
                             <!--<Setter Property="BorderThickness" TargetName="verticalGridLineBorder">
                                 <Setter.Value>
