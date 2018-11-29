@@ -26,7 +26,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmgc="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Controls"
                     xmlns:nmgm="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Markup"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
-                    xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework">
+                    xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework"
+                    xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Properties">
 
     <nmgv:IndexToForegroundBrushConverter x:Key="indexToForegroundBrushConverter" />
     <nmgv:IndexToBackgroundBrushConverter x:Key="indexToBackgroundBrushConverter" />
@@ -650,7 +651,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
         <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Content" Value="Insert..." />
+        <Setter Property="Content" Value="{x:Static p:Resources.Button_InsertRow}" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="BorderThickness" Value="1 0 1 1" />
         <Setter Property="Focusable" Value="False" />
