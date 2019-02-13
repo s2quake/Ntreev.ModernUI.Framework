@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
     {
         public ModernInsertionButton()
         {
-
+            
         }
     }
 }

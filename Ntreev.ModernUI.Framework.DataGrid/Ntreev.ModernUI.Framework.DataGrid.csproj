@@ -72,6 +72,7 @@
     <Compile Include="Controls\ModernDragEventArgs.cs" />
     <Compile Include="Controls\ModernDragEventHandler.cs" />
     <Compile Include="Controls\ModernInsertionButton.cs" />
+    <Compile Include="Controls\ModernInsertionRow.cs" />
     <Compile Include="Controls\ModernInsertionView.xaml.cs">
       <DependentUpon>ModernInsertionView.xaml</DependentUpon>
     </Compile>
@@ -178,6 +179,9 @@
     <PackageReference Include="ModernUI.WPF">
       <Version>1.0.9</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clipboard.png" />
   </ItemGroup>
   <Import Project="..\Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

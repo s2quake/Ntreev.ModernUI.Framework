@@ -32,18 +32,19 @@ namespace Ntreev.ModernUI.Framework.Converters
         {
             if (value is RoutedUICommand command)
             {
-                var text = command.Text;
-
+                var gestureList = new List<string>(command.InputGestures.Count);
                 foreach (var item in command.InputGestures)
                 {
                     if (item is KeyGesture gesture)
                     {
-                        text += $" ({gesture.DisplayString})";
-                        break;
+                        gestureList.Add(gesture.GetDisplayStringForCulture(culture));
                     }
                 }
-
-                return text;
+                if (gestureList.Any() == true)
+                {
+                    return $"{command.Text} ({string.Join(", ", gestureList)})";
+                }
+                return command.Text;
             }
             return null;
         }

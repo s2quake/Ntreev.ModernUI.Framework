@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Shell
 {
@@ -15,6 +16,8 @@ namespace Ntreev.ModernUI.Shell
     class ShellViewModel : Screen
     {
         private DataTable table = new DataTable();
+
+        private readonly ICommand insertCommand;
 
         public ShellViewModel()
         {
@@ -27,7 +30,17 @@ namespace Ntreev.ModernUI.Shell
             this.table.Rows.Add("2", "Value2", "3");
 
             var ss = Guid.NewGuid();
+            this.insertCommand = new DelegateCommand((p) => this.Insert(), (p) => CanInsert);
         }
+
+        public void Insert()
+        {
+
+        }
+
+        public bool CanInsert => true;
+
+        public ICommand InsertCommand => this.insertCommand;
 
         public IEnumerable ItemsSource => this.table.DefaultView;
 

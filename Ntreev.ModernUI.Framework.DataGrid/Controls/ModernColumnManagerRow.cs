@@ -31,11 +31,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernColumnManagerRow : ColumnManagerRow
     {
-        private readonly static DependencyPropertyKey ColumnWidthPropertyKey =
-            DependencyProperty.RegisterAttachedReadOnly("ColumnWidth", typeof(double), typeof(ModernColumnManagerRow),
+        private readonly static DependencyPropertyKey ColumnsWidthPropertyKey =
+            DependencyProperty.RegisterAttachedReadOnly("ColumnsWidth", typeof(double), typeof(ModernColumnManagerRow),
                 new UIPropertyMetadata(double.NaN));
 
-        public readonly static DependencyProperty ColumnWidthProperty = ColumnWidthPropertyKey.DependencyProperty;
+        public readonly static DependencyProperty ColumnsWidthProperty = ColumnsWidthPropertyKey.DependencyProperty;
 
         private ScrollContentPresenter scrollContentPresenter;
 
@@ -50,9 +50,9 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             this.scrollContentPresenter = FindParent<ScrollContentPresenter>(this);
         }
 
-        public static double GetColumnWidth(DependencyObject d)
+        public static double GetColumnsWidth(DependencyObject d)
         {
-            return (double)d.GetValue(ColumnWidthProperty);
+            return (double)d.GetValue(ColumnsWidthProperty);
         }
 
         protected override Cell CreateCell(ColumnBase column)
@@ -68,22 +68,29 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         protected override Size MeasureOverride(Size constraint)
         {
             var size = base.MeasureOverride(constraint);
-            this.Dispatcher.InvokeAsync(this.UpdateColumnWidth, System.Windows.Threading.DispatcherPriority.Render);
+            //this.Dispatcher.InvokeAsync(this.UpdateColumnsWidth, System.Windows.Threading.DispatcherPriority.Render);
             return size;
         }
 
-        private void UpdateColumnWidth()
+        protected override Size ArrangeOverride(Size arrangeBounds)
+        {
+            var size = base.ArrangeOverride(arrangeBounds);
+            this.UpdateColumnsWidth();
+            return size;
+        }
+
+        private void UpdateColumnsWidth()
         {
             if (DataGridControl.GetDataGridContext(this) is DataGridContext gridContext)
             {
                 var scrollSize = this.scrollContentPresenter.DesiredSize;
                 if (scrollSize.Width < this.DesiredSize.Width)
                 {
-                    gridContext.SetValue(ColumnWidthPropertyKey, scrollSize.Width + 1);
+                    gridContext.SetValue(ColumnsWidthPropertyKey, scrollSize.Width + 1);
                 }
                 else
                 {
-                    gridContext.SetValue(ColumnWidthPropertyKey, this.DesiredSize.Width);
+                    gridContext.SetValue(ColumnsWidthPropertyKey, this.DesiredSize.Width);
                 }
             }
         }

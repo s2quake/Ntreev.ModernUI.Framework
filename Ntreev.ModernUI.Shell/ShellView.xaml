@@ -160,16 +160,15 @@
                                 <xcdg:HierarchicalGroupByControl/>
                             </DataTemplate>
                             <DataTemplate>
-                                <nmgc:ModernColumnManagerRow />
+                                <nmgc:ModernColumnManagerRow x:Name="columnManagerRow" />
                             </DataTemplate>
                             <DataTemplate>
-                                <nmgc:ModernInsertionButton Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnWidth), RelativeSource={RelativeSource Self}}" />
+                                <nmgc:ModernInsertionRow InsertCommand="{Binding InsertCommand}" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />
                             </DataTemplate>
                             <DataTemplate>
                                 <Grid xcdg:TableView.CanScrollHorizontally="False" Height="3" VerticalAlignment="Bottom" 
-                                      HorizontalAlignment="Left"
-                                      Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnWidth), RelativeSource={RelativeSource Self}}"
-                                      xcdg:RowSelector.RowSelectorStyle="{DynamicResource DataRowSelector_Style}">
+                                      HorizontalAlignment="Left" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}"
+                                      xcdg:RowSelector.RowSelectorStyle="{DynamicResource DataRowSelector_Style}">  
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />

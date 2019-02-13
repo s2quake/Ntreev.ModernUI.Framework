@@ -105,11 +105,35 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private void MenuItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-
+            if (DesignerProperties.GetIsInDesignMode(this) == true)
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (var item in e.NewItems)
+                    {
+                        base.Items.Add(item);
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var item in e.OldItems)
+                    {
+                        base.Items.Remove(item);
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Reset)
+                {
+                    base.Items.Clear();
+                }
+                this.OnItemsChanged(e);
+            }
         }
 
         private void RefreshItemsSource(IEnumerable items)
         {
+            if (DesignerProperties.GetIsInDesignMode(this) == true)
+                return;
+
             var list = new List<object>();
             foreach (var item in this.MenuItems)
             {

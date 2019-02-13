@@ -647,10 +647,31 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type nmgc:ModernInsertionButton}" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+    <Style TargetType="{x:Type nmgc:ModernInsertionRow}">
         <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <!--<Setter Property="Width" Value="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type nmgc:ModernInsertionRow}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <nmfc:IconButton x:Name="PART_InsertManyButton" Focusable="False" Grid.Column="0" Command="{TemplateBinding InsertManyCommand}"
+                                         Source="/Ntreev.ModernUI.Framework.DataGrid;component/Images/clipboard.png" />
+                        <nmgc:ModernInsertionButton x:Name="PART_InsertButton" Grid.Column="1" Command="{TemplateBinding InsertCommand}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type nmgc:ModernInsertionButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+        <!--<Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Left" />-->
         <Setter Property="Content" Value="{x:Static p:Resources.Button_InsertRow}" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="BorderThickness" Value="1 0 1 1" />
