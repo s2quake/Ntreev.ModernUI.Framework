@@ -36,7 +36,7 @@ using System.ComponentModel.Composition;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
-    public abstract class TreeViewItemViewModel : PropertyChangedBase, INotifyPropertyChanged, IComparable, IDisposable, ISelectable, IPartImportsSatisfiedNotification, ICommand
+    public abstract class TreeViewItemViewModel : PropertyChangedBase, INotifyPropertyChanged, IComparable, IDisposable, ISelectable, ICommand
     {
         private TreeViewItemViewModel parent;
         private ICommand defaultCommand;
@@ -46,8 +46,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private string pattern;
         [Import]
         private IServiceProvider serviceProvider = null;
-        [Import]
-        private ICompositionService compositionService = null;
 
         protected TreeViewItemViewModel()
         {
@@ -419,9 +417,13 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             this.Disposed?.Invoke(this, e);
         }
 
-        protected virtual void OnImportsSatisfied()
+        protected override void OnImportsSatisfied()
         {
-
+            base.OnImportsSatisfied();
+            foreach (var item in this.Items)
+            {
+                this.SatisfyImportsOnce(item);
+            }
         }
 
         private static IEnumerable<string> CollectDisplayName(TreeViewItemViewModel parent, TreeViewItemViewModel viewModel)
@@ -445,10 +447,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                         foreach (TreeViewItemViewModel item in e.NewItems)
                         {
                             item.parent = this;
-                            if (this.compositionService != null && item.compositionService == null)
-                            {
-                                this.compositionService.SatisfyImportsOnce(item);
-                            }
+                            this.SatisfyImportsOnce(item);
                         }
                     }
                     break;
@@ -463,19 +462,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
             this.NotifyOfPropertyChange(nameof(this.HasItems));
         }
-
-        #region IPartImportsSatisfiedNotification
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            foreach (var item in this.Items)
-            {
-                this.compositionService.SatisfyImportsOnce(item);
-            }
-            this.OnImportsSatisfied();
-        }
-
-        #endregion
 
         #region ICommand
 

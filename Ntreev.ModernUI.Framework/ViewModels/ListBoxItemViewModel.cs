@@ -33,7 +33,7 @@ using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
-    public abstract class ListBoxItemViewModel : PropertyChangedBase, ISelectable, ICommand, IPartImportsSatisfiedNotification
+    public abstract class ListBoxItemViewModel : PropertyChangedBase, ISelectable, ICommand
     {
         private ICommand defaultCommand;
 
@@ -157,11 +157,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        protected virtual void OnImportsSatisfied()
-        {
-
-        }
-
         private ICommand DefaultCommand
         {
             get
@@ -182,15 +177,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 return this.defaultCommand;
             }
         }
-
-        #region IPartImportsSatisfiedNotification
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            this.OnImportsSatisfied();
-        }
-
-        #endregion
 
         #region ICommand
 

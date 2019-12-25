@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +26,12 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class ScreenBase : Caliburn.Micro.Screen
+    public class ScreenBase : Caliburn.Micro.Screen, IPartImportsSatisfiedNotification
     {
         private bool isProgressing;
         private string progressMessage;
+        [Import]
+        private ICompositionService compositionService = null;
 
         public sealed async override void CanClose(Action<bool> callback)
         {
@@ -114,5 +117,24 @@ namespace Ntreev.ModernUI.Framework
         {
             return await Task.Run(() => true);
         }
+
+        protected void SatisfyImportsOnce(object attributedPart)
+        {
+            this.compositionService?.SatisfyImportsOnce(attributedPart);
+        }
+
+        protected virtual void OnImportsSatisfied()
+        {
+
+        }
+
+        #region IPartImportsSatisfiedNotification
+
+        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        {
+            this.OnImportsSatisfied();
+        }
+
+        #endregion
     }
 }

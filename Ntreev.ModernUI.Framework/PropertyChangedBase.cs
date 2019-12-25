@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +26,30 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase
+    public class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase, IPartImportsSatisfiedNotification
     {
-        public Dispatcher Dispatcher
+        [Import]
+        private ICompositionService compositionService = null;
+
+        public Dispatcher Dispatcher => Application.Current.Dispatcher;
+
+        protected void SatisfyImportsOnce(object attributedPart)
         {
-            get { return Application.Current.Dispatcher; }
+            this.compositionService?.SatisfyImportsOnce(attributedPart);
         }
+
+        protected virtual void OnImportsSatisfied()
+        {
+
+        }
+
+        #region IPartImportsSatisfiedNotification
+
+        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        {
+            this.OnImportsSatisfied();
+        }
+
+        #endregion
     }
 }
