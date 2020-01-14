@@ -97,7 +97,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             EventManager.RegisterRoutedEvent(nameof(RowDrop), RoutingStrategy.Bubble,
                 typeof(ModernDragEventHandler), typeof(ModernDataGridControl));
 
-        private static List<Color> colors = new List<Color>();
+        private static readonly List<Color> colors = new List<Color>();
 
         private ScrollViewer scrollViewer;
         private DataGridContext selectedGridContext;
@@ -497,13 +497,13 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 this.DefaultCellEditors.Add(type, editor);
         }
 
-        private void FocusDefault()
-        {
-            if (this.GlobalCurrentItem == null)
-                this.selectedGridContext.CurrentItem = this.selectedGridContext.Items.GetItemAt(0);
-            if (this.GlobalCurrentColumn == null)
-                this.selectedGridContext.CurrentColumn = this.selectedGridContext.VisibleColumns.FirstOrDefault();
-        }
+        //private void FocusDefault()
+        //{
+        //    if (this.GlobalCurrentItem == null)
+        //        this.selectedGridContext.CurrentItem = this.selectedGridContext.Items.GetItemAt(0);
+        //    if (this.GlobalCurrentColumn == null)
+        //        this.selectedGridContext.CurrentColumn = this.selectedGridContext.VisibleColumns.FirstOrDefault();
+        //}
 
         private void GroupLevelDescriptionCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -889,7 +889,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         internal string Match(DataGridContext gridContext, object item)
         {
-            if (item is ICustomTypeDescriptor descriptor)
+            if (item is ICustomTypeDescriptor)
             {
                 foreach (var column in gridContext.VisibleColumns)
                 {

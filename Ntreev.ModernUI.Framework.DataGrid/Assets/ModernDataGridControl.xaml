@@ -57,7 +57,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             BorderBrush="{DynamicResource WindowBorderActive}"
                             BorderThickness="1"
                             Margin="0,-1,0,0">
-                        <!-- popup border thickness not dependent on BorderThickness property-->
                         <ScrollViewer Name="DropDownScrollViewer">
                             <Grid RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -101,13 +100,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                      Margin="{TemplateBinding Padding}"
                                      Padding="4,0,0,1"
                                      Visibility="Collapsed" />
-            <!--<TextBox x:Name="PART_EditableTextBox"
-                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
-                     Margin="{TemplateBinding Padding}"
-                     Padding="2,0,0,1"
-                     Style="{StaticResource ComboBoxEditableTextBox}"
-                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />-->
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasItems" Value="false">
@@ -139,14 +131,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Trigger>
             <MultiDataTrigger >
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HasSearchText, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.(nmgc:ModernDataGridControl.HasSearchText), RelativeSource={RelativeSource Self}}" Value="True" />
                     <Condition Binding="{Binding IsCurrent, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="True" />
                     <Condition Binding="{Binding IsBeingEdited, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
-                <!--<Setter TargetName="htb" Property="Highlight" Value="{DynamicResource WindowBackground}" />-->
                 <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Hidden" />
                 <Setter TargetName="htb" Property="Visibility" Value="Visible" />
-                <Setter TargetName="htb" Property="Pattern" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SearchText, RelativeSource={RelativeSource Self}}" />
+                <Setter TargetName="htb" Property="Pattern" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.(nmgc:ModernDataGridControl.HasSearchText), RelativeSource={RelativeSource Self}}" />
                 <Setter TargetName="htb" Property="Highlight" Value="{DynamicResource WindowBackground}" />
                 <Setter TargetName="htb" Property="Foreground" Value="{DynamicResource WindowText}" />
             </MultiDataTrigger>
@@ -260,10 +251,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <ControlTemplate x:Key="detailsExpanderButtonTemplate" TargetType="{x:Type Button}">
-        <ContentPresenter Name="expanderGlyphPresenter" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).CollapseGroupGlyph}" />
+        <ContentPresenter Name="expanderGlyphPresenter" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.CollapseGroupGlyph)}" />
         <ControlTemplate.Triggers>
             <Trigger Property="xcdg:DataGridControl.HasExpandedDetails" Value="False">
-                <Setter TargetName="expanderGlyphPresenter" Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ExpandGroupGlyph}" Property="ContentPresenter.ContentTemplate" />
+                <Setter TargetName="expanderGlyphPresenter" Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" Property="ContentPresenter.ContentTemplate" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -367,7 +358,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="Invisible_Thumb_Style" TargetType="{x:Type Thumb}" BasedOn="{StaticResource {x:Type Thumb}}">
+    <Style x:Key="Invisible_Thumb_Style" TargetType="{x:Type Thumb}">
         <Setter Property="Height" Value="4" />
         <Setter Property="Template">
             <Setter.Value>
@@ -418,7 +409,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundCurrent}" />
                 <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundCurrent}" />
             </Trigger>
-            <DataTrigger Binding="{Binding Path=DataContext.(nmgc:ModernDataGridControl.AllowHeightResize), RelativeSource={RelativeSource Self}}" Value="True">
+            <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.AllowHeightResize)}" Value="True">
                 <Setter TargetName="PART_RowResizerThumb" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </ControlTemplate.Triggers>
@@ -468,7 +459,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style x:Key="TitleRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource EmptyRowSelector_Style}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
+            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
         </Style.Triggers>
@@ -502,7 +493,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style x:Key="ModernColumnManagerRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource ColumnManagerRowSelector_Style}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
+            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
         </Style.Triggers>
@@ -511,13 +502,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style x:Key="DataRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
         <Setter Property="nmgc:ModernDataRow.IsDragOver" Value="False" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:ViewBase.IsLastItem)}" Value="True">
+            <DataTrigger Binding="{Binding Path=(xcdg:ViewBase.IsLastItem)}" Value="True">
                 <Setter Property="BorderThickness" Value="0 1 0 1" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:DataGridControl.HasExpandedDetails)}" Value="True">
+            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.HasExpandedDetails)}" Value="True">
                 <Setter Property="BorderThickness" Value="0 1 0 1" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:Row.IsSelected)}" Value="True">
+            <DataTrigger Binding="{Binding Path=(xcdg:Row.IsSelected)}" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundCurrent}" />
                 <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundCurrent}" />
             </DataTrigger>
@@ -527,11 +518,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Trigger Property="HasValidationError" Value="True" >
                 <Setter Property="ContentTemplate" Value="{x:Null}" />
             </Trigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(nmgc:ModernDataGridControl.HasDataContextError)}" Value="True">
-                <Setter Property="ContentTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ValidationErrorGlyph}" />
+            <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError)}" Value="True">
+                <Setter Property="ContentTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ValidationErrorGlyph)}" />
                 <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.DataContextError}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
+            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
         </Style.Triggers>
@@ -540,10 +531,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style x:Key="InsertionRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
         <Setter Property="nmgc:ModernDataRow.IsDragOver" Value="False" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:ViewBase.IsLastItem)}" Value="True">
+            <DataTrigger Binding="{Binding Path=(xcdg:ViewBase.IsLastItem)}" Value="True">
                 <Setter Property="BorderThickness" Value="0 1 0 1" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:DataGridControl.HasExpandedDetails)}" Value="True">
+            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.HasExpandedDetails)}" Value="True">
                 <Setter Property="BorderThickness" Value="0 1 0 1" />
             </DataTrigger>
             <!--<DataTrigger Binding="{Binding IsSelected}" Value="True">
@@ -558,7 +549,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style x:Key="ModernInsertionRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource InsertionRowSelector_Style}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
+            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
         </Style.Triggers>
@@ -581,7 +572,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Border x:Name="detailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
                 <Button x:Name="detailsToggle_Button" Template="{StaticResource detailsExpanderButtonTemplate}" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
             </Border>
-            <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
+            <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" Margin="{TemplateBinding Control.BorderThickness}" 
+                                 ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMinWidth)}" 
+                                 ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMode)}"
+                                 FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.FixedCellCount), Mode=TwoWay}"
+                                 FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.FixedColumnDropMarkPen)}" />
             <Border x:Name="bottomBorder" BorderThickness="0 0 0 1" xcdg:TableView.CanScrollHorizontally="False" Grid.ColumnSpan="3" 
                     BorderBrush="{TemplateBinding Control.BorderBrush}" Visibility="Collapsed" />
         </Grid>
@@ -783,7 +778,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Self}}" Value="{x:Null}" />
-                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HasSearchText, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.(nmgc:ModernDataGridControl.HasSearchText), RelativeSource={RelativeSource Self}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
@@ -832,10 +827,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Border Name="rootBorder" Grid.Column="1" Grid.ColumnSpan="3" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
             <xcdg:HierarchicalGroupLevelIndicatorPane xcdg:TableView.CanScrollHorizontally="False" Grid.Column="0" Background="{TemplateBinding Control.Background}" />
             <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" Background="{TemplateBinding Control.Background}" />
-            <ContentPresenter Name="detailsToggle" Grid.Column="2" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ExpandGroupGlyph}" />
+            <ContentPresenter Name="detailsToggle" Grid.Column="2" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" Visibility="Collapsed" 
+                              xcdg:TableView.CanScrollHorizontally="False" Content="{x:Null}" 
+                              ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" />
             <Border BorderThickness="0 0 0 1" BorderBrush="{DynamicResource DataGridGridLines}" Grid.Column="2" />
             <Decorator Name="indentationDecorator" Grid.Column="3">
-                <xcdg:FixedCellPanel x:Name="PART_CellsHost" Margin="{TemplateBinding Control.BorderThickness}" ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMinWidth}" ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ColumnStretchMode}" FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnCount, Mode=TwoWay}" FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).FixedColumnDropMarkPen}" />
+                <xcdg:FixedCellPanel x:Name="PART_CellsHost" Margin="{TemplateBinding Control.BorderThickness}" 
+                                     ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMinWidth)}" 
+                                     ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMode)}" 
+                                     FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.FixedCellCount), Mode=TwoWay}" 
+                                     FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.FixedColumnDropMarkPen)}" />
             </Decorator>
         </Grid>
         <ControlTemplate.Triggers>
@@ -1120,8 +1121,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             <!-- ScrollTip only displayed when scrolling -->
             <xcdg:ScrollTip Visibility="Collapsed" Content="{x:Null}"
-                            ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ScrollTipContentTemplate}"
-                            ContentTemplateSelector="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ScrollTipContentTemplateSelector}" />
+                            ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ScrollTipContentTemplate)}"
+                            ContentTemplateSelector="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ScrollTipContentTemplateSelector)}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="ShowRowSelectorPane" Value="False">
@@ -1143,8 +1144,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Resources>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template" Value="{StaticResource ModernTableViewScrollViewer_Template}" />
-        <Setter Property="ShowRowSelectorPane" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).ShowRowSelectorPane, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="RowSelectorPaneWidth" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).RowSelectorPaneWidth, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="ShowRowSelectorPane" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.ShowRowSelectorPane), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="RowSelectorPaneWidth" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.RowSelectorPaneWidth), RelativeSource={RelativeSource Self}}" />
     </Style>
 
     <ControlTemplate x:Key="ModernDataGridControl_Template" TargetType="{x:Type nmgc:ModernDataGridControl}">
@@ -1165,21 +1166,21 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Border>
             <Grid x:Name="connectionStateGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" Height="30" Width="30">
                 <ContentPresenter x:Name="connectionStateLoadingContentPresenter"
-                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ConnectionStateLoadingGlyph}"
+                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ConnectionStateLoadingGlyph)}"
                                   Content="{TemplateBinding ConnectionState}"
                                   Visibility="Collapsed" />
                 <ContentPresenter x:Name="connectionStateCommittingContentPresenter"
-                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ConnectionStateCommittingGlyph}"
+                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ConnectionStateCommittingGlyph)}"
                                   Content="{TemplateBinding ConnectionState}"
                                   Visibility="Collapsed" />
                 <ContentPresenter x:Name="connectionStateErrorContentPresenter"
-                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).ConnectionStateErrorGlyph}"
+                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ConnectionStateErrorGlyph)}"
                                   Content="{TemplateBinding ConnectionState}"
                                   Visibility="Collapsed" />
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).IsConnectionStateGlyphEnabled}" Value="False">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.IsConnectionStateGlyphEnabled)}" Value="False">
                 <Setter TargetName="connectionStateGrid" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Loading">
@@ -1379,18 +1380,26 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
         <Grid x:Name="rootGrid">
             <Grid.ColumnDefinitions>
-                --><!-- HierarchicalGroupLevelIndicatorPane --><!--
+                -->
+    <!-- HierarchicalGroupLevelIndicatorPane -->
+    <!--
                 <ColumnDefinition Width="Auto" />
-                --><!-- GroupLevelIndicatorPane --><!--
+                -->
+    <!-- GroupLevelIndicatorPane -->
+    <!--
                 <ColumnDefinition Width="Auto" />
 
-                --><!-- HierarchicalGroupByControl --><!--
+                -->
+    <!-- HierarchicalGroupByControl -->
+    <!--
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            --><!-- The border responsible for the visual outline of the row (gridlines and background)
+            -->
+    <!-- The border responsible for the visual outline of the row (gridlines and background)
               spans the GroupLevelIndicatorPane and CellsHost Panel. Those 2 elements are not children of
-              the Border because we don't want the border to be displayed in the GroupLevelIndicatorPane. --><!--
+              the Border because we don't want the border to be displayed in the GroupLevelIndicatorPane. -->
+    <!--
             <Border x:Name="rootBorder"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
@@ -1401,14 +1410,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" />
 
-            --><!-- GroupLevelIndicatorPane is a placeholder for individual GroupLevelIndicator elements that are added
-                       whenever this Row is part of a group. --><!--
+            -->
+    <!-- GroupLevelIndicatorPane is a placeholder for individual GroupLevelIndicator elements that are added
+                       whenever this Row is part of a group. -->
+    <!--
             <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
         </Grid>
         <ControlTemplate.Triggers>
-            --><!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(xcdg:GroupLevelIndicatorPane.GroupLevel)}" Value="-1">
+            -->
+    <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(xcdg:GroupLevelIndicatorPane.GroupLevel)}" Value="-1">
                 <Setter TargetName="groupLevelIndicatorPane" Property="Visibility" Value="Collapsed" />
-            </DataTrigger>--><!--
+            </DataTrigger>-->
+    <!--
         </ControlTemplate.Triggers>
     </ControlTemplate>-->
 
@@ -1476,13 +1489,15 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource HierarchicalGroupByControlRowSelector_Style}" />
     </Style>-->
 
+    <nmgv:GroupByItemToSortDirectionConverter x:Key="groupByItemToSortDirectionConverter" />
+
     <ControlTemplate x:Key="GroupByItem_Template" TargetType="{x:Type xcdg:GroupByItem}">
         <Border x:Name="outerBorder" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
                 Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}">
             <StackPanel x:Name="contentPanel" Orientation="Horizontal">
                 <TextBlock Text="{Binding Title}" />
                 <ContentPresenter x:Name="sortGlyphPresenter" Content="{x:Null}" Margin="6,0,0,0" Visibility="Hidden"
-                                 ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AscendingSortGlyph}" />
+                                 ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
             </StackPanel>
         </Border>
 
@@ -1502,14 +1517,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             <!-- The following 2 triggers allow the appropriate Sort Glyph to be displayed
               depending on the ParentColumn's SortDirection. -->
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=SortDirection}" Value="Ascending">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Ascending">
                 <Setter TargetName="sortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
-                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AscendingSortGlyph}" />
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
                 <Setter TargetName="sortGlyphPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=SortDirection}" Value="Descending">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Descending">
                 <Setter TargetName="sortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
-                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DescendingSortGlyph}" />
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.DescendingSortGlyph)}" />
                 <Setter TargetName="sortGlyphPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </ControlTemplate.Triggers>
@@ -1517,7 +1532,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </ControlTemplate>
 
     <Style TargetType="{x:Type xcdg:GroupByItem}">
-        <Setter Property="Background" Value="{Binding Path=DataContext.(nmgc:ModernDataGridControl.GroupIndex), RelativeSource={RelativeSource Self}, Converter={StaticResource indexToBackgroundBrushConverter}}" />
+        <Setter Property="Background" Value="{Binding Path=(nmgc:ModernDataGridControl.GroupIndex), Converter={StaticResource indexToBackgroundBrushConverter}}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
         <Setter Property="Padding" Value="5 3" />
