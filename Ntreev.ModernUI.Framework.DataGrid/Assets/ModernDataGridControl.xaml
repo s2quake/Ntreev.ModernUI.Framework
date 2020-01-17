@@ -397,14 +397,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundHover}" />
                 <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundHover}" />
             </Trigger>
-            <!--<MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=RowType, RelativeSource={RelativeSource Self}}" Value="{x:Type nmgc:ModernDataRow}" />
-                    <Condition Binding="{Binding Path=DataContext.IsContainsSelection, RelativeSource={RelativeSource Self}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
-                <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
-            </MultiDataTrigger>-->
             <Trigger Property="IsCurrent" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundCurrent}" />
                 <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundCurrent}" />
@@ -422,22 +414,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Template" Value="{StaticResource RowSelector_Template}" />
-
-        <Style.Triggers>
-            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:ViewBase.IsLastItem)}" Value="True">
-                <Setter Property="BorderThickness" Value="0 1 1 1" />
-            </DataTrigger>-->
-        </Style.Triggers>
     </Style>
-
-    <!--<Style x:Key="ExpandedRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
-        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataRowSelector_PreviewMouseLeftButtonDown" />
-        <Setter Property="BorderThickness" Value="0 1 0 1" />
-    </Style>
-    
-    <Style x:Key="LastRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
-        <Setter Property="BorderThickness" Value="0 1 0 1" />
-    </Style>-->
 
     <Style x:Key="EmptyRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
