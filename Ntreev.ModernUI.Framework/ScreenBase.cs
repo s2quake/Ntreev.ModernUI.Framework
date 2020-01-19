@@ -35,8 +35,6 @@ namespace Ntreev.ModernUI.Framework
 
         public sealed async override void CanClose(Action<bool> callback)
         {
-            if (this.IsProgressing == true)
-                return;
             if (await this.CloseAsync() == false)
                 return;
             callback(true);
@@ -115,7 +113,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected virtual async Task<bool> CloseAsync()
         {
-            return await Task.Run(() => true);
+            return await Task.Run(() => this.IsProgressing == false);
         }
 
         protected void SatisfyImportsOnce(object attributedPart)
