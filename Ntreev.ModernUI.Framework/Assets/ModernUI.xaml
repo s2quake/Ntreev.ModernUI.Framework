@@ -36,6 +36,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="ComboBox.xaml" />
         <ResourceDictionary Source="FilterBox.xaml" />
         <ResourceDictionary Source="SearchBox.xaml" />
+        <ResourceDictionary Source="StatusBar.xaml" />
         <ResourceDictionary Source="TreeView.xaml" />
         <ResourceDictionary Source="ModernTreeView.xaml" />
         <ResourceDictionary Source="ListBox.xaml" />
