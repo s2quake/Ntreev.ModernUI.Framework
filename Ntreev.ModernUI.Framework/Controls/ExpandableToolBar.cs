@@ -34,15 +34,10 @@ using System.Windows.Markup;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    [ContentProperty("MenuItems")]
-    [DefaultProperty("MenuItems")]
+    [ContentProperty(nameof(MenuItems))]
+    [DefaultProperty(nameof(MenuItems))]
     public class ExpandableToolBar : ToolBar
     {
-        private static readonly DependencyPropertyKey MenuItemsPropertyKey =
-            DependencyProperty.RegisterReadOnly(nameof(MenuItems), typeof(IList), typeof(ExpandableToolBar),
-                new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
-
         public new static DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ExpandableToolBar),
                 new FrameworkPropertyMetadata(ItemsSourcePropertyChangedCallback));
@@ -51,15 +46,10 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public ExpandableToolBar()
         {
-            this.SetValue(MenuItemsPropertyKey, this.menuItems);
             this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
         }
 
-        public IList MenuItems
-        {
-            get { return (IList)this.GetValue(MenuItemsProperty); }
-            private set { this.SetValue(MenuItemsPropertyKey, value); }
-        }
+        public IList MenuItems => this.menuItems;
 
         public new IEnumerable ItemsSource
         {
@@ -121,11 +111,26 @@ namespace Ntreev.ModernUI.Framework.Controls
                         base.Items.Remove(item);
                     }
                 }
+                else if (e.Action == NotifyCollectionChangedAction.Replace)
+                {
+                    for (var i=0;i<e.OldItems.Count; i++)
+                    {
+                        var oldItem = e.OldItems[i];
+                        var newItem = e.NewItems[i];
+                        var index = base.Items.IndexOf(oldItem);
+                        base.Items[index] = newItem;
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Move)
+                {
+                    var item = base.Items[e.OldStartingIndex];
+                    base.Items.RemoveAt(e.OldStartingIndex);
+                    base.Items.Insert(e.NewStartingIndex, item);
+                }
                 else if (e.Action == NotifyCollectionChangedAction.Reset)
                 {
                     base.Items.Clear();
                 }
-                this.OnItemsChanged(e);
             }
         }
 

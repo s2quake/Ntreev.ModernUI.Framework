@@ -230,8 +230,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                 </Popup>
                             </ToggleButton>
 
-                            <Thumb x:Name="ToolBarThumb" Width="10"
-                                   Style="{StaticResource ExpandableToolBar_Thumb_Style}" />
+                            <Thumb x:Name="ToolBarThumb" Width="10" Style="{StaticResource ExpandableToolBar_Thumb_Style}" />
 
                             <ToolBarPanel x:Name="PART_ToolBarPanel" Margin="0 1 2 2" IsItemsHost="True" />
                         </DockPanel>

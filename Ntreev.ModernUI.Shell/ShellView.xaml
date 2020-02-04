@@ -44,10 +44,10 @@
                                         <ToggleButton Focusable="False" IsChecked="{Binding Group.IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" OverridesDefaultStyle="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                             <ToggleButton.Template>
                                                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                    <ContentPresenter x:Name="expanderGlyphPresenter" ContentTemplate="{Binding (xcdg:DataGridControl.DataGridContext).CollapseGroupGlyph, RelativeSource={RelativeSource Self}}" Content="{x:Null}"/>
+                                                    <ContentPresenter x:Name="expanderGlyphPresenter" ContentTemplate="{Binding (xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.CollapseGroupGlyph), RelativeSource={RelativeSource Self}}" Content="{x:Null}"/>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsChecked" Value="False">
-                                                            <Setter Property="ContentTemplate" TargetName="expanderGlyphPresenter" Value="{Binding (xcdg:DataGridControl.DataGridContext).ExpandGroupGlyph, RelativeSource={RelativeSource Self}}"/>
+                                                            <Setter Property="ContentTemplate" TargetName="expanderGlyphPresenter" Value="{Binding (xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph), RelativeSource={RelativeSource Self}}"/>
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -82,15 +82,18 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <nmfc:ExpandableToolBar>
-                    <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" />
-                    <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" />
-                    <Separator />
-                    <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" />
-                    <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
-                    <Separator />
-                    <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
-                </nmfc:ExpandableToolBar>
+                <ToolBarTray>
+                    <ToolBar IsOverflowOpen="False" ToolBarTray.IsLocked="True">
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" />
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" />
+                        <Separator />
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" />
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
+                    </ToolBar>
+                    <nmfc:ExpandableToolBar>
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
+                    </nmfc:ExpandableToolBar>
+                </ToolBarTray>
                 <nmfc:PropertyItemsControl Grid.Row="1">
                     <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" Width="200" HorizontalAlignment="Left" />
                     <nmfc:FilterBox nmfc:PropertyItemsControl.Header="FilterBox" x:Name="filterBox"  />

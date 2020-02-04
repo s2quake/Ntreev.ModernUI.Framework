@@ -53,6 +53,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="MessageBoxView.xaml" />
         <ResourceDictionary Source="ModernWindow.xaml" />
         <ResourceDictionary Source="DialogWindow.xaml" />
+        <ResourceDictionary Source="ToolBar.xaml" />
+        <ResourceDictionary Source="ToolBarTray.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
