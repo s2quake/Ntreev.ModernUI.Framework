@@ -37,7 +37,6 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class ToolBarItemBase : PropertyChangedBase, IToolBarItem, ICommand
     {
-        private bool isEnabled;
         private string displayName;
         private EventHandler canExecuteChanged;
         private object icon;
@@ -49,7 +48,7 @@ namespace Ntreev.ModernUI.Framework
 
         public string DisplayName
         {
-            get { return this.displayName ?? string.Empty; }
+            get => this.displayName ?? string.Empty;
             set
             {
                 this.displayName = value;
@@ -57,25 +56,19 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public ICommand Command
-        {
-            get { return this; }
-        }
+        public ICommand Command => this;
 
         public bool IsVisible
         {
             get
             {
-                if (this.HideOnDisabled == true && this.isEnabled == false)
+                if (this.HideOnDisabled == true && this.IsEnabled == false)
                     return false;
                 return true;
             }
         }
 
-        public bool IsEnabled
-        {
-            get { return this.isEnabled; }
-        }
+        public bool IsEnabled { get; private set; }
 
         public object Icon
         {
@@ -84,7 +77,12 @@ namespace Ntreev.ModernUI.Framework
                 if (this.icon is string uri)
                 {
                     if (uri.StartsWith("pack://application:,,,") == false)
-                        uri = "pack://application:,,," + uri;
+                    {
+                        if (uri.StartsWith("/") == true)
+                            uri = "pack://application:,,," + uri;
+                        else
+                            uri = "pack://application:,,,/" + uri;
+                    }
                     return new IconButton()
                     {
                         Source = new BitmapImage(new Uri(uri)),
@@ -106,58 +104,39 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public bool HideOnDisabled
-        {
-            get; set;
-        }
+        public bool HideOnDisabled { get; set; }
 
         protected virtual void OnExecute(object parameter)
         {
 
         }
 
-        protected virtual bool OnCanExecute(object parameter)
-        {
-            return true;
-        }
+        protected virtual bool OnCanExecute(object parameter) => true;
 
-        protected void InvokeCanExecuteChangedEvent()
-        {
-            this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
+        protected void InvokeCanExecuteChangedEvent() => this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-        protected void InvokeCanExecuteChangedEvent(object sender, EventArgs e)
-        {
-            this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
+        protected void InvokeCanExecuteChangedEvent(object sender, EventArgs e) => this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
 
         #region ICommand
 
         event EventHandler ICommand.CanExecuteChanged
         {
-            add
-            {
-                this.canExecuteChanged += value;
-            }
-
-            remove
-            {
-                this.canExecuteChanged -= value;
-            }
+            add => this.canExecuteChanged += value;
+            remove => this.canExecuteChanged -= value;
         }
 
         bool ICommand.CanExecute(object parameter)
         {
             try
             {
-                var oldValue = this.isEnabled;
+                var oldValue = this.IsEnabled;
                 var newValue = this.OnCanExecute(parameter);
                 if (oldValue != newValue)
                 {
-                    this.isEnabled = newValue;
+                    this.IsEnabled = newValue;
                 }
 
-                return this.isEnabled;
+                return this.IsEnabled;
             }
             finally
             {
@@ -169,10 +148,7 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        void ICommand.Execute(object parameter)
-        {
-            this.OnExecute(parameter);
-        }
+        void ICommand.Execute(object parameter) => this.OnExecute(parameter);
 
         #endregion
     }

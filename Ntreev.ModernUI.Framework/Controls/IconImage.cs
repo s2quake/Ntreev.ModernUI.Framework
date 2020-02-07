@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -42,7 +43,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(IconImage),
                 new FrameworkPropertyMetadata(Stretch.None, StretchPropertyChangedCallback));
 
-        private static Dictionary<string, WriteableBitmap> items = new Dictionary<string, WriteableBitmap>();
+        private static readonly Dictionary<string, WriteableBitmap> items = new Dictionary<string, WriteableBitmap>();
 
         private Image image;
         private WriteableBitmap imageSource;
@@ -96,7 +97,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             get { return (Stretch)this.GetValue(StretchProperty); }
             set { this.SetValue(StretchProperty, value); }
         }
-        
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);

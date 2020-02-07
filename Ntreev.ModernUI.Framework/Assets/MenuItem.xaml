@@ -112,14 +112,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Rectangle Name="Bg" Fill="{TemplateBinding MenuItem.Background}" />
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="24"
-                                      Width="Auto"
-                                      SharedSizeGroup="MenuItemIconColumnGroup" />
+                    <ColumnDefinition MinWidth="24" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
                     <ColumnDefinition Width="4" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="37" />
-                    <ColumnDefinition Width="Auto"
-                                      SharedSizeGroup="MenuItemIGTColumnGroup" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
                     <ColumnDefinition Width="17" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon"
@@ -127,8 +124,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                   VerticalAlignment="Center"
                                   ContentSource="Icon"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                <Border x:Name="GlyphPanel"
-                        Visibility="Hidden">
+                <Border x:Name="GlyphPanel" Visibility="Hidden">
                     <Path Name="Glyph"
                           Width="10"
                           Height="10"

@@ -136,7 +136,12 @@ namespace Ntreev.ModernUI.Framework
                 if (value is string uri)
                 {
                     if (uri.StartsWith("pack://application:,,,") == false)
-                        uri = "pack://application:,,," + uri;
+                    {
+                        if (uri.StartsWith("/") == true)
+                            uri = "pack://application:,,," + uri;
+                        else
+                            uri = "pack://application:,,,/" + uri;
+                    }
                     this.icon = new IconImage() { Source = new BitmapImage(new Uri(uri)) };
                 }
                 else

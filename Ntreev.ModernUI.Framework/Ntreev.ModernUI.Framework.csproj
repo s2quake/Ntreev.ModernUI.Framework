@@ -104,6 +104,7 @@
     <Compile Include="Controls\IconImage.cs" />
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
+    <Compile Include="Controls\ThicknessControl.cs" />
     <Compile Include="Controls\ToolBarItemStyleSelector.cs" />
     <Compile Include="Controls\MenuItemStyleSelector.cs" />
     <Compile Include="Controls\ModernTreeViewItem.cs" />
@@ -372,6 +373,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Assets\ThicknessControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\ToggleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -475,6 +480,16 @@
     <PackageReference Include="ModernUI.WPF">
       <Version>1.0.9</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\thickness_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\thickness_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\thickness_top.png" />
+    <Resource Include="Images\thickness_bottom.png" />
   </ItemGroup>
   <Import Project="..\Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
