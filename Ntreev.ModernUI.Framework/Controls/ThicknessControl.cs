@@ -95,7 +95,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private void AttachEvent(TextBox textBox)
         {
-            textBox.PreviewTextInput += TextBox_PreviewTextInput;
+            //textBox.PreviewTextInput += TextBox_PreviewTextInput;
             textBox.KeyDown += TextBox_KeyDown;
             textBox.TextChanged += TextBox_TextChanged;
             textBox.GotFocus += TextBox_GotFocus;
@@ -144,16 +144,16 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         }
 
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                var text = textBox.Text.Insert(textBox.CaretIndex, e.Text);
-                if (double.TryParse(text, out _) == false)
-                {
-                    e.Handled = true;
-                }
-            }
-        }
+        //private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        //{
+        //    if (sender is TextBox textBox)
+        //    {
+        //        var text = textBox.Text.Insert(textBox.CaretIndex, e.Text);
+        //        if (double.TryParse(text, out _) == false)
+        //        {
+        //            e.Handled = true;
+        //        }
+        //    }
+        //}
     }
 }

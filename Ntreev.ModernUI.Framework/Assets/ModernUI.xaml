@@ -23,41 +23,41 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
 
-        <ResourceDictionary Source="TextBox.xaml" />
-        <ResourceDictionary Source="TerminalControl.xaml" />
-        <ResourceDictionary Source="PasswordBox.xaml" />
-        <ResourceDictionary Source="ExpandableContextMenu.xaml" />
-        <ResourceDictionary Source="ToggleButton.xaml" />
-        <ResourceDictionary Source="IconButton.xaml" />
-        <ResourceDictionary Source="IconToggleButton.xaml" />
-        <ResourceDictionary Source="IconImage.xaml" />
-        <ResourceDictionary Source="MenuItem.xaml" />
-        <ResourceDictionary Source="Separator.xaml" />
-        <ResourceDictionary Source="ComboBox.xaml" />
-        <ResourceDictionary Source="FilterBox.xaml" />
-        <ResourceDictionary Source="SearchBox.xaml" />
-        <ResourceDictionary Source="StatusBar.xaml" />
-        <ResourceDictionary Source="TreeView.xaml" />
-        <ResourceDictionary Source="ModernTreeView.xaml" />
-        <ResourceDictionary Source="ListBox.xaml" />
-        <ResourceDictionary Source="ExpandableToolBar.xaml" />
         <ResourceDictionary Source="BrowserExpander.xaml" />
-        <ResourceDictionary Source="PropertyItemsControl.xaml" />
-        <ResourceDictionary Source="TabControl.xaml" />
-        <ResourceDictionary Source="GuidControl.xaml" />
-        <ResourceDictionary Source="GroupBox.xaml" />
-        <ResourceDictionary Source="ProgressContent.xaml" />
-        <ResourceDictionary Source="FlagControl.xaml" />
-        <ResourceDictionary Source="TreeViewItemSelector.xaml" />
-        <ResourceDictionary Source="ErrorBlinker.xaml" />
-        <ResourceDictionary Source="ProgressRing.xaml" />
-        <ResourceDictionary Source="MessageBoxView.xaml" />
-        <ResourceDictionary Source="ModernWindow.xaml" />
+        <ResourceDictionary Source="ComboBox.xaml" />
         <ResourceDictionary Source="DialogWindow.xaml" />
+        <ResourceDictionary Source="ErrorBlinker.xaml" />
+        <ResourceDictionary Source="ExpandableContextMenu.xaml" />
+        <ResourceDictionary Source="ExpandableToolBar.xaml" />
+        <ResourceDictionary Source="FilterBox.xaml" />
+        <ResourceDictionary Source="FlagControl.xaml" />
+        <ResourceDictionary Source="GroupBox.xaml" />
+        <ResourceDictionary Source="GuidControl.xaml" />
+        <ResourceDictionary Source="IconButton.xaml" />
+        <ResourceDictionary Source="IconImage.xaml" />
+        <ResourceDictionary Source="IconToggleButton.xaml" />
+        <ResourceDictionary Source="ListBox.xaml" />
+        <ResourceDictionary Source="MenuItem.xaml" />
+        <ResourceDictionary Source="MessageBoxView.xaml" />
+        <ResourceDictionary Source="ModernTreeView.xaml" />
+        <ResourceDictionary Source="ModernWindow.xaml" />
+        <ResourceDictionary Source="NumericTextBox.xaml" />
+        <ResourceDictionary Source="PasswordBox.xaml" />
+        <ResourceDictionary Source="ProgressContent.xaml" />
+        <ResourceDictionary Source="ProgressRing.xaml" />
+        <ResourceDictionary Source="PropertyItemsControl.xaml" />
+        <ResourceDictionary Source="SearchBox.xaml" />
+        <ResourceDictionary Source="Separator.xaml" />
+        <ResourceDictionary Source="StatusBar.xaml" />
+        <ResourceDictionary Source="TabControl.xaml" />
+        <ResourceDictionary Source="TerminalControl.xaml" />
+        <ResourceDictionary Source="TextBox.xaml" />
         <ResourceDictionary Source="ThicknessControl.xaml" />
+        <ResourceDictionary Source="ToggleButton.xaml" />
         <ResourceDictionary Source="ToolBar.xaml" />
         <ResourceDictionary Source="ToolBarTray.xaml" />
-
+        <ResourceDictionary Source="TreeView.xaml" />
+        <ResourceDictionary Source="TreeViewItemSelector.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 

@@ -102,6 +102,7 @@
     <Compile Include="Controls\IconToggleButton.cs" />
     <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\IconImage.cs" />
+    <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ThicknessControl.cs" />
@@ -334,6 +335,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\ModernUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\NumericTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
