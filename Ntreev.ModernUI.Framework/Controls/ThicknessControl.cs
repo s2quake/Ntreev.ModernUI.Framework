@@ -17,7 +17,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     public class ThicknessControl : UserControl
     {
         public static readonly DependencyProperty ThicknessProperty =
-            DependencyProperty.Register(nameof(Thickness), typeof(Thickness), typeof(ThicknessControl),
+            DependencyProperty.Register(nameof(Value), typeof(Thickness), typeof(ThicknessControl),
                 new FrameworkPropertyMetadata(ThicknessPropertyChangedCallback));
 
         private TextBox leftControl;
@@ -33,30 +33,30 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.leftControl = this.Template.FindName("PART_Left", this) as TextBox;
             if (this.leftControl != null)
             {
-                this.leftControl.Text = $"{this.Thickness.Left}";
+                this.leftControl.Text = $"{this.Value.Left}";
                 this.AttachEvent(this.leftControl);
             }
             this.topControl = this.Template.FindName("PART_Top", this) as TextBox;
             if (this.topControl != null)
             {
-                this.topControl.Text = $"{this.Thickness.Top}";
+                this.topControl.Text = $"{this.Value.Top}";
                 this.AttachEvent(this.topControl);
             }
             this.rightControl = this.Template.FindName("PART_Right", this) as TextBox;
             if (this.rightControl != null)
             {
-                this.rightControl.Text = $"{this.Thickness.Right}";
+                this.rightControl.Text = $"{this.Value.Right}";
                 this.AttachEvent(this.rightControl);
             }
             this.bottomControl = this.Template.FindName("PART_Bottom", this) as TextBox;
             if (this.bottomControl != null)
             {
-                this.bottomControl.Text = $"{this.Thickness.Bottom}";
+                this.bottomControl.Text = $"{this.Value.Bottom}";
                 this.AttachEvent(this.bottomControl);
             }
         }
 
-        public Thickness Thickness
+        public Thickness Value
         {
             get => (Thickness)this.GetValue(ThicknessProperty);
             set => this.SetValue(ThicknessProperty, value);
@@ -77,19 +77,19 @@ namespace Ntreev.ModernUI.Framework.Controls
 
             if (this.leftControl != null)
             {
-                this.leftControl.Text = $"{this.Thickness.Left}";
+                this.leftControl.Text = $"{this.Value.Left}";
             }
             if (this.topControl != null)
             {
-                this.topControl.Text = $"{this.Thickness.Top}";
+                this.topControl.Text = $"{this.Value.Top}";
             }
             if (this.rightControl != null)
             {
-                this.rightControl.Text = $"{this.Thickness.Right}";
+                this.rightControl.Text = $"{this.Value.Right}";
             }
             if (this.bottomControl != null)
             {
-                this.bottomControl.Text = $"{this.Thickness.Bottom}";
+                this.bottomControl.Text = $"{this.Value.Bottom}";
             }
         }
 
@@ -113,10 +113,10 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (sender is TextBox textBox)
             {
-                var left = this.Thickness.Left;
-                var top = this.Thickness.Top;
-                var right = this.Thickness.Right;
-                var bottom = this.Thickness.Bottom;
+                var left = this.Value.Left;
+                var top = this.Value.Top;
+                var right = this.Value.Right;
+                var bottom = this.Value.Bottom;
                 if (this.leftControl == textBox)
                 {
                     left = double.Parse(this.leftControl.Text);
@@ -134,7 +134,7 @@ namespace Ntreev.ModernUI.Framework.Controls
                     bottom = double.Parse(this.bottomControl.Text);
                 }
                 this.isUpdating = true;
-                this.Thickness = new Thickness(left, top, right, bottom);
+                this.Value = new Thickness(left, top, right, bottom);
                 this.isUpdating = false;
             }
         }

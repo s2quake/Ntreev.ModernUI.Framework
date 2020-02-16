@@ -15,25 +15,25 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <DockPanel Grid.Column="0" Grid.Row="0">
-                <Viewbox Height="10">
+                <Viewbox Width="10" Height="10">
                     <nmfc:IconImage Source="../Images/thickness_left.png" DockPanel.Dock="Left" />
                 </Viewbox>
                 <nmfc:NumericTextBox x:Name="PART_Left" />
             </DockPanel>
             <DockPanel Grid.Column="2" Grid.Row="0">
-                <Viewbox Height="10">
+                <Viewbox Width="10" Height="10">
                     <nmfc:IconImage Source="../Images/thickness_top.png" DockPanel.Dock="Left" />
                 </Viewbox>
                 <nmfc:NumericTextBox x:Name="PART_Top" />
             </DockPanel>
             <DockPanel Grid.Column="0" Grid.Row="2">
-                <Viewbox Height="10">
+                <Viewbox Width="10" Height="10">
                     <nmfc:IconImage Source="../Images/thickness_right.png" DockPanel.Dock="Left" />
                 </Viewbox>
                 <nmfc:NumericTextBox x:Name="PART_Right" />
             </DockPanel>
             <DockPanel Grid.Column="2" Grid.Row="2">
-                <Viewbox Height="10">
+                <Viewbox Width="10" Height="10">
                     <nmfc:IconImage Source="../Images/thickness_bottom.png" DockPanel.Dock="Left" />
                 </Viewbox>
                 <nmfc:NumericTextBox x:Name="PART_Bottom" />
