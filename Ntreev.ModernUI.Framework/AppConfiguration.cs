@@ -45,7 +45,8 @@ namespace Ntreev.ModernUI.Framework
             this.filename = Path.Combine(path, productName, "app.config");
             try
             {
-                this.Read(this.filename);
+                if (File.Exists(this.filename) == true)
+                    this.Read(this.filename);
             }
             catch
             {

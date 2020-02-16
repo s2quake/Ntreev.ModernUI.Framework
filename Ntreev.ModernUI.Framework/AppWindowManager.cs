@@ -213,7 +213,6 @@ namespace Ntreev.ModernUI.Framework
             {
                 try
                 {
-
                     this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.WindowState), window.WindowState);
                     this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Width), window.Width);
                     this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Height), window.Height);
