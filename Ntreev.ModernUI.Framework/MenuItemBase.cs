@@ -89,7 +89,7 @@ namespace Ntreev.ModernUI.Framework
             set;
         }
 
-        public IEnumerable<IMenuItem> ItemsSource
+        public virtual IEnumerable<IMenuItem> ItemsSource
         {
             get
             {
