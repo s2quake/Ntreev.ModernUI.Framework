@@ -143,17 +143,5 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
 
         }
-
-        //private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        //{
-        //    if (sender is TextBox textBox)
-        //    {
-        //        var text = textBox.Text.Insert(textBox.CaretIndex, e.Text);
-        //        if (double.TryParse(text, out _) == false)
-        //        {
-        //            e.Handled = true;
-        //        }
-        //    }
-        //}
     }
 }
