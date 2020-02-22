@@ -9,8 +9,15 @@ using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
+<<<<<<< master
     public class NumericTextBox : TextBox
     {
+=======
+    //[TemplatePart(Name = nameof(PART_TextBox), Type = typeof(TextBox))]
+    public class NumericTextBox : TextBox
+    {
+        //public const string PART_TextBox = nameof(PART_TextBox);
+>>>>>>> local
         public static readonly DependencyProperty NumericTypeProperty =
             DependencyProperty.Register(nameof(NumericType), typeof(Type), typeof(NumericTextBox),
                 new FrameworkPropertyMetadata(typeof(double)), NumericTypePropertyValidateValueCallback);
@@ -19,7 +26,32 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Value), typeof(decimal), typeof(NumericTextBox),
                 new FrameworkPropertyMetadata(ValuePropertyChangedCallback));
 
+<<<<<<< master
         private bool isUpdating;
+=======
+        private static readonly Dictionary<NumericType, Func<string, decimal?>> parserByType = new Dictionary<NumericType, Func<string, decimal?>>()
+        {
+            { NumericType.Int8, (text) => { if (sbyte.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.UInt8, (text) => { if (byte.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.Int16, (text) => { if (short.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.UInt16, (text) => { if (ushort.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.Int32, (text) => { if (int.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.UInt32, (text) => { if (uint.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.Int64, (text) => { if (long.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.UInt64, (text) => { if (ulong.TryParse(text, out var v) == true) return v; return null; } },
+            { NumericType.Single, (text) => { if (float.TryParse(text, out var v) == true) return (decimal)v; return null; } },
+            { NumericType.Double, (text) => { if (double.TryParse(text, out var v) == true) return (decimal)v; return null; } },
+            { NumericType.Decimal, (text) => { if (decimal.TryParse(text, out var v) == true) return v; return null; } }
+        };
+
+        public NumericTextBox()
+        {
+            this.TextChanged += TextBox_TextChanged;
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, Paste_Executed, Paste_CanExecute));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut, Cut_Executed, Cut_CanExecute));
+            this.Text = $"{this.Value}";
+        }
+>>>>>>> local
 
         public Type NumericType
         {
@@ -33,7 +65,40 @@ namespace Ntreev.ModernUI.Framework.Controls
             set => this.SetValue(ValueProperty, value);
         }
 
+<<<<<<< master
         protected override void OnInitialized(EventArgs e)
+=======
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            base.OnPreviewKeyDown(e);
+            if (e.Key == Key.Delete)
+            {
+                e.Handled = this.ProcessDeleteKey();
+
+            }
+            else if (e.Key == Key.Back)
+            {
+                e.Handled = this.ProcessBackspaceKey();
+            }
+        }
+
+        protected override void OnPreviewTextInput(TextCompositionEventArgs e)
+        {
+            base.OnPreviewTextInput(e);
+            if (e.Handled == false)
+            {
+                var text = this.Text;
+                if (this.SelectionLength > 0)
+                    text = text.Remove(this.SelectionStart, this.SelectionLength);
+                text = text.Insert(this.CaretIndex, e.Text);
+                var parser = parserByType[this.NumericType];
+                if (parser(text) is decimal == false)
+                    e.Handled = true;
+            }
+        }
+
+        private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+>>>>>>> local
         {
             base.OnInitialized(e);
             this.Text = $"{0}";
@@ -55,6 +120,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         protected override void OnLostFocus(RoutedEventArgs e)
         {
+<<<<<<< master
             base.OnLostFocus(e);
             if (this.Text == string.Empty)
             {
@@ -211,9 +277,77 @@ namespace Ntreev.ModernUI.Framework.Controls
             if (d is NumericTextBox self)
             {
                 self.UpdateText();
+=======
+            var parser = parserByType[this.NumericType];
+            var value = parser(this.Text);
+            if (this.Value != value)
+            {
+                this.TextChanged -= TextBox_TextChanged;
+                this.Text = $"{this.Value}";
+                this.TextChanged += TextBox_TextChanged;
             }
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = this.Text;
+            var parser = parserByType[this.NumericType];
+            var value = parser(text).Value;
+            if (this.Value != value)
+            {
+                this.Value = value;
+            }
+        }
+
+        private void Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var text = this.Text;
+            var clipboardText = Clipboard.GetText();
+            var parser = parserByType[this.NumericType];
+            if (this.SelectionLength > 0)
+                text = text.Remove(this.SelectionStart, this.SelectionLength);
+            text = text.Insert(this.CaretIndex, clipboardText);
+            e.CanExecute = parser(text) is decimal;
+            e.Handled = true;
+        }
+
+        private void Paste_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Paste();
+        }
+
+        private void Cut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var text = this.Text;
+            var clipboardText = Clipboard.GetText();
+            var parser = parserByType[this.NumericType];
+            if (this.SelectionLength > 0)
+                text = text.Remove(this.SelectionStart, this.SelectionLength);
+            e.CanExecute = parser(text) is decimal;
+            e.Handled = true;
+        }
+
+        private void Cut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Cut();
+        }
+
+        private bool ProcessDeleteKey()
+        {
+            var text = this.Text;
+            var parser = parserByType[this.NumericType];
+            if (this.SelectionLength > 0)
+            {
+                text = text.Remove(this.SelectionStart, this.SelectionLength);
+            }
+            else
+            {
+                text = text.Remove(this.SelectionStart, 1);
+>>>>>>> local
+            }
+        }
+
+<<<<<<< master
         private void UpdateText()
         {
             if (this.isUpdating == false)
@@ -221,6 +355,19 @@ namespace Ntreev.ModernUI.Framework.Controls
                 this.isUpdating = true;
                 this.Text = $"{this.Value}";
                 this.isUpdating = false;
+=======
+        private bool ProcessBackspaceKey()
+        {
+            var text = this.Text;
+            var parser = parserByType[this.NumericType];
+            if (this.SelectionLength > 0)
+            {
+                text = text.Remove(this.SelectionStart, this.SelectionLength);
+            }
+            else if (this.SelectionStart > 0)
+            {
+                text = text.Remove(this.SelectionStart - 1, 1);
+>>>>>>> local
             }
         }
     }
