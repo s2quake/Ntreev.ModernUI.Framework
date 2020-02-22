@@ -18,6 +18,7 @@ namespace Ntreev.ModernUI.Shell
         private DataTable table = new DataTable();
 
         private readonly ICommand insertCommand;
+        private string text = "test";
 
         public ShellViewModel()
         {
@@ -36,6 +37,17 @@ namespace Ntreev.ModernUI.Shell
         public void Insert()
         {
 
+        }
+
+        public string Text
+        {
+            get => this.text;
+            set
+            {
+                this.text = value;
+                throw new Exception("!23");
+                this.NotifyOfPropertyChange(nameof(Text));
+            }
         }
 
         public bool CanInsert => true;
