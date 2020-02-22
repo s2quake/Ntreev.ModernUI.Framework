@@ -2,17 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
 
-<<<<<<< master
-    <Style TargetType="{x:Type nmfc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-        
-=======
-    <!--<ControlTemplate x:Key="NumericTextBox_Template" TargetType="{x:Type nmfc:NumericTextBox}">
-        <TextBox x:Name="PART_TextBox" />
-    </ControlTemplate>-->
+    <Style TargetType="{x:Type nmfc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBox}}" />
 
-    <Style TargetType="{x:Type nmfc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-        <!--<Setter Property="Template" Value="{StaticResource NumericTextBox_Template}" />-->
->>>>>>> local
-    </Style>
-    
 </ResourceDictionary>

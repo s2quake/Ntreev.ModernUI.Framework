@@ -1,34 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-<<<<<<< master
     public class NumericTextBox : TextBox
     {
-=======
-    //[TemplatePart(Name = nameof(PART_TextBox), Type = typeof(TextBox))]
-    public class NumericTextBox : TextBox
-    {
-        //public const string PART_TextBox = nameof(PART_TextBox);
->>>>>>> local
         public static readonly DependencyProperty NumericTypeProperty =
-            DependencyProperty.Register(nameof(NumericType), typeof(Type), typeof(NumericTextBox),
-                new FrameworkPropertyMetadata(typeof(double)), NumericTypePropertyValidateValueCallback);
+            DependencyProperty.Register(nameof(NumericType), typeof(NumericType), typeof(NumericTextBox),
+                new FrameworkPropertyMetadata(NumericType.Int32, NumericTypePropertyChangedCallback));
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(decimal), typeof(NumericTextBox),
-                new FrameworkPropertyMetadata(ValuePropertyChangedCallback));
+                new FrameworkPropertyMetadata(ValuePropertyChangedCallback, ValuePropertyCoerceValueCallback));
 
-<<<<<<< master
-        private bool isUpdating;
-=======
         private static readonly Dictionary<NumericType, Func<string, decimal?>> parserByType = new Dictionary<NumericType, Func<string, decimal?>>()
         {
             { NumericType.Int8, (text) => { if (sbyte.TryParse(text, out var v) == true) return v; return null; } },
@@ -51,11 +43,10 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut, Cut_Executed, Cut_CanExecute));
             this.Text = $"{this.Value}";
         }
->>>>>>> local
 
-        public Type NumericType
+        public NumericType NumericType
         {
-            get => (Type)this.GetValue(NumericTypeProperty);
+            get => (NumericType)this.GetValue(NumericTypeProperty);
             set => this.SetValue(NumericTypeProperty, value);
         }
 
@@ -65,20 +56,20 @@ namespace Ntreev.ModernUI.Framework.Controls
             set => this.SetValue(ValueProperty, value);
         }
 
-<<<<<<< master
-        protected override void OnInitialized(EventArgs e)
-=======
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             base.OnPreviewKeyDown(e);
-            if (e.Key == Key.Delete)
+            if (e.Handled == false)
             {
-                e.Handled = this.ProcessDeleteKey();
+                if (e.Key == Key.Delete)
+                {
+                    e.Handled = this.ProcessDeleteKey();
 
-            }
-            else if (e.Key == Key.Back)
-            {
-                e.Handled = this.ProcessBackspaceKey();
+                }
+                else if (e.Key == Key.Back)
+                {
+                    e.Handled = this.ProcessBackspaceKey();
+                }
             }
         }
 
@@ -98,186 +89,32 @@ namespace Ntreev.ModernUI.Framework.Controls
         }
 
         private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
->>>>>>> local
-        {
-            base.OnInitialized(e);
-            this.Text = $"{0}";
-        }
-
-        protected override void OnTextChanged(TextChangedEventArgs e)
-        {
-            base.OnTextChanged(e);
-            if (this.isUpdating == false)
-            {
-                this.isUpdating = true;
-                if (TryParse(this.NumericType, this.Text, out var v) == true)
-                {
-                    this.Value = v;
-                }
-                this.isUpdating = false;
-            }
-        }
-
-        protected override void OnLostFocus(RoutedEventArgs e)
-        {
-<<<<<<< master
-            base.OnLostFocus(e);
-            if (this.Text == string.Empty)
-            {
-                this.Value = 0;
-            }
-        }
-
-        protected override void OnPreviewTextInput(TextCompositionEventArgs e)
-        {
-            base.OnPreviewTextInput(e);
-            if (e.Handled == false)
-            {
-                var text = this.Text.Insert(this.CaretIndex, e.Text);
-                if (TryParse(this.NumericType, text, out _) == false)
-                    e.Handled = true;
-            }
-        }
-
-        private static bool TryParse(Type numericType, string text, out decimal result)
-        {
-            switch (Type.GetTypeCode(numericType))
-            {
-                case TypeCode.Byte:
-                    {
-                        if (Byte.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.SByte:
-                    {
-                        if (SByte.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.UInt16:
-                    {
-                        if (UInt16.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.UInt32:
-                    {
-                        if (UInt32.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.UInt64:
-                    {
-                        if (UInt64.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.Int16:
-                    {
-                        if (Int16.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.Int32:
-                    {
-                        if (Int32.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.Int64:
-                    {
-                        if (Int64.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.Decimal:
-                    {
-                        if (Decimal.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.Double:
-                    {
-                        if (Double.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-                case TypeCode.Single:
-                    {
-                        if (Single.TryParse(text, out var v) == true)
-                        {
-                            result = (decimal)v;
-                            return true;
-                        }
-                    }
-                    break;
-            }
-            result = 0;
-            return false;
-        }
-
-        private static bool NumericTypePropertyValidateValueCallback(object value)
-        {
-            if (value is Type type)
-            {
-                switch (Type.GetTypeCode(type))
-                {
-                    case TypeCode.Byte:
-                    case TypeCode.SByte:
-                    case TypeCode.UInt16:
-                    case TypeCode.UInt32:
-                    case TypeCode.UInt64:
-                    case TypeCode.Int16:
-                    case TypeCode.Int32:
-                    case TypeCode.Int64:
-                    case TypeCode.Decimal:
-                    case TypeCode.Double:
-                    case TypeCode.Single:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-            throw new NotImplementedException();
-        }
-
-        private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is NumericTextBox self)
             {
                 self.UpdateText();
-=======
+            }
+        }
+
+        private static object ValuePropertyCoerceValueCallback(DependencyObject d, object baseValue)
+        {
+            if (d is NumericTextBox self && baseValue is decimal value)
+            {
+                var parser = parserByType[self.NumericType];
+
+
+                return baseValue;
+            }
+            return decimal.Zero;
+        }
+
+        private static void NumericTypePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            d.CoerceValue(ValueProperty);
+        }
+
+        private void UpdateText()
+        {
             var parser = parserByType[this.NumericType];
             var value = parser(this.Text);
             if (this.Value != value)
@@ -285,17 +122,6 @@ namespace Ntreev.ModernUI.Framework.Controls
                 this.TextChanged -= TextBox_TextChanged;
                 this.Text = $"{this.Value}";
                 this.TextChanged += TextBox_TextChanged;
-            }
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var text = this.Text;
-            var parser = parserByType[this.NumericType];
-            var value = parser(text).Value;
-            if (this.Value != value)
-            {
-                this.Value = value;
             }
         }
 
@@ -332,6 +158,20 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.Cut();
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                var text = this.Text;
+                var parser = parserByType[this.NumericType];
+                var value = parser(text).Value;
+                if (this.Value != value)
+                {
+                    this.Value = value;
+                }
+            }
+        }
+
         private bool ProcessDeleteKey()
         {
             var text = this.Text;
@@ -343,19 +183,10 @@ namespace Ntreev.ModernUI.Framework.Controls
             else
             {
                 text = text.Remove(this.SelectionStart, 1);
->>>>>>> local
             }
+            return parser(text) is decimal == false;
         }
 
-<<<<<<< master
-        private void UpdateText()
-        {
-            if (this.isUpdating == false)
-            {
-                this.isUpdating = true;
-                this.Text = $"{this.Value}";
-                this.isUpdating = false;
-=======
         private bool ProcessBackspaceKey()
         {
             var text = this.Text;
@@ -367,8 +198,8 @@ namespace Ntreev.ModernUI.Framework.Controls
             else if (this.SelectionStart > 0)
             {
                 text = text.Remove(this.SelectionStart - 1, 1);
->>>>>>> local
             }
+            return parser(text) is decimal == false;
         }
     }
 }
