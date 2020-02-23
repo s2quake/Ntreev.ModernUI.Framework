@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -38,6 +39,8 @@ namespace Ntreev.ModernUI.Framework.Controls
                 DependencyProperty.Register(nameof(CurrentColor), typeof(Color), typeof(ColorPicker),
                     new FrameworkPropertyMetadata(Colors.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
+        private Button button;
+
         public ColorPicker()
         {
             InitializeComponent();
@@ -45,14 +48,21 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public Color CurrentColor
         {
-            get { return (Color)GetValue(CurrentColorProperty); }
-            set { SetValue(CurrentColorProperty, value); }
+            get => (Color)this.GetValue(CurrentColorProperty);
+            set => this.SetValue(CurrentColorProperty, value);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            this.CurrentColor = (button.Background as SolidColorBrush).Color;
+            if (sender is Button button && button.Background is SolidColorBrush brush)
+            {
+                this.CurrentColor = brush.Color;
+                if (this.button != null)
+                    this.button.Tag = null;
+                this.button = button;
+                if (this.button != null)
+                    this.button.Tag = true;
+            }
         }
     }
 }
