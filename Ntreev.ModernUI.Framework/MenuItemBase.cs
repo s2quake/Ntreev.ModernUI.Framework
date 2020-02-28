@@ -35,7 +35,7 @@ using Ntreev.ModernUI.Framework.Controls;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class MenuItemBase : PropertyChangedBase, IMenuItem, ICommand
+    public abstract class MenuItemBase : PropertyChangedBase, IMenuItem, ICommand, IServiceProvider
     {
         private string inputGestureText;
         private bool isChecked;
@@ -62,7 +62,7 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public ICommand Command
+        public virtual ICommand Command
         {
             get { return this; }
         }
@@ -227,6 +227,15 @@ namespace Ntreev.ModernUI.Framework
         void ICommand.Execute(object parameter)
         {
             this.OnExecute(parameter);
+        }
+
+        #endregion
+
+        #region IServiceProvider
+
+        object IServiceProvider.GetService(Type serviceType)
+        {
+            return this.serviceProvider.GetService(serviceType);
         }
 
         #endregion

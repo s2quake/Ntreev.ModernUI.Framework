@@ -29,29 +29,12 @@ using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    [TemplatePart(Name = PART_Popup, Type = typeof(Popup))]
-    public class IconButton : Button
+    public class IconToggleButton : ToggleButton
     {
-        public const string PART_Popup = "PART_Popup";
-
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(IconButton));
+            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(IconToggleButton));
 
-        public static readonly DependencyProperty DropDownTemplateProperty =
-            DependencyProperty.Register(nameof(DropDownTemplate), typeof(DataTemplate), typeof(IconButton));
-
-        public static readonly DependencyProperty IsDropDownOpenProperty =
-            DependencyProperty.Register(nameof(IsDropDownOpen), typeof(bool), typeof(IconButton),
-                new UIPropertyMetadata(false, IsDropDownOpenPropertyChangedCallback));
-
-        private Popup popup;
-
-        static IconButton()
-        {
-            EventManager.RegisterClassHandler(typeof(IconButton), Mouse.MouseDownEvent, new MouseButtonEventHandler(Mouse_MouseDownHandler), true);
-        }
-
-        public IconButton()
+        public IconToggleButton()
         {
 
         }
@@ -59,107 +42,12 @@ namespace Ntreev.ModernUI.Framework.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            if (this.popup != null)
-            {
-                this.popup.Closed -= Popup_Closed;
-            }
-
-            this.popup = this.Template.FindName(PART_Popup, this) as Popup;
-
-            if (this.popup != null)
-            {
-                this.popup.Closed += Popup_Closed;
-            }
         }
 
         public ImageSource Source
         {
             get { return (ImageSource)this.GetValue(SourceProperty); }
             set { this.SetValue(SourceProperty, value); }
-        }
-
-        public DataTemplate DropDownTemplate
-        {
-            get { return (DataTemplate)this.GetValue(DropDownTemplateProperty); }
-            set { this.SetValue(DropDownTemplateProperty, value); }
-        }
-
-        public bool IsDropDownOpen
-        {
-            get { return (bool)this.GetValue(IsDropDownOpenProperty); }
-            set { this.SetValue(IsDropDownOpenProperty, value); }
-        }
-
-        public event EventHandler DropDownClosed;
-
-        public event EventHandler DropDownOpened;
-
-        protected virtual void OnDropDownClosed(EventArgs e)
-        {
-            this.DropDownClosed?.Invoke(this, e);
-        }
-
-        protected virtual void OnDropDownOpened(EventArgs e)
-        {
-            this.DropDownOpened?.Invoke(this, e);
-        }
-
-        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            base.OnPreviewMouseLeftButtonDown(e);
-
-            if (this.popup == null)
-                return;
-
-            if (Mouse.Captured == this && e.OriginalSource == this && this.popup.IsMouseOver == false)
-            {
-                if (this.IsDropDownOpen == true)
-                    this.IsDropDownOpen = false;
-            }
-        }
-
-        protected override void OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnIsKeyboardFocusWithinChanged(e);
-
-            if (this.IsDropDownOpen == true)
-                this.IsDropDownOpen = false;
-        }
-
-        private static void IsDropDownOpenPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is IconButton button)
-            {
-                if ((bool)e.NewValue == true)
-                {
-                    Mouse.Capture(button, CaptureMode.SubTree);
-                    button.OnDropDownOpened(EventArgs.Empty);
-                }
-                else
-                {
-                    if (Mouse.Captured == button)
-                    {
-                        Mouse.Capture(null);
-                    }
-                }
-            }
-        }
-
-        private static void Mouse_MouseDownHandler(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is IconButton button)
-            {
-                if (button.IsDropDownOpen == true && (button.popup.IsMouseOver == false && button.IsMouseOver == false))
-                {
-                    button.IsDropDownOpen = false;
-                }
-            }
-        }
-
-        private void Popup_Closed(object sender, EventArgs e)
-        {
-            this.OnDropDownClosed(e);
         }
     }
 }

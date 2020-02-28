@@ -99,8 +99,8 @@
     <Compile Include="Controls\GuidControl.cs" />
     <Compile Include="Controls\HighlightTextBlock.cs" />
     <Compile Include="Controls\HighlightTextBox.cs" />
-    <Compile Include="Controls\IconToggleButton.cs" />
     <Compile Include="Controls\IconButton.cs" />
+    <Compile Include="Controls\IconToggleButton.cs" />
     <Compile Include="Controls\IconImage.cs" />
     <Compile Include="Controls\NumericType.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />

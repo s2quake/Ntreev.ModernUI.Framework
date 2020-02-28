@@ -30,7 +30,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Header" Value="{Binding DisplayName}" />
         <Setter Property="ItemsSource" Value="{Binding ItemsSource}" />
         <Setter Property="Command" Value="{Binding Command}" />
-        <Setter Property="InputGestureText" Value="{Binding InputGestureText}" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+        <Setter Property="CommandTarget" Value="{Binding RelativeSource={RelativeSource Mode=Self}}" />
+        <!--<Setter Property="InputGestureText" Value="{Binding InputGestureText}" />-->
         <Setter Property="IsChecked" Value="{Binding IsChecked}" />
         <Setter Property="Icon" Value="{Binding Icon}" />
         <Style.Triggers>
