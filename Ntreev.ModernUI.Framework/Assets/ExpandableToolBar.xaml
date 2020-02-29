@@ -23,6 +23,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters">
 
     <nmfv:RoutedUICommandToStringConverter x:Key="commandToTooltipConverter" />
+    <nmfv:DisplayNameInputGestureToStringConverter x:Key="DisplayNameInputGestureToStringConverter" />
 
     <Style x:Key="{x:Static ToolBar.SeparatorStyleKey}" TargetType="{x:Type Separator}">
         <Setter Property="Background" Value="{DynamicResource SeparatorBackground}" />
@@ -146,7 +147,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <Style x:Key="ExpandableToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}">
-        <Setter Property="ToolTip" Value="{Binding DisplayName}" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource DisplayNameInputGestureToStringConverter}">
+                    <Binding Path="DisplayName" />
+                    <Binding Path="InputGesture" />
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
         <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
         <Setter Property="Command" Value="{Binding Command}" />
         <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ExpandableToolBar}}}" />

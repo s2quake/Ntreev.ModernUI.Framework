@@ -17,26 +17,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using Caliburn.Micro;
+using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
-using System.Collections;
 
-namespace Ntreev.ModernUI.Framework
+namespace Ntreev.ModernUI.Framework.Converters
 {
-    public interface IToolBarItem
+    public class DisplayNameInputGestureToStringConverter : IMultiValueConverter
     {
-        string DisplayName { get; }
+        private readonly InputGestureToStringConverter inputGestureToStringConverter = new InputGestureToStringConverter();
 
-        ICommand Command { get; }
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            var displayName = $"{values[0]}";
+            var inputGestureText = $"{this.inputGestureToStringConverter.Convert(values[1], targetType, parameter, culture)}";
+            if (inputGestureText != string.Empty)
+                return $"{displayName} ({inputGestureText})";
+            return displayName;
+        }
 
-        InputGesture InputGesture { get; }
-
-        bool IsVisible { get; }
-
-        bool IsEnabled { get; }
-
-        object Icon { get; }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

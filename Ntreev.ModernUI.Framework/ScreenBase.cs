@@ -17,21 +17,36 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class ScreenBase : Caliburn.Micro.Screen, IPartImportsSatisfiedNotification
+    public class ScreenBase : Caliburn.Micro.Screen
     {
         private bool isProgressing;
         private string progressMessage;
-        [Import]
-        private ICompositionService compositionService = null;
+        private readonly IServiceProvider serviceProvider;
+
+        public ScreenBase()
+        {
+
+        }
+
+        public ScreenBase(IServiceProvider serviceProvider)
+        {
+            this.serviceProvider = serviceProvider;
+            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+            }
+        }
 
         public sealed async override void CanClose(Action<bool> callback)
         {
@@ -78,7 +93,7 @@ namespace Ntreev.ModernUI.Framework
 
         public bool IsProgressing
         {
-            get { return this.isProgressing; }
+            get => this.isProgressing;
             set
             {
                 this.isProgressing = value;
@@ -88,7 +103,7 @@ namespace Ntreev.ModernUI.Framework
 
         public string ProgressMessage
         {
-            get { return this.progressMessage; }
+            get => this.progressMessage;
             set
             {
                 this.progressMessage = value;
@@ -96,9 +111,40 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public Dispatcher Dispatcher
+        public Dispatcher Dispatcher => Application.Current.Dispatcher;
+
+        protected override void OnViewLoaded(object view)
         {
-            get { return Application.Current.Dispatcher; }
+            base.OnViewLoaded(view);
+            if (view is UIElement element)
+            {
+                if (this.serviceProvider.GetService(typeof(IEnumerable<IMenuItem>)) is IEnumerable<IMenuItem> menuItems)
+                {
+                    var items = MenuItemUtility.GetMenuItems<IMenuItem>(this, menuItems);
+                    foreach (var item in items)
+                    {
+                        this.SetInputBindings(element, item);
+                    }
+                }
+                if (this.serviceProvider.GetService(typeof(IEnumerable<IToolBarItem>)) is IEnumerable<IToolBarItem> toolbarItems)
+                {
+                    var items = ToolBarItemUtility.GetToolBarItems(this, toolbarItems);
+                    foreach (var item in items)
+                    {
+                        this.SetInputBindings(element, item);
+                    }
+                }
+            }
+        }
+
+        protected override void OnViewAttached(object view, object context)
+        {
+            base.OnViewAttached(view, context);
+        }
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
         }
 
         protected virtual void OnProgress()
@@ -118,7 +164,10 @@ namespace Ntreev.ModernUI.Framework
 
         protected void SatisfyImportsOnce(object attributedPart)
         {
-            this.compositionService?.SatisfyImportsOnce(attributedPart);
+            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                compositionService.SatisfyImportsOnce(attributedPart);
+            }
         }
 
         protected virtual void OnImportsSatisfied()
@@ -126,13 +175,71 @@ namespace Ntreev.ModernUI.Framework
 
         }
 
-        #region IPartImportsSatisfiedNotification
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        private void SetInputBindings(UIElement element, IMenuItem menuItem)
         {
-            this.OnImportsSatisfied();
+            if (menuItem.InputGesture != null)
+            {
+                if (menuItem.IsVisible == true)
+                    element.InputBindings.Add(new InputBinding(menuItem.Command, menuItem.InputGesture));
+
+                if (menuItem is INotifyPropertyChanged notifyObject)
+                {
+                    notifyObject.PropertyChanged += (s, e) =>
+                    {
+                        if (menuItem.IsVisible == true)
+                        {
+                            element.InputBindings.Add(new InputBinding(menuItem.Command, menuItem.InputGesture));
+                        }
+                        else
+                        {
+                            for (var i = 0; i < element.InputBindings.Count; i++)
+                            {
+                                if (element.InputBindings[i].Command == menuItem)
+                                {
+                                    element.InputBindings.RemoveAt(i);
+                                    break;
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+
+            foreach (var item in menuItem.ItemsSource)
+            {
+                this.SetInputBindings(element, item);
+            }
         }
 
-        #endregion
+        private void SetInputBindings(UIElement element, IToolBarItem toolbarItem)
+        {
+            if (toolbarItem.InputGesture != null)
+            {
+                if (toolbarItem.IsVisible == true)
+                    element.InputBindings.Add(new InputBinding(toolbarItem.Command, toolbarItem.InputGesture));
+
+                if (toolbarItem is INotifyPropertyChanged notifyObject)
+                {
+                    notifyObject.PropertyChanged += (s, e) =>
+                    {
+                        if (toolbarItem.IsVisible == true)
+                        {
+                            element.InputBindings.Add(new InputBinding(toolbarItem.Command, toolbarItem.InputGesture));
+                        }
+                        else
+                        {
+                            for (var i = 0; i < element.InputBindings.Count; i++)
+                            {
+                                if (element.InputBindings[i].Command == toolbarItem)
+                                {
+                                    element.InputBindings.RemoveAt(i);
+                                    break;
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+        }
     }
 }

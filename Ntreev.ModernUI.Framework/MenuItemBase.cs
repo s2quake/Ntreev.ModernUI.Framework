@@ -35,26 +35,21 @@ using Ntreev.ModernUI.Framework.Controls;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class MenuItemBase : PropertyChangedBase, IMenuItem, ICommand, IServiceProvider
+    public abstract class MenuItemBase : PropertyChangedBase, IMenuItem, ICommand
     {
-        private string inputGestureText;
         private bool isChecked;
-        private bool isEnabled;
         private string displayName;
         private EventHandler canExecuteChanged;
         private object icon;
 
-        [Import]
-        private IServiceProvider serviceProvider = null;
-
-        protected MenuItemBase()
+        protected MenuItemBase(IServiceProvider serviceProvider)
         {
-
+            this.ServiceProvider = serviceProvider;
         }
 
         public string DisplayName
         {
-            get { return this.displayName ?? string.Empty; }
+            get => this.displayName ?? string.Empty;
             set
             {
                 this.displayName = value;
@@ -62,40 +57,17 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public virtual ICommand Command
-        {
-            get { return this; }
-        }
+        public ICommand Command => this;
 
-        public string InputGestureText
-        {
-            get
-            {
-                if (this.InputGesture is KeyGesture)
-                {
-                    return (this.InputGesture as KeyGesture).GetDisplayStringForCulture(CultureInfo.CurrentCulture);
-                }
-                return this.inputGestureText ?? string.Empty;
-            }
-            set
-            {
-                this.inputGestureText = value;
-            }
-        }
-
-        public InputGesture InputGesture
-        {
-            get;
-            set;
-        }
+        public InputGesture InputGesture { get; set; }
 
         public virtual IEnumerable<IMenuItem> ItemsSource
         {
             get
             {
-                if (this.serviceProvider != null)
+                if (this.ServiceProvider != null)
                 {
-                    foreach (var item in MenuItemUtility.GetMenuItems<IMenuItem>(this, this.serviceProvider))
+                    foreach (var item in MenuItemUtility.GetMenuItems<IMenuItem>(this, this.ServiceProvider))
                     {
                         yield return item;
                     }
@@ -107,7 +79,7 @@ namespace Ntreev.ModernUI.Framework
         {
             get
             {
-                if (this.HideOnDisabled == true && this.isEnabled == false)
+                if (this.HideOnDisabled == true && this.IsEnabled == false)
                     return false;
                 return true;
             }
@@ -115,7 +87,7 @@ namespace Ntreev.ModernUI.Framework
 
         public bool IsChecked
         {
-            get { return this.isChecked; }
+            get => this.isChecked;
             set
             {
                 this.isChecked = value;
@@ -123,14 +95,11 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public bool IsEnabled
-        {
-            get { return this.isEnabled; }
-        }
+        public bool IsEnabled { get; private set; }
 
         public object Icon
         {
-            get { return this.icon; }
+            get => this.icon;
             set
             {
                 if (value is string uri)
@@ -153,18 +122,7 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public IInputElement CommandTarget
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public bool HideOnDisabled
-        {
-            get; set;
-        }
+        public bool HideOnDisabled { get; set; }
 
         protected virtual void OnExecute(object parameter)
         {
@@ -186,33 +144,27 @@ namespace Ntreev.ModernUI.Framework
             this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        protected IServiceProvider ServiceProvider { get; }
+
         #region ICommand
 
         event EventHandler ICommand.CanExecuteChanged
         {
-            add
-            {
-                this.canExecuteChanged += value;
-            }
-
-            remove
-            {
-                this.canExecuteChanged -= value;
-            }
+            add { this.canExecuteChanged += value; }
+            remove { this.canExecuteChanged -= value; }
         }
 
         bool ICommand.CanExecute(object parameter)
         {
             try
             {
-                var oldValue = this.isEnabled;
+                var oldValue = this.IsEnabled;
                 var newValue = this.OnCanExecute(parameter);
                 if (oldValue != newValue)
                 {
-                    this.isEnabled = newValue;
+                    this.IsEnabled = newValue;
                 }
-
-                return this.isEnabled;
+                return this.IsEnabled;
             }
             finally
             {
@@ -227,15 +179,6 @@ namespace Ntreev.ModernUI.Framework
         void ICommand.Execute(object parameter)
         {
             this.OnExecute(parameter);
-        }
-
-        #endregion
-
-        #region IServiceProvider
-
-        object IServiceProvider.GetService(Type serviceType)
-        {
-            return this.serviceProvider.GetService(serviceType);
         }
 
         #endregion

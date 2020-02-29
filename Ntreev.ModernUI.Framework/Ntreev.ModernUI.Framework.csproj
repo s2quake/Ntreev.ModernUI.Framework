@@ -123,6 +123,8 @@
     <Compile Include="Controls\TreeViewItemSelector.cs" />
     <Compile Include="Controls\TreeViewUtility.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\DisplayNameInputGestureToStringConverter.cs" />
+    <Compile Include="Converters\InputGestureToStringConverter.cs" />
     <Compile Include="Converters\RoutedUICommandToStringConverter.cs" />
     <Compile Include="Converters\ComplementaryConverter.cs" />
     <Compile Include="Converters\ContentToStringConverter.cs" />

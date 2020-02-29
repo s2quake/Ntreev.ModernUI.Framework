@@ -58,6 +58,8 @@ namespace Ntreev.ModernUI.Framework
 
         public ICommand Command => this;
 
+        public InputGesture InputGesture { get; set; }
+
         public bool IsVisible
         {
             get

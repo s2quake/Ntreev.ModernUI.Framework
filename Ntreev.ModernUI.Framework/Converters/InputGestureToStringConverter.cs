@@ -17,26 +17,29 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using Caliburn.Micro;
+using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
-using System.Collections;
 
-namespace Ntreev.ModernUI.Framework
+namespace Ntreev.ModernUI.Framework.Converters
 {
-    public interface IToolBarItem
+    public class InputGestureToStringConverter : IValueConverter
     {
-        string DisplayName { get; }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is KeyGesture keyGesture)
+            {
+                return keyGesture.GetDisplayStringForCulture(culture);
+            }
+            return $"{value}";
+        }
 
-        ICommand Command { get; }
-
-        InputGesture InputGesture { get; }
-
-        bool IsVisible { get; }
-
-        bool IsEnabled { get; }
-
-        object Icon { get; }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

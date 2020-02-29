@@ -32,7 +32,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_Popup, Type = typeof(Popup))]
     public class IconButton : Button
     {
-        public const string PART_Popup = "PART_Popup";
+        public const string PART_Popup = nameof(PART_Popup);
 
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(IconButton));
@@ -75,20 +75,20 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public ImageSource Source
         {
-            get { return (ImageSource)this.GetValue(SourceProperty); }
-            set { this.SetValue(SourceProperty, value); }
+            get => (ImageSource)this.GetValue(SourceProperty);
+            set => this.SetValue(SourceProperty, value);
         }
 
         public DataTemplate DropDownTemplate
         {
-            get { return (DataTemplate)this.GetValue(DropDownTemplateProperty); }
-            set { this.SetValue(DropDownTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(DropDownTemplateProperty);
+            set => this.SetValue(DropDownTemplateProperty, value);
         }
 
         public bool IsDropDownOpen
         {
-            get { return (bool)this.GetValue(IsDropDownOpenProperty); }
-            set { this.SetValue(IsDropDownOpenProperty, value); }
+            get => (bool)this.GetValue(IsDropDownOpenProperty);
+            set => this.SetValue(IsDropDownOpenProperty, value);
         }
 
         public event EventHandler DropDownClosed;

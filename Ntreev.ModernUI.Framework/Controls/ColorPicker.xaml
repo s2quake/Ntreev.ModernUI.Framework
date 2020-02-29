@@ -24,10 +24,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
              xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters">
 
     <UserControl.Resources>
-        <nmfv:ColorToBrushConverter x:Key="colorToBrushConverter" />
+        <nmfv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
         <Style TargetType="{x:Type nmfc:BrowserExpander}" BasedOn="{StaticResource {x:Type nmfc:BrowserExpander}}">
-            <!--<Setter Property="Background" Value="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource colorToBrushConverter}}" />-->
+            <!--<Setter Property="Background" Value="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ColorToBrushConverter}}" />-->
         </Style>
         <Style x:Key="ButtonFocusVisual1">
             <Setter Property="Control.Template">
@@ -198,7 +198,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <DockPanel Height="25">
                 <TextBox Text="{Binding CurrentColor}" DockPanel.Dock="Left" Width="100" BorderThickness="1 0 0 1" BorderBrush="{StaticResource Accent}" 
                          HorizontalAlignment="Center" IsReadOnly="True" Foreground="{StaticResource WindowText}" />
-                <Border Background="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource colorToBrushConverter}}" 
+                <Border Background="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ColorToBrushConverter}}" 
                     BorderThickness="1 0 1 1" BorderBrush="{StaticResource Accent}" />
             </DockPanel>
             
