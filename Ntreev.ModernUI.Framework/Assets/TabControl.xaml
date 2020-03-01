@@ -60,7 +60,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Border Background="{TemplateBinding Background}" Margin="0,0,1,0" SnapsToDevicePixels="True" Padding="2" >
+                            <Border Background="{TemplateBinding Background}" Margin="0,0,1,0" SnapsToDevicePixels="True" Padding="2">
                                 <ContentPresenter x:Name="header" ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                             <ControlTemplate.Triggers>
@@ -116,7 +116,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Border Background="{TemplateBinding Background}" Margin="0 0 1 0" SnapsToDevicePixels="True" Padding="2" >
+                    <Border Background="{TemplateBinding Background}" Margin="0 0 1 0" SnapsToDevicePixels="True" Padding="2">
                         <ContentPresenter x:Name="header" ContentSource="Header" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -179,7 +179,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid KeyboardNavigation.TabNavigation="Local" >
+                    <Grid KeyboardNavigation.TabNavigation="Local">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />

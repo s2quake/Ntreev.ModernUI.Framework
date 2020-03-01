@@ -120,7 +120,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Trigger Property="IsGrouping" Value="true">
                 <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
             </Trigger>
-            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false" >
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
                 <Setter TargetName="OpaqueRect" 
                         Property="Canvas.Top" 
                         Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}" />
@@ -228,7 +228,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
                         </Trigger>
-                        <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false" >
+                        <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
                             <Setter TargetName="OpaqueRect" 
                                     Property="Canvas.Top" 
                                     Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}" />

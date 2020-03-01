@@ -29,7 +29,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     public class ModernTreeView : TreeView
     {
         public static DependencyProperty HasScrollViewerProperty =
-            DependencyProperty.Register("HasScrollViewer", typeof(bool), typeof(ModernTreeView),
+            DependencyProperty.Register(nameof(HasScrollViewer), typeof(bool), typeof(ModernTreeView),
                 new FrameworkPropertyMetadata(true));
 
         public ModernTreeView()
@@ -39,8 +39,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public bool HasScrollViewer
         {
-            get { return (bool)this.GetValue(HasScrollViewerProperty); }
-            set { this.SetValue(HasScrollViewerProperty, value); }
+            get => (bool)this.GetValue(HasScrollViewerProperty);
+            set => this.SetValue(HasScrollViewerProperty, value);
         }
 
         protected override DependencyObject GetContainerForItemOverride()

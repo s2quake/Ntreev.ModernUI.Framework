@@ -31,15 +31,15 @@ namespace Ntreev.ModernUI.Framework.Controls
     {
         public static readonly DependencyProperty FilterPatternProperty =
             DependencyProperty.Register(nameof(FilterPattern), typeof(string), typeof(HighlightTextBox),
-                new UIPropertyMetadata(string.Empty, FilterPatternPropertyChangedCallback));
+                new FrameworkPropertyMetadata(string.Empty, FilterPatternPropertyChangedCallback));
 
         public static readonly DependencyProperty HighlightProperty =
             DependencyProperty.Register(nameof(Highlight), typeof(Brush), typeof(HighlightTextBox),
-                new UIPropertyMetadata(null, HighlightPropertyChangedCallback));
+                new FrameworkPropertyMetadata(null, HighlightPropertyChangedCallback));
 
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(HighlightTextBox),
-                new UIPropertyMetadata(string.Empty, TextPropertyChangedCallback));
+                new FrameworkPropertyMetadata(string.Empty, TextPropertyChangedCallback));
 
         public HighlightTextBox()
         {
@@ -48,20 +48,20 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public string FilterPattern
         {
-            get { return (string)this.GetValue(FilterPatternProperty); }
-            set { this.SetValue(FilterPatternProperty, value); }
+            get => (string)this.GetValue(FilterPatternProperty);
+            set => this.SetValue(FilterPatternProperty, value);
         }
 
         public Brush Highlight
         {
-            get { return (Brush)this.GetValue(HighlightProperty); }
-            set { this.SetValue(HeightProperty, value); }
+            get => (Brush)this.GetValue(HighlightProperty);
+            set => this.SetValue(HeightProperty, value);
         }
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
         }
 
         private static void FilterPatternPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

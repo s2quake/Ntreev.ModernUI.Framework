@@ -30,7 +30,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_EditableTextBox, Type = typeof(TextBox))]
     public class GuidControl : Control
     {
-        public const string PART_EditableTextBox = "PART_EditableTextBox";
+        public const string PART_EditableTextBox = nameof(PART_EditableTextBox);
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(Guid?), typeof(GuidControl),
@@ -61,8 +61,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public Guid? Value
         {
-            get { return (Guid?)this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
+            get => (Guid?)this.GetValue(ValueProperty);
+            set => this.SetValue(ValueProperty, value);
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)

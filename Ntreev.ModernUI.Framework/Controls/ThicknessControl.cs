@@ -10,12 +10,17 @@ using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    [TemplatePart(Name = "PART_Left", Type = typeof(TextBox))]
-    [TemplatePart(Name = "PART_Top", Type = typeof(TextBox))]
-    [TemplatePart(Name = "PART_Right", Type = typeof(TextBox))]
-    [TemplatePart(Name = "PART_Bottom", Type = typeof(TextBox))]
+    [TemplatePart(Name = PART_Left, Type = typeof(TextBox))]
+    [TemplatePart(Name = PART_Top, Type = typeof(TextBox))]
+    [TemplatePart(Name = PART_Right, Type = typeof(TextBox))]
+    [TemplatePart(Name = PART_Bottom, Type = typeof(TextBox))]
     public class ThicknessControl : UserControl
     {
+        public const string PART_Left = nameof(PART_Left);
+        public const string PART_Top = nameof(PART_Top);
+        public const string PART_Right = nameof(PART_Right);
+        public const string PART_Bottom = nameof(PART_Bottom);
+
         public static readonly DependencyProperty ThicknessProperty =
             DependencyProperty.Register(nameof(Value), typeof(Thickness), typeof(ThicknessControl),
                 new FrameworkPropertyMetadata(ThicknessPropertyChangedCallback));
@@ -30,25 +35,25 @@ namespace Ntreev.ModernUI.Framework.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.leftControl = this.Template.FindName("PART_Left", this) as TextBox;
+            this.leftControl = this.Template.FindName(PART_Left, this) as TextBox;
             if (this.leftControl != null)
             {
                 this.leftControl.Text = $"{this.Value.Left}";
                 this.AttachEvent(this.leftControl);
             }
-            this.topControl = this.Template.FindName("PART_Top", this) as TextBox;
+            this.topControl = this.Template.FindName(PART_Top, this) as TextBox;
             if (this.topControl != null)
             {
                 this.topControl.Text = $"{this.Value.Top}";
                 this.AttachEvent(this.topControl);
             }
-            this.rightControl = this.Template.FindName("PART_Right", this) as TextBox;
+            this.rightControl = this.Template.FindName(PART_Right, this) as TextBox;
             if (this.rightControl != null)
             {
                 this.rightControl.Text = $"{this.Value.Right}";
                 this.AttachEvent(this.rightControl);
             }
-            this.bottomControl = this.Template.FindName("PART_Bottom", this) as TextBox;
+            this.bottomControl = this.Template.FindName(PART_Bottom, this) as TextBox;
             if (this.bottomControl != null)
             {
                 this.bottomControl.Text = $"{this.Value.Bottom}";

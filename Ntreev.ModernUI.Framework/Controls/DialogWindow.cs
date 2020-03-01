@@ -31,11 +31,15 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = "PART_ProgressContent", Type = typeof(ProgressContent))]
     public class DialogWindow : ModernWindow
     {
+        private const string DesiredWidth = nameof(DesiredWidth);
+        private const string DesiredHeight = nameof(DesiredHeight);
+        private const string DesiredResizeMode = nameof(DesiredResizeMode);
+
         public static readonly DependencyProperty ProgressStyleProperty =
             DependencyProperty.RegisterAttached(nameof(ProgressStyle), typeof(Style), typeof(DialogWindow));
 
         public static readonly DependencyProperty ProgressTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ProgressType), typeof(ProgressType), typeof(DialogWindow), 
+            DependencyProperty.RegisterAttached(nameof(ProgressType), typeof(ProgressType), typeof(DialogWindow),
                 new UIPropertyMetadata(ProgressType.Ring));
 
         private static readonly DependencyProperty ProgressTypeInternalProperty =
@@ -48,15 +52,15 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register("IsProgressing", typeof(bool), typeof(DialogWindow));
 
         private static readonly DependencyProperty DesiredWidthProperty =
-            DependencyProperty.RegisterAttached("DesiredWidth", typeof(double), typeof(DialogWindow),
+            DependencyProperty.RegisterAttached(DesiredWidth, typeof(double), typeof(DialogWindow),
                 new FrameworkPropertyMetadata(double.NaN, DesiredWidthPropertyChangedCallback));
 
         private static readonly DependencyProperty DesiredHeightProperty =
-            DependencyProperty.RegisterAttached("DesiredHeight", typeof(double), typeof(DialogWindow),
+            DependencyProperty.RegisterAttached(DesiredHeight, typeof(double), typeof(DialogWindow),
                 new FrameworkPropertyMetadata(double.NaN, DesiredHeightPropertyChangedCallback));
 
         internal static readonly DependencyProperty DesiredResizeModeProperty =
-            DependencyProperty.RegisterAttached("DesiredResizeMode", typeof(ResizeMode), typeof(DialogWindow),
+            DependencyProperty.RegisterAttached(DesiredResizeMode, typeof(ResizeMode), typeof(DialogWindow),
                 new FrameworkPropertyMetadata(ResizeMode.NoResize));
 
         private ProgressContent progressContent;
@@ -125,26 +129,26 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public bool IsProgressing
         {
-            get { return (bool)this.GetValue(IsProgressingProperty); }
-            set { this.SetValue(IsProgressingProperty, value); }
+            get => (bool)this.GetValue(IsProgressingProperty);
+            set => this.SetValue(IsProgressingProperty, value);
         }
 
         public bool ProgressMessage
         {
-            get { return (bool)this.GetValue(ProgressMessageProperty); }
-            set { this.SetValue(ProgressMessageProperty, value); }
+            get => (bool)this.GetValue(ProgressMessageProperty);
+            set => this.SetValue(ProgressMessageProperty, value);
         }
 
         public ProgressType ProgressType
         {
-            get { return (ProgressType)this.GetValue(ProgressTypeProperty); }
-            set { this.SetValue(ProgressTypeProperty, value); }
+            get => (ProgressType)this.GetValue(ProgressTypeProperty);
+            set => this.SetValue(ProgressTypeProperty, value);
         }
 
         public Style ProgressStyle
         {
-            get { return (Style)this.GetValue(ProgressStyleProperty); }
-            set { this.SetValue(ProgressStyleProperty, value); }
+            get => (Style)this.GetValue(ProgressStyleProperty);
+            set => this.SetValue(ProgressStyleProperty, value);
         }
 
         protected override void OnContentChanged(object oldContent, object newContent)

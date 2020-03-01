@@ -26,7 +26,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
               Data="F1 M 31.6667,19L 44.3333,19L 57,31.6667L 57,44.3333L 44.3333,57L 31.6667,57L 19,44.3333L 19,31.6667L 31.6667,19 Z M 26.4762,45.0454L 30.9546,49.5238L 38,42.4783L 45.0454,49.5238L 49.5237,45.0454L 42.4783,38L 49.5238,30.9546L 45.0454,26.4763L 38,33.5217L 30.9546,26.4762L 26.4762,30.9546L 33.5217,38L 26.4762,45.0454 Z " />
     </Canvas>
 
-    <Canvas x:Key="Information_Image"  Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0" >
+    <Canvas x:Key="Information_Image"  Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
         <Path Width="14.2499" Height="38.0001" Canvas.Left="31.6666" Canvas.Top="19" Stretch="Fill" Fill="{DynamicResource WindowBorderActive}"
               Data="F1 M 31.6666,30.0834L 42.7499,30.0834L 42.7499,33.2501L 42.7499,52.2501L 45.9165,52.2501L 45.9165,57.0001L 31.6666,57.0001L 31.6666,52.2501L 34.8332,52.2501L 34.8332,34.8335L 31.6666,34.8335L 31.6666,30.0834 Z M 38.7917,19C 40.9778,19 42.75,20.7722 42.75,22.9583C 42.75,25.1445 40.9778,26.9167 38.7917,26.9167C 36.6055,26.9167 34.8333,25.1445 34.8333,22.9583C 34.8333,20.7722 36.6055,19 38.7917,19 Z " />
     </Canvas>
@@ -47,7 +47,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <DockPanel Margin="10 10 10 0" Grid.Row="0" >
+            <DockPanel Margin="10 10 10 0" Grid.Row="0">
                 <Viewbox Width="57" Height="57" x:Name="viewBox">
                     <ContentControl x:Name="Image" />
                 </Viewbox>

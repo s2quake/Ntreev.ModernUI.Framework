@@ -30,7 +30,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_EditableTextBox, Type = typeof(TextBox))]
     public class SearchBox : Control
     {
-        public const string PART_EditableTextBox = "PART_EditableTextBox";
+        public const string PART_EditableTextBox = nameof(PART_EditableTextBox);
 
         public static RoutedCommand ShowCommand = new RoutedUICommand(Properties.Resources.Command_Show, nameof(ShowCommand), typeof(SearchBox));
 
@@ -38,11 +38,11 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(SearchBox),
-                new PropertyMetadata(string.Empty));
+                new FrameworkPropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty CommentProperty =
             DependencyProperty.Register(nameof(Comment), typeof(string), typeof(SearchBox),
-                new PropertyMetadata(Properties.Resources.Comment_Filter));
+                new FrameworkPropertyMetadata(Properties.Resources.Comment_Filter));
 
         public static readonly DependencyProperty NextCommandProperty =
             DependencyProperty.Register(nameof(NextCommand), typeof(ICommand), typeof(SearchBox));
@@ -58,7 +58,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public static readonly DependencyProperty CloseCommandProperty =
             DependencyProperty.Register(nameof(CloseCommand), typeof(ICommand), typeof(SearchBox),
-                new PropertyMetadata(HideCommand));
+                new FrameworkPropertyMetadata(HideCommand));
 
         public static readonly DependencyProperty CloseCommandParameterProperty =
             DependencyProperty.Register(nameof(CloseCommandParameter), typeof(object), typeof(SearchBox));
@@ -94,50 +94,50 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
         }
 
         public string Comment
         {
-            get { return (string)this.GetValue(CommentProperty); }
-            set { this.SetValue(CommentProperty, value); }
+            get => (string)this.GetValue(CommentProperty);
+            set => this.SetValue(CommentProperty, value);
         }
 
         public ICommand NextCommand
         {
-            get { return (ICommand)GetValue(NextCommandProperty); }
-            set { SetValue(NextCommandProperty, value); }
+            get => (ICommand)GetValue(NextCommandProperty);
+            set => SetValue(NextCommandProperty, value);
         }
 
         public object NextCommandParameter
         {
-            get { return (object)GetValue(NextCommandParameterProperty); }
-            set { SetValue(NextCommandParameterProperty, value); }
+            get => (object)GetValue(NextCommandParameterProperty);
+            set => SetValue(NextCommandParameterProperty, value);
         }
 
         public ICommand PrevCommand
         {
-            get { return (ICommand)GetValue(PrevCommandProperty); }
-            set { SetValue(PrevCommandProperty, value); }
+            get => (ICommand)GetValue(PrevCommandProperty);
+            set => SetValue(PrevCommandProperty, value);
         }
 
         public object PrevCommandParameter
         {
-            get { return (object)GetValue(PrevCommandParameterProperty); }
-            set { SetValue(PrevCommandParameterProperty, value); }
+            get => (object)GetValue(PrevCommandParameterProperty);
+            set => SetValue(PrevCommandParameterProperty, value);
         }
 
         public ICommand CloseCommand
         {
-            get { return (ICommand)GetValue(CloseCommandProperty); }
-            set { SetValue(CloseCommandProperty, value); }
+            get => (ICommand)GetValue(CloseCommandProperty);
+            set => SetValue(CloseCommandProperty, value);
         }
 
         public object CloseCommandParameter
         {
-            get { return (object)GetValue(CloseCommandParameterProperty); }
-            set { SetValue(CloseCommandParameterProperty, value); }
+            get => (object)GetValue(CloseCommandParameterProperty);
+            set => SetValue(CloseCommandParameterProperty, value);
         }
 
         protected override void OnGotFocus(RoutedEventArgs e)

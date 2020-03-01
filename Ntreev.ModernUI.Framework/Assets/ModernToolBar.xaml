@@ -38,7 +38,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Margin" Value="2 2 2 1" />
     </Style>
 
-    <Style x:Key="ExpandableToolBar_Thumb_Style" TargetType="{x:Type Thumb}">
+    <Style x:Key="ModernToolBar_Thumb_Style" TargetType="{x:Type Thumb}">
         <Setter Property="Cursor" Value="SizeAll" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -77,7 +77,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="ExpandableToolBar_OverflowButton_Style" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="ModernToolBar_OverflowButton_Style" TargetType="{x:Type ToggleButton}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -146,7 +146,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="ExpandableToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}">
+    <Style x:Key="ModernToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}">
         <Setter Property="ToolTip">
             <Setter.Value>
                 <MultiBinding Converter="{StaticResource DisplayNameInputGestureToStringConverter}">
@@ -157,7 +157,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
         <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
         <Setter Property="Command" Value="{Binding Command}" />
-        <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ExpandableToolBar}}}" />
+        <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernToolBar}}}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
@@ -165,7 +165,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ExpandableToolBar_Button_Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+    <Style x:Key="ModernToolBar_Button_Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Width" Value="22" />
         <Setter Property="Height" Value="22" />
         <Setter Property="Padding" Value="0" />
@@ -174,14 +174,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
         <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
         <Setter Property="Command" Value="{Binding Command}" />
-        <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ExpandableToolBar}}}" />
+        <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernToolBar}}}" />
     </Style>
 
-    <Style x:Key="ExpandableToolBar_ItemContainer_Style" TargetType="{x:Type ContentControl}">
+    <Style x:Key="ModernToolBar_ItemContainer_Style" TargetType="{x:Type ContentControl}">
         <Setter Property="Content" Value="{Binding Icon}" />
         <Style.Resources>
-            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ExpandableToolBar_IconButton_Style}" />
-            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ExpandableToolBar_Button_Style}" />
+            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ModernToolBar_IconButton_Style}" />
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ModernToolBar_Button_Style}" />
         </Style.Resources>
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
@@ -190,9 +190,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <nmfc:ToolBarItemStyleSelector x:Key="ToolBarItemStyleSelector" Style="{StaticResource ExpandableToolBar_ItemContainer_Style}" />
+    <nmfc:ToolBarItemStyleSelector x:Key="ToolBarItemStyleSelector" Style="{StaticResource ModernToolBar_ItemContainer_Style}" />
 
-    <Style TargetType="{x:Type nmfc:ExpandableToolBar}">
+    <Style TargetType="{x:Type nmfc:ModernToolBar}">
         <Style.Resources>
             <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
             <!--<Style TargetType="{x:Type Separator}" BasedOn="{StaticResource Vertical_Separator_Style}" />-->
@@ -204,13 +204,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Padding" Value="2" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type nmfc:ExpandableToolBar}">
+                <ControlTemplate TargetType="{x:Type nmfc:ModernToolBar}">
                     <Border x:Name="Border"
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}" >
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <DockPanel>
-                            <ToggleButton Style="{StaticResource ExpandableToolBar_OverflowButton_Style}"
+                            <ToggleButton Style="{StaticResource ModernToolBar_OverflowButton_Style}"
                                           x:Name="OverflowButton"
                                           ClickMode="Press"
                                           DockPanel.Dock="Right"
@@ -238,7 +238,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                 </Popup>
                             </ToggleButton>
 
-                            <Thumb x:Name="ToolBarThumb" Width="10" Style="{StaticResource ExpandableToolBar_Thumb_Style}" />
+                            <Thumb x:Name="ToolBarThumb" Width="10" Style="{StaticResource ModernToolBar_Thumb_Style}" />
 
                             <ToolBarPanel x:Name="PART_ToolBarPanel" Margin="0 1 2 2" IsItemsHost="True" />
                         </DockPanel>

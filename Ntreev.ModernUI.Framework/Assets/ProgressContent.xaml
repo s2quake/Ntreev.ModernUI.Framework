@@ -28,7 +28,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     BorderThickness="{TemplateBinding BorderThickness}"
                     Margin="{TemplateBinding Margin}"
                     Padding="{TemplateBinding Padding}">
-                <StackPanel VerticalAlignment="Center" >
+                <StackPanel VerticalAlignment="Center">
                     <ContentControl ContentTemplate="{TemplateBinding ProgressTemplate}" />
                     <TextBlock Text="{TemplateBinding Message}" HorizontalAlignment="Center" />
                     <Button x:Name="PART_Cancel" Content="{x:Static p:Resources.Button_Cancel}" Visibility="Collapsed" HorizontalAlignment="Center" />
@@ -46,7 +46,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <DataTemplate x:Key="ProgressTemplate_ProgressRing" >
+    <DataTemplate x:Key="ProgressTemplate_ProgressRing">
         <nmfc:ProgressRing Margin="0 10" Background="{DynamicResource WindowBackground}" />
     </DataTemplate>
 
@@ -54,20 +54,20 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ProgressBar IsIndeterminate="True" Margin="0 10" Background="{DynamicResource WindowBackground}" />
     </DataTemplate>
 
-    <Style x:Key="ProgressContent_Style" TargetType="{x:Type nmfc:ProgressContent}" >
+    <Style x:Key="ProgressContent_Style" TargetType="{x:Type nmfc:ProgressContent}">
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Template" Value="{StaticResource ProgressContent_Template}" />
     </Style>
 
-    <Style x:Key="ProgressContent_ProgressRing_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}" >
+    <Style x:Key="ProgressContent_ProgressRing_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}">
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressRing}" />
     </Style>
 
-    <Style x:Key="ProgressContent_ProgressBar_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}" >
+    <Style x:Key="ProgressContent_ProgressBar_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}">
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressBar}" />
     </Style>
 
-    <Style x:Key="ProgressContent_Dialog_ProgressRing_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressRing_Style}" >
+    <Style x:Key="ProgressContent_Dialog_ProgressRing_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressRing_Style}">
         <Setter Property="Visibility" Value="Visible" />
         <Setter Property="Message" Value="{Binding ProgressMessage}" />
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressRing}" />
@@ -78,7 +78,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ProgressContent_Dialog_ProgressBar_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressBar_Style}" >
+    <Style x:Key="ProgressContent_Dialog_ProgressBar_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressBar_Style}">
         <Setter Property="Visibility" Value="Visible" />
         <Setter Property="Message" Value="{Binding ProgressMessage}" />
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressBar}" />

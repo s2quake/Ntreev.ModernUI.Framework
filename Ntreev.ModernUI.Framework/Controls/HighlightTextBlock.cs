@@ -31,19 +31,19 @@ namespace Ntreev.ModernUI.Framework.Controls
     {
         public static readonly DependencyProperty PatternProperty =
             DependencyProperty.Register(nameof(Pattern), typeof(string), typeof(HighlightTextBlock),
-                new UIPropertyMetadata(string.Empty, PatternPropertyChangedCallback, PatternCoerceValueCallback));
+                new FrameworkPropertyMetadata(string.Empty, PatternPropertyChangedCallback, PatternCoerceValueCallback));
 
         public static readonly DependencyProperty CaseSensitiveProperty =
             DependencyProperty.Register(nameof(CaseSensitive), typeof(bool), typeof(HighlightTextBlock),
-                new UIPropertyMetadata(false, CaseSensitivePropertyChangedCallback));
+                new FrameworkPropertyMetadata(false, CaseSensitivePropertyChangedCallback));
 
         public static readonly DependencyProperty HighlightProperty =
             DependencyProperty.Register(nameof(Highlight), typeof(Brush), typeof(HighlightTextBlock),
-                new UIPropertyMetadata(null, HighlightPropertyChangedCallback));
+                new FrameworkPropertyMetadata(null, HighlightPropertyChangedCallback));
 
         public new static DependencyProperty TextProperty =
            DependencyProperty.Register(nameof(Text), typeof(string), typeof(HighlightTextBlock),
-               new UIPropertyMetadata(string.Empty, TextPropertyChangedCallback));
+               new FrameworkPropertyMetadata(string.Empty, TextPropertyChangedCallback));
 
         public HighlightTextBlock()
         {
@@ -52,26 +52,26 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public string Pattern
         {
-            get { return (string)this.GetValue(PatternProperty); }
-            set { this.SetValue(PatternProperty, value); }
+            get => (string)this.GetValue(PatternProperty);
+            set => this.SetValue(PatternProperty, value);
         }
 
         public bool CaseSensitive
         {
-            get { return (bool)this.GetValue(CaseSensitiveProperty); }
-            set { this.SetValue(CaseSensitiveProperty, value); }
+            get => (bool)this.GetValue(CaseSensitiveProperty);
+            set => this.SetValue(CaseSensitiveProperty, value);
         }
 
         public Brush Highlight
         {
-            get { return (Brush)this.GetValue(HighlightProperty); }
-            set { this.SetValue(HeightProperty, value); }
+            get => (Brush)this.GetValue(HighlightProperty);
+            set => this.SetValue(HeightProperty, value);
         }
 
         public new string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
         }
 
         private static void PatternPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -26,7 +26,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ControlTemplate x:Key="SearchBox_Template" TargetType="{x:Type nmfc:SearchBox}">
         <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
-                FocusManager.FocusedElement="{Binding ElementName=PART_EditableTextBox}" >
+                FocusManager.FocusedElement="{Binding ElementName=PART_EditableTextBox}">
             <Grid x:Name="MainGrid" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

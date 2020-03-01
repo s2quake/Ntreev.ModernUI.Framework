@@ -28,14 +28,17 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     public static class TreeViewUtility
     {
+        private const string SelectedItemBindingPath = nameof(SelectedItemBindingPath);
+        private const string SelectedItem = nameof(SelectedItem);
+
         public static readonly DependencyProperty SelectedItemBindingPathProperty =
-            DependencyProperty.RegisterAttached("SelectedItemBindingPath", typeof(string), typeof(TreeViewUtility),
+            DependencyProperty.RegisterAttached(SelectedItemBindingPath, typeof(string), typeof(TreeViewUtility),
                 new PropertyMetadata(null, SelectedItemBindingPathPropertyChangedCallback));
 
-        private static DependencyProperty SelectedItemProperty = 
-            DependencyProperty.RegisterAttached("SelectedItem", typeof(object), typeof(TreeViewUtility));
+        private static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.RegisterAttached(SelectedItem, typeof(object), typeof(TreeViewUtility));
 
-       public static string GetSelectedItemBindingPath(TreeView treeView)
+        public static string GetSelectedItemBindingPath(TreeView treeView)
         {
             return (string)treeView.GetValue(SelectedItemBindingPathProperty);
         }
@@ -47,16 +50,15 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void SelectedItemBindingPathPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var treeView = d as TreeView;
-            if (treeView == null)
-                return;
-
-            treeView.Loaded -= TreeView_Loaded;
-            treeView.Loaded += TreeView_Loaded;
-
-            if (treeView.IsLoaded == true)
+            if (d is TreeView treeView)
             {
-                OnTreeViewLoaded(treeView);
+                treeView.Loaded -= TreeView_Loaded;
+                treeView.Loaded += TreeView_Loaded;
+
+                if (treeView.IsLoaded == true)
+                {
+                    OnTreeViewLoaded(treeView);
+                }
             }
         }
 

@@ -28,15 +28,15 @@ namespace Ntreev.ModernUI.Framework.Controls
     public class FlagControlItem : ContentControl
     {
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(long), typeof(FlagControlItem),
-            new UIPropertyMetadata(ValuePropertyChangedCallback));
+            DependencyProperty.Register(nameof(Value), typeof(long), typeof(FlagControlItem),
+                new FrameworkPropertyMetadata(ValuePropertyChangedCallback));
 
         public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(FlagControlItem),
-            new UIPropertyMetadata(true, IsSelectedPropertyChangedCallback));
+            DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(FlagControlItem),
+                new FrameworkPropertyMetadata(true, IsSelectedPropertyChangedCallback));
 
         public static readonly DependencyProperty FlagTypeProperty =
-            DependencyProperty.Register("FlagType", typeof(FlagControlItemType), typeof(FlagControlItem));
+            DependencyProperty.Register(nameof(FlagType), typeof(FlagControlItemType), typeof(FlagControlItem));
 
         public static RoutedEvent SelectedEvent = EventManager.RegisterRoutedEvent("Selected", RoutingStrategy.Bubble,
             typeof(RoutedEventHandler), typeof(FlagControlItem));
@@ -53,20 +53,17 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public long Value
         {
-            get { return (long)this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
+            get => (long)this.GetValue(ValueProperty);
+            set => this.SetValue(ValueProperty, value);
         }
 
         public bool IsSelected
         {
-            get { return (bool)this.GetValue(IsSelectedProperty); }
-            set { this.SetValue(IsSelectedProperty, value); }
+            get => (bool)this.GetValue(IsSelectedProperty);
+            set => this.SetValue(IsSelectedProperty, value);
         }
 
-        public FlagControlItemType FlagType
-        {
-            get { return (FlagControlItemType)this.GetValue(FlagTypeProperty); }
-        }
+        public FlagControlItemType FlagType => (FlagControlItemType)this.GetValue(FlagTypeProperty);
 
         public event RoutedEventHandler Selected
         {

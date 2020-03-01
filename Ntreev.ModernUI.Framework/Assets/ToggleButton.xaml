@@ -27,7 +27,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Border Width="16" 
                             Height="16"
                             Background="Transparent"
-                            Padding="5,5,5,5" >
+                            Padding="5,5,5,5">
                         <Path x:Name="ExpandPath"  
                               Stroke="{DynamicResource WindowText}"
                               StrokeThickness="1"
@@ -66,7 +66,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Path x:Name="Arrow" Grid.Column="0"
                       Fill="{TemplateBinding Foreground}"
                       Data="M 1,1 L 7,7 13,1"
-                      HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                      HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                     <Path.RenderTransform>
                         <RotateTransform Angle="0" />
                     </Path.RenderTransform>

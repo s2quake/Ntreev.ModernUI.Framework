@@ -41,15 +41,12 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         }
 
-        public bool HasError
-        {
-            get { return (bool)this.GetValue(HasErrorProperty); }
-        }
+        public bool HasError => (bool)this.GetValue(HasErrorProperty);
 
         public object ErrorContent
         {
-            get { return (object)this.GetValue(ErrorContentProperty); }
-            set { this.SetValue(ErrorContentProperty, value); }
+            get => (object)this.GetValue(ErrorContentProperty);
+            set => this.SetValue(ErrorContentProperty, value);
         }
 
         private static void ErrorContentPropertyPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

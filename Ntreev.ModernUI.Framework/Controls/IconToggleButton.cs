@@ -46,8 +46,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public ImageSource Source
         {
-            get { return (ImageSource)this.GetValue(SourceProperty); }
-            set { this.SetValue(SourceProperty, value); }
+            get => (ImageSource)this.GetValue(SourceProperty);
+            set => this.SetValue(SourceProperty, value);
         }
     }
 }

@@ -15,18 +15,10 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Caliburn.Micro;
 using Ntreev.ModernUI.Framework.Properties;
 using Ntreev.ModernUI.Framework.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -143,7 +135,7 @@ namespace Ntreev.ModernUI.Framework
 
             var text = (MessageSelector ?? SelectDefaultMessage)(message);
 
-            if (WindowManager == null)
+            if (AppWindowManager.Current == null)
             {
                 return MessageBox.Show(text, title, button, icon);
             }
@@ -156,7 +148,7 @@ namespace Ntreev.ModernUI.Framework
                     Button = button,
                     Image = icon
                 };
-                WindowManager.ShowDialog(dialog);
+                AppWindowManager.Current.ShowDialog(dialog);
                 return dialog.Result;
             }
         }
@@ -171,11 +163,6 @@ namespace Ntreev.ModernUI.Framework
         }
 
         public static MessageSelector MessageSelector
-        {
-            get; set;
-        }
-
-        internal static IWindowManager WindowManager
         {
             get; set;
         }

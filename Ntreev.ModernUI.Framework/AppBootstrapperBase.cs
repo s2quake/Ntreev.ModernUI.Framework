@@ -34,16 +34,24 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class AppBootstrapper<TRootModel> : BootstrapperBase, IServiceProvider
+    public abstract class AppBootstrapperBase : BootstrapperBase, IServiceProvider
     {
+        private readonly Type modelType;
         private CompositionContainer container;
-        private AppConfiguration configs = new AppConfiguration();
 
-        public AppBootstrapper()
+        protected AppBootstrapperBase(Type modelType)
         {
+            if (Current != null)
+                throw new InvalidOperationException("AppBootstrapper does not allow multi instance");
+            Current = this;
+            this.modelType = modelType;
             if (this.AutoInitialize == true)
                 this.Initialize();
         }
+
+        public static AppBootstrapperBase Current { get; private set; }
+
+        public static IAppConfiguration Configs => AppConfiguration.Current;
 
         public object GetService(Type serviceType)
         {
@@ -72,6 +80,11 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
+        public static void SatisfyImportsOnce(object instance)
+        {
+            Current.BuildUp(instance);
+        }
+
         protected override void Configure()
         {
             var catalog = new AggregateCatalog();
@@ -81,17 +94,14 @@ namespace Ntreev.ModernUI.Framework
                 catalog.Catalogs.Add(new AssemblyCatalog(item));
             }
 
-            this.container = new CompositionContainer(catalog);
-
+            var container = new CompositionContainer(catalog);
             var batch = new CompositionBatch();
-            var windowManager = new AppWindowManager();
-            AppMessageBox.WindowManager = ModalDialogBase.WindowManager = windowManager;
 
-            batch.AddExportedValue<IWindowManager>(windowManager);
+            batch.AddExportedValue<IWindowManager>(AppWindowManager.Current);
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-            batch.AddExportedValue<IAppConfiguration>(this.configs);
+            batch.AddExportedValue<IAppConfiguration>(AppConfiguration.Current);
             batch.AddExportedValue<IServiceProvider>(this);
-            batch.AddExportedValue<ICompositionService>(this.container);
+            batch.AddExportedValue<ICompositionService>(container);
 
             foreach (var item in this.GetParts())
             {
@@ -105,8 +115,8 @@ namespace Ntreev.ModernUI.Framework
                     }
                 }, () => item.Item2));
             }
-            this.container.Compose(batch);
-            this.container.SatisfyImportsOnce(windowManager);
+            container.Compose(batch);
+            this.container = container;
 
             var defaultLocateForView = ViewModelLocator.LocateForView;
             ViewModelLocator.LocateForView = (view) =>
@@ -244,12 +254,12 @@ namespace Ntreev.ModernUI.Framework
                 new FrameworkPropertyMetadata(System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag)));
 
             if (this.IgnoreDisplay == false)
-                this.DisplayRootViewFor<TRootModel>();
+                this.DisplayRootViewFor(this.modelType);
         }
 
         protected override void OnExit(object sender, EventArgs e)
         {
-            this.configs.Write();
+            AppConfiguration.Current.Write();
             base.OnExit(sender, e);
             this.container.Dispose();
         }

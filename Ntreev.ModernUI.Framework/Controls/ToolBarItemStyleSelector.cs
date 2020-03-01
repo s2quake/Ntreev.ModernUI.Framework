@@ -27,8 +27,6 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     public class ToolBarItemStyleSelector : StyleSelector
     {
-        private Style style;
-
         public ToolBarItemStyleSelector()
         {
 
@@ -40,16 +38,12 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 if (container is FrameworkElement fe)
                 {
-                    if (this.style != null)
-                        return this.style;
+                    if (this.Style != null)
+                        return this.Style;
                 }
             }
             return base.SelectStyle(item, container);
         }
-        public Style Style
-        {
-            get { return this.style; }
-            set { this.style = value; }
-        }
+        public Style Style { get; set; }
     }
 }

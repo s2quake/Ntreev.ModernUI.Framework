@@ -32,8 +32,8 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_Popup, Type = typeof(Popup))]
     public class FilterBox : Control
     {
-        public const string PART_EditableTextBox = "PART_EditableTextBox";
-        public const string PART_Popup = "PART_Popup";
+        public const string PART_EditableTextBox = nameof(PART_EditableTextBox);
+        public const string PART_Popup = nameof(PART_Popup);
 
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(FilterBox),
@@ -101,32 +101,32 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
         }
 
         public string Comment
         {
-            get { return (string)this.GetValue(CommentProperty); }
-            set { this.SetValue(CommentProperty, value); }
+            get => (string)this.GetValue(CommentProperty);
+            set => this.SetValue(CommentProperty, value);
         }
 
         public bool CaseSensitive
         {
-            get { return (bool)this.GetValue(CaseSensitiveProperty); }
-            set { this.SetValue(CaseSensitiveProperty, value); }
+            get => (bool)this.GetValue(CaseSensitiveProperty);
+            set => this.SetValue(CaseSensitiveProperty, value);
         }
 
         public bool GlobPattern
         {
-            get { return (bool)this.GetValue(GlobPatternProperty); }
-            set { this.SetValue(GlobPatternProperty, value); }
+            get => (bool)this.GetValue(GlobPatternProperty);
+            set => this.SetValue(GlobPatternProperty, value);
         }
 
         public bool IsDropDownOpen
         {
-            get { return (bool)GetValue(IsDropDownOpenProperty); }
-            set { SetValue(IsDropDownOpenProperty, value); }
+            get => (bool)GetValue(IsDropDownOpenProperty);
+            set => SetValue(IsDropDownOpenProperty, value);
         }
 
         public event EventHandler DropDownClosed;

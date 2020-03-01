@@ -35,7 +35,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_TreeView, Type = typeof(TreeView))]
     public class TreeViewItemSelector : ComboBox
     {
-        public const string PART_TreeView = "PART_TreeView";
+        public const string PART_TreeView = nameof(PART_TreeView);
 
         private Dictionary<object, TreeViewItemViewModel> itemToViewModel;
         private TreeView treeView;

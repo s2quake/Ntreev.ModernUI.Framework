@@ -24,7 +24,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <nmfv:InputGestureToStringConverter x:Key="InputGestureToStringConverter" />
 
-    <Style x:Key="ExpandableContextMenuItem_Style" TargetType="{x:Type nmfc:ExpandableContextMenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+    <Style x:Key="ModernContextMenuItem_Style" TargetType="{x:Type nmfc:ModernContextMenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Header" Value="{Binding DisplayName}" />
@@ -40,12 +40,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <nmfc:MenuItemStyleSelector x:Key="ExpandableContextMenuItemStyleSelector" StyleName="ExpandableContextMenuItem_Style" Style="{StaticResource ExpandableContextMenuItem_Style}" />
+    <nmfc:MenuItemStyleSelector x:Key="ModernContextMenuItemStyleSelector" StyleName="ModernContextMenuItem_Style" Style="{StaticResource ModernContextMenuItem_Style}" />
 
-    <Style TargetType="{x:Type nmfc:ExpandableContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
+    <Style TargetType="{x:Type nmfc:ModernContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
         <Setter Property="cal:Bind.Model" Value="{Binding}" />
         <Setter Property="UsesItemContainerTemplate" Value="True" />
-        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ExpandableContextMenuItemStyleSelector}" />
+        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernContextMenuItemStyleSelector}" />
     </Style>
 
 </ResourceDictionary>

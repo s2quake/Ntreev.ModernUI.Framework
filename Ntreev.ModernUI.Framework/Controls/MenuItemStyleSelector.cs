@@ -27,9 +27,6 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     public class MenuItemStyleSelector : StyleSelector
     {
-        private string styleName = "MenuItem_Style";
-        private Style style;
-
         public override Style SelectStyle(object item, DependencyObject container)
         {
             if (item is IMenuItem == true)
@@ -38,23 +35,15 @@ namespace Ntreev.ModernUI.Framework.Controls
                 {
                     if (fe.TryFindResource(this.StyleName) is Style style)
                         return style;
-                    if (this.style != null)
-                        return this.style;
+                    if (this.Style != null)
+                        return this.Style;
                 }
             }
             return base.SelectStyle(item, container);
         }
 
-        public string StyleName
-        {
-            get { return this.styleName; }
-            set { this.styleName = value; }
-        }
+        public string StyleName { get; set; } = "MenuItem_Style";
 
-        public Style Style
-        {
-            get { return this.style; }
-            set { this.style = value; }
-        }
+        public Style Style { get; set; }
     }
 }

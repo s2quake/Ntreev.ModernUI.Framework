@@ -32,16 +32,18 @@ using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    [TemplatePart(Name = "PART_TextBox", Type = typeof(RichTextBox))]
+    [TemplatePart(Name = PART_TextBox, Type = typeof(RichTextBox))]
     public class TerminalControl : Control
     {
+        public const string PART_TextBox = nameof(PART_TextBox);
+
         public readonly static DependencyProperty PromptProperty =
             DependencyProperty.Register(nameof(Prompt), typeof(string), typeof(TerminalControl),
-                new PropertyMetadata(string.Empty, PromptPropertyChangedCallback, PromptPropertyCoerceValueCallback));
+                new FrameworkPropertyMetadata(string.Empty, PromptPropertyChangedCallback, PromptPropertyCoerceValueCallback));
 
         private readonly static DependencyPropertyKey TextPropertyKey =
             DependencyProperty.RegisterReadOnly(nameof(Text), typeof(string), typeof(TerminalControl),
-                new PropertyMetadata(string.Empty));
+                new FrameworkPropertyMetadata(string.Empty));
         public readonly static DependencyProperty TextProperty = TextPropertyKey.DependencyProperty;
 
         public readonly static DependencyProperty OutputForegroundProperty =
@@ -198,20 +200,20 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public string Prompt
         {
-            get { return (string)this.GetValue(PromptProperty); }
-            set { this.SetValue(PromptProperty, value); }
+            get => (string)this.GetValue(PromptProperty);
+            set => this.SetValue(PromptProperty, value);
         }
 
         public Brush OutputForeground
         {
-            get { return (Brush)this.GetValue(OutputForegroundProperty); }
-            set { this.SetValue(OutputForegroundProperty, value); }
+            get => (Brush)this.GetValue(OutputForegroundProperty);
+            set => this.SetValue(OutputForegroundProperty, value);
         }
 
         public Brush OutputBackground
         {
-            get { return (Brush)this.GetValue(OutputBackgroundProperty); }
-            set { this.SetValue(OutputBackgroundProperty, value); }
+            get => (Brush)this.GetValue(OutputBackgroundProperty);
+            set => this.SetValue(OutputBackgroundProperty, value);
         }
 
         public void NextCompletion()

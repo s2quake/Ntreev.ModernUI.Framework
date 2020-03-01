@@ -27,8 +27,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     public static class TextBlockService
     {
-        private const string ShowTrimmedText = "ShowTrimmedText";
-        private const string IsTextTrimmed = "IsTextTrimmed";
+        private const string ShowTrimmedText = nameof(ShowTrimmedText);
+        private const string IsTextTrimmed = nameof(IsTextTrimmed);
 
         public static readonly DependencyProperty ShowTrimmedTextProperty =
             DependencyProperty.RegisterAttached(ShowTrimmedText, typeof(bool), typeof(TextBlockService),

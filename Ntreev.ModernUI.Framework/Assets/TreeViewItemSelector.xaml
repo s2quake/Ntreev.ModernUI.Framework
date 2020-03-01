@@ -75,7 +75,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             Margin="0,-1,0,0">
                         <TreeView x:Name="PART_TreeView" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                   KeyboardNavigation.DirectionalNavigation="Contained"  
-                                  BorderThickness="0" Margin="0" Padding="1" VerticalContentAlignment="Center" >
+                                  BorderThickness="0" Margin="0" Padding="1" VerticalContentAlignment="Center">
                             <TreeView.Resources>
                                 <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItem_Style}">
                                     <EventSetter Event="Selected" Handler="TreeViewItem_Selected" />

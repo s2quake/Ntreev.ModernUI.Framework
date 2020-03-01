@@ -47,6 +47,11 @@ namespace Ntreev.ModernUI.Framework
             this.ServiceProvider = serviceProvider;
         }
 
+        protected MenuItemBase()
+        {
+
+        }
+
         public string DisplayName
         {
             get => this.displayName ?? string.Empty;
@@ -65,12 +70,9 @@ namespace Ntreev.ModernUI.Framework
         {
             get
             {
-                if (this.ServiceProvider != null)
+                foreach (var item in MenuItemUtility.GetMenuItems<IMenuItem>(this, this.ServiceProvider ?? AppBootstrapperBase.Current))
                 {
-                    foreach (var item in MenuItemUtility.GetMenuItems<IMenuItem>(this, this.ServiceProvider))
-                    {
-                        yield return item;
-                    }
+                    yield return item;
                 }
             }
         }

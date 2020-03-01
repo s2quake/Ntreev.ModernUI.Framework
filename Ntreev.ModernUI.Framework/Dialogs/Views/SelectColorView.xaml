@@ -23,7 +23,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
              xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.Properties"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     
     <StackPanel>
         <nmfc:ColorPicker CurrentColor="{Binding CurrentColor, Mode=TwoWay}" />

@@ -36,15 +36,15 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     [ContentProperty(nameof(MenuItems))]
     [DefaultProperty(nameof(MenuItems))]
-    public class ExpandableToolBar : ToolBar
+    public class ModernToolBar : ToolBar
     {
         public new static DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ExpandableToolBar),
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ModernToolBar),
                 new FrameworkPropertyMetadata(ItemsSourcePropertyChangedCallback));
 
         private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
 
-        public ExpandableToolBar()
+        public ModernToolBar()
         {
             this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
         }
@@ -87,7 +87,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void ItemsSourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ExpandableToolBar self)
+            if (d is ModernToolBar self)
             {
                 self.RefreshItemsSource(e.NewValue as IEnumerable);
             }

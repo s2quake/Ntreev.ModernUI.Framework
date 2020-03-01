@@ -40,8 +40,8 @@ namespace Ntreev.ModernUI.Framework.Controls
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(HeaderedContentControl))]
     public class PropertyItemsControl : ItemsControl
     {
-        private const string headerString = "Header";
-        private const string targetString = "Target";
+        private const string Header = nameof(Header);
+        private const string Target = nameof(Target);
 
         public static readonly DependencyProperty HeaderWidthProperty =
             DependencyProperty.Register(nameof(HeaderWidth), typeof(GridLength), typeof(PropertyItemsControl),
@@ -56,11 +56,11 @@ namespace Ntreev.ModernUI.Framework.Controls
                new FrameworkPropertyMetadata(double.NaN, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty HeaderProperty =
-            DependencyProperty.RegisterAttached(headerString, typeof(object), typeof(PropertyItemsControl),
+            DependencyProperty.RegisterAttached(Header, typeof(object), typeof(PropertyItemsControl),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, HeaderPropertyChangedCallback));
 
         public static readonly DependencyProperty TargetProperty =
-            DependencyProperty.RegisterAttached(targetString, typeof(UIElement), typeof(PropertyItemsControl),
+            DependencyProperty.RegisterAttached(Target, typeof(UIElement), typeof(PropertyItemsControl),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
         public static readonly DependencyProperty OrientationProperty =
@@ -116,33 +116,33 @@ namespace Ntreev.ModernUI.Framework.Controls
         [TypeConverter(typeof(GridLengthConverter))]
         public GridLength HeaderWidth
         {
-            get { return (GridLength)this.GetValue(HeaderWidthProperty); }
-            set { this.SetValue(HeaderWidthProperty, value); }
+            get => (GridLength)this.GetValue(HeaderWidthProperty);
+            set => this.SetValue(HeaderWidthProperty, value);
         }
 
         [TypeConverter(typeof(LengthConverter))]
         public double HeaderMinWidth
         {
-            get { return (double)this.GetValue(HeaderMinWidthProperty); }
-            set { this.SetValue(HeaderMinWidthProperty, value); }
+            get => (double)this.GetValue(HeaderMinWidthProperty);
+            set => this.SetValue(HeaderMinWidthProperty, value);
         }
 
         public Orientation Orientation
         {
-            get { return (Orientation)this.GetValue(OrientationProperty); }
-            set { this.SetValue(OrientationProperty, value); }
+            get => (Orientation)this.GetValue(OrientationProperty);
+            set => this.SetValue(OrientationProperty, value);
         }
 
         public DataTemplate ContentTemplate
         {
-            get { return (DataTemplate)this.GetValue(ContentTemplateProperty); }
-            set { this.SetValue(ContentTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(ContentTemplateProperty);
+            set => this.SetValue(ContentTemplateProperty, value);
         }
 
         public DataTemplateSelector ContentTemplateSelector
         {
-            get { return (DataTemplateSelector)this.GetValue(ContentTemplateSelectorProperty); }
-            set { this.SetValue(ContentTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)this.GetValue(ContentTemplateSelectorProperty);
+            set => this.SetValue(ContentTemplateSelectorProperty, value);
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)

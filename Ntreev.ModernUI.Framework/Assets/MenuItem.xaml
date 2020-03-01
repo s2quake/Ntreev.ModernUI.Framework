@@ -56,7 +56,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Margin="0,0,8,8"
                             Background="{DynamicResource PopupBackground}"
                             BorderBrush="{DynamicResource WindowBorderActive}"
-                            BorderThickness="1" >
+                            BorderThickness="1">
                         <Border.Effect>
                             <DropShadowEffect Opacity="0.5" />
                         </Border.Effect>

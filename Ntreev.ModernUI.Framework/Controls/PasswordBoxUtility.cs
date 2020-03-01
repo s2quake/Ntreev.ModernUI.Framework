@@ -27,16 +27,19 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     public class PasswordBoxUtility : DependencyObject
     {
+        private const string ValidationTarget = nameof(ValidationTarget);
+        private const string IsValid = nameof(IsValid);
+
         public static readonly DependencyProperty ValidationTargetProperty
-            = DependencyProperty.RegisterAttached("ValidationTarget", typeof(PasswordBox), typeof(PasswordBoxUtility),
+            = DependencyProperty.RegisterAttached(ValidationTarget, typeof(PasswordBox), typeof(PasswordBoxUtility),
                 new UIPropertyMetadata(ValidationTargetPropertyChangedCallback));
 
         private static readonly DependencyPropertyKey IsValidPropertyKey
-            = DependencyProperty.RegisterAttachedReadOnly("IsValid", typeof(bool), typeof(PasswordBoxUtility), new UIPropertyMetadata(true));
+            = DependencyProperty.RegisterAttachedReadOnly(IsValid, typeof(bool), typeof(PasswordBoxUtility), new UIPropertyMetadata(true));
 
         public static readonly DependencyProperty IsValidProperty = IsValidPropertyKey.DependencyProperty;
 
-        private static Dictionary<PasswordBox, PasswordBox> targetToSource = new Dictionary<PasswordBox, PasswordBox>();
+        private static readonly Dictionary<PasswordBox, PasswordBox> targetToSource = new Dictionary<PasswordBox, PasswordBox>();
 
         public static PasswordBox GetValidationTarget(PasswordBox d)
         {

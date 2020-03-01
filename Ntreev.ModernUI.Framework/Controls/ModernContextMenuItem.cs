@@ -27,19 +27,19 @@ using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    class ExpandableContextMenuItem : MenuItem
+    class ModernContextMenuItem : MenuItem
     {
-        private ExpandableContextMenu contextMenu;
+        private readonly ModernContextMenu contextMenu;
 
-        static ExpandableContextMenuItem()
+        static ModernContextMenuItem()
         {
-            CommandProperty.OverrideMetadata(typeof(ExpandableContextMenuItem),
+            CommandProperty.OverrideMetadata(typeof(ModernContextMenuItem),
                 new FrameworkPropertyMetadata(null, CommandPropertyChangedCallback, CommandPropertyCoerceValueCallback));
-            CommandParameterProperty.OverrideMetadata(typeof(ExpandableContextMenuItem),
+            CommandParameterProperty.OverrideMetadata(typeof(ModernContextMenuItem),
                 new FrameworkPropertyMetadata(null, CommandParameterPropertyChangedCallback));
         }
 
-        public ExpandableContextMenuItem(ExpandableContextMenu contextMenu)
+        public ModernContextMenuItem(ModernContextMenu contextMenu)
         {
             this.contextMenu = contextMenu;
             this.contextMenu.Opened += ContextMenu_Opened;
@@ -50,12 +50,12 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new ExpandableContextMenuItem(this.contextMenu);
+            return new ModernContextMenuItem(this.contextMenu);
         }
 
         private static object CommandPropertyCoerceValueCallback(DependencyObject d, object baseValue)
         {
-            var self = d as ExpandableContextMenuItem;
+            var self = d as ModernContextMenuItem;
             if (self.contextMenu.IsOpen == false)
                 return null;
             var parameter = d.GetValue(CommandParameterProperty);

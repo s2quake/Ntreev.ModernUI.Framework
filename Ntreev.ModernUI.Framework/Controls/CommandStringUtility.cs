@@ -158,13 +158,6 @@ namespace Ntreev.ModernUI.Framework.Controls
             return text;
         }
 
-        //public static bool IsSwitch(string argument)
-        //{
-        //    if (argument == null)
-        //        return false;
-        //    return Regex.IsMatch(argument, $"^{CommandSettings.Delimiter}{CommandSettings.SwitchPattern}$|^{CommandSettings.ShortDelimiter}{CommandSettings.ShortSwitchPattern}$");
-        //}
-
         private static string ToLiteral(string input)
         {
             using (var writer = new StringWriter())

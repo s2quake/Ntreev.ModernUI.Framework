@@ -35,20 +35,20 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     [ContentProperty("MenuItems")]
     [DefaultProperty("MenuItems")]
-    public class ExpandableContextMenu : ContextMenu
+    public class ModernContextMenu : ContextMenu
     {
         private static readonly DependencyPropertyKey MenuItemsPropertyKey =
-            DependencyProperty.RegisterReadOnly(nameof(MenuItems), typeof(IList), typeof(ExpandableContextMenu),
+            DependencyProperty.RegisterReadOnly(nameof(MenuItems), typeof(IList), typeof(ModernContextMenu),
                 new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
 
         public new static DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ExpandableContextMenu),
-                new UIPropertyMetadata(ItemsSourcePropertyChangedCallback));
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ModernContextMenu),
+                new FrameworkPropertyMetadata(ItemsSourcePropertyChangedCallback));
 
         private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
 
-        public ExpandableContextMenu()
+        public ModernContextMenu()
         {
             this.SetValue(MenuItemsPropertyKey, this.menuItems);
             this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
@@ -56,14 +56,14 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public IList MenuItems
         {
-            get { return (IList)this.GetValue(MenuItemsProperty); }
-            private set { this.SetValue(MenuItemsPropertyKey, value); }
+            get => (IList)this.GetValue(MenuItemsProperty);
+            private set => this.SetValue(MenuItemsPropertyKey, value);
         }
 
         public new IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -81,7 +81,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new ExpandableContextMenuItem(this);
+            return new ModernContextMenuItem(this);
         }
 
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
@@ -144,7 +144,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void ItemsSourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ExpandableContextMenu self)
+            if (d is ModernContextMenu self)
             {
                 self.RefreshItemsSource(e.NewValue as IEnumerable);
             }
@@ -197,7 +197,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 return CategoryAttribute.Default.Category;
             }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute menuAttr)
+            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute)
             {
                 return CategoryAttribute.Default.Category;
             }

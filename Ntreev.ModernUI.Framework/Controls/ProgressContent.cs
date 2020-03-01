@@ -28,23 +28,23 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_Cancel, Type = typeof(Button))]
     public class ProgressContent : UserControl
     {
-        public const string PART_Cancel = "PART_Cancel";
+        public const string PART_Cancel = nameof(PART_Cancel);
 
         public static readonly DependencyProperty MessageProperty =
             DependencyProperty.Register(nameof(Message), typeof(string), typeof(ProgressContent),
-                new PropertyMetadata(string.Empty));
+                new FrameworkPropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(double), typeof(ProgressContent),
-                new PropertyMetadata(0.0));
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty CanCancelProperty =
             DependencyProperty.Register(nameof(CanCancel), typeof(bool), typeof(ProgressContent),
-                new PropertyMetadata(false));
+                new FrameworkPropertyMetadata(false));
 
         private static readonly DependencyPropertyKey IsCancellationRequestedPropertyKey =
             DependencyProperty.RegisterReadOnly(nameof(IsCancellationRequested), typeof(bool), typeof(ProgressContent),
-                new PropertyMetadata(false));
+                new FrameworkPropertyMetadata(false));
         public static readonly DependencyProperty IsCancellationRequestedProperty = IsCancellationRequestedPropertyKey.DependencyProperty;
 
         public static readonly DependencyProperty ProgressTemplateProperty =
@@ -77,31 +77,28 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public string Message
         {
-            get { return (string)this.GetValue(MessageProperty); }
-            set { this.SetValue(MessageProperty, value); }
+            get => (string)this.GetValue(MessageProperty);
+            set => this.SetValue(MessageProperty, value);
         }
 
         public double Value
         {
-            get { return (double)this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
+            get => (double)this.GetValue(ValueProperty);
+            set => this.SetValue(ValueProperty, value);
         }
 
         public bool CanCancel
         {
-            get { return (bool)this.GetValue(CanCancelProperty); }
-            set { this.SetValue(CanCancelProperty, value); }
+            get => (bool)this.GetValue(CanCancelProperty);
+            set => this.SetValue(CanCancelProperty, value);
         }
 
-        public bool IsCancellationRequested
-        {
-            get { return (bool)this.GetValue(IsCancellationRequestedProperty); }
-        }
+        public bool IsCancellationRequested => (bool)this.GetValue(IsCancellationRequestedProperty);
 
         public DataTemplate ProgressTemplate
         {
-            get { return (DataTemplate)this.GetValue(ProgressTemplateProperty); }
-            set { this.SetValue(ProgressTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(ProgressTemplateProperty);
+            set => this.SetValue(ProgressTemplateProperty, value);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

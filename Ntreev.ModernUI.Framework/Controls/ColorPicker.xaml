@@ -24,10 +24,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
              xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters">
 
     <UserControl.Resources>
-        <nmfv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <nmfv:ColorToBrushConverter x:Key="colorToBrushConverter" />
 
-        <Style TargetType="{x:Type nmfc:BrowserExpander}" BasedOn="{StaticResource {x:Type nmfc:BrowserExpander}}">
-            <!--<Setter Property="Background" Value="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ColorToBrushConverter}}" />-->
+        <Style TargetType="{x:Type nmfc:ModernExpander}" BasedOn="{StaticResource {x:Type nmfc:ModernExpander}}">
+            <!--<Setter Property="Background" Value="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource colorToBrushConverter}}" />-->
         </Style>
         <Style x:Key="ButtonFocusVisual1">
             <Setter Property="Control.Template">
@@ -91,7 +91,23 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </UserControl.Resources>
     <Border BorderThickness="1">
         <StackPanel Orientation="Vertical">
-            <nmfc:BrowserExpander IsExpanded="True" Header="Modern Colors" Padding="0 3">
+            <nmfc:ModernExpander IsExpanded="True" Header="Standard Colors">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="White" CommandParameter="#a4c400" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Black" CommandParameter="#60a917" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Blue" CommandParameter="#008a00" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Chocolate" CommandParameter="#00aba9" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Gray" CommandParameter="#1ba1e2" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Green" CommandParameter="#0050ef" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Orange" CommandParameter="#6a00ff" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Purple" CommandParameter="#aa00ff" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Red" CommandParameter="#f472d0" Margin="3" />
+                        <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="Yellow" CommandParameter="#d80073" Margin="3" />
+                    </StackPanel>
+                </StackPanel>
+            </nmfc:ModernExpander>
+            <nmfc:ModernExpander IsExpanded="True" Header="Modern Colors">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="#a4c400" CommandParameter="#a4c400" Margin="3" />
@@ -118,8 +134,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="#87794e" CommandParameter="#87794e" Margin="3" />
                     </StackPanel>
                 </StackPanel>
-            </nmfc:BrowserExpander>
-            <nmfc:BrowserExpander IsExpanded="True" Header="Theme Colors" Padding="0 3">
+            </nmfc:ModernExpander>
+            <nmfc:ModernExpander IsExpanded="True" Header="Theme Colors">
                 <StackPanel>
                     <StackPanel SnapsToDevicePixels="True" x:Name="FirstRow" Margin="2,0,0,0" Orientation="Horizontal">
                         <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="#d08f25" CommandParameter="#d08f25" Margin="3,4,3,4" />
@@ -194,11 +210,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <Button Style="{StaticResource ColorButtonStyleFirstRow}" Background="#974806" CommandParameter="#974806" Margin="3,0,3,0" />
                     </StackPanel>
                 </StackPanel>
-            </nmfc:BrowserExpander>
+            </nmfc:ModernExpander>
             <DockPanel Height="25">
                 <TextBox Text="{Binding CurrentColor}" DockPanel.Dock="Left" Width="100" BorderThickness="1 0 0 1" BorderBrush="{StaticResource Accent}" 
                          HorizontalAlignment="Center" IsReadOnly="True" Foreground="{StaticResource WindowText}" />
-                <Border Background="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ColorToBrushConverter}}" 
+                <Border Background="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource colorToBrushConverter}}" 
                     BorderThickness="1 0 1 1" BorderBrush="{StaticResource Accent}" />
             </DockPanel>
             

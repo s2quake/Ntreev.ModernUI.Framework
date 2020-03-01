@@ -26,7 +26,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                          AutoReverse="True" Duration="0:0:0.2" />
     </Storyboard>
 
-    <ControlTemplate x:Key="ErrorBlinker_Template" TargetType="{x:Type nmfc:ErrorBlinker}" >
+    <ControlTemplate x:Key="ErrorBlinker_Template" TargetType="{x:Type nmfc:ErrorBlinker}">
         <Rectangle Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
             <Rectangle.Style>
                 <Style TargetType="{x:Type Rectangle}">
@@ -43,7 +43,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Rectangle>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="ImageErrorBlinker_ControlTemplate" TargetType="{x:Type nmfc:ErrorBlinker}" >
+    <ControlTemplate x:Key="ImageErrorBlinker_ControlTemplate" TargetType="{x:Type nmfc:ErrorBlinker}">
         <Grid>
             <Rectangle x:Name="rect" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
                 <Rectangle.Style>

@@ -94,49 +94,46 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public long? Value
         {
-            get { return (long?)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (long?)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
         public bool IsEditable
         {
-            get { return (bool)this.GetValue(IsEditableProperty); }
-            set { this.SetValue(IsEditableProperty, value); }
+            get => (bool)this.GetValue(IsEditableProperty);
+            set => this.SetValue(IsEditableProperty, value);
         }
 
         public string NumericMemberPath
         {
-            get { return (string)GetValue(NumericMemberPathProperty); }
-            set { SetValue(NumericMemberPathProperty, value); }
+            get => (string)GetValue(NumericMemberPathProperty);
+            set => SetValue(NumericMemberPathProperty, value);
         }
 
         public string CommentMemberPath
         {
-            get { return (string)this.GetValue(CommentMemberPathProperty); }
-            set { this.SetValue(CommentMemberPathProperty, value); }
+            get => (string)this.GetValue(CommentMemberPathProperty);
+            set => this.SetValue(CommentMemberPathProperty, value);
         }
 
-        public IList SelectedItems
-        {
-            get { return (IList)GetValue(SelectedItemsProperty); }
-        }
+        public IList SelectedItems => (IList)GetValue(SelectedItemsProperty);
 
         public double MaxDropDownHeight
         {
-            get { return (double)GetValue(MaxDropDownHeightProperty); }
-            set { SetValue(MaxDropDownHeightProperty, value); }
+            get => (double)GetValue(MaxDropDownHeightProperty);
+            set => SetValue(MaxDropDownHeightProperty, value);
         }
 
         public bool IsDropDownOpen
         {
-            get { return (bool)GetValue(IsDropDownOpenProperty); }
-            set { SetValue(IsDropDownOpenProperty, value); }
+            get => (bool)GetValue(IsDropDownOpenProperty);
+            set => SetValue(IsDropDownOpenProperty, value);
         }
 
         public event SelectionChangedEventHandler SelectionChanged
@@ -320,7 +317,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private string GetDisplayMember(object item)
         {
-            string text = string.Empty;
+            string text;
             if (item is ContentControl)
             {
                 text = (item as ContentControl).Content.ToString();

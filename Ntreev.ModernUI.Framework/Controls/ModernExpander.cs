@@ -17,50 +17,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using System.Reflection;
-using System.ComponentModel.Composition;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Input;
 using Caliburn.Micro;
-using Ntreev.Library;
-using Ntreev.Library.IO;
+using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework
+namespace Ntreev.ModernUI.Framework.Controls
 {
-    sealed class AppConfiguration : ConfigurationBase, IAppConfiguration
+    public class ModernExpander : Expander
     {
-        private readonly string filename;
-
-        internal AppConfiguration()
+        public ModernExpander()
         {
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var productName = AppInfo.ProductName;
-            this.filename = Path.Combine(path, productName, "app.config");
-            try
-            {
-                if (File.Exists(this.filename) == true)
-                    this.Read(this.filename);
-            }
-            catch
-            {
-
-            }
         }
-
-        public void Write()
-        {
-            FileUtility.Prepare(filename);
-            this.Write(filename);
-        }
-
-        public override string Name => "AppConfigs";
-
-        public static AppConfiguration Current { get; } = new AppConfiguration();
     }
 }

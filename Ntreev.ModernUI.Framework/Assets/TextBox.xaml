@@ -46,7 +46,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <!--<Border x:Name="errorBorder" Background="#FFdc000c" Margin="8,0,0,0"
                                     Opacity="0" CornerRadius="0"
                                     IsHitTestVisible="False"
-                                    MinHeight="24" >
+                                    MinHeight="24">
                             <TextBlock Text="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
                                        Foreground="White" Margin="8,2,8,3" TextWrapping="Wrap" VerticalAlignment="Center" />
                         </Border>-->

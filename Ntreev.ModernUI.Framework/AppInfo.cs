@@ -126,14 +126,11 @@ namespace Ntreev.ModernUI.Framework
 
         public static string GetUserAppDataPath()
         {
-            string path = string.Empty;
-            Assembly assembly = Assembly.GetEntryAssembly();
-            Type at = typeof(AssemblyCompanyAttribute);
-            object[] r = assembly.GetCustomAttributes(at, false);
-
-            AssemblyCompanyAttribute ct = ((AssemblyCompanyAttribute)(r[0]));
-
-            path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var assembly = Assembly.GetEntryAssembly();
+            var at = typeof(AssemblyCompanyAttribute);
+            var r = assembly.GetCustomAttributes(at, false);
+            var ct = (AssemblyCompanyAttribute)(r[0]);
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             path += @"\" + ct.Company;
             path += @"\" + assembly.GetName().Name.ToString();
 

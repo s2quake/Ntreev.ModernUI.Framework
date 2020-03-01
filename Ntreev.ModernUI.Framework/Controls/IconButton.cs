@@ -42,7 +42,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public static readonly DependencyProperty IsDropDownOpenProperty =
             DependencyProperty.Register(nameof(IsDropDownOpen), typeof(bool), typeof(IconButton),
-                new UIPropertyMetadata(false, IsDropDownOpenPropertyChangedCallback));
+                new FrameworkPropertyMetadata(false, IsDropDownOpenPropertyChangedCallback));
 
         private Popup popup;
 

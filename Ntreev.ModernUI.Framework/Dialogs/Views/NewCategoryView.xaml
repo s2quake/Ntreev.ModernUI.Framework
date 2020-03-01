@@ -32,7 +32,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <TextBox x:Name="CategoryName" nmfc:PropertyItemsControl.Header="{x:Static p:Resources.Label_CategoryName}" 
                      TabIndex="0" />
         </nmfc:PropertyItemsControl>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="Create" Content="{x:Static p:Resources.Button_Create}" IsDefault="True" Style="{DynamicResource Dialog_Button_Style}" />
             <Border Width="4" />
             <Button x:Name="TryClose" Content="{x:Static p:Resources.Button_Close}" Style="{DynamicResource Dialog_Button_Style}" />

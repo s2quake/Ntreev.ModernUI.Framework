@@ -27,16 +27,16 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     public static class DragDropUtility
     {
-        private const string dropCommandString = "DropCommand";
-        private const string dropCommandParameterString = "DropCommandParameter";
+        private const string DropCommand = nameof(DropCommand);
+        private const string DropCommandParameter = nameof(DropCommandParameter);
 
         public static readonly DependencyProperty DropCommandProperty =
-            DependencyProperty.RegisterAttached(dropCommandString, typeof(ICommand), typeof(DragDropUtility),
-                new PropertyMetadata(null, CommandPropertyChangedCallback));
+            DependencyProperty.RegisterAttached(DropCommand, typeof(ICommand), typeof(DragDropUtility),
+                new FrameworkPropertyMetadata(null, CommandPropertyChangedCallback));
 
         public static readonly DependencyProperty DropCommandParameterProperty =
-            DependencyProperty.RegisterAttached(dropCommandParameterString, typeof(object), typeof(DragDropUtility),
-                new PropertyMetadata(null));
+            DependencyProperty.RegisterAttached(DropCommandParameter, typeof(object), typeof(DragDropUtility),
+                new FrameworkPropertyMetadata(null));
 
         public static ICommand GetDropCommand(DependencyObject d)
         {
@@ -61,7 +61,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         public static void ExecuteDropCommand(DependencyObject d, object parameter)
         {
             var command = GetDropCommand(d);
-
             if (command != null)
             {
                 if (command.CanExecute(parameter) == true)
@@ -74,7 +73,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         public static bool CanExecuteDropCommand(DependencyObject d, object parameter)
         {
             var command = GetDropCommand(d);
-
             if (command != null)
             {
                 return command.CanExecute(parameter);

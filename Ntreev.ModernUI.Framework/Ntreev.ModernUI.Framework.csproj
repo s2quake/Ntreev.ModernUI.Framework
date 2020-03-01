@@ -57,7 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="AppBootstrapperBase.cs" />
     <Compile Include="AppInfo.cs" />
     <Compile Include="AppMessageBox.cs" />
     <Compile Include="AppWindowManager.cs" />
@@ -80,8 +80,7 @@
       <DependentUpon>TreeViewItemSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppConfiguration.cs" />
-    <Compile Include="ConfigServiceObsolete.cs" />
-    <Compile Include="Controls\BrowserExpander.cs" />
+    <Compile Include="Controls\ModernExpander.cs" />
     <Compile Include="Controls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
@@ -90,8 +89,8 @@
     <Compile Include="Controls\DragDropUtility.cs" />
     <Compile Include="Controls\ErrorBlinker.cs" />
     <Compile Include="Controls\ExpandableToolBar.cs" />
-    <Compile Include="Controls\ExpandableContextMenu.cs" />
-    <Compile Include="Controls\ExpandableContextMenuItem.cs" />
+    <Compile Include="Controls\ModernContextMenu.cs" />
+    <Compile Include="Controls\ModernContextMenuItem.cs" />
     <Compile Include="Controls\FilterBox.cs" />
     <Compile Include="Controls\FlagControl.cs" />
     <Compile Include="Controls\FlagControlItem.cs" />
@@ -104,6 +103,7 @@
     <Compile Include="Controls\IconImage.cs" />
     <Compile Include="Controls\NumericType.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
+    <Compile Include="Controls\ProgressUtility.cs" />
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ThicknessControl.cs" />
@@ -257,7 +257,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Assets\BrowserExpander.xaml">
+    <Page Include="Assets\ModernExpander.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -269,11 +269,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\ExpandableContextMenu.xaml">
+    <Page Include="Assets\ModernContextMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\ExpandableToolBar.xaml">
+    <Page Include="Assets\ModernToolBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

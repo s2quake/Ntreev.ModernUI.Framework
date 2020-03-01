@@ -29,11 +29,7 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class ModalDialogBase : Screen, IModalDialog
     {
-        private bool isProgressing;
         private string progressMessage;
-        private bool? dialogResult;
-        [Import]
-        private IServiceProvider serviceProvider = null;
 
         protected ModalDialogBase()
         {
@@ -49,8 +45,8 @@ namespace Ntreev.ModernUI.Framework
         {
             return this.Dispatcher.Invoke(() =>
             {
-                WindowManager.ShowDialog(this);
-                return this.dialogResult;
+                AppWindowManager.Current.ShowDialog(this);
+                return this.DialogResult;
             });
         }
 
@@ -61,7 +57,7 @@ namespace Ntreev.ModernUI.Framework
 
         public void BeginProgress(string message)
         {
-            this.isProgressing = true;
+            this.IsProgressing = true;
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
@@ -75,21 +71,18 @@ namespace Ntreev.ModernUI.Framework
 
         public void EndProgress(string message)
         {
-            this.isProgressing = false;
+            this.IsProgressing = false;
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
             this.OnProgress();
         }
 
-        public bool IsProgressing
-        {
-            get { return this.isProgressing; }
-        }
+        public bool IsProgressing { get; private set; }
 
         public string ProgressMessage
         {
-            get { return this.progressMessage; }
+            get => this.progressMessage;
             set
             {
                 this.progressMessage = value;
@@ -99,30 +92,15 @@ namespace Ntreev.ModernUI.Framework
 
         public override void TryClose(bool? dialogResult = null)
         {
-            this.dialogResult = dialogResult;
+            this.DialogResult = dialogResult;
             base.TryClose(dialogResult);
         }
 
-        public bool? DialogResult
-        {
-            get { return this.dialogResult; }
-            set { this.dialogResult = value; }
-        }
+        public bool? DialogResult { get; set; }
 
-        public Dispatcher Dispatcher
-        {
-            get { return Application.Current.Dispatcher; }
-        }
+        public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        public virtual IEnumerable<IToolBarItem> ToolBarItems
-        {
-            get
-            {
-                if (this.serviceProvider == null)
-                    return Enumerable.Empty<IToolBarItem>();
-                return ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
-            }
-        }
+        public virtual IEnumerable<IToolBarItem> ToolBarItems => ToolBarItemUtility.GetToolBarItems(this, AppBootstrapperBase.Current);
 
         protected virtual void OnProgress()
         {
@@ -137,11 +115,6 @@ namespace Ntreev.ModernUI.Framework
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
-        }
-
-        internal static IWindowManager WindowManager
-        {
-            get; set;
         }
     }
 }

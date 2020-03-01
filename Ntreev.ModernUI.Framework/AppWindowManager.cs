@@ -31,18 +31,20 @@ using Ntreev.Library;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class AppWindowManager : WindowManager
+    public sealed class AppWindowManager : WindowManager
     {
-        [Import]
-        private IAppConfiguration configs = null;
-        [Import]
-        private ICompositionService compositionService = null;
+        internal AppWindowManager()
+        {
+
+        }
 
         public override bool? ShowDialog(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
-            this.compositionService.SatisfyImportsOnce(rootModel);
+            AppBootstrapperBase.SatisfyImportsOnce(rootModel);
             return base.ShowDialog(rootModel, context, settings);
         }
+
+        public static AppWindowManager Current { get; } = new AppWindowManager();
 
         protected override Page EnsurePage(object model, object view)
         {
@@ -51,9 +53,30 @@ namespace Ntreev.ModernUI.Framework
 
         protected override Window EnsureWindow(object model, object view, bool isDialog)
         {
-            var window = view as Window;
+            if (view is Window window)
+            {
+                var owner = InferOwnerOf(window);
+                if (owner != null && isDialog)
+                {
+                    window.Owner = owner;
 
-            if (window == null)
+                    window.Loaded += (s, e) =>
+                    {
+                        if (owner.WindowState != WindowState.Maximized)
+                        {
+                            window.Left = owner.Left + (owner.ActualWidth - window.ActualWidth) / 2;
+                            window.Top = owner.Top + (owner.ActualHeight - window.ActualHeight) / 2;
+                        }
+                        else
+                        {
+                            window.Left = (owner.ActualWidth - window.ActualWidth) / 2;
+                            window.Top = (owner.ActualHeight - window.ActualHeight) / 2;
+                        }
+                        window.SizeToContent = SizeToContent.Manual;
+                    };
+                }
+            }
+            else
             {
                 window = isDialog == true ? new DialogWindow() : new Window();
                 window.Content = new DialogContentControl() { Content = view, };
@@ -87,29 +110,6 @@ namespace Ntreev.ModernUI.Framework
                 else
                 {
                     window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                }
-            }
-            else
-            {
-                var owner = InferOwnerOf(window);
-                if (owner != null && isDialog)
-                {
-                    window.Owner = owner;
-
-                    window.Loaded += (s, e) =>
-                    {
-                        if (owner.WindowState != WindowState.Maximized)
-                        {
-                            window.Left = owner.Left + (owner.ActualWidth - window.ActualWidth) / 2;
-                            window.Top = owner.Top + (owner.ActualHeight - window.ActualHeight) / 2;
-                        }
-                        else
-                        {
-                            window.Left = (owner.ActualWidth - window.ActualWidth) / 2;
-                            window.Top = (owner.ActualHeight - window.ActualHeight) / 2;
-                        }
-                        window.SizeToContent = SizeToContent.Manual;
-                    };
                 }
             }
 
@@ -157,7 +157,7 @@ namespace Ntreev.ModernUI.Framework
 
         private void UpdateState(object model, Window window)
         {
-            if (this.configs.TryGetValue<WindowState>(typeof(AppWindowManager), model.GetType(), nameof(WindowState), out var windowState) == true)
+            if (AppConfiguration.Current.TryGetValue<WindowState>(typeof(AppWindowManager), model.GetType(), nameof(WindowState), out var windowState) == true)
             {
                 window.WindowState = windowState;
             }
@@ -168,11 +168,11 @@ namespace Ntreev.ModernUI.Framework
             if (window.ResizeMode.HasFlag(ResizeMode.CanResize) == false)
                 return;
 
-            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Width), out var width) == true)
+            if (AppConfiguration.Current.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Width), out var width) == true)
             {
                 window.Width = width;
             }
-            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Height), out var height) == true)
+            if (AppConfiguration.Current.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Height), out var height) == true)
             {
                 window.Height = height;
             }
@@ -180,8 +180,8 @@ namespace Ntreev.ModernUI.Framework
 
         private void UpdatePosition(object model, Window window, Window owner)
         {
-            var left = double.NaN;
-            var top = double.NaN;
+            double left;
+            double top;
             if (owner.WindowState != WindowState.Maximized)
             {
                 left = owner.Left + (owner.ActualWidth - window.ActualWidth) / 2;
@@ -192,11 +192,11 @@ namespace Ntreev.ModernUI.Framework
                 left = (owner.ActualWidth - window.ActualWidth) / 2;
                 top = (owner.ActualHeight - window.ActualHeight) / 2;
             }
-            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Left), out var l) == true)
+            if (AppConfiguration.Current.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Left), out var l) == true)
             {
                 left = l;
             }
-            if (this.configs.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Top), out var t) == true)
+            if (AppConfiguration.Current.TryGetValue<double>(typeof(AppWindowManager), model.GetType(), nameof(window.Top), out var t) == true)
             {
                 top = t;
             }
@@ -213,11 +213,11 @@ namespace Ntreev.ModernUI.Framework
             {
                 try
                 {
-                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.WindowState), window.WindowState);
-                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Width), window.Width);
-                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Height), window.Height);
-                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Left), window.Left);
-                    this.configs.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Top), window.Top);
+                    AppConfiguration.Current.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.WindowState), window.WindowState);
+                    AppConfiguration.Current.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Width), window.Width);
+                    AppConfiguration.Current.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Height), window.Height);
+                    AppConfiguration.Current.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Left), window.Left);
+                    AppConfiguration.Current.SetValue(typeof(AppWindowManager), window.DataContext.GetType(), nameof(window.Top), window.Top);
                 }
                 catch
                 {

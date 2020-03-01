@@ -88,14 +88,14 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public ImageSource Source
         {
-            get { return (ImageSource)this.GetValue(SourceProperty); }
-            set { this.SetValue(SourceProperty, value); }
+            get => (ImageSource)this.GetValue(SourceProperty);
+            set => this.SetValue(SourceProperty, value);
         }
 
         public Stretch Stretch
         {
-            get { return (Stretch)this.GetValue(StretchProperty); }
-            set { this.SetValue(StretchProperty, value); }
+            get => (Stretch)this.GetValue(StretchProperty);
+            set => this.SetValue(StretchProperty, value);
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
