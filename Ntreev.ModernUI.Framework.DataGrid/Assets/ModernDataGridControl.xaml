@@ -121,7 +121,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Trigger Property="IsGrouping" Value="true">
                 <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
             </Trigger>
-            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false" >
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
                 <Setter TargetName="OpaqueRect" 
                         Property="Canvas.Top" 
                         Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}" />
@@ -144,12 +144,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmgc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}" >
+    <Style TargetType="{x:Type nmgc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}">
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
         <Setter Property="CaretBrush" Value="{DynamicResource WindowText}" />
     </Style>
 
-    <Style TargetType="{x:Type nmgc:ModernDataCellTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}" >
+    <Style TargetType="{x:Type nmgc:ModernDataCellTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}">
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
         <Setter Property="CaretBrush" Value="{DynamicResource WindowText}" />
     </Style>
@@ -203,7 +203,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
               Width="8" Height="6" Margin="5,0,5,0"
               Stretch="Fill" Fill="{DynamicResource WindowText}" 
               RenderTransformOrigin="0.5,0.4"
-              Data="M0,0 L1,0 0.5,1 z" >
+              Data="M0,0 L1,0 0.5,1 z">
             <Path.RenderTransform>
                 <RotateTransform Angle="180" />
             </Path.RenderTransform>
@@ -215,7 +215,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
               Width="8" Height="6" Margin="5,0,5,0"
               Stretch="Fill" Fill="{DynamicResource WindowText}" 
               RenderTransformOrigin="0.5,0.4"
-              Data="M0,0 L1,0 0.5,1 z" >
+              Data="M0,0 L1,0 0.5,1 z">
         </Path>
     </DataTemplate>
 
@@ -260,7 +260,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </ControlTemplate>
 
     <ControlTemplate x:Key="GroupHeaderControl_ToggleButton_Template" TargetType="{x:Type ToggleButton}">
-        <ContentPresenter x:Name="expanderGlyphPresenter" Content="{x:Null}" >
+        <ContentPresenter x:Name="expanderGlyphPresenter" Content="{x:Null}">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate>
                     <Border Width="9" Height="9" Background="Transparent">
@@ -328,7 +328,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ControlTemplate TargetType="{x:Type xcdg:GroupHeaderControl}">
                     <xcdg:PassiveLayoutDecorator Axis="Horizontal">
                         <DockPanel>
-                            <xcdg:HierarchicalGroupLevelIndicatorPane DockPanel.Dock="Left"/>
+                            <xcdg:HierarchicalGroupLevelIndicatorPane DockPanel.Dock="Left" />
                             <xcdg:GroupLevelIndicatorPane DockPanel.Dock="Left" Indented="False">
                                 <xcdg:GroupLevelIndicatorPane.GroupLevel>
                                     <Binding ConverterParameter="-1" Path="(xcdg:GroupLevelIndicatorPane.GroupLevel)" RelativeSource="{RelativeSource TemplatedParent}">
@@ -343,14 +343,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     <ToggleButton Focusable="False" IsChecked="{Binding Group.IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" OverridesDefaultStyle="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   Template="{StaticResource GroupHeaderControl_ToggleButton_Template}">
                                     </ToggleButton>
-                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="3,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="3,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                 </StackPanel>
                             </Border>
                         </DockPanel>
                     </xcdg:PassiveLayoutDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="xcdg:DataGridControl.NavigationBehavior" Value="None">
-                            <Setter Property="Focusable" TargetName="mainBorder" Value="False"/>
+                            <Setter Property="Focusable" TargetName="mainBorder" Value="False" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -369,7 +369,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="RowSelector_Template" TargetType="{x:Type xcdg:RowSelector}" >
+    <ControlTemplate x:Key="RowSelector_Template" TargetType="{x:Type xcdg:RowSelector}">
         <Grid>
             <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
                     BorderBrush="{DynamicResource DataGridGridLines}"
@@ -423,7 +423,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:RowSelector}" >
+                <ControlTemplate TargetType="{x:Type xcdg:RowSelector}">
                     <Grid>
                         <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -449,7 +449,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:RowSelector}" >
+                <ControlTemplate TargetType="{x:Type xcdg:RowSelector}">
                     <Grid>
                         <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -492,7 +492,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Trigger Property="nmgc:ModernDataRow.IsDragOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource WindowBorder}" />
             </Trigger>
-            <Trigger Property="HasValidationError" Value="True" >
+            <Trigger Property="HasValidationError" Value="True">
                 <Setter Property="ContentTemplate" Value="{x:Null}" />
             </Trigger>
             <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError)}" Value="True">
@@ -715,7 +715,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type xcdg:Cell}" >
+    <Style TargetType="{x:Type xcdg:Cell}">
         <Setter Property="UseLayoutRounding" Value="False" />
         <Setter Property="MinHeight" Value="22" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
@@ -772,7 +772,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </Setter.Value>
                 </Setter>
             </MultiDataTrigger>
-            <Trigger Property="HasValidationError" Value="True" >
+            <Trigger Property="HasValidationError" Value="True">
                 <Setter Property="CellErrorStyle" Value="{x:Null}" />
             </Trigger>
             <Trigger Property="HasValidationError" Value="True">
@@ -865,7 +865,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                 BorderBrush="{DynamicResource DataGridGridLines}" 
                                 BorderThickness="0 0 0 1" 
                                 Padding ="{TemplateBinding Padding}">
-                            <Grid x:Name="containerGrid" Margin="5 0" >
+                            <Grid x:Name="containerGrid" Margin="5 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -942,7 +942,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
                     <Grid Name="Bg"
                           Background="{TemplateBinding Background}"
-                          SnapsToDevicePixels="true" >
+                          SnapsToDevicePixels="true">
                         <Grid.RowDefinitions>
                             <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
                             <RowDefinition Height="0.00001*" />
@@ -994,7 +994,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
                             <Grid Name="Bg"
                                   Background="{TemplateBinding Background}"
-                                  SnapsToDevicePixels="true" >
+                                  SnapsToDevicePixels="true">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
                                     <ColumnDefinition Width="0.00001*" />
@@ -1198,7 +1198,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.EditTemplate>
     </xcdg:CellEditor>-->
 
-    <!--<xcdg:CellEditor x:Key="TextEditor" >
+    <!--<xcdg:CellEditor x:Key="TextEditor">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <TextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Red" 
@@ -1407,19 +1407,19 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
         <Setter Property="BorderThickness" Value="1 0 0 1" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="StairHeight" Value="0"/>
-        <Setter Property="ConnectionLineOffset" Value="0"/>
-        <Setter Property="ConnectionLineAlignment" Value="CenterToCenter"/>
-        <Setter Property="xcdg:RowSelector.Visible" Value="True"/>
-        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False"/>
+        <Setter Property="StairHeight" Value="0" />
+        <Setter Property="ConnectionLineOffset" Value="0" />
+        <Setter Property="ConnectionLineAlignment" Value="CenterToCenter" />
+        <Setter Property="xcdg:RowSelector.Visible" Value="True" />
+        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
                     <Grid x:Name="rootGrid">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border x:Name="rootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}" Grid.ColumnSpan="2" Grid.Column="1" Padding="{TemplateBinding Padding}">
@@ -1428,23 +1428,23 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             <Border.BorderThickness>
                                 <Binding ConverterParameter="Right" Path="(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness" RelativeSource="{RelativeSource Self}">
                                     <Binding.Converter>
-                                        <xcdg:ThicknessConverter InverseValue="False"/>
+                                        <xcdg:ThicknessConverter InverseValue="False" />
                                     </Binding.Converter>
                                 </Binding>
                             </Border.BorderThickness>
                         </Border>-->
-                        <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0"/>
-                        <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1"/>
-                        <xcdg:GroupByControl AllowSort="{TemplateBinding AllowSort}" AllowGroupingModification="{TemplateBinding AllowGroupingModification}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" xcdg:TableView.CanScrollHorizontally="True" ConnectionLinePen="{TemplateBinding ConnectionLinePen}" Grid.Column="2" NoGroupContent="{TemplateBinding NoGroupContent}"/>
+                        <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" />
+                        <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
+                        <xcdg:GroupByControl AllowSort="{TemplateBinding AllowSort}" AllowGroupingModification="{TemplateBinding AllowGroupingModification}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" xcdg:TableView.CanScrollHorizontally="True" ConnectionLinePen="{TemplateBinding ConnectionLinePen}" Grid.Column="2" NoGroupContent="{TemplateBinding NoGroupContent}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Path=(xcdg:GroupLevelIndicatorPane.GroupLevel), RelativeSource={RelativeSource TemplatedParent}}" Value="-1">
-                            <Setter Property="Visibility" TargetName="groupLevelIndicatorPane" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="groupLevelIndicatorPane" Value="Collapsed" />
                             <!--<Setter Property="BorderThickness" TargetName="verticalGridLineBorder">
                                 <Setter.Value>
                                     <Binding ConverterParameter="Right, Left" Path="(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness" RelativeSource="{RelativeSource Self}">
                                         <Binding.Converter>
-                                            <xcdg:ThicknessConverter InverseValue="False"/>
+                                            <xcdg:ThicknessConverter InverseValue="False" />
                                         </Binding.Converter>
                                     </Binding>
                                 </Setter.Value>
@@ -1540,13 +1540,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.String" >
+    <xcdg:CellEditor x:Key="System.String">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:ModernDataCellTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent" 
                                             PreviewKeyDown="StringTextBox_KeyDown"
                                             Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                            Text="{nmgm:EditingContentBinding}" >
+                                            Text="{nmgm:EditingContentBinding}">
                 </nmgc:ModernDataCellTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1555,7 +1555,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Single" >
+    <xcdg:CellEditor x:Key="System.Single">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
@@ -1570,7 +1570,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Double" >
+    <xcdg:CellEditor x:Key="System.Double">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
@@ -1585,13 +1585,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.SByte" >
+    <xcdg:CellEditor x:Key="System.SByte">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1600,13 +1600,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Byte" >
+    <xcdg:CellEditor x:Key="System.Byte">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1615,13 +1615,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Int16" >
+    <xcdg:CellEditor x:Key="System.Int16">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1630,13 +1630,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.UInt16" >
+    <xcdg:CellEditor x:Key="System.UInt16">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1645,13 +1645,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Int32" >
+    <xcdg:CellEditor x:Key="System.Int32">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1660,13 +1660,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.UInt32" >
+    <xcdg:CellEditor x:Key="System.UInt32">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1675,13 +1675,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Int64" >
+    <xcdg:CellEditor x:Key="System.Int64">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1690,13 +1690,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.UInt64" >
+    <xcdg:CellEditor x:Key="System.UInt64">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmgc:NumericTextBox Margin="-2 0" Padding="0" BorderThickness="0"  Background="Transparent"
                                      NumberStyles="Integer"
                                      Tag="{Binding ParentRow, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}"
-                                     Text="{nmgm:EditingContentBinding}" >
+                                     Text="{nmgm:EditingContentBinding}">
                 </nmgc:NumericTextBox>
             </DataTemplate>
         </xcdg:CellEditor.EditTemplate>
@@ -1735,7 +1735,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </xcdg:CellEditor.ActivationGestures>
     </xcdg:CellEditor>
 
-    <xcdg:CellEditor x:Key="System.Guid" >
+    <xcdg:CellEditor x:Key="System.Guid">
         <xcdg:CellEditor.EditTemplate>
             <DataTemplate>
                 <nmfc:GuidControl Margin="-2 0" Padding="0" BorderThickness="0" Background="Transparent"
