@@ -43,19 +43,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             <AdornedElementPlaceholder x:Name="adorner" Margin="-1" />
                             <nmfc:ErrorBlinker x:Name="blinker" Margin="-1" />
                         </Grid>
-                        <!--<Border x:Name="errorBorder" Background="#FFdc000c" Margin="8,0,0,0"
-                                    Opacity="0" CornerRadius="0"
-                                    IsHitTestVisible="False"
-                                    MinHeight="24">
-                            <TextBlock Text="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
-                                       Foreground="White" Margin="8,2,8,3" TextWrapping="Wrap" VerticalAlignment="Center" />
-                        </Border>-->
                     </StackPanel>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Value="True">
-                            <DataTrigger.Binding>
-                                <Binding ElementName="adorner" Path="AdornedElement.IsKeyboardFocused" />
-                            </DataTrigger.Binding>
+                        <DataTrigger Binding="{Binding AdornedElement.(Validation.HasError), ElementName=adorner}" Value="True">
                             <Setter TargetName="blinker" Property="ErrorContent" Value="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=adorner}" />
                             <Setter TargetName="image" Property="ToolTip" Value="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=adorner}" />
                         </DataTrigger>
