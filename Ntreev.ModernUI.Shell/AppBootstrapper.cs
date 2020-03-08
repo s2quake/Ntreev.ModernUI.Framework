@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Shell
 {
-    class AppBootstrapper : AppBootstrapper<IShell>
+    class AppBootstrapper : AppBootstrapperBase
     {
         public AppBootstrapper()
+            : base(typeof(IShell))
         {
             
         }

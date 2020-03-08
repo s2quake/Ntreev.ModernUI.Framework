@@ -90,9 +90,9 @@
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" />
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
                     </ToolBar>
-                    <nmfc:ExpandableToolBar>
+                    <nmfc:ModernToolBar>
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
-                    </nmfc:ExpandableToolBar>
+                    </nmfc:ModernToolBar>
                 </ToolBarTray>
                 <nmfc:PropertyItemsControl Grid.Row="1">
                     <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" Width="200" HorizontalAlignment="Left" />

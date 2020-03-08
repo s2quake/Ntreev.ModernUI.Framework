@@ -188,6 +188,13 @@ namespace Ntreev.ModernUI.Framework
                     {
                         if (menuItem.IsVisible == true)
                         {
+                            for (var i = 0; i < element.InputBindings.Count; i++)
+                            {
+                                if (element.InputBindings[i].Command == menuItem)
+                                {
+                                    return;
+                                }
+                            }
                             element.InputBindings.Add(new InputBinding(menuItem.Command, menuItem.InputGesture));
                         }
                         else
@@ -224,6 +231,13 @@ namespace Ntreev.ModernUI.Framework
                     {
                         if (toolbarItem.IsVisible == true)
                         {
+                            for (var i = 0; i < element.InputBindings.Count; i++)
+                            {
+                                if (element.InputBindings[i].Command == toolbarItem)
+                                {
+                                    return;
+                                }
+                            }
                             element.InputBindings.Add(new InputBinding(toolbarItem.Command, toolbarItem.InputGesture));
                         }
                         else
