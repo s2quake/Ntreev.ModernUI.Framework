@@ -716,7 +716,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </ControlTemplate>
 
     <Style TargetType="{x:Type xcdg:Cell}">
-        <Setter Property="UseLayoutRounding" Value="False" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="MinHeight" Value="22" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="CellErrorStyle" Value="{x:Null}" />

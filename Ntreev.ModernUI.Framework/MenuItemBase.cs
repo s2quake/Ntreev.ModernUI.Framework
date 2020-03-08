@@ -70,7 +70,7 @@ namespace Ntreev.ModernUI.Framework
         {
             get
             {
-                foreach (var item in MenuItemUtility.GetMenuItems<IMenuItem>(this, this.ServiceProvider ?? AppBootstrapperBase.Current))
+                foreach (var item in MenuItemUtility.GetMenuItems(this, this.ServiceProvider ?? AppBootstrapperBase.Current))
                 {
                     yield return item;
                 }

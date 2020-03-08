@@ -35,20 +35,20 @@ namespace Ntreev.ModernUI.Framework.Controls
 {
     [ContentProperty(nameof(MenuItems))]
     [DefaultProperty(nameof(MenuItems))]
-    public class ModernContextMenu : ContextMenu
+    public class ModernMenu : Menu
     {
         private static readonly DependencyPropertyKey MenuItemsPropertyKey =
-            DependencyProperty.RegisterReadOnly(nameof(MenuItems), typeof(IList), typeof(ModernContextMenu),
+            DependencyProperty.RegisterReadOnly(nameof(MenuItems), typeof(IList), typeof(ModernMenu),
                 new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
 
         public new static DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ModernContextMenu),
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ModernMenu),
                 new FrameworkPropertyMetadata(ItemsSourcePropertyChangedCallback));
 
         private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
 
-        public ModernContextMenu()
+        public ModernMenu()
         {
             this.SetValue(MenuItemsPropertyKey, this.menuItems);
             this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
@@ -81,59 +81,15 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new ModernContextMenuItem(this);
+            return new ModernMenuItem();
         }
 
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
             base.PrepareContainerForItemOverride(element, item);
-        }
-
-        protected override void OnOpened(RoutedEventArgs e)
-        {
-            base.OnOpened(e);
-            if (this.Parent is FrameworkElement fe)
+            if (element is ModernMenuItem menuItem)
             {
-                this.DataContext = fe.DataContext;
-            }
-
-            var items = base.ItemsSource.OfType<object>();
-
-            if (items.FirstOrDefault() is Separator s1)
-            {
-                s1.Visibility = Visibility.Collapsed;
-            }
-
-            var isSeparator = items.FirstOrDefault() is Separator;
-            foreach (var item in base.ItemsSource)
-            {
-                var container = this.ItemContainerGenerator.ContainerFromItem(item);
-                if (container is UIElement element && element.Visibility != Visibility.Visible)
-                    continue;
-
-                if (isSeparator == true && item is Separator s)
-                {
-                    s.Visibility = Visibility.Collapsed;
-                }
-                isSeparator = item is Separator;
-            }
-
-            if (items.LastOrDefault() is Separator s2)
-            {
-                s2.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        protected override void OnClosed(RoutedEventArgs e)
-        {
-            base.OnClosed(e);
-
-            foreach (var item in base.ItemsSource)
-            {
-                if (item is Separator s)
-                {
-                    s.Visibility = Visibility.Visible;
-                }
+                menuItem.ItemContainerStyleSelector = this.ItemContainerStyleSelector;
             }
         }
 
@@ -144,7 +100,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void ItemsSourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ModernContextMenu self)
+            if (d is ModernMenu self)
             {
                 self.RefreshItemsSource(e.NewValue as IEnumerable);
             }
@@ -158,83 +114,43 @@ namespace Ntreev.ModernUI.Framework.Controls
         private void RefreshItemsSource(IEnumerable items)
         {
             var list = new List<object>();
+            var menuItemByType = new Dictionary<Type, ModernMenuItem>(this.MenuItems.Count);
             foreach (var item in this.MenuItems)
             {
+                if (item is ModernMenuItem menuItem && menuItem.DataType != null)
+                {
+                    menuItemByType.Add(menuItem.DataType, menuItem);
+                }
                 list.Add(item);
             }
             foreach (var item in items)
             {
-                list.Add(item);
+                if (menuItemByType.ContainsKey(item.GetType()) == true)
+                {
+                    menuItemByType[item.GetType()].DataContext = item;
+                }
+                else
+                {
+                    list.Add(item);
+                }
             }
 
+            var categories = CategoryDefinitionAttribute.GetCategoryDefinitions(this.DataContext);
             var query = from item in list
-                        group item by this.GetCategory(item) into groupItem
+                        group item by CategoryNameAttribute.GetCategory(item) into groupItem
                         orderby groupItem.Key
                         select groupItem;
 
             var itemList = new List<object>();
-            var index = 0;
-            var comparer = new Comparer();
-            foreach (var groupItem in query.OrderBy(i => i.Key, comparer))
+            foreach (var groupItem in CategoryDefinitionAttribute.Order(query, item => item.Key, categories))
             {
-                if (index > 0)
-                {
-                    itemList.Add(new Separator());
-                }
-                foreach (var item in groupItem.OrderBy(i => this.GetOrder(i)))
+                foreach (var item in groupItem.OrderBy(i => OrderAttribute.GetOrder(i)))
                 {
                     itemList.Add(item);
                 }
-                index++;
             }
 
             this.SetValue(ItemsControl.ItemsSourceProperty, itemList);
         }
-
-        private string GetCategory(object item)
-        {
-            if (item is Control)
-            {
-                return CategoryNameAttribute.Default.Category;
-            }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute)
-            {
-                return CategoryNameAttribute.Default.Category;
-            }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(CategoryNameAttribute), false) is CategoryNameAttribute categoryAttr)
-            {
-                if (string.IsNullOrEmpty(categoryAttr.Category) == true)
-                    return CategoryNameAttribute.Data.Category;
-                return categoryAttr.Category;
-            }
-            return CategoryNameAttribute.Data.Category;
-        }
-
-        private int GetOrder(object item)
-        {
-            if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute menuAttr)
-            {
-                return menuAttr.Order - 1;
-            }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(OrderAttribute), false) is OrderAttribute categoryAttr)
-            {
-                return categoryAttr.Order;
-            }
-            return 0;
-        }
-
-        #region classes
-
-        class Comparer : IComparer<string>
-        {
-            public int Compare(string x, string y)
-            {
-                var x1 = x == CategoryNameAttribute.Default.Category ? string.Empty : x;
-                var y1 = y == CategoryNameAttribute.Default.Category ? string.Empty : y;
-                return x1.CompareTo(y1);
-            }
-        }
-
-        #endregion
     }
 }

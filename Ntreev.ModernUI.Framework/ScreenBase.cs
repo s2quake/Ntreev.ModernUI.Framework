@@ -120,7 +120,7 @@ namespace Ntreev.ModernUI.Framework
             {
                 if (this.serviceProvider.GetService(typeof(IEnumerable<IMenuItem>)) is IEnumerable<IMenuItem> menuItems)
                 {
-                    var items = MenuItemUtility.GetMenuItems<IMenuItem>(this, menuItems);
+                    var items = MenuItemUtility.GetMenuItems(this, menuItems);
                     foreach (var item in items)
                     {
                         this.SetInputBindings(element, item);

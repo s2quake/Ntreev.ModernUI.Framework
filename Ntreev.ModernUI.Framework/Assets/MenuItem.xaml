@@ -66,17 +66,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
-            <!--<Trigger Property="IsSuspendingPopupAnimation" Value="True">
-                <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
-            </Trigger>-->
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundHover}" />
                 <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}" />
             </Trigger>
-            <!--<Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="True">
-                <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="0,0,4,4" />
-                <Setter TargetName="SubmenuBorder" Property="Padding" Value="0,0,0,3" />
-            </Trigger>-->
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}" />
             </Trigger>
@@ -84,11 +77,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
                 <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}" />
                 <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
-                <!--<Setter TargetName="SubmenuBorder" Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect BlurRadius="5" Opacity="0.4" />
-                    </Setter.Value>
-                </Setter>-->
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

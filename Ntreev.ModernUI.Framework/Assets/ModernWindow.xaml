@@ -42,7 +42,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="35" />
                                             <RowDefinition Height="*" />
-                                            <RowDefinition Height="15" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
 
                                         <!-- window background content -->
@@ -141,6 +141,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
     
 </ResourceDictionary>

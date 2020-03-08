@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+
+    <nmfc:MenuItemStyleSelector x:Key="ModernMenu_ItemContainerStyleSelector" StyleName="ModernMenuItem_Style" Style="{StaticResource ModernMenuItem_Style}" />
+    
+    <Style TargetType="{x:Type nmfc:ModernMenu}" BasedOn="{StaticResource {x:Type Menu}}">
+        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernMenu_ItemContainerStyleSelector}" />
+    </Style>
+
+</ResourceDictionary>

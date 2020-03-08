@@ -80,6 +80,9 @@
       <DependentUpon>TreeViewItemSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppConfiguration.cs" />
+    <Compile Include="CategoryNameAttribute.cs" />
+    <Compile Include="Controls\ModernMenuItem.cs" />
+    <Compile Include="Controls\ModernMenu.cs" />
     <Compile Include="Controls\ModernExpander.cs" />
     <Compile Include="Controls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
@@ -88,7 +91,7 @@
     <Compile Include="Controls\DialogContentControl.cs" />
     <Compile Include="Controls\DragDropUtility.cs" />
     <Compile Include="Controls\ErrorBlinker.cs" />
-    <Compile Include="Controls\ExpandableToolBar.cs" />
+    <Compile Include="Controls\ModernToolBar.cs" />
     <Compile Include="Controls\ModernContextMenu.cs" />
     <Compile Include="Controls\ModernContextMenuItem.cs" />
     <Compile Include="Controls\FilterBox.cs" />
@@ -196,6 +199,7 @@
     <Compile Include="IUndoService.cs" />
     <Compile Include="IUndoTransaction.cs" />
     <Compile Include="Markup\VisibilityBindingExtension.cs" />
+    <Compile Include="CategoryDefinitionAttribute.cs" />
     <Compile Include="ToolBarItemUtility.cs" />
     <Compile Include="ToolBarItemBase.cs" />
     <Compile Include="MenuItemUtility.cs" />
@@ -270,6 +274,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\ModernContextMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\ModernMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\ModernMenuItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

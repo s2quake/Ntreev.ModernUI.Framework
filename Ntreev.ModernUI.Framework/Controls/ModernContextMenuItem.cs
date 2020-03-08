@@ -71,7 +71,6 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void CommandParameterPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var command = d.GetValue(CommandProperty);
             d.CoerceValue(CommandProperty);
         }
 

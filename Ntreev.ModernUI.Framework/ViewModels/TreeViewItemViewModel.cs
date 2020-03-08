@@ -66,10 +66,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public virtual int Order
-        {
-            get { return 0; }
-        }
+        public virtual int Order => 0;
 
         public virtual int CompareTo(object obj)
         {
@@ -180,18 +177,9 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             return ItemName.Create(items.ToArray());
         }
 
-        public bool HasItems
-        {
-            get
-            {
-                return this.Items.Count > 0;
-            }
-        }
+        public bool HasItems => this.Items.Count > 0;
 
-        public virtual string DisplayName
-        {
-            get { return null; }
-        }
+        public virtual string DisplayName => null;
 
         [Obsolete]
         public TreeViewItemCollection ItemsSource
@@ -207,7 +195,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool IsExpanded
         {
-            get { return this.state.HasFlag(TreeViewItemState.IsExpanded); }
+            get => this.state.HasFlag(TreeViewItemState.IsExpanded);
             set
             {
                 if (this.state.HasFlag(TreeViewItemState.IsExpanded) == value)
@@ -228,7 +216,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool IsSelected
         {
-            get { return this.state.HasFlag(TreeViewItemState.IsSelected); }
+            get => this.state.HasFlag(TreeViewItemState.IsSelected);
             set
             {
                 if (this.state.HasFlag(TreeViewItemState.IsSelected) == value)
@@ -245,7 +233,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool IsVisible
         {
-            get { return this.state.HasFlag(TreeViewItemState.IsVisible); }
+            get => this.state.HasFlag(TreeViewItemState.IsVisible);
             set
             {
                 if (this.state.HasFlag(TreeViewItemState.IsVisible) == value)
@@ -274,7 +262,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public TreeViewItemViewModel Parent
         {
-            get { return this.parent; }
+            get => this.parent;
             set
             {
                 if (this.parent == value)
@@ -326,13 +314,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 #else
                 return false;
 #endif
-
             }
         }
 
         public bool CaseSensitive
         {
-            get { return this.caseSensitive; }
+            get => this.caseSensitive;
             set
             {
                 if (this.caseSensitive == value)
@@ -344,7 +331,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string Pattern
         {
-            get { return this.pattern ?? string.Empty; }
+            get => this.pattern ?? string.Empty;
             set
             {
                 if (this.pattern == value)
@@ -355,14 +342,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public bool HasPattern
-        {
-            get { return this.Pattern != string.Empty; }
-        }
+        public bool HasPattern => this.Pattern != string.Empty;
 
         public TreeViewItemState State
         {
-            get { return this.state; }
+            get => this.state;
             set
             {
                 if (this.state == value)
@@ -406,7 +390,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             {
                 if (this.serviceProvider == null)
                     return Enumerable.Empty<IMenuItem>();
-                return MenuItemUtility.GetMenuItems<IMenuItem>(this, this.serviceProvider);
+                return MenuItemUtility.GetMenuItems(this, this.serviceProvider);
             }
         }
 

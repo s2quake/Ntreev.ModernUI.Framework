@@ -17,34 +17,29 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace Ntreev.ModernUI.Framework
 {
-    public class MenuItemStyleSelector : StyleSelector
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CategoryNameAttribute : CategoryAttribute
     {
-        public override Style SelectStyle(object item, DependencyObject container)
+        public CategoryNameAttribute(string categoryName)
+            : base(categoryName)
         {
-            var fe = container as FrameworkElement;
-            if (item is IMenuItem == true || fe.DataContext is IMenuItem)
-            {
-                if (fe != null)
-                {
-                    if (fe.TryFindResource(this.StyleName) is Style style)
-                        return style;
-                    if (this.Style != null)
-                        return this.Style;
-                }
-            }
-            return base.SelectStyle(item, container);
+            
         }
 
-        public string StyleName { get; set; } = "MenuItem_Style";
-
-        public Style Style { get; set; }
+        public static string GetCategory(object obj)
+        {
+            if (obj != null && Attribute.GetCustomAttribute(obj.GetType(), typeof(System.ComponentModel.CategoryAttribute), false) is System.ComponentModel.CategoryAttribute attr)
+            {
+                return attr.Category;
+            }
+            return string.Empty;
+        }
     }
 }

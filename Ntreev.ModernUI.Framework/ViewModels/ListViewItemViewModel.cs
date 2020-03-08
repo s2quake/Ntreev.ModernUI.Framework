@@ -168,7 +168,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             {
                 if (this.serviceProvider == null)
                     return Enumerable.Empty<IMenuItem>();
-                return MenuItemUtility.GetMenuItems<IMenuItem>(this, this.serviceProvider);
+                return MenuItemUtility.GetMenuItems(this, this.serviceProvider);
             }
         }
 

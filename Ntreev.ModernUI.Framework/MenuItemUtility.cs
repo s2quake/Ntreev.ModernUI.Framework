@@ -23,23 +23,24 @@ using System.Threading.Tasks;
 using Ntreev.Library.Linq;
 using System.ComponentModel.Composition.Hosting;
 using Ntreev.ModernUI.Framework;
+using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework
 {
     public static class MenuItemUtility
     {
-        public static IEnumerable<T> GetMenuItems<T>(object parent, IEnumerable<T> menuItems)
+        public static IEnumerable<IMenuItem> GetMenuItems(object parent, IEnumerable<IMenuItem> menuItems)
         {
             return menuItems.Where(item => Predicate(item, parent)).OrderByAttribute().TopologicalSort();
         }
 
-        public static IEnumerable<T> GetMenuItems<T>(object parent, IServiceProvider serviceProvider)
+        public static IEnumerable<IMenuItem> GetMenuItems(object parent, IServiceProvider serviceProvider)
         {
-            var items = serviceProvider.GetService(typeof(IEnumerable<T>)) as IEnumerable<T>;
+            var items = serviceProvider.GetService(typeof(IEnumerable<IMenuItem>)) as IEnumerable<IMenuItem>;
             return GetMenuItems(parent, items);
         }
 
-        private static bool Predicate<T>(T item, object parent)
+        private static bool Predicate<IMenuItem>(IMenuItem item, object parent)
         {
             var parentType = parent is Type ? parent as Type : parent.GetType();
             var attrs = item.GetType().GetCustomAttributes(typeof(ParentTypeAttribute), true);

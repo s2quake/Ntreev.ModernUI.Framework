@@ -53,8 +53,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public new IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -113,7 +113,7 @@ namespace Ntreev.ModernUI.Framework.Controls
                 }
                 else if (e.Action == NotifyCollectionChangedAction.Replace)
                 {
-                    for (var i=0;i<e.OldItems.Count; i++)
+                    for (var i = 0; i < e.OldItems.Count; i++)
                     {
                         var oldItem = e.OldItems[i];
                         var newItem = e.NewItems[i];
@@ -177,19 +177,19 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (item is Control)
             {
-                return CategoryAttribute.Default.Category;
+                return CategoryNameAttribute.Default.Category;
             }
             else if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute menuAttr)
             {
-                return CategoryAttribute.Default.Category;
+                return CategoryNameAttribute.Default.Category;
             }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(CategoryAttribute), false) is CategoryAttribute categoryAttr)
+            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(CategoryNameAttribute), false) is CategoryNameAttribute categoryAttr)
             {
                 if (string.IsNullOrEmpty(categoryAttr.Category) == true)
-                    return CategoryAttribute.Data.Category;
+                    return CategoryNameAttribute.Data.Category;
                 return categoryAttr.Category;
             }
-            return CategoryAttribute.Data.Category;
+            return CategoryNameAttribute.Data.Category;
         }
 
         private int GetOrder(object item)
@@ -211,8 +211,8 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             public int Compare(string x, string y)
             {
-                var x1 = x == CategoryAttribute.Default.Category ? string.Empty : x;
-                var y1 = y == CategoryAttribute.Default.Category ? string.Empty : y;
+                var x1 = x == CategoryNameAttribute.Default.Category ? string.Empty : x;
+                var y1 = y == CategoryNameAttribute.Default.Category ? string.Empty : y;
                 return x1.CompareTo(y1);
             }
         }
