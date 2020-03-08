@@ -167,21 +167,21 @@ namespace Ntreev.ModernUI.Framework.Controls
                 list.Add(item);
             }
 
+            var categories = CategoryDefinitionAttribute.GetCategoryDefinitions(this.DataContext);
             var query = from item in list
-                        group item by this.GetCategory(item) into groupItem
+                        group item by CategoryNameAttribute.GetCategory(item) into groupItem
                         orderby groupItem.Key
                         select groupItem;
 
             var itemList = new List<object>();
             var index = 0;
-            var comparer = new Comparer();
-            foreach (var groupItem in query.OrderBy(i => i.Key, comparer))
+            foreach (var groupItem in CategoryDefinitionAttribute.Order(query, item => item.Key, categories))
             {
                 if (index > 0)
                 {
                     itemList.Add(new Separator());
                 }
-                foreach (var item in groupItem.OrderBy(i => this.GetOrder(i)))
+                foreach (var item in groupItem.OrderBy(i => OrderAttribute.GetOrder(i)))
                 {
                     itemList.Add(item);
                 }
@@ -190,51 +190,5 @@ namespace Ntreev.ModernUI.Framework.Controls
 
             this.SetValue(ItemsControl.ItemsSourceProperty, itemList);
         }
-
-        private string GetCategory(object item)
-        {
-            if (item is Control)
-            {
-                return CategoryNameAttribute.Default.Category;
-            }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute)
-            {
-                return CategoryNameAttribute.Default.Category;
-            }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(CategoryNameAttribute), false) is CategoryNameAttribute categoryAttr)
-            {
-                if (string.IsNullOrEmpty(categoryAttr.Category) == true)
-                    return CategoryNameAttribute.Data.Category;
-                return categoryAttr.Category;
-            }
-            return CategoryNameAttribute.Data.Category;
-        }
-
-        private int GetOrder(object item)
-        {
-            if (Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) is DefaultMenuAttribute menuAttr)
-            {
-                return menuAttr.Order - 1;
-            }
-            else if (Attribute.GetCustomAttribute(item.GetType(), typeof(OrderAttribute), false) is OrderAttribute categoryAttr)
-            {
-                return categoryAttr.Order;
-            }
-            return 0;
-        }
-
-        #region classes
-
-        class Comparer : IComparer<string>
-        {
-            public int Compare(string x, string y)
-            {
-                var x1 = x == CategoryNameAttribute.Default.Category ? string.Empty : x;
-                var y1 = y == CategoryNameAttribute.Default.Category ? string.Empty : y;
-                return x1.CompareTo(y1);
-            }
-        }
-
-        #endregion
     }
 }
