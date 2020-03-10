@@ -243,9 +243,8 @@ namespace Ntreev.ModernUI.Framework
 
         class BatchAction : UndoBase, IUndoTransaction
         {
-            private readonly Stack<IUndo> items = new Stack<IUndo>();
             private UndoServiceBase undoService;
-            private string name;
+            private readonly string name;
 
             public BatchAction(UndoServiceBase undoService, string name)
             {
@@ -274,11 +273,11 @@ namespace Ntreev.ModernUI.Framework
                 this.undoService = null;
             }
 
-            public Stack<IUndo> Items => this.items;
+            public Stack<IUndo> Items { get; } = new Stack<IUndo>();
 
             protected override void OnRedo()
             {
-                foreach (var item in this.items.Reverse())
+                foreach (var item in this.Items.Reverse())
                 {
                     item.Redo();
                 }
@@ -286,7 +285,7 @@ namespace Ntreev.ModernUI.Framework
 
             protected override void OnUndo()
             {
-                foreach (var item in this.items)
+                foreach (var item in this.Items)
                 {
                     item.Undo();
                 }

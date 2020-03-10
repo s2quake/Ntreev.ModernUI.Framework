@@ -212,7 +212,7 @@
     <Compile Include="ScreenBase.cs" />
     <Compile Include="DelegateUndoAction.cs" />
     <Compile Include="UndoBase.cs" />
-    <Compile Include="UndoService.cs" />
+    <None Include="UndoService.cs" />
     <Compile Include="UndoServiceBase.cs" />
     <Compile Include="ViewAwareBase.cs" />
     <Compile Include="PropertyChangedBase.cs" />
