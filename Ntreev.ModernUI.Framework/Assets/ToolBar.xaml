@@ -78,12 +78,28 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <Style x:Key="ToolBar_ItemContainer_Style" TargetType="{x:Type ContentPresenter}">
+        <Setter Property="Content" Value="{Binding Icon}" />
+        <Style.Resources>
+            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBar_Button_Style}" />
+        </Style.Resources>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsVisible}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <nmfc:ModernToolBarStyleSelector x:Key="ToolBarStyleSelector" Style="{StaticResource ToolBar_ItemContainer_Style}" />
+
     <Style TargetType="{x:Type ToolBar}">
         <Style.Resources>
             <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
         </Style.Resources>
         <Setter Property="Background" Value="{StaticResource WindowBackground}" />
         <Setter Property="Template" Value="{StaticResource ToolBar_Template}" />
+        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ToolBarStyleSelector}" />
     </Style>
 
 </ResourceDictionary>

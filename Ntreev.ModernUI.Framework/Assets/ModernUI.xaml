@@ -23,6 +23,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
 
+        <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="ComboBox.xaml" />
         <ResourceDictionary Source="DialogWindow.xaml" />
         <ResourceDictionary Source="ErrorBlinker.xaml" />
@@ -34,6 +35,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="IconImage.xaml" />
         <ResourceDictionary Source="IconToggleButton.xaml" />
         <ResourceDictionary Source="ListBox.xaml" />
+        <ResourceDictionary Source="Menu.xaml" />
         <ResourceDictionary Source="MenuItem.xaml" />
         <ResourceDictionary Source="MessageBoxView.xaml" />
         <ResourceDictionary Source="ModernContextMenu.xaml" />

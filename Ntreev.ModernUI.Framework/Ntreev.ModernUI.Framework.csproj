@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="CategoryNameAttribute.cs" />
+    <Compile Include="Controls\ModernToolBarStyleSelector.cs" />
     <Compile Include="Controls\ModernMenuItem.cs" />
     <Compile Include="Controls\ModernMenu.cs" />
     <Compile Include="Controls\ModernExpander.cs" />
@@ -110,8 +111,8 @@
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ThicknessControl.cs" />
-    <Compile Include="Controls\ToolBarItemStyleSelector.cs" />
-    <Compile Include="Controls\MenuItemStyleSelector.cs" />
+    <None Include="Controls\ToolBarItemStyleSelector.cs" />
+    <Compile Include="Controls\ModernMenuStyleSelector.cs" />
     <Compile Include="Controls\ModernTreeViewItem.cs" />
     <Compile Include="Controls\ModernTreeView.cs" />
     <Compile Include="Controls\PasswordBoxUtility.cs" />
@@ -261,6 +262,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\ModernExpander.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

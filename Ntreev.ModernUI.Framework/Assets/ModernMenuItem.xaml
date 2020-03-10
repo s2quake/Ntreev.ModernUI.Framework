@@ -12,7 +12,7 @@
         <Setter Property="MinWidth" Value="50" />
     </Style>
 
-    <Style x:Key="ModernMenuItem_Style" TargetType="{x:Type nmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type nmfc:ModernMenuItem}}">
+    <Style x:Key="IMenuItem_ModernMenuItem_Style" TargetType="{x:Type nmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type nmfc:ModernMenuItem}}">
         <Setter Property="Header" Value="{Binding DisplayName}" />
         <Setter Property="ItemsSource" Value="{Binding ItemsSource}" />
         <Setter Property="Command" Value="{Binding Command}" />

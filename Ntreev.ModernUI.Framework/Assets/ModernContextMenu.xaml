@@ -18,7 +18,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:cal="http://www.caliburnproject.org"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters">
 
@@ -40,10 +39,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <nmfc:MenuItemStyleSelector x:Key="ModernContextMenuItemStyleSelector" StyleName="ModernContextMenuItem_Style" Style="{StaticResource ModernContextMenuItem_Style}" />
+    <nmfc:ModernMenuStyleSelector x:Key="ModernContextMenuItemStyleSelector" StyleName="ModernContextMenuItem_Style" Style="{StaticResource ModernContextMenuItem_Style}" />
 
     <Style TargetType="{x:Type nmfc:ModernContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
-        <Setter Property="cal:Bind.Model" Value="{Binding}" />
         <Setter Property="UsesItemContainerTemplate" Value="True" />
         <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernContextMenuItemStyleSelector}" />
     </Style>

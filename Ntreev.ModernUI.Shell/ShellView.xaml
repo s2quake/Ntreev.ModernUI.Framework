@@ -73,9 +73,28 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <DataTemplate x:Key="DropDown_Template">
+            <ItemsControl>
+                <MenuItem Header="Menu1" Click="MenuItem_Click" />
+                <MenuItem Header="Menu2" />
+                <MenuItem Header="Menu3" />
+                <MenuItem Header="Menu4" />
+            </ItemsControl>
+        </DataTemplate>
     </mui:ModernWindow.Resources>
 
-    <TabControl Style="{StaticResource TabControl_Page_Style}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="Open" IsChecked="True" />
+            </MenuItem>
+        </Menu>
+    
+    <TabControl Grid.Row="1" Style="{StaticResource TabControl_Page_Style}">
         <TabItem Header="Base">
             <Grid>
                 <Grid.RowDefinitions>
@@ -87,7 +106,8 @@
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" />
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" />
                         <Separator />
-                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" />
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" 
+                                         DropDownTemplate="{StaticResource DropDown_Template}" />
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
                     </ToolBar>
                     <nmfc:ModernToolBar>
@@ -104,7 +124,10 @@
                         <nmfc:FlagControlItem Value="4" Content="C" />
                         <nmfc:FlagControlItem Value="7" Content="All" />
                     </nmfc:FlagControl>
-                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
+                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
+                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left"
+                                     DropDownTemplate="{StaticResource DropDown_Template}"/>
+                    
                     <StackPanel Orientation="Horizontal" nmfc:PropertyItemsControl.Header="IconImage" >
                         <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
                                         HorizontalAlignment="Left" />
@@ -143,7 +166,7 @@
             </nmfc:PropertyItemsControl>
         </TabItem>
         <TabItem Header="ListBox">
-            <ListBox Style="{StaticResource ListBox_Style}">
+            <ListBox>
                 <ListBoxItem Content="ListBoxItem1" />
                 <ListBoxItem Content="ListBoxItem2" />
                 <ListBoxItem Content="ListBoxItem3" />
@@ -191,5 +214,6 @@
             </nmgc:ModernDataGridControl>
         </TabItem>
     </TabControl>
+    </Grid>
 
 </mui:ModernWindow>

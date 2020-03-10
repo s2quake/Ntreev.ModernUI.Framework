@@ -63,13 +63,13 @@ namespace Ntreev.ModernUI.Framework.Controls
             if (this.popup != null)
             {
                 this.popup.Closed -= Popup_Closed;
+                this.popup.Opened -= Popup_Opened;
             }
-
             this.popup = this.Template.FindName(PART_Popup, this) as Popup;
-
             if (this.popup != null)
             {
                 this.popup.Closed += Popup_Closed;
+                this.popup.Opened += Popup_Opened;
             }
         }
 
@@ -105,6 +105,13 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.DropDownOpened?.Invoke(this, e);
         }
 
+        protected override void OnClick()
+        {
+            base.OnClick();
+            if (this.IsDropDownOpen == true)
+                this.IsDropDownOpen = false;
+        }
+
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);
@@ -123,22 +130,22 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             base.OnIsKeyboardFocusWithinChanged(e);
 
-            if (this.IsDropDownOpen == true)
-                this.IsDropDownOpen = false;
+            //if (this.IsDropDownOpen == true)
+            //    this.IsDropDownOpen = false;
         }
 
         private static void IsDropDownOpenPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is IconButton button)
+            if (d is IconButton self)
             {
                 if ((bool)e.NewValue == true)
                 {
-                    Mouse.Capture(button, CaptureMode.SubTree);
-                    button.OnDropDownOpened(EventArgs.Empty);
+                    Mouse.Capture(self, CaptureMode.SubTree);
+                    self.OnDropDownOpened(EventArgs.Empty);
                 }
                 else
                 {
-                    if (Mouse.Captured == button)
+                    if (Mouse.Captured == self)
                     {
                         Mouse.Capture(null);
                     }
@@ -160,6 +167,19 @@ namespace Ntreev.ModernUI.Framework.Controls
         private void Popup_Closed(object sender, EventArgs e)
         {
             this.OnDropDownClosed(e);
+        }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            this.popup.IsKeyboardFocusWithinChanged += Popup_IsKeyboardFocusWithinChanged;
+        }
+
+        private void Popup_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == false)
+            {
+                this.IsDropDownOpen = false;
+            }
         }
     }
 }

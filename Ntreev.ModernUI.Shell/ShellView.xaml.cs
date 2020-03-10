@@ -77,5 +77,10 @@ namespace Ntreev.ModernUI.Shell
                 this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
             }
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AppMessageBox.Show("123");
+        }
     }
 }

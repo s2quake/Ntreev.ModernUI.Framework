@@ -3,9 +3,10 @@
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
 
     <nmfc:ModernMenuStyleSelector x:Key="ModernMenu_ItemContainerStyleSelector" Style="{StaticResource IMenuItem_ModernMenuItem_Style}" />
-    
-    <Style TargetType="{x:Type nmfc:ModernMenu}" BasedOn="{StaticResource {x:Type Menu}}">
+
+    <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource {x:Type Menu}}">
+        <Setter Property="Background" Value="{StaticResource WindowBackground}" />
         <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernMenu_ItemContainerStyleSelector}" />
     </Style>
-
+    
 </ResourceDictionary>

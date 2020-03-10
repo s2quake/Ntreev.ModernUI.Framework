@@ -127,61 +127,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="ToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Width" Value="22" />
-        <Setter Property="Height" Value="22" />
-        <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
-        <Setter Property="ToolTip" Value="{Binding Path=Command, RelativeSource={RelativeSource Self}, Converter={StaticResource commandToTooltipConverter}}" />
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <nmfc:IconImage Source="{Binding Source, RelativeSource={RelativeSource AncestorType={x:Type nmfc:IconButton}}}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ModernToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <MultiBinding Converter="{StaticResource DisplayNameInputGestureToStringConverter}">
-                    <Binding Path="DisplayName" />
-                    <Binding Path="InputGesture" />
-                </MultiBinding>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-        <Setter Property="Command" Value="{Binding Command}" />
-        <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernToolBar}}}" />
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding IsVisible}" Value="False">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ModernToolBar_Button_Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Width" Value="22" />
-        <Setter Property="Height" Value="22" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="ToolTip" Value="{Binding DisplayName}" />
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
-        <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-        <Setter Property="Command" Value="{Binding Command}" />
-        <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernToolBar}}}" />
-    </Style>
-
     <Style x:Key="ModernToolBar_ItemContainer_Style" TargetType="{x:Type ContentControl}">
         <Setter Property="Content" Value="{Binding Icon}" />
         <Style.Resources>
-            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ModernToolBar_IconButton_Style}" />
-            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ModernToolBar_Button_Style}" />
+            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBar_Button_Style}" />
         </Style.Resources>
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
@@ -190,75 +140,68 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <nmfc:ToolBarItemStyleSelector x:Key="ToolBarItemStyleSelector" Style="{StaticResource ModernToolBar_ItemContainer_Style}" />
+    <nmfc:ModernToolBarStyleSelector x:Key="ModernToolBarStyleSelector" Style="{StaticResource ModernToolBar_ItemContainer_Style}" />
+
+    <ControlTemplate x:Key="ModernToolBar_Template" TargetType="{x:Type nmfc:ModernToolBar}">
+        <Border x:Name="Border" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+            <DockPanel>
+                <ToggleButton Style="{StaticResource ModernToolBar_OverflowButton_Style}"
+                              x:Name="OverflowButton"
+                              ClickMode="Press"
+                              DockPanel.Dock="Right"
+                              IsChecked="{Binding Path=IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                              IsEnabled="{TemplateBinding HasOverflowItems}">
+                    <Popup x:Name="OverflowPopup"
+                           AllowsTransparency="True"
+                           Focusable="false"
+                           IsOpen="{Binding Path=IsOverflowOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                           Placement="Bottom"
+                           PopupAnimation="Slide"
+                           StaysOpen="false">
+                        <Border x:Name="DropDownBorder"
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                BorderBrush="{DynamicResource ControlBorderBrush}"
+                                BorderThickness="1">
+                            <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel"
+                                                  Margin="2"
+                                                  FocusVisualStyle="{x:Null}"
+                                                  Focusable="True"
+                                                  KeyboardNavigation.DirectionalNavigation="Cycle"
+                                                  KeyboardNavigation.TabNavigation="Cycle"
+                                                  WrapWidth="200" />
+                        </Border>
+                    </Popup>
+                </ToggleButton>
+                <Thumb x:Name="ToolBarThumb" Width="10" Style="{StaticResource ModernToolBar_Thumb_Style}" />
+                <ToolBarPanel x:Name="PART_ToolBarPanel" Margin="0 1 2 2" IsItemsHost="True" />
+            </DockPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsOverflowOpen" Value="True">
+                <Setter TargetName="ToolBarThumb" Property="IsEnabled" Value="False" />
+            </Trigger>
+            <Trigger Property="HasOverflowItems" Value="False">
+                <Setter TargetName="OverflowButton" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="ToolBarTray.IsLocked" Value="True">
+                <Setter TargetName="ToolBarThumb" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
     <Style TargetType="{x:Type nmfc:ModernToolBar}">
         <Style.Resources>
             <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
-            <!--<Style TargetType="{x:Type Separator}" BasedOn="{StaticResource Vertical_Separator_Style}" />-->
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolBarTray.IsLocked" Value="True" />
         <Setter Property="Padding" Value="2" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type nmfc:ModernToolBar}">
-                    <Border x:Name="Border"
-                            Padding="{TemplateBinding Padding}"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <DockPanel>
-                            <ToggleButton Style="{StaticResource ModernToolBar_OverflowButton_Style}"
-                                          x:Name="OverflowButton"
-                                          ClickMode="Press"
-                                          DockPanel.Dock="Right"
-                                          IsChecked="{Binding Path=IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          IsEnabled="{TemplateBinding HasOverflowItems}">
-                                <Popup x:Name="OverflowPopup"
-                                       AllowsTransparency="True"
-                                       Focusable="false"
-                                       IsOpen="{Binding Path=IsOverflowOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                       Placement="Bottom"
-                                       PopupAnimation="Slide"
-                                       StaysOpen="false">
-                                    <Border x:Name="DropDownBorder"
-                                            Background="{DynamicResource ControlBackgroundBrush}"
-                                            BorderBrush="{DynamicResource ControlBorderBrush}"
-                                            BorderThickness="1">
-                                        <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel"
-                                                              Margin="2"
-                                                              FocusVisualStyle="{x:Null}"
-                                                              Focusable="True"
-                                                              KeyboardNavigation.DirectionalNavigation="Cycle"
-                                                              KeyboardNavigation.TabNavigation="Cycle"
-                                                              WrapWidth="200" />
-                                    </Border>
-                                </Popup>
-                            </ToggleButton>
-
-                            <Thumb x:Name="ToolBarThumb" Width="10" Style="{StaticResource ModernToolBar_Thumb_Style}" />
-
-                            <ToolBarPanel x:Name="PART_ToolBarPanel" Margin="0 1 2 2" IsItemsHost="True" />
-                        </DockPanel>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsOverflowOpen" Value="True">
-                            <Setter TargetName="ToolBarThumb" Property="IsEnabled" Value="False" />
-                        </Trigger>
-                        <Trigger Property="HasOverflowItems" Value="False">
-                            <Setter TargetName="OverflowButton" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="ToolBarTray.IsLocked" Value="True">
-                            <Setter TargetName="ToolBarThumb" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Template" Value="{StaticResource ModernToolBar_Template}"/>
         <Setter Property="cal:Bind.Model" Value="{Binding}" />
-        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ToolBarItemStyleSelector}" />
+        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernToolBarStyleSelector}" />
     </Style>
 
 </ResourceDictionary>

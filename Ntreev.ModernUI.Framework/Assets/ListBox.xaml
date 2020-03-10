@@ -69,7 +69,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="ListBox_Style" TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
+    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
         <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItem_Style}" />
     </Style>
 

@@ -64,7 +64,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     Padding="{TemplateBinding Padding}">
                                 <Grid Margin="{Binding Path=Depth, Converter={StaticResource depthToIndentConverter}}">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <ToggleButton x:Name="Expander"

@@ -25,12 +25,14 @@ using System.Windows.Controls;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    public class MenuItemStyleSelector : StyleSelector
+    public class ModernToolBarStyleSelector : StyleSelector
     {
+        private string styleName;
+
         public override Style SelectStyle(object item, DependencyObject container)
         {
             var fe = container as FrameworkElement;
-            if (item is IMenuItem == true || fe.DataContext is IMenuItem)
+            if (item is IToolBarItem == true || fe.DataContext is IToolBarItem)
             {
                 if (fe != null)
                 {
@@ -43,7 +45,11 @@ namespace Ntreev.ModernUI.Framework.Controls
             return base.SelectStyle(item, container);
         }
 
-        public string StyleName { get; set; } = "MenuItem_Style";
+        public string StyleName
+        {
+            get => this.styleName ?? string.Empty;
+            set => this.styleName = value;
+        }
 
         public Style Style { get; set; }
     }

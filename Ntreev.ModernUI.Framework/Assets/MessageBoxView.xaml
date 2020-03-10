@@ -44,8 +44,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <ControlTemplate x:Key="MessageBoxView_Template" TargetType="{x:Type views:MessageBoxView}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <DockPanel Margin="10 10 10 0" Grid.Row="0">
                 <Viewbox Width="57" Height="57" x:Name="viewBox">

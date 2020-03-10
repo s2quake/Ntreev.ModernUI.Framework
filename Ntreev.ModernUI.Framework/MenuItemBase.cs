@@ -185,4 +185,34 @@ namespace Ntreev.ModernUI.Framework
 
         #endregion
     }
+
+    public abstract class MenuItemBase<T> : MenuItemBase
+    {
+        protected sealed override bool OnCanExecute(object parameter)
+        {
+            if (parameter is T t)
+            {
+                return this.OnCanExecute(t);
+            }
+            return false;
+        }
+
+        protected sealed override void OnExecute(object parameter)
+        {
+            if (parameter is T t)
+            {
+                this.OnExecute(t);
+            }
+        }
+
+        protected virtual bool OnCanExecute(T obj)
+        {
+            return false;
+        }
+
+        protected virtual void OnExecute(T obj)
+        {
+
+        }
+    }
 }

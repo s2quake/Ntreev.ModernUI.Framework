@@ -48,10 +48,25 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
 
+        static ModernContextMenu()
+        {
+            //PlacementTargetProperty.OverrideMetadata(typeof(ModernContextMenu),
+            //    new FrameworkPropertyMetadata(PlacementTargetPropertyChangedCallback));
+        }
+
+        private static void PlacementTargetPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            //if (e.NewValue is FrameworkElement frameworkElement)
+            //{
+            //    d.SetValue(DataContextProperty, frameworkElement.DataContext);
+            //}
+            //d.CoerceValue(DataContextProperty);
+            //d.CoerceValue(ItemsSourceProperty);
+        }
+
         public ModernContextMenu()
         {
             this.SetValue(MenuItemsPropertyKey, this.menuItems);
-            this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
         }
 
         public IList MenuItems
@@ -92,13 +107,18 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void OnOpened(RoutedEventArgs e)
         {
             base.OnOpened(e);
-            if (this.Parent is FrameworkElement fe)
-            {
-                this.DataContext = fe.DataContext;
-            }
+            //if (this.Parent is FrameworkElement fe)
+            //{
+            //    this.DataContext = fe.DataContext;
+            //}
+
+            //var be = BindingOperations.GetBindingExpressionBase(this, DataContextProperty);
+            //if  (be != null)
+            //{
+            //    be.UpdateTarget();
+            //}
 
             var items = base.ItemsSource.OfType<object>();
-
             if (items.FirstOrDefault() is Separator s1)
             {
                 s1.Visibility = Visibility.Collapsed;
@@ -146,13 +166,8 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (d is ModernContextMenu self)
             {
-                self.RefreshItemsSource(e.NewValue as IEnumerable);
+                self.RefreshItemsSource((e.NewValue as IEnumerable) ?? new object[] { });
             }
-        }
-
-        private void MenuItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-
         }
 
         private void RefreshItemsSource(IEnumerable items)
