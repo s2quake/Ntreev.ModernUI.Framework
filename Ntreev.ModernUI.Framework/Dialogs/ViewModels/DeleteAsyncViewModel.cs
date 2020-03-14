@@ -17,23 +17,18 @@
 
 using Ntreev.ModernUI.Framework.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
     public class DeleteAsyncViewModel : DeleteViewModel
     {
-        private bool isValid;
-
         protected DeleteAsyncViewModel()
         {
             this.PropertyChanged += DeleteAsyncViewModel_PropertyChanged;
         }
-        
+
         public async override void Delete()
         {
             try
@@ -61,15 +56,8 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             return Task.Delay(1);
         }
 
-        protected override void OnProgress()
-        {
-            base.OnProgress();
-            this.NotifyOfPropertyChange(nameof(this.CanDelete));
-        }
-
         private void VerifyAction(bool isValid)
         {
-            this.isValid = isValid;
             this.NotifyOfPropertyChange(nameof(this.CanDelete));
         }
 
@@ -78,6 +66,10 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             if (e.PropertyName == nameof(this.DeletionMessage))
             {
                 this.VerifyDelete(this.VerifyAction);
+            }
+            else if (e.PropertyName == nameof(this.IsProgressing))
+            {
+                this.NotifyOfPropertyChange(nameof(this.CanDelete));
             }
         }
     }

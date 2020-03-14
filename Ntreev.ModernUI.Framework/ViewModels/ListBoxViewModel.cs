@@ -15,26 +15,17 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Caliburn.Micro;
 using Ntreev.Library;
-using Ntreev.Library.IO;
-using Ntreev.Library.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
-    public class ListBoxViewModel<T> : ViewModelBase, ISelector, IPartImportsSatisfiedNotification where T : ListBoxItemViewModel
+    public class ListBoxViewModel<T> : ViewModelBase, ISelector where T : ListBoxItemViewModel
     {
-        private readonly ObservableCollection<T> items = new ObservableCollection<T>();
         private readonly List<T> visibleItems = new List<T>();
         private T selectedItem;
         private string filterExpression;
@@ -42,33 +33,25 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private bool globPattern;
         private string displayName;
 
-        [Import]
-        private IServiceProvider serviceProvider = null;
-        [Import]
-        private ICompositionService compositionService = null;
-
         public ListBoxViewModel()
+            : this(null)
         {
-            this.items.CollectionChanged += Items_CollectionChanged;
-        }
-        
-        [Obsolete]
-        public ObservableCollection<T> ItemsSource
-        {
-            get { return this.items; }
+            
         }
 
-        public ObservableCollection<T> Items
+        public ListBoxViewModel(IServiceProvider serviceProvider)
         {
-            get { return this.items; }
+            this.Items.CollectionChanged += Items_CollectionChanged;
         }
+
+        public ObservableCollection<T> Items { get; } = new ObservableCollection<T>();
 
         public T SelectedItem
         {
-            get { return this.selectedItem; }
+            get => this.selectedItem;
             set
             {
-                if (value != null && this.items.Contains(value) == false)
+                if (value != null && this.Items.Contains(value) == false)
                     throw new ArgumentOutOfRangeException(nameof(value));
                 if (this.selectedItem == value)
                     return;
@@ -91,7 +74,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string DisplayName
         {
-            get { return this.displayName; }
+            get => this.displayName ?? string.Empty;
             set
             {
                 this.displayName = value;
@@ -101,7 +84,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string FilterExpression
         {
-            get { return this.filterExpression ?? string.Empty; }
+            get => this.filterExpression ?? string.Empty;
             set
             {
                 if (this.filterExpression == value)
@@ -120,12 +103,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 }
                 else
                 {
-                    foreach (var item in this.items)
+                    foreach (var item in this.Items)
                     {
                         item.IsVisible = false;
                     }
 
-                    var query = from item in items
+                    var query = from item in Items
                                 where this.Filter(item.DisplayName, this.FilterExpression)
                                 select item;
 
@@ -146,7 +129,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool CaseSensitive
         {
-            get { return this.caseSensitive; }
+            get => this.caseSensitive;
             set
             {
                 this.caseSensitive = value;
@@ -156,7 +139,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool GlobPattern
         {
-            get { return this.globPattern; }
+            get => this.globPattern;
             set
             {
                 this.globPattern = value;
@@ -166,16 +149,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public event EventHandler SelectionChanged;
 
-        public virtual IEnumerable<IToolBarItem> ToolBarItems
-        {
-            get
-            {
-                if (this.serviceProvider == null)
-                    return Enumerable.Empty<IToolBarItem>();
-                return ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
-            }
-        }
-
         protected virtual void OnSelectionChanged(EventArgs e)
         {
             this.SelectionChanged?.Invoke(this, e);
@@ -183,7 +156,10 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         protected virtual void OnPartImportsSatisfied()
         {
-
+            foreach (var item in this.Items)
+            {
+                this.SatisfyImportsOnce(item);
+            }
         }
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -194,7 +170,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     {
                         foreach (var item in e.NewItems)
                         {
-                            this.compositionService?.SatisfyImportsOnce(item);
+                            this.SatisfyImportsOnce(item);
                         }
                     }
                     break;
@@ -229,7 +205,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private void BackupState()
         {
             this.visibleItems.Clear();
-            foreach (var item in this.items)
+            foreach (var item in this.Items)
             {
                 if (item.IsVisible == true)
                     this.visibleItems.Add(item);
@@ -240,7 +216,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         {
             var selectedItem = this.selectedItem;
 
-            foreach (var item in this.items)
+            foreach (var item in this.Items)
             {
                 item.IsVisible = false;
                 item.Pattern = string.Empty;
@@ -257,27 +233,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        #region IPartImportsSatisfiedNotification
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            foreach (var item in this.Items)
-            {
-                this.compositionService.SatisfyImportsOnce(item);
-            }
-            this.OnPartImportsSatisfied();
-        }
-
-        #endregion
-
         #region ISelector
 
         object ISelector.SelectedItem
         {
-            get
-            {
-                return this.SelectedItem;
-            }
+            get => this.SelectedItem;
             set
             {
                 if (value is T viewModel)

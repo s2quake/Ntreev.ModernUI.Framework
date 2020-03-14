@@ -16,11 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.Library.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
@@ -42,24 +37,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             this.itemName = new ItemName(item.Path);
         }
 
-        public override string DisplayName
-        {
-            get { return this.itemName.Name; }
-        }
+        public override string DisplayName => this.itemName.Name;
 
-        public string DisplayPath
-        {
-            get { return this.itemName.Name; }
-        }
+        public string DisplayPath => this.itemName.Name;
 
-        public string Path
-        {
-            get { return this.itemName.Path; }
-        }
+        public string Path => this.itemName.Path;
 
-        public string Name
-        {
-            get { return this.itemName.Name; }
-        }
+        public string Name => this.itemName.Name;
     }
 }

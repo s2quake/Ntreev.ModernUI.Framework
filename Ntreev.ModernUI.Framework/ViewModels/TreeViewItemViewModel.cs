@@ -15,24 +15,14 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Ntreev.Library.Linq;
+using Ntreev.Library.ObjectModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Specialized;
-using System.Windows.Threading;
-using System.Linq.Expressions;
-using Caliburn.Micro;
-using System.Collections;
-using Ntreev.Library.Linq;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
-using System.Windows;
-using System.IO;
-using Ntreev.Library.ObjectModel;
-using System.ComponentModel.Composition;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
@@ -44,10 +34,15 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private TreeViewItemState state = TreeViewItemState.IsVisible;
         private bool caseSensitive;
         private string pattern;
-        [Import]
-        private IServiceProvider serviceProvider = null;
 
         protected TreeViewItemViewModel()
+            : this(null)
+        {
+            
+        }
+
+        protected TreeViewItemViewModel(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             this.Items.CollectionChanged += Items_CollectionChanged;
             this.ExpandCommand = new DelegateCommand(item =>
@@ -179,17 +174,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool HasItems => this.Items.Count > 0;
 
-        public virtual string DisplayName => null;
-
-        [Obsolete]
-        public TreeViewItemCollection ItemsSource
-        {
-            get
-            {
-                System.Diagnostics.Debugger.Break();
-                return this.Items;
-            }
-        }
+        public virtual string DisplayName => string.Empty;
 
         public TreeViewItemCollection Items { get; } = new TreeViewItemCollection();
 
@@ -296,13 +281,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public object Target { get; set; }
 
-        [Obsolete]
-        public object ItemsViewModel
-        {
-            get => this.Owner;
-            set => this.Owner = value;
-        }
-
         public object Owner { get; set; }
 
         public bool IsDebug
@@ -381,16 +359,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 }
 
                 return this.defaultCommand;
-            }
-        }
-
-        public virtual IEnumerable<IMenuItem> ContextMenus
-        {
-            get
-            {
-                if (this.serviceProvider == null)
-                    return Enumerable.Empty<IMenuItem>();
-                return MenuItemUtility.GetMenuItems(this, this.serviceProvider);
             }
         }
 

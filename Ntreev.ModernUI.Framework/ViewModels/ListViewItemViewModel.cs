@@ -16,19 +16,8 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Collections.Specialized;
-using System.Windows.Threading;
-using System.Linq.Expressions;
-using Caliburn.Micro;
-using System.Collections;
-using Ntreev.Library.Linq;
-using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
@@ -36,7 +25,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
     [Obsolete]
     public abstract class ListViewItemViewModel : PropertyChangedBase, INotifyPropertyChanged, ISelectable, ICommand
     {
-        private object target;
         private object itemsViewModel;
         private ICommand defaultCommand;
 
@@ -44,22 +32,22 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private bool caseSensitive;
         private string pattern;
 
-        [Import]
-        private IServiceProvider serviceProvider = null;
-
         protected ListViewItemViewModel()
         {
 
         }
 
-        public virtual string DisplayName
+        protected ListViewItemViewModel(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
-            get { return null; }
+
         }
+
+        public virtual string DisplayName => string.Empty;
 
         public bool IsSelected
         {
-            get { return this.state.HasFlag(ListViewItemState.IsSelected); }
+            get => this.state.HasFlag(ListViewItemState.IsSelected);
             set
             {
                 if (this.state.HasFlag(ListViewItemState.IsSelected) == value)
@@ -76,7 +64,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool IsVisible
         {
-            get { return this.state.HasFlag(ListViewItemState.IsVisible); }
+            get => this.state.HasFlag(ListViewItemState.IsVisible);
             set
             {
                 if (this.state.HasFlag(ListViewItemState.IsVisible) == value)
@@ -91,15 +79,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public object Target
-        {
-            get { return this.target; }
-            set { this.target = value; }
-        }
+        public object Target { get; set; }
 
         public object ItemsViewModel
         {
-            get { return this.itemsViewModel; }
+            get => this.itemsViewModel;
             set
             {
                 this.itemsViewModel = value;
@@ -116,13 +100,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 #else
                 return false;
 #endif
-
             }
         }
 
         public bool CaseSensitive
         {
-            get { return this.caseSensitive; }
+            get => this.caseSensitive;
             set
             {
                 if (this.caseSensitive == value)
@@ -134,7 +117,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string Pattern
         {
-            get { return this.pattern ?? string.Empty; }
+            get => this.pattern ?? string.Empty;
             set
             {
                 if (this.pattern == value)
@@ -145,30 +128,17 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public bool HasPattern
-        {
-            get { return this.Pattern != string.Empty; }
-        }
+        public bool HasPattern => this.Pattern != string.Empty;
 
         public ListViewItemState State
         {
-            get { return this.state; }
+            get => this.state;
             set
             {
                 if (this.state == value)
                     return;
                 this.state = value;
                 this.Refresh();
-            }
-        }
-
-        public virtual IEnumerable<IMenuItem> ContextMenus
-        {
-            get
-            {
-                if (this.serviceProvider == null)
-                    return Enumerable.Empty<IMenuItem>();
-                return MenuItemUtility.GetMenuItems(this, this.serviceProvider);
             }
         }
 

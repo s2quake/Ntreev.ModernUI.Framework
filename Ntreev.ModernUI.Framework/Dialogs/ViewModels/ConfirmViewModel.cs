@@ -16,13 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.ModernUI.Framework.Properties;
-using Ntreev.ModernUI.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -46,7 +40,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string ConfirmationMessage
         {
-            get { return this.confirmationMessage ?? string.Empty; }
+            get => this.confirmationMessage ?? string.Empty;
             set
             {
                 this.confirmationMessage = value;
@@ -57,7 +51,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string Comment
         {
-            get { return this.comment; }
+            get => this.comment ?? string.Empty;
             set
             {
                 this.comment = value;
@@ -70,14 +64,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.TryClose(this.CanConfirm);
         }
 
-        public bool CanConfirm
-        {
-            get { return this.confirmationMessage == this.textToConfirm; }
-        }
+        public bool CanConfirm => this.confirmationMessage == this.textToConfirm;
 
         public string Target
         {
-            get { return this.target ?? string.Empty; }
+            get => this.target ?? string.Empty;
             set
             {
                 this.target = value;

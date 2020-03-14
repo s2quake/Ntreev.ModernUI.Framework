@@ -111,7 +111,6 @@
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ThicknessControl.cs" />
-    <None Include="Controls\ToolBarItemStyleSelector.cs" />
     <Compile Include="Controls\ModernMenuStyleSelector.cs" />
     <Compile Include="Controls\ModernTreeViewItem.cs" />
     <Compile Include="Controls\ModernTreeView.cs" />
@@ -212,7 +211,6 @@
     <Compile Include="ScreenBase.cs" />
     <Compile Include="DelegateUndoAction.cs" />
     <Compile Include="UndoBase.cs" />
-    <None Include="UndoService.cs" />
     <Compile Include="UndoServiceBase.cs" />
     <Compile Include="ViewAwareBase.cs" />
     <Compile Include="PropertyChangedBase.cs" />

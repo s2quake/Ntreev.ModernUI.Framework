@@ -15,11 +15,6 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -81,8 +76,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             base.OnApplyTemplate();
 
-            var flagControl = ItemsControl.ItemsControlFromItemContainer(this) as FlagControl;
-            if (flagControl != null)
+            if (ItemsControl.ItemsControlFromItemContainer(this) is FlagControl flagControl)
             {
                 this.isUpdating = true;
                 try
@@ -109,8 +103,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var flagControl = ItemsControl.ItemsControlFromItemContainer(d) as FlagControl;
-            var flagItem = d as FlagControlItem;
+            _ = ItemsControl.ItemsControlFromItemContainer(d) as FlagControl;
             var value = (long)e.NewValue;
 
             if (value == 0)
@@ -133,11 +126,10 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void IsSelectedPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var flagControl = ItemsControl.ItemsControlFromItemContainer(d) as FlagControl;
             var flagItem = d as FlagControlItem;
             var isSelected = (bool)e.NewValue;
 
-            if (flagControl != null && flagItem.isUpdating == false)
+            if (ItemsControl.ItemsControlFromItemContainer(d) is FlagControl flagControl && flagItem.isUpdating == false)
             {
                 if (isSelected == true)
                     flagControl.AddFlag(flagItem.Value);

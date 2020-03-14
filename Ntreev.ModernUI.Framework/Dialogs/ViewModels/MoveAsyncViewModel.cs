@@ -18,10 +18,7 @@
 using Ntreev.ModernUI.Framework.Dialogs.Views;
 using Ntreev.ModernUI.Framework.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
@@ -70,12 +67,6 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             return Task.Delay(1);
         }
 
-        protected override void OnProgress()
-        {
-            base.OnProgress();
-            this.NotifyOfPropertyChange(nameof(this.CanMove));
-        }
-
         private void VerifyAction(bool isValid)
         {
             this.isValid = isValid;
@@ -87,6 +78,10 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             if (e.PropertyName == nameof(this.TargetPath))
             {
                 this.VerifyMove(this.TargetPath, this.VerifyAction);
+            }
+            else if (e.PropertyName == nameof(this.IsProgressing))
+            {
+                this.NotifyOfPropertyChange(nameof(this.CanMove));
             }
         }
     }

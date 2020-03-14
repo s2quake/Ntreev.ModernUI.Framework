@@ -15,30 +15,33 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Caliburn.Micro;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 using System.ComponentModel.Composition;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
     public abstract class ModalDialogBase : Screen, IModalDialog
     {
         private string progressMessage;
+        private bool isProgressing;
+        private readonly IServiceProvider serviceProvider;
 
         protected ModalDialogBase()
         {
 
         }
 
-        protected ModalDialogBase(string displayName)
+        protected ModalDialogBase(IServiceProvider serviceProvider)
         {
-            this.DisplayName = displayName;
+            this.serviceProvider = serviceProvider;
+            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+            }
         }
 
         public bool? ShowDialog()
@@ -57,11 +60,10 @@ namespace Ntreev.ModernUI.Framework
 
         public void BeginProgress(string message)
         {
-            this.IsProgressing = true;
+            this.isProgressing = true;
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
-            this.OnProgress();
         }
 
         public void EndProgress()
@@ -71,18 +73,25 @@ namespace Ntreev.ModernUI.Framework
 
         public void EndProgress(string message)
         {
-            this.IsProgressing = false;
+            this.isProgressing = false;
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
-            this.OnProgress();
         }
 
-        public bool IsProgressing { get; private set; }
+        public bool IsProgressing
+        {
+            get => this.isProgressing;
+            set
+            {
+                this.isProgressing = value;
+                this.NotifyOfPropertyChange(nameof(this.IsProgressing));
+            }
+        }
 
         public string ProgressMessage
         {
-            get => this.progressMessage;
+            get => this.progressMessage ?? string.Empty;
             set
             {
                 this.progressMessage = value;
@@ -102,11 +111,6 @@ namespace Ntreev.ModernUI.Framework
 
         public virtual IEnumerable<IToolBarItem> ToolBarItems => ToolBarItemUtility.GetToolBarItems(this, AppBootstrapperBase.Current);
 
-        protected virtual void OnProgress()
-        {
-
-        }
-
         protected override void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
@@ -115,6 +119,19 @@ namespace Ntreev.ModernUI.Framework
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
+        }
+
+        protected void SatisfyImportsOnce(object attributedPart)
+        {
+            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                compositionService.SatisfyImportsOnce(attributedPart);
+            }
+        }
+
+        protected virtual void OnImportsSatisfied()
+        {
+
         }
     }
 }

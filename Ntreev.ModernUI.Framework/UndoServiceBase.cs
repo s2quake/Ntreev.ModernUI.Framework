@@ -19,8 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -48,10 +46,7 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public bool CanRedo
-        {
-            get { return this.redoItems.Any(); }
-        }
+        public bool CanRedo => this.redoItems.Any();
 
         public IEnumerable<IUndo> UndoItems => this.undoItemsReadOnly;
 
@@ -157,10 +152,7 @@ namespace Ntreev.ModernUI.Framework
 
         public event EventHandler Changed;
 
-        protected virtual void OnChanged(EventArgs e)
-        {
-            this.Changed?.Invoke(this, e);
-        }
+        protected virtual void OnChanged(EventArgs e) => this.Changed?.Invoke(this, e);
 
         private void ValidateBeginTransaction(string name)
         {

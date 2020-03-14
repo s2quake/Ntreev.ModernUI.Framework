@@ -16,34 +16,26 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class ViewAttribute : Attribute
     {
-        private readonly string viewTypeName;
         private Type viewType;
 
         public ViewAttribute(string viewTypeName)
         {
-            this.viewTypeName = viewTypeName;
+            this.ViewTypeName = viewTypeName;
         }
 
         public ViewAttribute(Type type)
         {
             this.viewType = type;
-            this.viewTypeName = type.AssemblyQualifiedName;
+            this.ViewTypeName = type.AssemblyQualifiedName;
         }
 
-        public string ViewTypeName
-        {
-            get { return this.viewTypeName; }
-        }
+        public string ViewTypeName { get; }
 
         internal Type ViewType
         {
@@ -51,7 +43,7 @@ namespace Ntreev.ModernUI.Framework
             {
                 if (this.viewType == null)
                 {
-                    this.viewType = Type.GetType(this.viewTypeName);
+                    this.viewType = Type.GetType(this.ViewTypeName);
                 }
                 return this.viewType;
             }

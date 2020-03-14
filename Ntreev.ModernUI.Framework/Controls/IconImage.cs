@@ -18,13 +18,9 @@
 using Ntreev.Library;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -128,18 +124,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         private static void StretchPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
-        }
-
-        private static void ForegroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var self = d as IconImage;
-            self.InvalidateMeasure();
-        }
-
-        private static void BackgroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var self = d as IconImage;
-            self.InvalidateMeasure();
         }
 
         private static byte[] BitmapSourceToArray(BitmapSource bitmapSource)

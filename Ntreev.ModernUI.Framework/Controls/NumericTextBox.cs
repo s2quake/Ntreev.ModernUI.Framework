@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.Controls
@@ -98,11 +93,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static object ValuePropertyCoerceValueCallback(DependencyObject d, object baseValue)
         {
-            if (d is NumericTextBox self && baseValue is decimal value)
+            if (d is NumericTextBox && baseValue is decimal)
             {
-                var parser = parserByType[self.NumericType];
-
-
                 return baseValue;
             }
             return decimal.Zero;

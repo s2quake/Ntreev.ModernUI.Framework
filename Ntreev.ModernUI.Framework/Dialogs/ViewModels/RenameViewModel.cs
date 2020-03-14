@@ -15,21 +15,14 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Properties;
 using Ntreev.Library.ObjectModel;
-using Ntreev.ModernUI.Framework;
+using Ntreev.ModernUI.Framework.Properties;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
     public class RenameViewModel : ModalDialogBase
     {
-        private readonly string currentName;
         private string newName;
         private readonly Func<string, bool> predicate;
 
@@ -42,7 +35,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
         public RenameViewModel(string currentName, Func<string, bool> predicate)
         {
             this.Validate(currentName);
-            this.currentName = currentName;
+            this.CurrentName = currentName;
             this.newName = currentName;
             this.predicate = predicate;
             this.DisplayName = Resources.Title_Rename;
@@ -55,7 +48,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string NewName
         {
-            get { return this.newName ?? string.Empty; }
+            get => this.newName ?? string.Empty;
             set
             {
                 this.newName = value;
@@ -64,10 +57,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             }
         }
 
-        public string CurrentName
-        {
-            get { return this.currentName; }
-        }
+        public string CurrentName { get; }
 
         public bool CanRename
         {

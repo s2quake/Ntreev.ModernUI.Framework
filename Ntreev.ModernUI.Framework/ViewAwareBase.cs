@@ -16,20 +16,32 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class ViewAwareBase : Caliburn.Micro.ViewAware
+    public abstract class ViewAwareBase : Caliburn.Micro.ViewAware
     {
         private bool isProgressing;
         private string progressMessage;
         private string displayName;
+        private readonly IServiceProvider serviceProvider;
+
+        protected ViewAwareBase()
+        {
+
+        }
+
+        protected ViewAwareBase(IServiceProvider serviceProvider)
+        {
+            this.serviceProvider = serviceProvider;
+            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+            }
+        }
 
         public void BeginProgress()
         {
@@ -42,7 +54,6 @@ namespace Ntreev.ModernUI.Framework
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
-            this.OnProgress();
         }
 
         public void EndProgress()
@@ -56,17 +67,21 @@ namespace Ntreev.ModernUI.Framework
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
-            this.OnProgress();
         }
 
         public bool IsProgressing
         {
-            get { return this.isProgressing; }
+            get => this.isProgressing;
+            set
+            {
+                this.isProgressing = value;
+                this.NotifyOfPropertyChange(nameof(this.IsProgressing));
+            }
         }
 
         public string ProgressMessage
         {
-            get { return this.progressMessage; }
+            get => this.progressMessage ?? string.Empty;
             set
             {
                 this.progressMessage = value;
@@ -76,7 +91,7 @@ namespace Ntreev.ModernUI.Framework
 
         public virtual string DisplayName
         {
-            get { return this.displayName ?? string.Empty; }
+            get => this.displayName ?? string.Empty;
             set
             {
                 this.displayName = value;
@@ -84,14 +99,19 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public Dispatcher Dispatcher
+        public Dispatcher Dispatcher => Application.Current.Dispatcher;
+
+        protected void SatisfyImportsOnce(object attributedPart)
         {
-            get { return Application.Current.Dispatcher; }
+            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                compositionService.SatisfyImportsOnce(attributedPart);
+            }
         }
 
-        protected virtual void OnProgress()
+        protected virtual void OnImportsSatisfied()
         {
-            
+
         }
     }
 }

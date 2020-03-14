@@ -15,14 +15,9 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Dialogs.Views;
-using Ntreev.ModernUI.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ntreev.ModernUI.Framework.Properties;
+using System;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -69,12 +64,6 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             return Task.Delay(1);
         }
 
-        protected override void OnProgress()
-        {
-            base.OnProgress();
-            this.NotifyOfPropertyChange(nameof(this.CanRename));
-        }
-
         private void VerifyAction(bool isValid)
         {
             this.isValid = isValid;
@@ -86,6 +75,10 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             if (e.PropertyName == nameof(this.NewName))
             {
                 this.VerifyRename(this.NewName, this.VerifyAction);
+            }
+            else if (e.PropertyName == nameof(this.IsProgressing))
+            {
+                this.NotifyOfPropertyChange(nameof(this.CanRename));
             }
         }
     }

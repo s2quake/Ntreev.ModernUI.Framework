@@ -15,14 +15,8 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Caliburn.Micro;
 using System.Windows;
-using System.Threading.Tasks;
-using Ntreev.ModernUI.Framework.Properties;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
@@ -30,6 +24,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
     {
         private string progressMessage;
         private MessageBoxResult result;
+        private bool isProgressing;
 
         public MessageBoxViewModel()
         {
@@ -56,32 +51,20 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             this.Select(MessageBoxResult.No);
         }
 
-        public bool OkVisible
-        {
-            get { return this.Button == MessageBoxButton.OK || this.Button == MessageBoxButton.OKCancel; }
-        }
+        public bool OkVisible => this.Button == MessageBoxButton.OK || this.Button == MessageBoxButton.OKCancel;
 
-        public bool CancelVisible
-        {
-            get { return this.Button == MessageBoxButton.OKCancel || this.Button == MessageBoxButton.YesNoCancel; }
-        }
+        public bool CancelVisible => this.Button == MessageBoxButton.OKCancel || this.Button == MessageBoxButton.YesNoCancel;
 
-        public bool YesVisible
-        {
-            get { return this.Button == MessageBoxButton.YesNo || this.Button == MessageBoxButton.YesNoCancel; }
-        }
+        public bool YesVisible => this.Button == MessageBoxButton.YesNo || this.Button == MessageBoxButton.YesNoCancel;
 
-        public bool NoVisible
-        {
-            get { return this.Button == MessageBoxButton.YesNo || this.Button == MessageBoxButton.YesNoCancel; }
-        }
+        public bool NoVisible => this.Button == MessageBoxButton.YesNo || this.Button == MessageBoxButton.YesNoCancel;
 
         public string Message { get; set; }
 
-        public MessageBoxResult Result 
+        public MessageBoxResult Result
         {
-            get { return this.result; }
-            set 
+            get => this.result;
+            set
             {
                 this.result = value;
                 this.TryClose();
@@ -94,12 +77,17 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool IsProgressing
         {
-            get { return false; }
+            get => this.isProgressing;
+            set
+            {
+                this.isProgressing = value;
+                this.NotifyOfPropertyChange(nameof(this.IsProgressing));
+            }
         }
 
         public string ProgressMessage
         {
-            get { return this.progressMessage; }
+            get => this.progressMessage ?? string.Empty;
             set
             {
                 this.progressMessage = value;

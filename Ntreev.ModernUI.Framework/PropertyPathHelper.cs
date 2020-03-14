@@ -15,11 +15,6 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -49,8 +44,8 @@ namespace Ntreev.ModernUI.Framework
 
             public object Value
             {
-                get { return (object)this.GetValue(ValueProperty); }
-                set { this.SetValue(ValueProperty, value); }
+                get => (object)this.GetValue(ValueProperty);
+                set => this.SetValue(ValueProperty, value);
             }
         }
 
