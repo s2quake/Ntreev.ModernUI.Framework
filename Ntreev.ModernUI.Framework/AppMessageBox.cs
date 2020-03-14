@@ -148,7 +148,7 @@ namespace Ntreev.ModernUI.Framework
                     Button = button,
                     Image = icon
                 };
-                AppWindowManager.Current.ShowDialog(dialog);
+                AppWindowManager.Current.ShowDialogAsync(dialog).Wait();
                 return dialog.Result;
             }
         }

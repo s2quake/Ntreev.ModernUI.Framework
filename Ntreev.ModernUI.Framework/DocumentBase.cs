@@ -17,6 +17,8 @@
 
 using System;
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework
@@ -30,14 +32,14 @@ namespace Ntreev.ModernUI.Framework
             this.CloseCommand = new DelegateCommand(CloseCommand_Execute, CloseCommand_CanExecute);
         }
 
-        public sealed override void TryClose(bool? dialogResult = default)
+        public sealed override Task TryCloseAsync(bool? dialogResult = default)
         {
-            base.TryClose(dialogResult);
+            return base.TryCloseAsync(dialogResult);
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
-            this.TryClose(null);
+            await this.TryCloseAsync(null);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -80,9 +82,9 @@ namespace Ntreev.ModernUI.Framework
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected sealed override void OnDeactivate(bool close)
+        protected sealed override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
-            base.OnDeactivate(close);
+            return base.OnDeactivateAsync(close, cancellationToken);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

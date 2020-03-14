@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Shell
         public ShellView()
         {
             this.InitializeComponent();
-            this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
+            //this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -38,44 +38,44 @@ namespace Ntreev.ModernUI.Shell
 
         private void Editor_Executed(object sender, RoutedEventArgs e)
         {
-            if (this.editor.Text == "reset")
-            {
-                this.editor.Reset();
-            }
-            else
-            {
-                this.editor.Append("executed: ");
-                var oldForeground = this.editor.OutputForeground;
-                this.editor.OutputForeground = Brushes.Red;
-                this.editor.AppendLine(this.editor.Text);
-                this.editor.OutputForeground = oldForeground;
-            }
+            //if (this.editor.Text == "reset")
+            //{
+            //    this.editor.Reset();
+            //}
+            //else
+            //{
+            //    this.editor.Append("executed: ");
+            //    var oldForeground = this.editor.OutputForeground;
+            //    this.editor.OutputForeground = Brushes.Red;
+            //    this.editor.AppendLine(this.editor.Text);
+            //    this.editor.OutputForeground = oldForeground;
+            //}
         }
 
         private void Editor_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.InvokeAsync(() =>
-            {
-                if (this.editor.ApplyTemplate() == true)
-                {
-                    this.editor.Focus();
-                    this.editor.AppendLine("안녕하세요.");
-                    this.editor.Prompt = "c:>";
-                }
-            });
+            //this.Dispatcher.InvokeAsync(() =>
+            //{
+            //    if (this.editor.ApplyTemplate() == true)
+            //    {
+            //        this.editor.Focus();
+            //        this.editor.AppendLine("안녕하세요.");
+            //        this.editor.Prompt = "c:>";
+            //    }
+            //});
         }
 
         private void PickColor_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new SelectColorViewModel()
-            {
-                CurrentColor = FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor = dialog.CurrentColor;
-                this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
-            }
+            //var dialog = new SelectColorViewModel()
+            //{
+            //    CurrentColor = FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor,
+            //};
+            //if (dialog.ShowDialog() == true)
+            //{
+            //    FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor = dialog.CurrentColor;
+            //    this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
+            //}
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

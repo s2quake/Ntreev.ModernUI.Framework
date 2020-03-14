@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -55,14 +56,14 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public override void DeactivateItem(T item, bool close)
+        public override Task DeactivateItemAsync(T item, bool close, CancellationToken cancellationToken)
         {
-            base.DeactivateItem(item, close);
+            return base.DeactivateItemAsync(item, close, cancellationToken);
         }
 
-        public override void CanClose(Action<bool> callback)
+        public override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
         {
-            base.CanClose(callback);
+            return base.CanCloseAsync(cancellationToken);
         }
 
         public IEnumerable<T> Documents
@@ -85,10 +86,10 @@ namespace Ntreev.ModernUI.Framework
 
         public event EventHandler Closed;
 
-        protected override void ChangeActiveItem(T newItem, bool closePrevious)
-        {
-            base.ChangeActiveItem(newItem, closePrevious);
-        }
+        //protected override void ChangeActiveItem(T newItem, bool closePrevious)
+        //{
+        //    base.ChangeActiveItem(newItem, closePrevious);
+        //}
 
         protected override void OnActivationProcessed(T item, bool success)
         {

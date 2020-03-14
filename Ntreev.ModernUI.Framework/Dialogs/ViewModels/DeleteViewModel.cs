@@ -16,6 +16,8 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.ModernUI.Framework.Properties;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -54,9 +56,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             }
         }
 
-        public virtual void Delete()
+        public virtual Task DeleteAsync()
         {
-            this.TryClose(this.CanDelete);
+            return this.TryCloseAsync(true);
+        }
+
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        {
+            return await this.Dispatcher.InvokeAsync(() => this.CanDelete);
         }
 
         public bool CanDelete => this.deletionMessage == this.textToDelete;

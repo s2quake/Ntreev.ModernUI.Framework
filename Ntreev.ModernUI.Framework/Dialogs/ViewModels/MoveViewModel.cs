@@ -19,6 +19,8 @@ using Ntreev.Library.ObjectModel;
 using Ntreev.ModernUI.Framework.Properties;
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -48,9 +50,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.DisplayName = Resources.Title_Move;
         }
 
-        public virtual void Move()
+        public virtual Task MoveAsync()
         {
-            this.TryClose(this.CanMove);
+            return this.TryCloseAsync(true);
+        }
+
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        {
+            return await this.Dispatcher.InvokeAsync(() => this.CanMove);
         }
 
         public string[] TargetPaths { get; }

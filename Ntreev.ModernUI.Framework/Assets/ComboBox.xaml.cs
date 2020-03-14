@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.Assets
     {
         public ComboBox()
         {
-            this.InitializeComponent();
+
         }
 
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)

@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -29,9 +30,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += CommentViewModel_PropertyChanged;
         }
 
-        public virtual void Confirm()
+        public virtual Task ConfirmAsync()
         {
-            this.TryClose(true);
+            return this.TryCloseAsync(true);
         }
 
         public string Comment
@@ -75,7 +76,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
         {
             if (e.PropertyName == nameof(this.IsProgressing))
             {
-                this.NotifyOfPropertyChange(nameof(this.CanClose));
+                //this.NotifyOfPropertyChange(nameof(this.CanClose));
             }
         }
     }

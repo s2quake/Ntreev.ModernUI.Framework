@@ -18,6 +18,8 @@
 using Ntreev.Library.ObjectModel;
 using Ntreev.ModernUI.Framework.Properties;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -41,9 +43,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.DisplayName = Resources.Title_Rename;
         }
 
-        public virtual void Rename()
+        public virtual Task RenameAsync()
         {
-            this.TryClose(this.CanRename);
+            return this.TryCloseAsync(true);
+        }
+
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        {
+            return await this.Dispatcher.InvokeAsync(() => this.CanRename);
         }
 
         public string NewName

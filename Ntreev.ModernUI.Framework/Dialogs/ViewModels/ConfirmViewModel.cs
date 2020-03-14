@@ -17,6 +17,8 @@
 
 using Ntreev.ModernUI.Framework.Properties;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -59,9 +61,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             }
         }
 
-        public void Confirm()
+        public Task ConfirmAsync()
         {
-            this.TryClose(this.CanConfirm);
+            return this.TryCloseAsync(true);
         }
 
         public bool CanConfirm => this.confirmationMessage == this.textToConfirm;
@@ -74,6 +76,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
                 this.target = value;
                 this.NotifyOfPropertyChange(nameof(this.Target));
             }
+        }
+
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        {
+            return await this.Dispatcher.InvokeAsync(() => this.CanConfirm);
         }
     }
 }

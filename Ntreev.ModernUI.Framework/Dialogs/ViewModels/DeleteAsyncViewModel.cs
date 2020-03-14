@@ -29,14 +29,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += DeleteAsyncViewModel_PropertyChanged;
         }
 
-        public async override void Delete()
+        public async override Task DeleteAsync()
         {
             try
             {
                 this.BeginProgress(Resources.Message_Deleting);
-                await this.DeleteAsync();
+                await this.OnDeleteAsync();
                 this.EndProgress();
-                this.TryClose(true);
+                await this.TryCloseAsync(true);
                 AppMessageBox.Show(Resources.Message_Deleted);
             }
             catch (Exception e)
@@ -51,7 +51,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             isValid(true);
         }
 
-        protected virtual Task DeleteAsync()
+        protected virtual Task OnDeleteAsync()
         {
             return Task.Delay(1);
         }

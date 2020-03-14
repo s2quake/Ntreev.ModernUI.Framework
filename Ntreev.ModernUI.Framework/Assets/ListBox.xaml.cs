@@ -29,7 +29,7 @@ namespace Ntreev.ModernUI.Framework.Assets
     {
         public ListBox()
         {
-            InitializeComponent();
+
         }
 
         private void ContentPresenter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

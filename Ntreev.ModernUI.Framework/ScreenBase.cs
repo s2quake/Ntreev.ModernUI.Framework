@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -46,11 +47,10 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public sealed async override void CanClose(Action<bool> callback)
+        public sealed async override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
         {
             if (await this.CloseAsync() == false)
-                return;
-            callback(true);
+                return false;
             foreach (var item in this.Views)
             {
                 if (item.Value is IDisposable disposable)
@@ -59,6 +59,7 @@ namespace Ntreev.ModernUI.Framework
                 }
             }
             this.OnClose();
+            return true;
         }
 
         public void BeginProgress()

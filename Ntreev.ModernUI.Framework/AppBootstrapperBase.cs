@@ -252,7 +252,7 @@ namespace Ntreev.ModernUI.Framework
                 new FrameworkPropertyMetadata(System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag)));
 
             if (this.IgnoreDisplay == false)
-                this.DisplayRootViewFor(this.modelType);
+                this.DisplayRootViewForAsync(this.modelType);
         }
 
         protected override void OnExit(object sender, EventArgs e)

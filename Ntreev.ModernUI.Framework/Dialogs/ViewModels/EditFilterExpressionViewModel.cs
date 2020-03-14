@@ -17,6 +17,7 @@
 
 using Ntreev.ModernUI.Framework.Properties;
 using System;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -30,9 +31,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.DisplayName = Resources.Title_EditFilter;
         }
 
-        public void Close()
+        public Task CloseAsync()
         {
-            this.TryClose(true);
+            return this.TryCloseAsync(true);
         }
 
         public string FilterExpression

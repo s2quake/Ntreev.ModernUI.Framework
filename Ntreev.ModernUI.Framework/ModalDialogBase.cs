@@ -19,6 +19,8 @@ using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -46,9 +48,10 @@ namespace Ntreev.ModernUI.Framework
 
         public bool? ShowDialog()
         {
+            AppWindowManager.Current.ShowDialogAsync(this).Wait();
             return this.Dispatcher.Invoke(() =>
             {
-                AppWindowManager.Current.ShowDialog(this);
+                
                 return this.DialogResult;
             });
         }
@@ -99,10 +102,10 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public override void TryClose(bool? dialogResult = null)
+        public override async Task TryCloseAsync(bool? dialogResult = null)
         {
             this.DialogResult = dialogResult;
-            base.TryClose(dialogResult);
+            await base.TryCloseAsync(dialogResult);
         }
 
         public bool? DialogResult { get; set; }
@@ -116,9 +119,9 @@ namespace Ntreev.ModernUI.Framework
             base.OnViewLoaded(view);
         }
 
-        protected override void OnDeactivate(bool close)
+        protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
-            base.OnDeactivate(close);
+            return base.OnDeactivateAsync(close, cancellationToken);
         }
 
         protected void SatisfyImportsOnce(object attributedPart)

@@ -19,6 +19,7 @@ using Caliburn.Micro;
 using Ntreev.ModernUI.Framework.Controls;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -32,10 +33,10 @@ namespace Ntreev.ModernUI.Framework
 
         }
 
-        public override bool? ShowDialog(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        public override async Task<bool?> ShowDialogAsync(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
             AppBootstrapperBase.SatisfyImportsOnce(rootModel);
-            return base.ShowDialog(rootModel, context, settings);
+            return await base.ShowDialogAsync(rootModel, context, settings);
         }
 
         public static AppWindowManager Current { get; } = new AppWindowManager();
@@ -112,9 +113,9 @@ namespace Ntreev.ModernUI.Framework
             return window;
         }
 
-        protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
+        protected override async Task<Window> CreateWindowAsync(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
         {
-            var window = base.CreateWindow(rootModel, isDialog, context, settings);
+            var window = await base.CreateWindowAsync(rootModel, isDialog, context, settings);
 
             if (window.Owner != null)
             {

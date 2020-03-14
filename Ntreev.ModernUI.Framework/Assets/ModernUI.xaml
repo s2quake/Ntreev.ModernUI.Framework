@@ -21,7 +21,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ResourceDictionary.MergedDictionaries>
 
-        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+        <!--<ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />-->
 
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="ComboBox.xaml" />

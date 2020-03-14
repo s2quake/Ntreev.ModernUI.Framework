@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.Assets
     {
         public TabControl()
         {
-            InitializeComponent();
+
         }
     }
 }

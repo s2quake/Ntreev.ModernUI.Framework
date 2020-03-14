@@ -41,9 +41,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             base.ShowDialog();
         }
 
-        public void OK()
+        public Task OKAsync()
         {
-            this.TryClose(null);
+            return this.TryCloseAsync(null);
         }
 
         protected override void OnViewLoaded(object view)

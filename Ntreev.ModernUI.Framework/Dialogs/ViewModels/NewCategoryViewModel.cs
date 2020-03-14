@@ -20,6 +20,8 @@ using Ntreev.Library.ObjectModel;
 using Ntreev.ModernUI.Framework.Properties;
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -48,9 +50,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.predicate = predicate;
         }
 
-        public virtual void Create()
+        public virtual Task CreateAsync()
         {
-            this.TryClose(this.CanCreate);
+            return this.TryCloseAsync(true);
         }
 
         public string CategoryName
@@ -87,6 +89,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
                     return false;
                 return this.VerifyName(this.CategoryName);
             }
+        }
+
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        {
+            return await this.Dispatcher.InvokeAsync(() => this.CanCreate);
         }
 
         protected virtual bool VerifyName(string categoryName)

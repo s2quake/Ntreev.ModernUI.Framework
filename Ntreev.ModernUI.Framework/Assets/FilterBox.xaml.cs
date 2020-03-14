@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.Assets
     {
         public FilterBox()
         {
-            this.InitializeComponent();
+
         }
 
         private void IconButton_Click(object sender, RoutedEventArgs e)

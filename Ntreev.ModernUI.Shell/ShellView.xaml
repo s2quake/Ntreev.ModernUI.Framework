@@ -94,127 +94,127 @@
                 <MenuItem Header="Open" IsChecked="True" />
             </MenuItem>
         </Menu>
-    
-    <TabControl Grid.Row="1" Style="{StaticResource TabControl_Page_Style}">
-        <TabItem Header="Base">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <ToolBarTray>
-                    <ToolBar IsOverflowOpen="False" ToolBarTray.IsLocked="True">
-                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" />
-                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" />
-                        <Separator />
-                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" 
+
+        <TabControl Grid.Row="1" Style="{StaticResource TabControl_Page_Style}">
+            <TabItem Header="Base">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ToolBarTray>
+                        <ToolBar IsOverflowOpen="False" ToolBarTray.IsLocked="True">
+                            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" />
+                            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" />
+                            <Separator />
+                            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png" 
                                          DropDownTemplate="{StaticResource DropDown_Template}" />
-                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
-                    </ToolBar>
-                    <nmfc:ModernToolBar>
-                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
-                    </nmfc:ModernToolBar>
-                </ToolBarTray>
-                <nmfc:PropertyItemsControl Grid.Row="1">
-                    <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" Width="200" HorizontalAlignment="Left" />
-                    <nmfc:FilterBox nmfc:PropertyItemsControl.Header="FilterBox" x:Name="filterBox"  />
-                    <nmfc:FlagControl nmfc:PropertyItemsControl.Header="FlagControl">
-                        <nmfc:FlagControlItem Value="0" Content="None" />
-                        <nmfc:FlagControlItem Value="1" Content="A" />
-                        <nmfc:FlagControlItem Value="2" Content="B" />
-                        <nmfc:FlagControlItem Value="4" Content="C" />
-                        <nmfc:FlagControlItem Value="7" Content="All" />
-                    </nmfc:FlagControl>
-                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
-                    <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left"
+                            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
+                        </ToolBar>
+                        <nmfc:ModernToolBar>
+                            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
+                        </nmfc:ModernToolBar>
+                    </ToolBarTray>
+                    <nmfc:PropertyItemsControl Grid.Row="1">
+                        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" Width="200" HorizontalAlignment="Left" />
+                        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="FilterBox" x:Name="filterBox"  />
+                        <nmfc:FlagControl nmfc:PropertyItemsControl.Header="FlagControl">
+                            <nmfc:FlagControlItem Value="0" Content="None" />
+                            <nmfc:FlagControlItem Value="1" Content="A" />
+                            <nmfc:FlagControlItem Value="2" Content="B" />
+                            <nmfc:FlagControlItem Value="4" Content="C" />
+                            <nmfc:FlagControlItem Value="7" Content="All" />
+                        </nmfc:FlagControl>
+                        <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
+                        <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left"
                                      DropDownTemplate="{StaticResource DropDown_Template}"/>
-                    
-                    <StackPanel Orientation="Horizontal" nmfc:PropertyItemsControl.Header="IconImage" >
-                        <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
-                                        HorizontalAlignment="Left" />
-                        <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
-                                        HorizontalAlignment="Left" Background="{DynamicResource Accent}" />
-                        <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" 
-                                        HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
+
+                        <StackPanel Orientation="Horizontal" nmfc:PropertyItemsControl.Header="IconImage" >
+                            <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
+                                            HorizontalAlignment="Left" />
+                            <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
+                                            HorizontalAlignment="Left" Background="{DynamicResource Accent}" />
+                            <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
+                                            HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
+                        </StackPanel>
+                        <Button nmfc:PropertyItemsControl.Header="ColorPicker" x:Name="PickColor" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
+                        <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" ItemsSource="{Binding TreeViewItems}" />
+                        <nmfc:GuidControl nmfc:PropertyItemsControl.Header="Guid" Value="d1be6c34-6a65-464f-97aa-9a20ac6cac3d" />
+                        <TextBox nmfc:PropertyItemsControl.Header="TextBox"  />
+                        <nmfc:NumericTextBox nmfc:PropertyItemsControl.Header="NumericTextBox" />
+                    </nmfc:PropertyItemsControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Terminal">
+                <nmfc:TerminalControl x:Name="editor" Executed="Editor_Executed" Loaded="Editor_Loaded" />
+            </TabItem>
+            <TabItem Header="PropertyItemsControl">
+                <nmfc:PropertyItemsControl>
+                    <TextBox nmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
+                    <TextBox nmfc:PropertyItemsControl.Header="Address" />
+                    <TextBox nmfc:PropertyItemsControl.Header="UserID"  />
+                    <PasswordBox nmfc:PropertyItemsControl.Header="Password" />
+                    <StackPanel nmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
+                        <TextBox Text="Find" Width="148" />
+                        <Border Width="4" />
+                        <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
                     </StackPanel>
-                    <Button nmfc:PropertyItemsControl.Header="ColorPicker" x:Name="PickColor" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
-                    <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" ItemsSource="{Binding TreeViewItems}" />
-                    <nmfc:GuidControl nmfc:PropertyItemsControl.Header="Guid" Value="d1be6c34-6a65-464f-97aa-9a20ac6cac3d" />
-                    <TextBox nmfc:PropertyItemsControl.Header="TextBox"  />
-                    <nmfc:NumericTextBox nmfc:PropertyItemsControl.Header="NumericTextBox" />
+                    <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
+                        <Button Background="{Binding Background, ElementName=PickColor}" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
+                        <Border Width="4" />
+                        <ComboBox Width="122" />
+                    </StackPanel>
                 </nmfc:PropertyItemsControl>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Terminal">
-            <nmfc:TerminalControl x:Name="editor" Executed="Editor_Executed" Loaded="Editor_Loaded" />
-        </TabItem>
-        <TabItem Header="PropertyItemsControl">
-            <nmfc:PropertyItemsControl>
-                <TextBox nmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
-                <TextBox nmfc:PropertyItemsControl.Header="Address" />
-                <TextBox nmfc:PropertyItemsControl.Header="UserID"  />
-                <PasswordBox nmfc:PropertyItemsControl.Header="Password" />
-                <StackPanel nmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
-                    <TextBox Text="Find" Width="148" />
-                    <Border Width="4" />
-                    <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
-                </StackPanel>
-                <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
-                    <Button Background="{Binding Background, ElementName=PickColor}" Click="PickColor_Click" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
-                    <Border Width="4" />
-                    <ComboBox Width="122" />
-                </StackPanel>
-            </nmfc:PropertyItemsControl>
-        </TabItem>
-        <TabItem Header="ListBox">
-            <ListBox>
-                <ListBoxItem Content="ListBoxItem1" />
-                <ListBoxItem Content="ListBoxItem2" />
-                <ListBoxItem Content="ListBoxItem3" />
-                <ListBoxItem Content="ListBoxItem4" />
-            </ListBox>
-        </TabItem>
-        <TabItem Header="GridControl">
-            <nmgc:ModernDataGridControl ItemsSource="{Binding Source={StaticResource source}}">
-                <nmgc:ModernDataGridControl.Columns>
-                    <xcdg:Column FieldName="Column1" Title="Column1" />
-                    <xcdg:Column FieldName="Column2" Title="Column2" />
-                    <xcdg:Column FieldName="Column3" Title="Column3" />
-                </nmgc:ModernDataGridControl.Columns>
-                <nmgc:ModernDataGridControl.View>
-                    <xcdg:TableView UseDefaultHeadersFooters="False">
-                        <xcdg:TableView.FixedHeaders>
-                            <DataTemplate>
-                                <xcdg:HierarchicalGroupByControl/>
-                            </DataTemplate>
-                            <DataTemplate>
-                                <nmgc:ModernColumnManagerRow x:Name="columnManagerRow" />
-                            </DataTemplate>
-                            <DataTemplate>
-                                <nmgc:ModernInsertionRow InsertCommand="{Binding InsertCommand}" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />
-                            </DataTemplate>
-                            <DataTemplate>
-                                <Grid xcdg:TableView.CanScrollHorizontally="False" Height="3" VerticalAlignment="Bottom" 
-                                      HorizontalAlignment="Left" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}"
-                                      xcdg:RowSelector.RowSelectorStyle="{DynamicResource DataRowSelector_Style}">  
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" Visibility="Hidden" xcdg:GroupLevelIndicatorPane.ShowIndicators="True" />
-                                    <xcdg:GroupLevelIndicatorPane Grid.Column="1" Visibility="Hidden" x:Name="glip" />
-                                    <Border Grid.Column="0" Grid.ColumnSpan="3" Height="1" BorderThickness="1 0 1 0" BorderBrush="{DynamicResource DataGridGridLines}" VerticalAlignment="Bottom" />
-                                    <Border Grid.Column="3" BorderThickness="0 0 1 1" BorderBrush="{DynamicResource DataGridGridLines}" />
-                                </Grid>
-                            </DataTemplate>
-                        </xcdg:TableView.FixedHeaders>
-                    </xcdg:TableView>
-                </nmgc:ModernDataGridControl.View>
-            </nmgc:ModernDataGridControl>
-        </TabItem>
-    </TabControl>
+            </TabItem>
+            <TabItem Header="ListBox">
+                <ListBox>
+                    <ListBoxItem Content="ListBoxItem1" />
+                    <ListBoxItem Content="ListBoxItem2" />
+                    <ListBoxItem Content="ListBoxItem3" />
+                    <ListBoxItem Content="ListBoxItem4" />
+                </ListBox>
+            </TabItem>
+            <TabItem Header="GridControl">
+                <nmgc:ModernDataGridControl ItemsSource="{Binding Source={StaticResource source}}">
+                    <nmgc:ModernDataGridControl.Columns>
+                        <xcdg:Column FieldName="Column1" Title="Column1" />
+                        <xcdg:Column FieldName="Column2" Title="Column2" />
+                        <xcdg:Column FieldName="Column3" Title="Column3" />
+                    </nmgc:ModernDataGridControl.Columns>
+                    <nmgc:ModernDataGridControl.View>
+                        <xcdg:TableView UseDefaultHeadersFooters="False">
+                            <xcdg:TableView.FixedHeaders>
+                                <DataTemplate>
+                                    <xcdg:HierarchicalGroupByControl/>
+                                </DataTemplate>
+                                <DataTemplate>
+                                    <nmgc:ModernColumnManagerRow x:Name="columnManagerRow" />
+                                </DataTemplate>
+                                <DataTemplate>
+                                    <nmgc:ModernInsertionRow InsertCommand="{Binding InsertCommand}" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />
+                                </DataTemplate>
+                                <DataTemplate>
+                                    <Grid xcdg:TableView.CanScrollHorizontally="False" Height="3" VerticalAlignment="Bottom"
+                                          HorizontalAlignment="Left" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}"
+                                          xcdg:RowSelector.RowSelectorStyle="{DynamicResource DataRowSelector_Style}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" Visibility="Hidden" xcdg:GroupLevelIndicatorPane.ShowIndicators="True" />
+                                        <xcdg:GroupLevelIndicatorPane Grid.Column="1" Visibility="Hidden" x:Name="glip" />
+                                        <Border Grid.Column="0" Grid.ColumnSpan="3" Height="1" BorderThickness="1 0 1 0" BorderBrush="{DynamicResource DataGridGridLines}" VerticalAlignment="Bottom" />
+                                        <Border Grid.Column="3" BorderThickness="0 0 1 1" BorderBrush="{DynamicResource DataGridGridLines}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </xcdg:TableView.FixedHeaders>
+                        </xcdg:TableView>
+                    </nmgc:ModernDataGridControl.View>
+                </nmgc:ModernDataGridControl>
+            </TabItem>
+        </TabControl>
     </Grid>
 
 </mui:ModernWindow>

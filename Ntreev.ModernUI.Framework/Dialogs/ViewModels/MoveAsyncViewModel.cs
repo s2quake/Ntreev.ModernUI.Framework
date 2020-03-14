@@ -34,14 +34,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += MoveAsyncViewModel_PropertyChanged;
         }
 
-        public async sealed override void Move()
+        public async sealed override Task MoveAsync()
         {
             try
             {
                 this.BeginProgress(Resources.Message_Moving);
-                await this.MoveAsync(this.TargetPath);
+                await this.OnMoveAsync(this.TargetPath);
                 this.EndProgress();
-                this.TryClose(true);
+                await this.TryCloseAsync(true);
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             isValid(true);
         }
 
-        protected virtual Task MoveAsync(string targetPath)
+        protected virtual Task OnMoveAsync(string targetPath)
         {
             return Task.Delay(1);
         }

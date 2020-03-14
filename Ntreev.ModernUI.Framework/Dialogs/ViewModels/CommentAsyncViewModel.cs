@@ -28,14 +28,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += CommentAsyncViewModel_PropertyChanged;
         }
 
-        public async override void Confirm()
+        public async override Task ConfirmAsync()
         {
             try
             {
                 this.BeginProgress();
                 await this.ConfirmAsync(this.Comment);
                 this.EndProgress();
-                this.TryClose(true);
+                await this.TryCloseAsync(true);
             }
             catch (Exception e)
             {

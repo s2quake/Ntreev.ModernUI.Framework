@@ -31,14 +31,14 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += RenameAsyncViewModel_PropertyChanged;
         }
 
-        public async sealed override void Rename()
+        public async sealed override Task RenameAsync()
         {
             try
             {
                 this.BeginProgress(Resources.Message_Renaming);
-                await this.RenameAsync(this.NewName);
+                await this.OnRenameAsync(this.NewName);
                 this.EndProgress();
-                this.TryClose(true);
+                await this.TryCloseAsync(true);
             }
             catch (Exception e)
             {
@@ -59,7 +59,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             isValid(true);
         }
 
-        protected virtual Task RenameAsync(string newName)
+        protected virtual Task OnRenameAsync(string newName)
         {
             return Task.Delay(1);
         }

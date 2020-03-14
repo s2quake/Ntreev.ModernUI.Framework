@@ -67,7 +67,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             set
             {
                 this.result = value;
-                this.TryClose();
+                this.TryCloseAsync();
             }
         }
 
@@ -119,7 +119,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     break;
             }
 
-            this.TryClose(dialogResult);
+            this.TryCloseAsync(dialogResult);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Assets
     {
         public ModernDataGridControl()
         {
-            this.InitializeComponent();
+
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)

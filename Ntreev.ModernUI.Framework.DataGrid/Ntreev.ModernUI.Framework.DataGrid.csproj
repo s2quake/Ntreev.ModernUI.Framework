@@ -1,189 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1C55FED2-99EB-469D-9DAC-A1F7B9E7C790}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Ntreev.ModernUI.Framework.DataGrid</RootNamespace>
-    <AssemblyName>Ntreev.ModernUI.Framework.DataGrid</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFrameworks>netcoreapp3.0;net45</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>4.0.19187.1259</Version>
+    <AssemblyVersion>4.0</AssemblyVersion>
+    <FileVersion>4.0.19187.1259</FileVersion>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicense>https://github.com/s2quake/Ntreev.ModernUI.Framework/blob/master/LICENSE.md</PackageLicense>
+    <Copyright>Copyright © Ntreev Soft 2018</Copyright>
+    <Description>this is submodule of crema project</Description>
+    <Company>NtreevSoft</Company>
+    <Authors>s2quake</Authors>
+    <RepositoryUrl>https://github.com/s2quake/Ntreev.ModernUI.Framework</RepositoryUrl>
+    <PackageTags>Crema</PackageTags>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ModernDataGridControl.xaml.cs">
-      <DependentUpon>ModernDataGridControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DomainRowsFromClipboard.cs" />
-    <Compile Include="Controls\ItemDeletingEventArgs.cs" />
-    <Compile Include="Controls\ItemDeletingEventHandler.cs" />
-    <Compile Include="Controls\ModernColumnManagerCell.cs" />
-    <Compile Include="Controls\ModernColumnManagerRow.cs" />
-    <Compile Include="Controls\ModernCurrentItemElement.cs" />
-    <Compile Include="Controls\ModernDataCell.cs" />
-    <Compile Include="Controls\ModernDataCellContentTemplateSelector.cs" />
-    <Compile Include="Controls\ModernDataCellTextBox.cs" />
-    <Compile Include="Controls\ModernDataGridCommands.cs" />
-    <Compile Include="Controls\ModernDataGridControl.cs" />
-    <Compile Include="Controls\ModernDataGridExtensions.cs" />
-    <Compile Include="Controls\ModernDataGridUpdateSourceException.cs" />
-    <Compile Include="Controls\ModernDataRow.cs" />
-    <Compile Include="Controls\ModernDragEventArgs.cs" />
-    <Compile Include="Controls\ModernDragEventHandler.cs" />
-    <Compile Include="Controls\ModernInsertionButton.cs" />
-    <Compile Include="Controls\ModernInsertionRow.cs" />
-    <Compile Include="Controls\ModernInsertionView.xaml.cs">
-      <DependentUpon>ModernInsertionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ModernInsertionViewModel.cs" />
-    <Compile Include="Controls\ModernItemInfo.cs" />
-    <Compile Include="Controls\ModernScrollBar.cs" />
-    <Compile Include="Controls\ModernSearchedItems.cs" />
-    <Compile Include="Controls\ModernTableViewItemsHost.cs" />
-    <Compile Include="Controls\ModernTableViewScrollViewer.cs" />
-    <Compile Include="Controls\ModernTextClipboardExporter.cs" />
-    <Compile Include="Controls\ModernTextClipboardParser.cs" />
-    <Page Include="Assets\DataGridUI.Light.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\DataGridUI.Dark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <None Include="Converters\ContentToStringConverter.cs" />
-    <Compile Include="Controls\SelectedFlags.cs" />
-    <Compile Include="Controls\TimeSpanUpDown.cs" />
-    <Compile Include="Controls\ValueChangingEventArgs.cs" />
-    <Compile Include="Controls\ValueChangingEventHandler.cs" />
-    <Compile Include="Converters\GroupByItemToSortDirectionConverter.cs" />
-    <Compile Include="Converters\IndexToForegroundBrushConverter.cs" />
-    <Compile Include="Converters\IndexToBackgroundBrushConverter.cs" />
-    <None Include="Converters\TypeToEnumMembersConverter.cs" />
-    <Compile Include="Markup\ContentBindingExtension.cs" />
-    <Compile Include="Markup\EditingContentBindingExtension.cs" />
-    <Compile Include="Controls\NumericTextBox.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Page Include="Controls\ModernInsertionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <None Remove="Images\**\*.png" />
+    <Resource Include="Images\**\*.png" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+    <PackageReference Include="MiqM.Xceed.Wpf.Toolkit.NETCore" Version="3.4.0.5" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
+  </ItemGroup>  
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.4.0" />
+  </ItemGroup>  
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.105-alpha" />
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.105-alpha" />
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library.Net45\Ntreev.Library.csproj">
-      <Project>{1918437f-4fbf-4731-ac5b-981a4a4cb1f1}</Project>
-      <Name>Ntreev.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ntreev.ModernUI.Framework\Ntreev.ModernUI.Framework.csproj">
-      <Project>{20c3d3dd-de99-4126-9449-bca12e4d255d}</Project>
-      <Name>Ntreev.ModernUI.Framework</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library\Ntreev.Library.csproj" />
+    <ProjectReference Include="..\Ntreev.ModernUI.Framework\Ntreev.ModernUI.Framework.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Page Include="Assets\DataGridUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Assets\DateTimePicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\ModernDataGridControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\TextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Assets\TimePicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\TimeSpanUpDown.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Caliburn.Micro">
-      <Version>3.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="Extended.Wpf.Toolkit">
-      <Version>3.4.0</Version>
-    </PackageReference>
-    <PackageReference Include="MahApps.Metro">
-      <Version>1.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="ModernUI.WPF">
-      <Version>1.0.9</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\clipboard.png" />
-  </ItemGroup>
-  <Import Project="..\Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems" Label="Shared" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

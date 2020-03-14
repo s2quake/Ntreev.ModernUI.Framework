@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.Assets
     {
         public TreeViewItemSelector()
         {
-            this.InitializeComponent();
+
         }
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)

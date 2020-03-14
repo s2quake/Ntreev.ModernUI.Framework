@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.ModernUI.Framework.Properties;
+using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
@@ -29,9 +30,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.DisplayName = Resources.Title_SelectColor;
         }
 
-        public void Select()
+        public Task SelectAsync()
         {
-            this.TryClose(true);
+            return this.TryCloseAsync(true);
         }
 
         public Color CurrentColor

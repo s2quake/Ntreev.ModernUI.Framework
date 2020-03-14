@@ -7,9 +7,9 @@ using System.Windows;
 // 어셈블리의 일반 정보는 다음 특성 집합을 통해 제어됩니다.
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
-[assembly: AssemblyTitle("Ntreev.ModernUI.Shell")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyProduct("Ntreev.ModernUI.Shell")]
+// [assembly: AssemblyTitle("Ntreev.ModernUI.Shell")]
+// [assembly: AssemblyDescription("")]
+// [assembly: AssemblyProduct("Ntreev.ModernUI.Shell")]
 
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 
 // 표시되지 않습니다.  COM에서 이 어셈블리의 형식에 액세스하려면 
