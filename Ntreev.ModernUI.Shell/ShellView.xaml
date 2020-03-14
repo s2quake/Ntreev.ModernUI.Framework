@@ -81,6 +81,7 @@
                 <MenuItem Header="Menu4" />
             </ItemsControl>
         </DataTemplate>
+
     </mui:ModernWindow.Resources>
 
     <Grid>

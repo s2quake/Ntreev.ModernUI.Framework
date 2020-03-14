@@ -35,7 +35,7 @@ namespace Ntreev.ModernUI.Framework
         protected PropertyChangedBase(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            if (this.serviceProvider?.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
             {
                 this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
             }
@@ -49,7 +49,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected void SatisfyImportsOnce(object attributedPart)
         {
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            if (this.serviceProvider?.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
             {
                 compositionService.SatisfyImportsOnce(attributedPart);
             }
