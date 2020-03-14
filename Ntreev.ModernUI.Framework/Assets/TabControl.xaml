@@ -348,12 +348,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <ScrollContentPresenter Grid.Column="0" Content="{TemplateBinding ScrollViewer.Content}" />
-                                        <RepeatButton x:Name="LeftButton" Grid.Column="1" Content="L" Command="ScrollBar.LineLeftCommand" 
+                                        <nmfc:IconRepeatButton x:Name="LeftButton" Grid.Column="1" Command="ScrollBar.LineLeftCommand" 
                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                                      Style="{DynamicResource TabScrollerRepeatButtonStyle}" />
-                                        <RepeatButton x:Name="RightButton" Grid.Column="2" Content="R" Command="ScrollBar.LineRightCommand" 
+                                                      Source="/Ntreev.ModernUI.Framework;component/Images/arrow_left.png" />
+                                        <nmfc:IconRepeatButton x:Name="RightButton" Grid.Column="2" Command="ScrollBar.LineRightCommand" 
                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                                      Style="{DynamicResource TabScrollerRepeatButtonStyle}" />
+                                                      Source="/Ntreev.ModernUI.Framework;component/Images/arrow_right.png" />
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
