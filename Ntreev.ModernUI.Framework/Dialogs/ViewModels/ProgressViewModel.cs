@@ -22,8 +22,6 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
     public class ProgressViewModel : ModalDialogBase
     {
-        private Action action;
-
         public ProgressViewModel()
         {
 
@@ -31,41 +29,19 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public async Task ShowDialogAsync(Action action)
         {
-            this.action = () => this.Initialize(action);
-            base.ShowDialogAsync();
+            this.Initialize(Task.Run(action));
+            await base.ShowDialogAsync();
         }
 
-        public void ShowDialog(Task task)
+        public async Task ShowDialogAsync(Task task)
         {
-            this.action = () => this.Initialize(task);
-            base.ShowDialogAsync();
+            this.Initialize(task);
+            await base.ShowDialogAsync();
         }
 
         public Task OKAsync()
         {
             return this.TryCloseAsync(null);
-        }
-
-        protected override void OnViewLoaded(object view)
-        {
-            base.OnViewLoaded(view);
-            this.action?.Invoke();
-        }
-
-        private async void Initialize(Action action)
-        {
-            this.BeginProgress();
-            await Task.Delay(100);
-            try
-            {
-                action();
-                this.EndProgress();
-            }
-            catch (Exception e)
-            {
-                this.EndProgress();
-                AppMessageBox.ShowError(e);
-            }
         }
 
         private async void Initialize(Task task)

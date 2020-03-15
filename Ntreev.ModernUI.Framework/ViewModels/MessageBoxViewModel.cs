@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
@@ -23,7 +24,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
     class MessageBoxViewModel : Screen, IModalDialog
     {
         private string progressMessage;
-        private MessageBoxResult result;
         private bool isProgressing;
 
         public MessageBoxViewModel()
@@ -31,24 +31,24 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         }
 
-        public void Ok()
+        public Task OkAsync()
         {
-            this.Select(MessageBoxResult.OK);
+            return this.SelectAsync(MessageBoxResult.OK);
         }
 
-        public void Cancel()
+        public Task CancelAsync()
         {
-            this.Select(MessageBoxResult.Cancel);
+            return this.SelectAsync(MessageBoxResult.Cancel);
         }
 
-        public void Yes()
+        public Task YesAsync()
         {
-            this.Select(MessageBoxResult.Yes);
+            return this.SelectAsync(MessageBoxResult.Yes);
         }
 
-        public void No()
+        public Task NoAsync()
         {
-            this.Select(MessageBoxResult.No);
+            return this.SelectAsync(MessageBoxResult.No);
         }
 
         public bool OkVisible => this.Button == MessageBoxButton.OK || this.Button == MessageBoxButton.OKCancel;
@@ -61,15 +61,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string Message { get; set; }
 
-        public MessageBoxResult Result
-        {
-            get => this.result;
-            //set
-            //{
-            //    this.result = value;
-            //    this.TryCloseAsync();
-            //}
-        }
+        public MessageBoxResult Result { get; private set; }
 
         public MessageBoxButton Button { get; set; }
 
@@ -95,10 +87,10 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        private void Select(MessageBoxResult result)
+        private async Task SelectAsync(MessageBoxResult result)
         {
             bool? dialogResult = null;
-            this.result = result;
+            this.Result = result;
 
             switch (this.Button)
             {
@@ -118,8 +110,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                         dialogResult = false;
                     break;
             }
-
-            this.TryCloseAsync(dialogResult);
+            await this.TryCloseAsync(dialogResult);
         }
     }
 }
