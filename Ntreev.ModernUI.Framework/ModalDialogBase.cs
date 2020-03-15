@@ -46,14 +46,10 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public bool? ShowDialog()
+        public async Task<bool?> ShowDialogAsync()
         {
-            AppWindowManager.Current.ShowDialogAsync(this).Wait();
-            return this.Dispatcher.Invoke(() =>
-            {
-                
-                return this.DialogResult;
-            });
+            var result = await AppWindowManager.Current.ShowDialogAsync(this);
+            return this.DialogResult;
         }
 
         public void BeginProgress()
@@ -105,7 +101,7 @@ namespace Ntreev.ModernUI.Framework
         public override async Task TryCloseAsync(bool? dialogResult = null)
         {
             this.DialogResult = dialogResult;
-            await base.TryCloseAsync(dialogResult);
+            await base.TryCloseAsync(null);
         }
 
         public bool? DialogResult { get; set; }

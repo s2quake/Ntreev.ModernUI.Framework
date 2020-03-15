@@ -29,16 +29,16 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         }
 
-        public void ShowDialog(Action action)
+        public async Task ShowDialogAsync(Action action)
         {
             this.action = () => this.Initialize(action);
-            base.ShowDialog();
+            base.ShowDialogAsync();
         }
 
         public void ShowDialog(Task task)
         {
             this.action = () => this.Initialize(task);
-            base.ShowDialog();
+            base.ShowDialogAsync();
         }
 
         public Task OKAsync()

@@ -35,7 +35,7 @@ namespace Ntreev.ModernUI.Framework
 
         public override async Task<bool?> ShowDialogAsync(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
-            AppBootstrapperBase.SatisfyImportsOnce(rootModel);
+            await Application.Current.Dispatcher.InvokeAsync(() => AppBootstrapperBase.SatisfyImportsOnce(rootModel));
             return await base.ShowDialogAsync(rootModel, context, settings);
         }
 

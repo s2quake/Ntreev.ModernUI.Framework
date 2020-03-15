@@ -64,11 +64,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         public MessageBoxResult Result
         {
             get => this.result;
-            set
-            {
-                this.result = value;
-                this.TryCloseAsync();
-            }
+            //set
+            //{
+            //    this.result = value;
+            //    this.TryCloseAsync();
+            //}
         }
 
         public MessageBoxButton Button { get; set; }
