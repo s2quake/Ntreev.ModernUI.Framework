@@ -16,10 +16,9 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Windows.Controls;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using System.Globalization;
 
 namespace Ntreev.ModernUI.Framework.Converters
 {

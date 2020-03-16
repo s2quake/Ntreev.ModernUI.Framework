@@ -16,19 +16,14 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.Library;
-using Ntreev.Library.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace Ntreev.ModernUI.Framework.Controls
@@ -51,8 +46,6 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
 
-        //private readonly ModernMenu menu;
-
         static ModernMenuItem()
         {
             CommandProperty.OverrideMetadata(typeof(ModernMenuItem),
@@ -64,12 +57,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         public ModernMenuItem()
         {
             this.SetValue(MenuItemsPropertyKey, this.menuItems);
-            //this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
-            //this.menu = menu;
-            //this.contextMenu.Opened += ContextMenu_Opened;
-            //this.contextMenu.Closed += ContextMenu_Closed;
-
-            //BindingOperations.SetBinding(this, CommandParameterProperty, new Binding(nameof(this.DataContext)) { Source = menu, });
         }
 
         public Type DataType

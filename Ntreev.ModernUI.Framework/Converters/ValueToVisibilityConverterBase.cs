@@ -16,10 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -29,7 +25,7 @@ namespace Ntreev.ModernUI.Framework.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            bool visible = this.Convert(value, parameter);
+            var visible = this.Convert(value, parameter);
 
             if (this.IsInversed == true)
                 visible = !visible;
@@ -50,17 +46,9 @@ namespace Ntreev.ModernUI.Framework.Converters
             return isVisible;
         }
 
-        public bool IsInversed
-        {
-            get;
-            set;
-        }
+        public bool IsInversed { get; set; }
 
-        public bool IsHidden
-        {
-            get;
-            set;
-        }
+        public bool IsHidden { get; set; }
 
         protected abstract bool Convert(object value, object parameter);
     }

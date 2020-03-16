@@ -17,11 +17,7 @@
 
 using Ntreev.ModernUI.Framework.Converters;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
@@ -60,38 +56,38 @@ namespace Ntreev.ModernUI.Framework.Markup
         [DefaultValue(null)]
         public PropertyPath Path
         {
-            get { return this.binding.Path; }
-            set { this.binding.Path = value; }
+            get => this.binding.Path;
+            set => this.binding.Path = value;
         }
 
         public bool Inverse
         {
-            get { return this.converter.IsInversed; }
-            set { this.converter.IsInversed = value; }
+            get => this.converter.IsInversed;
+            set => this.converter.IsInversed = value;
         }
 
         public bool IsHidden
         {
-            get { return this.converter.IsHidden; }
-            set { this.converter.IsHidden = value; }
+            get => this.converter.IsHidden;
+            set => this.converter.IsHidden = value;
         }
 
-        public string ElementName 
+        public string ElementName
         {
-            get { return this.binding.ElementName; }
-            set { this.binding.ElementName = value; }
+            get => this.binding.ElementName;
+            set => this.binding.ElementName = value;
         }
 
         public BindingMode Mode
         {
-            get { return this.binding.Mode; }
-            set { this.binding.Mode = value; }
+            get => this.binding.Mode;
+            set => this.binding.Mode = value;
         }
 
         public RelativeSource RelativeSource
         {
-            get { return this.binding.RelativeSource; }
-            set { this.binding.RelativeSource = value; }
+            get => this.binding.RelativeSource;
+            set => this.binding.RelativeSource = value;
         }
     }
 }

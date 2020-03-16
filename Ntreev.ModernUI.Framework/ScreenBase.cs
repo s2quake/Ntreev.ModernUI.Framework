@@ -19,8 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -28,18 +26,18 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class ScreenBase : Caliburn.Micro.Screen
+    public abstract class ScreenBase : Caliburn.Micro.Screen
     {
         private bool isProgressing;
         private string progressMessage;
         private readonly IServiceProvider serviceProvider;
 
-        public ScreenBase()
+        protected ScreenBase()
         {
 
         }
 
-        public ScreenBase(IServiceProvider serviceProvider)
+        protected ScreenBase(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
             if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
@@ -74,7 +72,6 @@ namespace Ntreev.ModernUI.Framework
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
-            this.OnProgress();
         }
 
         public void EndProgress()
@@ -88,7 +85,6 @@ namespace Ntreev.ModernUI.Framework
             this.progressMessage = message;
             this.NotifyOfPropertyChange(nameof(this.IsProgressing));
             this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
-            this.OnProgress();
         }
 
         public bool IsProgressing
@@ -103,7 +99,7 @@ namespace Ntreev.ModernUI.Framework
 
         public string ProgressMessage
         {
-            get => this.progressMessage;
+            get => this.progressMessage ?? string.Empty;
             set
             {
                 this.progressMessage = value;
@@ -145,11 +141,6 @@ namespace Ntreev.ModernUI.Framework
         protected override void OnViewReady(object view)
         {
             base.OnViewReady(view);
-        }
-
-        protected virtual void OnProgress()
-        {
-
         }
 
         protected virtual void OnClose()

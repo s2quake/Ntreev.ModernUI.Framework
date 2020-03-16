@@ -18,11 +18,8 @@
 using Ntreev.Library.IO;
 using Ntreev.Library.Linq;
 using Ntreev.Library.ObjectModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
@@ -51,7 +48,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 }
                 else if (NameValidator.VerifyCategoryPath(item) == true)
                 {
-                    var categoryName = new CategoryName(item);
+                    _ = new CategoryName(item);
                     var viewModel = this.CreateCategory(item);
                     var parentPath = this.GetParentPath(item);
                     viewModel.Parent = viewModels[parentPath];
@@ -59,7 +56,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 }
                 else if (categoryOnly == false)
                 {
-                    var itemName = new ItemName(item);
+                    _ = new ItemName(item);
                     var viewModel = this.CreateItem(item);
                     var parentPath = this.GetParentPath(item);
                     viewModel.Parent = viewModels[parentPath];

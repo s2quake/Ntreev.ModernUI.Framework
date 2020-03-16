@@ -15,23 +15,16 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Properties;
 using Ntreev.Library.ObjectModel;
-using Ntreev.ModernUI.Framework;
+using Ntreev.ModernUI.Framework.Properties;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
     public class MoveViewModel : ModalDialogBase
     {
         private readonly string currentPath;
-        private readonly string currentTargetPath;
-        private readonly string[] targetPaths;
         private string targetPath;
         private readonly Func<string, bool> predicate;
 
@@ -46,11 +39,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.Validate(currentPath, targetPaths);
             this.currentPath = currentPath;
             if (NameValidator.VerifyCategoryPath(currentPath) == true)
-                this.currentTargetPath = new CategoryName(currentPath).ParentPath;
+                this.CurrentTargetPath = new CategoryName(currentPath).ParentPath;
             else
-                this.currentTargetPath = new ItemName(currentPath).CategoryPath;
-            this.targetPath = currentTargetPath;
-            this.targetPaths = targetPaths;
+                this.CurrentTargetPath = new ItemName(currentPath).CategoryPath;
+            this.targetPath = CurrentTargetPath;
+            this.TargetPaths = targetPaths;
             this.predicate = predicate;
             this.DisplayName = Resources.Title_Move;
         }
@@ -60,14 +53,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.TryClose(this.CanMove);
         }
 
-        public string[] TargetPaths
-        {
-            get { return this.targetPaths; }
-        }
+        public string[] TargetPaths { get; }
 
         public string TargetPath
         {
-            get { return this.targetPath ?? string.Empty; }
+            get => this.targetPath ?? string.Empty;
             set
             {
                 this.targetPath = value;
@@ -76,15 +66,9 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             }
         }
 
-        public string CurrentTargetPath
-        {
-            get { return this.currentTargetPath; }
-        }
+        public string CurrentTargetPath { get; }
 
-        public string CurrentPath
-        {
-            get { return this.currentPath ?? string.Empty; }
-        }
+        public string CurrentPath => this.currentPath ?? string.Empty;
 
         public bool CanMove
         {
@@ -102,7 +86,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
                 if (this.TargetPath.StartsWith(this.CurrentPath) == true)
                     return false;
 
-                if (this.TargetPath == this.currentTargetPath)
+                if (this.TargetPath == this.CurrentTargetPath)
                     return false;
 
                 if (this.TargetPath == this.CurrentPath)

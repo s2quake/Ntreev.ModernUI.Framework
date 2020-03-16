@@ -30,19 +30,17 @@ namespace Ntreev.ModernUI.Framework.Converters
             {
                 return null;
             }
-            if (value is Color)
+            if (value is Color color)
             {
-                Color color = (Color)value;
                 return new SolidColorBrush(color);
             }
 
-            Type type = value.GetType();
-            throw new InvalidOperationException("Unsupported type [" + type.Name + "]");
+            throw new InvalidOperationException($"Unsupported type [{value.GetType().Name}]");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush brush = (SolidColorBrush)value;
+            var brush = (SolidColorBrush)value;
             return brush.Color;
         }
     }

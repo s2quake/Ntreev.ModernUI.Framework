@@ -16,11 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -41,7 +37,7 @@ namespace Ntreev.ModernUI.Framework.Converters
             throw new NotImplementedException();
         }
 
-        private int ToArgb(System.Windows.Media.Color color)
+        private int ToArgb(Color color)
         {
             var bytes = new byte[] { color.A, color.R, color.G, color.B };
             return BitConverter.ToInt32(bytes, 0);

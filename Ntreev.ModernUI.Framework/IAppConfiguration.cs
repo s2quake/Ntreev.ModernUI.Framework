@@ -18,10 +18,6 @@
 using Ntreev.Library;
 using Ntreev.Library.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -63,7 +59,7 @@ namespace Ntreev.ModernUI.Framework
                 }
             }
 
-            value = default(T);
+            value = default;
             return false;
         }
 

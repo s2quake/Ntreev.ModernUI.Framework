@@ -23,7 +23,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <nmfv:RoutedUICommandToStringConverter x:Key="RoutedUICommandToStringConverter" />
 
-    <ControlTemplate x:Key="IconToggleButton_Template" TargetType="{x:Type nmfc:IconToggleButton}">
+    <ControlTemplate x:Key="IconRepeatButton_Template" TargetType="{x:Type nmfc:IconRepeatButton}">
         <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
             <Grid>
                 <ContentPresenter x:Name="Presenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -46,39 +46,19 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="BorderBrush" TargetName="Chrome" Value="{DynamicResource Accent}" />
             </Trigger>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{DynamicResource WindowBorder}" />
-            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:IconToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+    <Style TargetType="{x:Type nmfc:IconRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Padding" Value="3" />
-        <Setter Property="Template" Value="{StaticResource IconToggleButton_Template}" />
+        <Setter Property="Template" Value="{StaticResource IconRepeatButton_Template}" />
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
         <Setter Property="ToolTip" Value="{Binding Path=Command, RelativeSource={RelativeSource Self}, Converter={StaticResource RoutedUICommandToStringConverter}}" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <nmfc:IconImage Source="{Binding Source, RelativeSource={RelativeSource AncestorType={x:Type nmfc:IconToggleButton}}}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="Toolbar_IconToggleButton_Style" TargetType="{x:Type nmfc:IconToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
-        <Setter Property="Width" Value="22" />
-        <Setter Property="Height" Value="22" />
-        <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <nmfc:IconImage Source="{Binding Source, RelativeSource={RelativeSource AncestorType={x:Type nmfc:IconToggleButton}}}" />
+                    <nmfc:IconImage Source="{Binding Source, RelativeSource={RelativeSource AncestorType={x:Type nmfc:IconRepeatButton}}}" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>

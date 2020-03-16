@@ -15,35 +15,26 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    public class ToolBarItemStyleSelector : StyleSelector
+    public class IconRepeatButton : RepeatButton
     {
-        public ToolBarItemStyleSelector()
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(IconRepeatButton));
+
+        public IconRepeatButton()
         {
 
         }
 
-        public override Style SelectStyle(object item, DependencyObject container)
+        public ImageSource Source
         {
-            if (item is IToolBarItem == true)
-            {
-                if (container is FrameworkElement fe)
-                {
-                    if (this.Style != null)
-                        return this.Style;
-                }
-            }
-            return base.SelectStyle(item, container);
+            get => (ImageSource)this.GetValue(SourceProperty);
+            set => this.SetValue(SourceProperty, value);
         }
-        public Style Style { get; set; }
     }
 }

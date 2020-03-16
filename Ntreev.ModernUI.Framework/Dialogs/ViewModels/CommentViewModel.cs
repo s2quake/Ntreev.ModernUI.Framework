@@ -15,13 +15,7 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Properties;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -32,7 +26,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public CommentViewModel()
         {
-            
+            this.PropertyChanged += CommentViewModel_PropertyChanged;
         }
 
         public virtual void Confirm()
@@ -42,7 +36,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string Comment
         {
-            get { return this.comment ?? string.Empty; }
+            get => this.comment ?? string.Empty;
             set
             {
                 this.comment = value;
@@ -65,14 +59,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             }
         }
 
-        public bool AllowEmptyComment
-        {
-            get; set;
-        }
+        public bool AllowEmptyComment { get; set; }
 
         public string CommentHeader
         {
-            get { return this.commentHeader ?? string.Empty; }
+            get => this.commentHeader ?? string.Empty;
             set
             {
                 this.commentHeader = value;
@@ -80,10 +71,12 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             }
         }
 
-        protected override void OnProgress()
+        private void CommentViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnProgress();
-            this.NotifyOfPropertyChange(nameof(this.CanClose));
+            if (e.PropertyName == nameof(this.IsProgressing))
+            {
+                this.NotifyOfPropertyChange(nameof(this.CanClose));
+            }
         }
     }
 }

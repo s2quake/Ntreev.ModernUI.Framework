@@ -16,11 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Ntreev.ModernUI.Framework.Converters
@@ -39,10 +35,6 @@ namespace Ntreev.ModernUI.Framework.Converters
             throw new InvalidOperationException("IsNullConverter can only be used OneWay.");
         }
 
-        public bool Inverse
-        {
-            get;
-            set;
-        }
+        public bool Inverse { get; set; }
     }
 }

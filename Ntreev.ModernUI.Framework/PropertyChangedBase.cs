@@ -18,24 +18,41 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase, IPartImportsSatisfiedNotification
+    public abstract class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase, IPartImportsSatisfiedNotification
     {
-        [Import]
-        private ICompositionService compositionService = null;
+        private readonly IServiceProvider serviceProvider;
+
+        protected PropertyChangedBase()
+        {
+
+        }
+
+        protected PropertyChangedBase(IServiceProvider serviceProvider)
+        {
+            this.serviceProvider = serviceProvider;
+            if (this.serviceProvider?.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+            }
+        }
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
+        public virtual IEnumerable<IMenuItem> ContextMenus => MenuItemUtility.GetMenuItems(this, this.serviceProvider ?? AppBootstrapperBase.Current);
+
+        public virtual IEnumerable<IToolBarItem> ToolBarMenus => ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider ?? AppBootstrapperBase.Current);
+
         protected void SatisfyImportsOnce(object attributedPart)
         {
-            this.compositionService?.SatisfyImportsOnce(attributedPart);
+            if (this.serviceProvider?.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            {
+                compositionService.SatisfyImportsOnce(attributedPart);
+            }
         }
 
         protected virtual void OnImportsSatisfied()

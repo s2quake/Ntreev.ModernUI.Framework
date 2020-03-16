@@ -21,9 +21,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -333,11 +331,6 @@ namespace Ntreev.ModernUI.Framework.Controls
             return text;
         }
 
-        private object GetCommentMember(object item)
-        {
-            return PropertyPathHelper.GetValue(item, this.CommentMemberPath);
-        }
-
         private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as FlagControl;
@@ -436,8 +429,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 for (var i = 0; i < this.ItemContainerGenerator.Items.Count; i++)
                 {
-                    var item = this.ItemContainerGenerator.ContainerFromIndex(i) as FlagControlItem;
-                    if (item == null)
+                    if (!(this.ItemContainerGenerator.ContainerFromIndex(i) is FlagControlItem item))
                         continue;
 
                     if (this.Value.HasValue == true)

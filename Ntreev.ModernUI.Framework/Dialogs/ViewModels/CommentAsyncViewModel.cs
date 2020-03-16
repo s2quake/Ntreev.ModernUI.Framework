@@ -16,18 +16,13 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
     public class CommentAsyncViewModel : CommentViewModel
     {
-        private bool isValid;
-
         protected CommentAsyncViewModel()
         {
             this.PropertyChanged += CommentAsyncViewModel_PropertyChanged;
@@ -59,15 +54,8 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             return Task.Delay(1);
         }
 
-        protected override void OnProgress()
-        {
-            base.OnProgress();
-            this.NotifyOfPropertyChange(nameof(this.CanConfirm));
-        }
-
         private void VerifyAction(bool isValid)
         {
-            this.isValid = isValid;
             this.NotifyOfPropertyChange(nameof(this.CanConfirm));
         }
 
@@ -76,6 +64,10 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             if (e.PropertyName == nameof(this.Comment))
             {
                 this.Verify(this.Comment, this.VerifyAction);
+            }
+            else if (e.PropertyName == nameof(this.IsProgressing))
+            {
+                this.NotifyOfPropertyChange(nameof(this.CanConfirm));
             }
         }
     }

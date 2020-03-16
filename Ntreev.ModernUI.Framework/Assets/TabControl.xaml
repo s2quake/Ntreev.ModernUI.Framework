@@ -117,7 +117,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Border Background="{TemplateBinding Background}" Margin="0 0 1 0" SnapsToDevicePixels="True" Padding="2">
-                        <ContentPresenter x:Name="header" ContentSource="Header" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ContentPresenter ContentSource="Header" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
@@ -140,6 +140,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="BorderThickness" Value="0 1 0 0" />
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource TabItem_Document_Style}" />
+        <Setter Property="Template" Value="{StaticResource TabControl_Template}" />
     </Style>
 
     <Style x:Key="TabControl_Modern_Style" TargetType="{x:Type TabControl}">
@@ -320,4 +321,85 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
     
+    <ControlTemplate x:Key="TabControl_Template" TargetType="{x:Type TabControl}">
+        <Grid x:Name="templateRoot" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="ColumnDefinition0"/>
+                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                <RowDefinition x:Name="RowDefinition1" Height="*"/>
+            </Grid.RowDefinitions>
+            <!--<TabPanel x:Name="HeaderPanel" Background="Transparent" Grid.Column="0" IsItemsHost="True" Margin="2,2,2,0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>-->
+            <ScrollViewer x:Name="HeaderPanel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="{x:Type ScrollViewer}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" x:Name="HeaderPanel">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <ScrollContentPresenter Grid.Column="0" Content="{TemplateBinding ScrollViewer.Content}" />
+                                        <nmfc:IconRepeatButton x:Name="LeftButton" Grid.Column="1" Command="ScrollBar.LineLeftCommand" 
+                                                      Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                      Source="/Ntreev.ModernUI.Framework;component/Images/arrow_left.png" />
+                                        <nmfc:IconRepeatButton x:Name="RightButton" Grid.Column="2" Command="ScrollBar.LineRightCommand" 
+                                                      Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                      Source="/Ntreev.ModernUI.Framework;component/Images/arrow_right.png" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ScrollViewer.Style>
+                <StackPanel IsItemsHost="True" Orientation="Horizontal" Background="{x:Null}" KeyboardNavigation.TabIndex="1" />
+            </ScrollViewer>
+            <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                <ContentPresenter x:Name="PART_SelectedContentHost" ContentTemplate="{TemplateBinding SelectedContentTemplate}" Content="{TemplateBinding SelectedContent}" ContentStringFormat="{TemplateBinding SelectedContentStringFormat}" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="TabStripPlacement" Value="Bottom">
+                <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
+                <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
+                <Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>
+            </Trigger>
+            <Trigger Property="TabStripPlacement" Value="Left">
+                <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="0"/>
+                <Setter Property="Grid.Column" TargetName="ContentPanel" Value="1"/>
+                <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
+                <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
+                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                <Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>
+            </Trigger>
+            <Trigger Property="TabStripPlacement" Value="Right">
+                <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="1"/>
+                <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
+                <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
+                <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
+                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                <Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
 </ResourceDictionary>

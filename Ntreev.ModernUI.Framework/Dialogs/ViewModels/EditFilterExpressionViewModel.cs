@@ -15,14 +15,8 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.Library;
-using Ntreev.ModernUI.Framework;
 using Ntreev.ModernUI.Framework.Properties;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -43,26 +37,26 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string FilterExpression
         {
-            get { return this.filterExpression ?? string.Empty; }
+            get => this.filterExpression ?? string.Empty;
             set
             {
                 this.filterExpression = value ?? string.Empty;
                 this.filterExpressions = this.filterExpression.Replace(";", Environment.NewLine);
 
-                this.NotifyOfPropertyChange(() => this.FilterExpression);
-                this.NotifyOfPropertyChange(() => this.FilterExpressions);
+                this.NotifyOfPropertyChange(nameof(this.FilterExpression));
+                this.NotifyOfPropertyChange(nameof(this.FilterExpressions));
             }
         }
 
         public string FilterExpressions
         {
-            get { return this.filterExpressions ?? string.Empty; }
+            get => this.filterExpressions ?? string.Empty;
             set
             {
                 this.filterExpressions = value ?? string.Empty;
                 this.filterExpression = this.filterExpressions.Trim().Replace(Environment.NewLine, ";");
-                this.NotifyOfPropertyChange(() => this.FilterExpression);
-                this.NotifyOfPropertyChange(() => this.FilterExpressions);
+                this.NotifyOfPropertyChange(nameof(this.FilterExpression));
+                this.NotifyOfPropertyChange(nameof(this.FilterExpressions));
             }
         }
     }

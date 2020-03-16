@@ -16,13 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.ModernUI.Framework.Properties;
-using Ntreev.ModernUI.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
@@ -42,7 +35,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string DeletionMessage
         {
-            get { return this.deletionMessage ?? string.Empty; }
+            get => this.deletionMessage ?? string.Empty;
             set
             {
                 this.deletionMessage = value;
@@ -53,7 +46,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string Comment
         {
-            get { return this.comment; }
+            get => this.comment ?? string.Empty;
             set
             {
                 this.comment = value;
@@ -66,14 +59,11 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.TryClose(this.CanDelete);
         }
 
-        public bool CanDelete
-        {
-            get { return this.deletionMessage == this.textToDelete; }
-        }
+        public bool CanDelete => this.deletionMessage == this.textToDelete;
 
         public string Target
         {
-            get { return this.target ?? string.Empty; }
+            get => this.target ?? string.Empty;
             set
             {
                 this.target = value;

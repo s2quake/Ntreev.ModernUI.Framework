@@ -15,25 +15,19 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Caliburn.Micro;
 using Ntreev.Library;
 using Ntreev.Library.IO;
 using Ntreev.Library.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
-    public class TreeViewViewModel : ViewModelBase, ISelector, IPartImportsSatisfiedNotification
+    public class TreeViewViewModel : ViewModelBase, ISelector
     {
-        private readonly ObservableCollection<TreeViewItemViewModel> items = new ObservableCollection<TreeViewItemViewModel>();
         private readonly List<TreeViewItemViewModel> expandedItems = new List<TreeViewItemViewModel>();
         private readonly List<TreeViewItemViewModel> visibleItems = new List<TreeViewItemViewModel>();
         private TreeViewItemViewModel selectedItem;
@@ -42,10 +36,16 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private bool globPattern;
         private string displayName;
 
-        [Import]
-        private IServiceProvider serviceProvider = null;
-        [Import]
-        private ICompositionService compositionService = null;
+        public TreeViewViewModel()
+        {
+
+        }
+
+        public TreeViewViewModel(IServiceProvider serviceProvider)
+            : base(serviceProvider)
+        {
+
+        }
 
         public void ExpandAll()
         {
@@ -88,14 +88,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public ObservableCollection<TreeViewItemViewModel> Items
-        {
-            get { return this.items; }
-        }
+        public ObservableCollection<TreeViewItemViewModel> Items { get; } = new ObservableCollection<TreeViewItemViewModel>();
 
         public TreeViewItemViewModel SelectedItem
         {
-            get { return this.selectedItem; }
+            get => this.selectedItem;
             set
             {
                 if (this.selectedItem == value)
@@ -118,7 +115,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string DisplayName
         {
-            get { return this.displayName; }
+            get => this.displayName;
             set
             {
                 this.displayName = value;
@@ -128,7 +125,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string FilterExpression
         {
-            get { return this.filterExpression ?? string.Empty; }
+            get => this.filterExpression ?? string.Empty;
             set
             {
                 if (this.filterExpression == value)
@@ -147,7 +144,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 }
                 else
                 {
-                    var items = this.items.SelectMany((TreeViewItemViewModel item) => EnumerableUtility.FamilyTree(item, i => i.Items));
+                    var items = this.Items.SelectMany((TreeViewItemViewModel item) => EnumerableUtility.FamilyTree(item, i => i.Items));
 
                     foreach (var item in items)
                     {
@@ -177,7 +174,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool CaseSensitive
         {
-            get { return this.caseSensitive; }
+            get => this.caseSensitive;
             set
             {
                 this.caseSensitive = value;
@@ -187,7 +184,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public bool GlobPattern
         {
-            get { return this.globPattern; }
+            get => this.globPattern;
             set
             {
                 this.globPattern = value;
@@ -197,19 +194,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public event EventHandler SelectionChanged;
 
-        public virtual IEnumerable<IToolBarItem> ToolBarItems
-        {
-            get
-            {
-                if (this.serviceProvider == null)
-                    return Enumerable.Empty<IToolBarItem>();
-                return ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
-            }
-        }
+        protected virtual void OnSelectionChanged(EventArgs e) => this.SelectionChanged?.Invoke(this, e);
 
-        protected virtual void OnSelectionChanged(EventArgs e)
+        protected override void OnImportsSatisfied()
         {
-            this.SelectionChanged?.Invoke(this, e);
+            base.OnImportsSatisfied();
         }
 
         private bool Filter(string text, string filterExpression)
@@ -223,7 +212,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         private void BackupState()
         {
-            var items = this.items.SelectMany((TreeViewItemViewModel item) => EnumerableUtility.FamilyTree(item, i => i.Items));
+            var items = this.Items.SelectMany((TreeViewItemViewModel item) => EnumerableUtility.FamilyTree(item, i => i.Items));
 
             this.expandedItems.Clear();
             this.visibleItems.Clear();
@@ -239,7 +228,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private void RestoreState()
         {
             var selectedItem = this.selectedItem;
-            var items = this.items.SelectMany((TreeViewItemViewModel item) => EnumerableUtility.FamilyTree(item, i => i.Items));
+            var items = this.Items.SelectMany((TreeViewItemViewModel item) => EnumerableUtility.FamilyTree(item, i => i.Items));
 
             foreach (var item in items)
             {
@@ -276,30 +265,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             return string.Join(PathUtility.Separator, items);
         }
 
-        #region IPartImportsSatisfiedNotification
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            foreach (var item in this.Items)
-            {
-                this.compositionService.SatisfyImportsOnce(item);
-            }
-        }
-
-        #endregion
-
         #region ISelector
 
         object ISelector.SelectedItem
         {
-            get
-            {
-                return this.SelectedItem;
-            }
-            set
-            {
-                this.SelectedItem = value as TreeViewItemViewModel;
-            }
+            get => this.SelectedItem;
+            set => this.SelectedItem = value as TreeViewItemViewModel;
         }
 
         #endregion

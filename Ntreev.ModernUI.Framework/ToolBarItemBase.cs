@@ -15,23 +15,11 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ntreev.Library.Linq;
 using Caliburn.Micro;
-using System.Windows.Input;
-using System.ComponentModel.Composition;
-using System.Windows;
-using System.Collections;
-using System.Globalization;
-using System.ComponentModel.Composition.Hosting;
-using System.Runtime.CompilerServices;
-using System.ComponentModel;
-using System.Windows.Threading;
-using System.Windows.Media.Imaging;
 using Ntreev.ModernUI.Framework.Controls;
+using System;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Ntreev.ModernUI.Framework
 {

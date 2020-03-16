@@ -15,32 +15,22 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Caliburn.Micro;
-using Ntreev.ModernUI.Framework;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
     public abstract class DocumentBase : ScreenBase, IDocument
     {
-        private readonly ICommand closeCommand;
         private bool isModified;
 
         protected DocumentBase()
         {
-            this.closeCommand = new DelegateCommand(CloseCommand_Execute, CloseCommand_CanExecute);
+            this.CloseCommand = new DelegateCommand(CloseCommand_Execute, CloseCommand_CanExecute);
         }
 
-        public sealed override void TryClose(bool? dialogResult = default(bool?))
+        public sealed override void TryClose(bool? dialogResult = default)
         {
             base.TryClose(dialogResult);
         }
@@ -51,14 +41,11 @@ namespace Ntreev.ModernUI.Framework
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public ICommand CloseCommand
-        {
-            get { return this.closeCommand; }
-        }
+        public ICommand CloseCommand { get; }
 
         public bool IsModified
         {
-            get { return this.isModified; }
+            get => this.isModified;
             set
             {
                 this.isModified = value;
@@ -86,11 +73,6 @@ namespace Ntreev.ModernUI.Framework
             base.OnClose();
             this.OnDisposed(EventArgs.Empty);
         }
-
-        //protected virtual Task CloseAsync(bool save)
-        //{
-        //    return Task.Delay(0);
-        //}
 
         protected virtual void OnDisposed(EventArgs e)
         {

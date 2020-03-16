@@ -15,22 +15,16 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Properties;
-using Ntreev.Library.ObjectModel;
-using Ntreev.ModernUI.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 using Ntreev.Library.IO;
+using Ntreev.Library.ObjectModel;
+using Ntreev.ModernUI.Framework.Properties;
+using System;
+using System.Linq;
 
 namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 {
     public class NewCategoryViewModel : ModalDialogBase
     {
-        private readonly string parentPath;
         private readonly Func<string, bool> predicate;
         private string categoryName;
 
@@ -50,7 +44,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
         {
             this.Validate(parentPath);
             this.DisplayName = Resources.Title_NewCategory;
-            this.parentPath = parentPath;
+            this.ParentPath = parentPath;
             this.predicate = predicate;
         }
 
@@ -61,7 +55,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public string CategoryName
         {
-            get { return this.categoryName ?? string.Empty; }
+            get => this.categoryName ?? string.Empty;
             set
             {
                 this.categoryName = value;
@@ -76,15 +70,12 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             get
             {
                 if (this.CategoryName == string.Empty)
-                    return this.parentPath + this.CategoryName;
-                return this.parentPath + this.CategoryName + PathUtility.Separator;
+                    return this.ParentPath + this.CategoryName;
+                return this.ParentPath + this.CategoryName + PathUtility.Separator;
             }
         }
 
-        public string ParentPath
-        {
-            get { return this.parentPath; }
-        }
+        public string ParentPath { get; }
 
         public bool CanCreate
         {

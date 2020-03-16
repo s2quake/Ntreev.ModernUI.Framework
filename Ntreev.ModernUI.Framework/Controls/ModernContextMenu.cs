@@ -20,14 +20,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 
@@ -50,18 +46,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         static ModernContextMenu()
         {
-            //PlacementTargetProperty.OverrideMetadata(typeof(ModernContextMenu),
-            //    new FrameworkPropertyMetadata(PlacementTargetPropertyChangedCallback));
-        }
-
-        private static void PlacementTargetPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            //if (e.NewValue is FrameworkElement frameworkElement)
-            //{
-            //    d.SetValue(DataContextProperty, frameworkElement.DataContext);
-            //}
-            //d.CoerceValue(DataContextProperty);
-            //d.CoerceValue(ItemsSourceProperty);
+            
         }
 
         public ModernContextMenu()
@@ -107,16 +92,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void OnOpened(RoutedEventArgs e)
         {
             base.OnOpened(e);
-            //if (this.Parent is FrameworkElement fe)
-            //{
-            //    this.DataContext = fe.DataContext;
-            //}
-
-            //var be = BindingOperations.GetBindingExpressionBase(this, DataContextProperty);
-            //if  (be != null)
-            //{
-            //    be.UpdateTarget();
-            //}
 
             var items = base.ItemsSource.OfType<object>();
             if (items.FirstOrDefault() is Separator s1)

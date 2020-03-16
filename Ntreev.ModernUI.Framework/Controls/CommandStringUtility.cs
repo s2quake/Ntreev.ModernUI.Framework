@@ -16,14 +16,8 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
@@ -156,18 +150,6 @@ namespace Ntreev.ModernUI.Framework.Controls
                 text = text.Remove(text.Length - 1);
             }
             return text;
-        }
-
-        private static string ToLiteral(string input)
-        {
-            using (var writer = new StringWriter())
-            {
-                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
-                {
-                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
-                    return writer.ToString();
-                }
-            }
         }
 
         public static IDictionary<string, object> ArgumentsToDictionary(string[] arguments)

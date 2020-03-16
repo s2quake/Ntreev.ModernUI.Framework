@@ -16,14 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.Library.IO;
-using Ntreev.Library.Linq;
 using Ntreev.Library.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
@@ -74,29 +67,14 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             return viewModels[PathUtility.Separator] as CategoryTreeViewItemViewModel;
         }
 
-        public override string DisplayName
-        {
-            get { return this.categoryName.Name; }
-        }
+        public override string DisplayName => this.categoryName.Name;
 
-        public string DisplayPath
-        {
-            get { return this.categoryName.Path; }
-        }
+        public string DisplayPath => this.categoryName.Path;
 
-        public string Path
-        {
-            get { return this.categoryName.Path; }
-        }
+        public string Path => this.categoryName.Path;
 
-        public string Name
-        {
-            get { return categoryName.Name; }
-        }
+        public string Name => categoryName.Name;
 
-        public override int Order
-        {
-            get { return 1; }
-        }
+        public override int Order => 1;
     }
 }

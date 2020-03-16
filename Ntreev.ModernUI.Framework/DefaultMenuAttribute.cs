@@ -16,18 +16,12 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class DefaultMenuAttribute : Attribute
     {
-        private readonly int order;
-
         public DefaultMenuAttribute()
         {
 
@@ -35,12 +29,9 @@ namespace Ntreev.ModernUI.Framework
 
         public DefaultMenuAttribute(int order)
         {
-            this.order = order;
+            this.Order = order;
         }
 
-        public int Order
-        {
-            get { return this.order; }
-        }
+        public int Order { get; }
     }
 }

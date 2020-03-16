@@ -34,6 +34,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="GuidControl.xaml" />
         <ResourceDictionary Source="IconButton.xaml" />
         <ResourceDictionary Source="IconImage.xaml" />
+        <ResourceDictionary Source="IconRepeatButton.xaml" />
         <ResourceDictionary Source="IconToggleButton.xaml" />
         <ResourceDictionary Source="ListBox.xaml" />
         <ResourceDictionary Source="Menu.xaml" />

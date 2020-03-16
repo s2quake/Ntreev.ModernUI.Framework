@@ -15,18 +15,9 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Specialized;
-using System.Windows.Threading;
-using System.Linq.Expressions;
-using Caliburn.Micro;
-using System.Collections;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
 {
@@ -59,7 +50,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
                 foreach (var item in this.Items.OfType<CheckableTreeViewItemViewModel>())
                 {
-                    item.PropertyChanged -= item_PropertyChanged;
+                    item.PropertyChanged -= Item_PropertyChanged;
                 }
 
                 foreach (var item in this.Items.OfType<CheckableTreeViewItemViewModel>())
@@ -71,7 +62,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
                 foreach (var item in this.Items.OfType<CheckableTreeViewItemViewModel>())
                 {
-                    item.PropertyChanged += item_PropertyChanged;
+                    item.PropertyChanged += Item_PropertyChanged;
                 }
 
                 if (this.isChecked == true)
@@ -89,25 +80,13 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public virtual bool IsThreeState
-        {
-            get { return true; }
-        }
+        public virtual bool IsThreeState => true;
 
-        public virtual bool DependsOnChilds
-        {
-            get { return true; }
-        }
+        public virtual bool DependsOnChilds => true;
 
-        public virtual bool DependsOnParent
-        {
-            get { return false; }
-        }
+        public virtual bool DependsOnParent => false;
 
-        public virtual bool CanCheck
-        {
-            get { return true; }
-        }
+        public virtual bool CanCheck => true;
 
         protected virtual void OnChecked()
         {
@@ -134,7 +113,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                         {
                             if (item is INotifyPropertyChanged == true)
                             {
-                                (item as INotifyPropertyChanged).PropertyChanged += item_PropertyChanged;
+                                (item as INotifyPropertyChanged).PropertyChanged += Item_PropertyChanged;
                             }
                         }
                     }
@@ -146,7 +125,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                         {
                             if (item is INotifyPropertyChanged == true)
                             {
-                                (item as INotifyPropertyChanged).PropertyChanged -= item_PropertyChanged;
+                                (item as INotifyPropertyChanged).PropertyChanged -= Item_PropertyChanged;
                             }
                         }
                     }
@@ -154,7 +133,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsChecked")
             {

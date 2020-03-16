@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="CategoryNameAttribute.cs" />
+    <Compile Include="Controls\IconRepeatButton.cs" />
     <Compile Include="Controls\ModernToolBarStyleSelector.cs" />
     <Compile Include="Controls\ModernMenuItem.cs" />
     <Compile Include="Controls\ModernMenu.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Controls\TerminalColors.cs" />
     <Compile Include="Controls\TerminalControl.cs" />
     <Compile Include="Controls\ThicknessControl.cs" />
-    <None Include="Controls\ToolBarItemStyleSelector.cs" />
     <Compile Include="Controls\ModernMenuStyleSelector.cs" />
     <Compile Include="Controls\ModernTreeViewItem.cs" />
     <Compile Include="Controls\ModernTreeView.cs" />
@@ -212,7 +212,6 @@
     <Compile Include="ScreenBase.cs" />
     <Compile Include="DelegateUndoAction.cs" />
     <Compile Include="UndoBase.cs" />
-    <None Include="UndoService.cs" />
     <Compile Include="UndoServiceBase.cs" />
     <Compile Include="ViewAwareBase.cs" />
     <Compile Include="PropertyChangedBase.cs" />
@@ -269,6 +268,10 @@
     <Page Include="Assets\GridSplitter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\IconRepeatButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\Menu.xaml">
       <SubType>Designer</SubType>
@@ -527,6 +530,10 @@
   <ItemGroup>
     <Resource Include="Images\thickness_top.png" />
     <Resource Include="Images\thickness_bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow_left.png" />
+    <Resource Include="Images\arrow_right.png" />
   </ItemGroup>
   <Import Project="..\Ntreev.ModernUI.AssemblyInfo\Ntreev.ModernUI.AssemblyInfo.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
