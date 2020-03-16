@@ -551,7 +551,12 @@ namespace Ntreev.ModernUI.Framework.Controls
             else if (e.Key == Key.Back && Keyboard.Modifiers == ModifierKeys.None)
             {
                 var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
+                var commandEnd = this.promptBlock.Inlines.FirstInline.ContentEnd.GetPositionAtOffset(this.Prompt.Length);
                 if (this.textBox.CaretPosition.CompareTo(commandStart) <= 0)
+                {
+                    e.Handled = true;
+                }
+                else if (commandEnd != null && this.textBox.CaretPosition.CompareTo(commandEnd) <= 0)
                 {
                     e.Handled = true;
                 }

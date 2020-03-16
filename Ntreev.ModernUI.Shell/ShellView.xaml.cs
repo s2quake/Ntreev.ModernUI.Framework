@@ -60,7 +60,7 @@ namespace Ntreev.ModernUI.Shell
                 {
                     this.editor.Focus();
                     this.editor.AppendLine("안녕하세요.");
-                    this.editor.Prompt = "c:>";
+                    this.editor.Prompt = "c:> ";
                 }
             });
         }

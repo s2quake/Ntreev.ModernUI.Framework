@@ -9,7 +9,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="MinWidth" Value="50" />
+        <Setter Property="MinWidth" Value="60" />
     </Style>
 
     <Style x:Key="IMenuItem_ModernMenuItem_Style" TargetType="{x:Type nmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type nmfc:ModernMenuItem}}">
