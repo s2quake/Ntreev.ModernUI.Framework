@@ -54,15 +54,15 @@ namespace Ntreev.ModernUI.Shell
 
         private void Editor_Loaded(object sender, RoutedEventArgs e)
         {
-            //this.Dispatcher.InvokeAsync(() =>
-            //{
-            //    if (this.editor.ApplyTemplate() == true)
-            //    {
-            //        this.editor.Focus();
-            //        this.editor.AppendLine("안녕하세요.");
-            //        this.editor.Prompt = "c:>";
-            //    }
-            //});
+            this.Dispatcher.InvokeAsync(() =>
+            {
+                if (this.editor.ApplyTemplate() == true)
+                {
+                    this.editor.Focus();
+                    this.editor.AppendLine("안녕하세요.");
+                    this.editor.Prompt = "c:> ";
+                }
+            });
         }
 
         private void PickColor_Click(object sender, RoutedEventArgs e)
