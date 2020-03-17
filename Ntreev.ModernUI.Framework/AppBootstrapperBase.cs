@@ -17,6 +17,7 @@
 
 using Caliburn.Micro;
 using Ntreev.Library.Linq;
+using Ntreev.ModernUI.Framework.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,6 +37,11 @@ namespace Ntreev.ModernUI.Framework
     {
         private readonly Type modelType;
         private CompositionContainer container;
+
+        static AppBootstrapperBase()
+        {
+            ConventionManager.AddElementConvention<ThicknessControl>(ThicknessControl.ValueProperty, nameof(ThicknessControl.Value), nameof(ThicknessControl.ValueChanged));
+        }
 
         protected AppBootstrapperBase(Type modelType)
         {

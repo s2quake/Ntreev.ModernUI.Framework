@@ -15,9 +15,12 @@ namespace Ntreev.ModernUI.Framework.Controls
         public const string PART_Right = nameof(PART_Right);
         public const string PART_Bottom = nameof(PART_Bottom);
 
-        public static readonly DependencyProperty ThicknessProperty =
+        public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(Thickness), typeof(ThicknessControl),
-                new FrameworkPropertyMetadata(ThicknessPropertyChangedCallback));
+                new FrameworkPropertyMetadata(default(Thickness), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertyChangedCallback));
+
+        public static readonly RoutedEvent ValueChangedEvent =
+            EventManager.RegisterRoutedEvent(nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ThicknessControl));
 
         private TextBox leftControl;
         private TextBox topControl;
@@ -57,11 +60,17 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public Thickness Value
         {
-            get => (Thickness)this.GetValue(ThicknessProperty);
-            set => this.SetValue(ThicknessProperty, value);
+            get => (Thickness)this.GetValue(ValueProperty);
+            set => this.SetValue(ValueProperty, value);
         }
 
-        private static void ThicknessPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public event RoutedEventHandler ValueChanged
+        {
+            add { AddHandler(ValueChangedEvent, value); }
+            remove { RemoveHandler(ValueChangedEvent, value); }
+        }
+
+        private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ThicknessControl self)
             {
@@ -90,11 +99,11 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 this.bottomControl.Text = $"{this.Value.Bottom}";
             }
+            this.RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
         }
 
         private void AttachEvent(TextBox textBox)
         {
-            //textBox.PreviewTextInput += TextBox_PreviewTextInput;
             textBox.KeyDown += TextBox_KeyDown;
             textBox.TextChanged += TextBox_TextChanged;
             textBox.GotFocus += TextBox_GotFocus;
