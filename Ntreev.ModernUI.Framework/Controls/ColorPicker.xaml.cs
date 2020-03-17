@@ -15,29 +15,22 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using FirstFloor.ModernUI.Presentation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
     public partial class ColorPicker : UserControl
     {
-        public static readonly DependencyProperty CurrentColorProperty =
-                DependencyProperty.Register(nameof(CurrentColor), typeof(Color), typeof(ColorPicker),
-                    new FrameworkPropertyMetadata(Colors.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty ValueProperty =
+                DependencyProperty.Register(nameof(Value), typeof(Color), typeof(ColorPicker),
+                    new FrameworkPropertyMetadata(Colors.Transparent, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                        ValuePropertyChangedCallback));
+
+        public static readonly RoutedEvent ValueChangedEvent =
+            EventManager.RegisterRoutedEvent(nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorPicker));
 
         private Button button;
 
@@ -46,22 +39,36 @@ namespace Ntreev.ModernUI.Framework.Controls
             InitializeComponent();
         }
 
-        public Color CurrentColor
+        public Color Value
         {
-            get => (Color)this.GetValue(CurrentColorProperty);
-            set => this.SetValue(CurrentColorProperty, value);
+            get => (Color)this.GetValue(ValueProperty);
+            set => this.SetValue(ValueProperty, value);
+        }
+
+        public event RoutedEventHandler ValueChanged
+        {
+            add { this.AddHandler(ValueChangedEvent, value); }
+            remove { this.AddHandler(ValueChangedEvent, value); }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Background is SolidColorBrush brush)
             {
-                this.CurrentColor = brush.Color;
+                this.Value = brush.Color;
                 if (this.button != null)
                     this.button.Tag = null;
                 this.button = button;
                 if (this.button != null)
                     this.button.Tag = true;
+            }
+        }
+
+        private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is UIElement element)
+            {
+                element.RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
             }
         }
     }

@@ -41,6 +41,7 @@ namespace Ntreev.ModernUI.Framework
         static AppBootstrapperBase()
         {
             ConventionManager.AddElementConvention<ThicknessControl>(ThicknessControl.ValueProperty, nameof(ThicknessControl.Value), nameof(ThicknessControl.ValueChanged));
+            ConventionManager.AddElementConvention<ColorPicker>(ColorPicker.ValueProperty, nameof(ColorPicker.Value), nameof(ColorPicker.ValueChanged));
         }
 
         protected AppBootstrapperBase(Type modelType)

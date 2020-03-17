@@ -26,7 +26,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
              mc:Ignorable="d">
     
     <StackPanel>
-        <nmfc:ColorPicker CurrentColor="{Binding CurrentColor, Mode=TwoWay}" />
+        <nmfc:ColorPicker Value="{Binding CurrentColor, Mode=TwoWay}" />
         <Button x:Name="Select" IsDefault="True" Content="{x:Static p:Resources.Button_Select}" HorizontalAlignment="Center" Style="{DynamicResource Dialog_Button_Style}" />
     </StackPanel>
     
