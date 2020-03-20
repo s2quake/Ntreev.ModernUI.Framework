@@ -247,4 +247,7 @@
   <data name="Command_Hide" xml:space="preserve">
     <value>Hide</value>
   </data>
+  <data name="Command_NewGuid" xml:space="preserve">
+    <value>_New Guid</value>
+  </data>
 </root>

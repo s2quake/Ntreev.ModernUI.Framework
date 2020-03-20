@@ -24,6 +24,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <!--<ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />-->
 
         <ResourceDictionary Source="Button.xaml" />
+        <ResourceDictionary Source="ColorButton.xaml" />
         <ResourceDictionary Source="ComboBox.xaml" />
         <ResourceDictionary Source="DialogWindow.xaml" />
         <ResourceDictionary Source="ErrorBlinker.xaml" />

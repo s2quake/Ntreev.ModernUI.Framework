@@ -65,7 +65,7 @@ namespace Ntreev.ModernUI.Framework
 
         public static void SetValue<T>(this IAppConfiguration config, Type section, Type type, string key, T value)
         {
-            var configItem = new ConfigurationItem(section.Name, type.FullName, key);
+            var configItem = new ConfigurationItem(section.FullName, type.FullName, key);
             if (ConfigurationBase.CanSupportType(typeof(T)) == true)
             {
                 config[configItem] = value;

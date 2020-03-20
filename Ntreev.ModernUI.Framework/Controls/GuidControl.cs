@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -31,7 +32,10 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Value), typeof(Guid?), typeof(GuidControl),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertychangedCallback));
 
-        public static readonly RoutedCommand NewCommand = new RoutedUICommand("New", nameof(NewCommand), typeof(GuidControl));
+        public static readonly RoutedCommand NewCommand = new RoutedUICommand(Ntreev.ModernUI.Framework.Properties.Resources.Command_NewGuid, nameof(NewCommand), typeof(GuidControl));
+
+        public static readonly RoutedEvent ValueChangedEvent =
+            EventManager.RegisterRoutedEvent(nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidControl));
 
         private TextBox textBox;
 
@@ -43,21 +47,33 @@ namespace Ntreev.ModernUI.Framework.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            if (this.textBox != null)
+            {
+                this.textBox.PreviewTextInput -= TextBox_PreviewTextInput;
+                this.textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
+                CommandManager.RemovePreviewExecutedHandler(this.textBox, ExecutedRoutedEventHandler);
+            }
             this.textBox = (TextBox)this.Template.FindName(PART_EditableTextBox, this);
             if (this.textBox != null)
             {
                 this.textBox.Text = $"{this.Value}";
                 this.textBox.PreviewTextInput += TextBox_PreviewTextInput;
                 this.textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
-
                 CommandManager.AddPreviewExecutedHandler(this.textBox, ExecutedRoutedEventHandler);
             }
         }
 
+        [TypeConverter(typeof(NullableGuidConverter))]
         public Guid? Value
         {
             get => (Guid?)this.GetValue(ValueProperty);
             set => this.SetValue(ValueProperty, value);
+        }
+
+        public event RoutedEventHandler ValueChanged
+        {
+            add { AddHandler(ValueChangedEvent, value); }
+            remove { RemoveHandler(ValueChangedEvent, value); }
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -105,7 +121,21 @@ namespace Ntreev.ModernUI.Framework.Controls
                     if (control.textBox != null)
                         control.textBox.Text = string.Empty;
                 }
+                control.RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
             }
         }
+
+        #region NullableGuidConverter
+
+        class NullableGuidConverter : NullableConverter
+        {
+            public NullableGuidConverter()
+                : base(typeof(Guid))
+            {
+
+            }
+        }
+
+        #endregion
     }
 }

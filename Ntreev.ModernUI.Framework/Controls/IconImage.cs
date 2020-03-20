@@ -29,7 +29,7 @@ namespace Ntreev.ModernUI.Framework.Controls
     [TemplatePart(Name = PART_Image, Type = typeof(Image))]
     public class IconImage : Control
     {
-        public const string PART_Image = "PART_Image";
+        public const string PART_Image = nameof(PART_Image);
 
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(IconImage),

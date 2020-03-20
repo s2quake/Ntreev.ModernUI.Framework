@@ -65,19 +65,6 @@ namespace Ntreev.ModernUI.Shell
             });
         }
 
-        private void PickColor_Click(object sender, RoutedEventArgs e)
-        {
-            //var dialog = new SelectColorViewModel()
-            //{
-            //    CurrentColor = FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor,
-            //};
-            //if (dialog.ShowDialog() == true)
-            //{
-            //    FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor = dialog.CurrentColor;
-            //    this.PickColor.Background = new SolidColorBrush(FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
-            //}
-        }
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             AppMessageBox.Show("123");

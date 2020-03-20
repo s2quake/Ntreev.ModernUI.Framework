@@ -247,4 +247,7 @@
   <data name="Command_Hide" xml:space="preserve">
     <value>감추기</value>
   </data>
+  <data name="Command_NewGuid" xml:space="preserve">
+    <value>새로운 고유 아이디(_N)</value>
+  </data>
 </root>
