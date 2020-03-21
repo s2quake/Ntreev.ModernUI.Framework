@@ -3,7 +3,7 @@
 
     <Style x:Key="ToolBar_Button_Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Width" Value="22" />
-        <Setter Property="Height" Value="22" />
+        <Setter Property="Height" Value="23" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="ToolTip" Value="{Binding DisplayName}" />

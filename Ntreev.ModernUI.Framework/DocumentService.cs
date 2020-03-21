@@ -18,7 +18,6 @@
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +26,6 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    [InheritedExport(typeof(IDocumentService))]
     public abstract class DocumentServiceBase<T> : Conductor<T>.Collection.OneActive, IDocumentService where T : class, IDocument
     {
         public DocumentServiceBase()
@@ -66,30 +64,19 @@ namespace Ntreev.ModernUI.Framework
             return base.CanCloseAsync(cancellationToken);
         }
 
-        public IEnumerable<T> Documents
-        {
-            get { return this.Items; }
-        }
+        public IEnumerable<T> Documents => this.Items;
 
         public T SelectedDocument
         {
-            get { return this.ActiveItem; }
-            set { this.ActiveItem = value as T; }
+            get => this.ActiveItem;
+            set => this.ActiveItem = value as T;
         }
 
-        public Dispatcher Dispatcher
-        {
-            get { return Application.Current.Dispatcher; }
-        }
+        public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
         public event EventHandler SelectionChanged;
 
         public event EventHandler Closed;
-
-        //protected override void ChangeActiveItem(T newItem, bool closePrevious)
-        //{
-        //    base.ChangeActiveItem(newItem, closePrevious);
-        //}
 
         protected override void OnActivationProcessed(T item, bool success)
         {
@@ -111,15 +98,12 @@ namespace Ntreev.ModernUI.Framework
 
         #region IDocumentService
 
-        IEnumerable<IDocument> IDocumentService.Documents
-        {
-            get { return this.Items; }
-        }
+        IEnumerable<IDocument> IDocumentService.Documents => this.Items;
 
         IDocument IDocumentService.SelectedDocument
         {
-            get { return this.ActiveItem; }
-            set { this.ActiveItem = value as T; }
+            get => this.ActiveItem;
+            set => this.ActiveItem = value as T;
         }
 
         #endregion

@@ -134,12 +134,11 @@ namespace Ntreev.ModernUI.Framework.Controls
             return pixels;
         }
 
-        private static WriteableBitmap ApplyColor(DependencyObject d, BitmapSource bitmapSource, Brush foreground, Brush background)
+        private static WriteableBitmap ApplyColor(BitmapSource bitmapSource, Brush foreground, Brush background)
         {
             var hash = HashUtility.GetHashValue($"{bitmapSource}", $"{foreground}", $"{background}");
             if (items.ContainsKey(hash) == true)
                 return items[hash];
-            //System.Diagnostics.Trace.WriteLine($"{bitmapSource}, {forground}, {background}");
             var writableBitmap = new WriteableBitmap(bitmapSource);
             var foregroundColor = Colors.Black;
             var backgroundColor = Colors.White;
@@ -185,7 +184,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.Source is BitmapSource == true)
             {
-                this.imageSource = ApplyColor(this, this.Source as BitmapSource, this.Foreground, this.Background);
+                this.imageSource = ApplyColor(this.Source as BitmapSource, this.Foreground, this.Background);
             }
             else
             {

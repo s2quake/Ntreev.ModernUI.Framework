@@ -24,9 +24,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
              xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
              xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.Properties"
              mc:Ignorable="d">
-    
+
     <StackPanel>
-        <nmfc:ColorPicker Value="{Binding CurrentColor, Mode=TwoWay}" />
+        <nmfc:ColorPicker x:Name="CurrentColor" Error="CurrentColor_Error" />
         <Button x:Name="Select" IsDefault="True" Content="{x:Static p:Resources.Button_Select}" HorizontalAlignment="Center" Style="{DynamicResource Dialog_Button_Style}" />
     </StackPanel>
     

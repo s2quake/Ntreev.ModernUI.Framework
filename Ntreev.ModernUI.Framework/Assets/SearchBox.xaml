@@ -25,31 +25,31 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <ControlTemplate x:Key="SearchBox_Template" TargetType="{x:Type nmfc:SearchBox}">
-        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
-                FocusManager.FocusedElement="{Binding ElementName=PART_EditableTextBox}">
-            <Grid x:Name="MainGrid" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <nmfc:IconButton Grid.Column="1" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" 
-                                 Command="{TemplateBinding PrevCommand}" BorderThickness="0" Margin="0 1 0 1" />
-                <nmfc:IconButton Grid.Column="2" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" 
-                                 Command="{TemplateBinding NextCommand}" BorderThickness="0" Margin="0 1 0 1" />
-                <nmfc:IconButton Grid.Column="3" Source="/Ntreev.ModernUI.Framework;component/Images/close.png" 
-                                 Command="{TemplateBinding CloseCommand}" BorderThickness="0" Margin="0 1 1 1" />
-                <TextBlock x:Name="watermark" Text="{TemplateBinding Comment}" Padding="2 0 0 1" Visibility="Hidden"
+        <ControlTemplate.Resources>
+            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ComboBox_IconButton_Style}" />
+        </ControlTemplate.Resources>
+        <Grid x:Name="MainGrid" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0 0 0 10" />
+            <nmfc:IconButton Grid.Column="1" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" 
+                                 Command="{TemplateBinding PrevCommand}" />
+            <nmfc:IconButton Grid.Column="2" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" 
+                                 Command="{TemplateBinding NextCommand}" />
+            <nmfc:IconButton Grid.Column="3" Source="/Ntreev.ModernUI.Framework;component/Images/close.png" 
+                                 Command="{TemplateBinding CloseCommand}" />
+            <TextBlock x:Name="Watermark" Text="{TemplateBinding Comment}" Padding="2 0 0 1" Visibility="Hidden"
                            Margin="{TemplateBinding Padding}" Foreground="{DynamicResource InputTextDisabled}" />
-                <TextBox x:Name="PART_EditableTextBox"
+            <TextBox x:Name="PART_EditableTextBox" BorderThickness="0" Padding="2 0 0 1"
                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                          Margin="{TemplateBinding Padding}" CaretBrush="{DynamicResource InputText}"
-                         Padding="2 0 0 1"
                          Style="{StaticResource SearchBox_EditableTextBox}"
                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-            </Grid>
-        </Border>
+        </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}" />
@@ -69,7 +69,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Condition Property="Text" Value="" />
                     <Condition SourceName="PART_EditableTextBox" Property="IsFocused" Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter TargetName="watermark" Property="Visibility" Value="Visible" />
+                <Setter TargetName="Watermark" Property="Visibility" Value="Visible" />
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -89,6 +89,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="3" />
+        <Setter Property="Height" Value="23" />
         <Setter Property="Template" Value="{StaticResource SearchBox_Template}" />
     </Style>
 

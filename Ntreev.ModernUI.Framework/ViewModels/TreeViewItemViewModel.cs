@@ -38,7 +38,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         protected TreeViewItemViewModel()
             : this(null)
         {
-            
+
         }
 
         protected TreeViewItemViewModel(IServiceProvider serviceProvider)
@@ -369,15 +369,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             this.Disposed?.Invoke(this, e);
         }
 
-        protected override void OnImportsSatisfied()
-        {
-            base.OnImportsSatisfied();
-            foreach (var item in this.Items)
-            {
-                this.SatisfyImportsOnce(item);
-            }
-        }
-
         private static IEnumerable<string> CollectDisplayName(TreeViewItemViewModel parent, TreeViewItemViewModel viewModel)
         {
             if (viewModel != parent)
@@ -399,7 +390,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                         foreach (TreeViewItemViewModel item in e.NewItems)
                         {
                             item.parent = this;
-                            this.SatisfyImportsOnce(item);
                         }
                     }
                     break;

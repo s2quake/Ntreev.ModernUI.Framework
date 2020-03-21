@@ -19,7 +19,6 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
@@ -31,7 +30,6 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
     <PackageReference Include="MiqM.Xceed.Wpf.Toolkit.NETCore" Version="3.4.0.5" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <PackageReference Include="Extended.Wpf.Toolkit" Version="3.4.0" />

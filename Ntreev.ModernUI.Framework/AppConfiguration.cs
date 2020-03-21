@@ -19,8 +19,6 @@ using Ntreev.Library;
 using Ntreev.Library.IO;
 using System;
 using System.IO;
-using System.Threading;
-using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework
 {
@@ -35,8 +33,8 @@ namespace Ntreev.ModernUI.Framework
             this.filename = Path.Combine(path, productName, "app.config");
             try
             {
-                if (File.Exists(this.filename) == true)
-                    this.Read(this.filename);
+                //if (File.Exists(this.filename) == true)
+                //    this.Read(this.filename);
             }
             catch
             {
@@ -46,43 +44,43 @@ namespace Ntreev.ModernUI.Framework
 
         public void Write()
         {
-            var d = DateTime.Now;
-            this["sbyte"] = default(sbyte);
-            this["byte"] = default(byte);
-            this["short"] = default(short);
-            this["ushort"] = default(ushort);
-            this["int"] = default(int);
-            this["uint"] = default(uint);
-            this["long"] = default(long);
-            this["ulong"] = default(ulong);
-            this["float"] = default(float);
-            this["double"] = default(double);
-            this["decimal"] = default(decimal);
-            this["numberAsString"] = "0";
-            this["dateTime"] = DateTime.Now;
-            Thread.Sleep(100);
-            this["timeSpan"] = DateTime.Now - d;
-            this["wo2w"] = Colors.Red;
-            this["array1"] = new int[] { 1, 2, 3};
-            this["array2"] = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
-            this["array3"] = new int[2, 3, 3] 
-            {
-                { 
-                    { 1, 2, 3 }, 
-                    { 4, 5, 6 },
-                    { 7, 8, 9 }
-                },
-                {
-                    { 11, 12, 13 },
-                    { 14, 15, 16 },
-                    { 17, 18, 19 }
-                }
-            };
-            var i = (int)ConfigurationBase.ConvertFromConfig(this["decimal"], typeof(int));
-            var c = (Color)ConfigurationBase.ConvertFromConfig(this["wo2w"], typeof(Color));
+            //var d = DateTime.Now;
+            //this["sbyte"] = default(sbyte);
+            //this["byte"] = default(byte);
+            //this["short"] = default(short);
+            //this["ushort"] = default(ushort);
+            //this["int"] = default(int);
+            //this["uint"] = default(uint);
+            //this["long"] = default(long);
+            //this["ulong"] = default(ulong);
+            //this["float"] = default(float);
+            //this["double"] = default(double);
+            //this["decimal"] = default(decimal);
+            //this["numberAsString"] = "0";
+            //this["dateTime"] = DateTime.Now;
+            //Thread.Sleep(100);
+            //this["timeSpan"] = DateTime.Now - d;
+            //this["wo2w"] = Colors.Red;
+            //this["array1"] = new int[] { 1, 2, 3};
+            //this["array2"] = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
+            //this["array3"] = new int[2, 3, 3] 
+            //{
+            //    { 
+            //        { 1, 2, 3 }, 
+            //        { 4, 5, 6 },
+            //        { 7, 8, 9 }
+            //    },
+            //    {
+            //        { 11, 12, 13 },
+            //        { 14, 15, 16 },
+            //        { 17, 18, 19 }
+            //    }
+            //};
+            //var i = (int)ConfigurationBase.ConvertFromConfig(this["decimal"], typeof(int));
+            //var c = (Color)ConfigurationBase.ConvertFromConfig(this["wo2w"], typeof(Color));
             
             FileUtility.Prepare(filename);
-            this.Write(filename);
+            //this.Write(filename);
         }
 
         public override string Name => "AppConfigs";

@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,20 +30,11 @@ namespace Ntreev.ModernUI.Framework
     {
         private bool isProgressing;
         private string progressMessage;
-        private readonly IServiceProvider serviceProvider;
+        private IServiceProvider serviceProvider;
 
         protected ScreenBase()
         {
 
-        }
-
-        protected ScreenBase(IServiceProvider serviceProvider)
-        {
-            this.serviceProvider = serviceProvider;
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
-            {
-                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
-            }
         }
 
         public sealed async override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
@@ -115,7 +105,7 @@ namespace Ntreev.ModernUI.Framework
             base.OnViewLoaded(view);
             if (view is UIElement element)
             {
-                if (this.serviceProvider.GetService(typeof(IEnumerable<IMenuItem>)) is IEnumerable<IMenuItem> menuItems)
+                if (AppBootstrapperBase.Current.GetService(typeof(IEnumerable<IMenuItem>)) is IEnumerable<IMenuItem> menuItems)
                 {
                     var items = MenuItemUtility.GetMenuItems(this, menuItems);
                     foreach (var item in items)
@@ -123,7 +113,7 @@ namespace Ntreev.ModernUI.Framework
                         this.SetInputBindings(element, item);
                     }
                 }
-                if (this.serviceProvider.GetService(typeof(IEnumerable<IToolBarItem>)) is IEnumerable<IToolBarItem> toolbarItems)
+                if (AppBootstrapperBase.Current.GetService(typeof(IEnumerable<IToolBarItem>)) is IEnumerable<IToolBarItem> toolbarItems)
                 {
                     var items = ToolBarItemUtility.GetToolBarItems(this, toolbarItems);
                     foreach (var item in items)
@@ -154,18 +144,10 @@ namespace Ntreev.ModernUI.Framework
             return await Task.Run(() => this.IsProgressing == false);
         }
 
-        protected void SatisfyImportsOnce(object attributedPart)
-        {
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
-            {
-                compositionService.SatisfyImportsOnce(attributedPart);
-            }
-        }
+        //protected virtual void OnAfterBuildUp()
+        //{
 
-        protected virtual void OnImportsSatisfied()
-        {
-
-        }
+        //}
 
         private void SetInputBindings(UIElement element, IMenuItem menuItem)
         {

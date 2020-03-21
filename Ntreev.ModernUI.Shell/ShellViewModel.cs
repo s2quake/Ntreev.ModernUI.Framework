@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using Ntreev.ModernUI.Framework;
-using Ntreev.ModernUI.Framework.Dialogs.ViewModels;
 using System;
 using System.Collections;
 using System.ComponentModel.Composition;
@@ -15,11 +14,15 @@ namespace Ntreev.ModernUI.Shell
         private DataTable table = new DataTable();
 
         private readonly ICommand insertCommand;
-        private string text = "test";
+        private string textBox = "TextBox";
         private Guid guid = Guid.NewGuid();
 
         public ShellViewModel()
         {
+
+            //var converter = TypeDescriptor.GetConverter(typeof(System.Windows.Media.Color));
+            //var c = converter.ConvertFromString("red");
+
             this.DisplayName = "Controls";
             this.table.Columns.Add();
             this.table.Columns.Add();
@@ -63,15 +66,6 @@ namespace Ntreev.ModernUI.Shell
             //var a= s[5];
         }
 
-        public async void PickColor()
-        {
-            var dialog = new SelectColorViewModel();
-            if (await dialog.ShowDialogAsync() == true)
-            {
-
-            }
-        }
-
         public static bool IncrementIndics(int[] indics, int[] length)
         {
             indics[length.Length - 1]++;
@@ -93,14 +87,13 @@ namespace Ntreev.ModernUI.Shell
 
         }
 
-        public string Text
+        public string TextBox
         {
-            get => this.text;
+            get => this.textBox;
             set
             {
-                this.text = value;
-                throw new Exception("!23");
-                this.NotifyOfPropertyChange(nameof(Text));
+                this.textBox = value;
+                this.NotifyOfPropertyChange(nameof(TextBox));
             }
         }
 

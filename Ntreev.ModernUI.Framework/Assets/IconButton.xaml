@@ -25,32 +25,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <nmfv:DisplayNameInputGestureToStringConverter x:Key="DisplayNameInputGestureToStringConverter" />
 
     <ControlTemplate x:Key="IconButton_Template" TargetType="{x:Type nmfc:IconButton}">
-        <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Popup Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" Placement="Bottom" Margin="1" StaysOpen="False"
-                       IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
-                    <Grid Margin="4">
-                        <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
-                        <Border Background="#0A000000" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
-                        <Border x:Name="DropDownBorder" BorderThickness="1" Margin="0 -1 0 0"
-                                Background="{DynamicResource PopupBackground}" BorderBrush="{DynamicResource WindowBorderActive}">
-                            <ContentControl ContentTemplate="{TemplateBinding DropDownTemplate}" />
-                        </Border>
-                    </Grid>
-                </Popup>
+        <Grid Name="MainGrid" SnapsToDevicePixels="True">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                 <ContentPresenter x:Name="Presenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                <Border x:Name="Separator" Grid.Column="1" Width="1" Background="{DynamicResource WindowBackground}" />
-                <ToggleButton x:Name="DropDownButton" Grid.Column="2" Padding="2 0" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                              Background="{TemplateBinding Background}" BorderThickness="0" ClickMode="Press">
-                    <Path x:Name="Arrow" Data="M0,0 L3,3 6,0" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </ToggleButton>
-            </Grid>
-        </Border>
+            </Border>
+        </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource ButtonTextDisabled}" />
@@ -71,19 +50,70 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Foreground" Value="{DynamicResource ButtonTextPressed}" />
             </Trigger>
             <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderBrush" TargetName="Chrome" Value="{DynamicResource Accent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
             </Trigger>
-            <Trigger Property="DropDownTemplate" Value="{x:Null}">
-                <Setter TargetName="Separator" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="DropDownButton" Property="Visibility" Value="Collapsed" />
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="IconButton_DropDown_Template" TargetType="{x:Type nmfc:IconButton}">
+        <Grid Name="MainGrid" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition MinWidth="10" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="PART_Popup" AllowsTransparency="True" Grid.ColumnSpan="2" Placement="Bottom" Margin="1"
+                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <Grid Margin="4">
+                    <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
+                    <Border Background="#0A000000" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
+
+                    <Border x:Name="DropDownBorder" Background="{DynamicResource PopupBackground}" BorderBrush="{DynamicResource WindowBorderActive}"
+                            BorderThickness="1" Margin="0 -1 0 0">
+                        <ContentControl ContentTemplate="{TemplateBinding DropDownTemplate}" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <ToggleButton x:Name="DropDownButton" Grid.ColumnSpan="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0 0 0 10" 
+                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+            <Path Name="Arrow" Grid.ColumnSpan="3" Margin="2 1 2 0" Fill="{TemplateBinding Foreground}"
+                  Data="{DynamicResource DownArrowGeometry}" HorizontalAlignment="Right"
+                  VerticalAlignment="Center" IsHitTestVisible="False" />
+            <Border Margin="1" BorderThickness="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="Presenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+            <Border x:Name="Separator" Grid.Column="1" Width="1" Background="{DynamicResource WindowBackground}" Margin="0 1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource ButtonTextDisabled}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackgroundHover}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource ButtonTextHover}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}" />
+                <Setter Property="Foreground" Value="{DynamicResource ButtonTextPressed}" />
+            </Trigger>
+            <Trigger Property="IsDropDownOpen" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}" />
+                <Setter Property="Foreground" Value="{DynamicResource ButtonTextPressed}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="Padding" Value="3" />
-        <Setter Property="Template" Value="{StaticResource IconButton_Template}" />
+        <Setter Property="Padding" Value="3 3 3 2" />
+        <Setter Property="Template" Value="{StaticResource IconButton_DropDown_Template}" />
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
         <Setter Property="ToolTip" Value="{Binding Path=Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToTooltipConverter}}" />
         <Setter Property="ContentTemplate">
@@ -93,15 +123,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="DropDownTemplate" Value="{x:Null}">
+                <Setter Property="Template" Value="{StaticResource IconButton_Template}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="ToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type nmfc:IconButton}}">
-        <Setter Property="Height" Value="22" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
-        <!--<Setter Property="Padding" Value="0" />-->
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
         <Setter Property="ToolTip" Value="{Binding Path=Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToTooltipConverter}}" />
         <Setter Property="ContentTemplate">
@@ -129,6 +162,22 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ComboBox_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type nmfc:IconButton}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0 1" />
+        <Setter Property="Padding" Value="2 0" />
+        <Setter Property="Focusable" Value="False" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource InputBackground}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 

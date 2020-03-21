@@ -18,7 +18,6 @@
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,9 +39,10 @@ namespace Ntreev.ModernUI.Framework
         protected ModalDialogBase(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            if (this.serviceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
             {
-                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+                buildUp.BuildUp(this);
+                this.Dispatcher.InvokeAsync(this.OnAfterBuildUp);
             }
         }
 
@@ -108,7 +108,7 @@ namespace Ntreev.ModernUI.Framework
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        public virtual IEnumerable<IToolBarItem> ToolBarItems => ToolBarItemUtility.GetToolBarItems(this, AppBootstrapperBase.Current);
+        public virtual IEnumerable<IToolBarItem> ToolBarItems => ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
 
         protected override void OnViewLoaded(object view)
         {
@@ -120,15 +120,7 @@ namespace Ntreev.ModernUI.Framework
             return base.OnDeactivateAsync(close, cancellationToken);
         }
 
-        protected void SatisfyImportsOnce(object attributedPart)
-        {
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
-            {
-                compositionService.SatisfyImportsOnce(attributedPart);
-            }
-        }
-
-        protected virtual void OnImportsSatisfied()
+        protected virtual void OnAfterBuildUp()
         {
 
         }

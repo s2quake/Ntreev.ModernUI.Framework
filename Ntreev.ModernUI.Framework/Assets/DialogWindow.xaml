@@ -40,7 +40,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ShowInTaskbar" Value="False" />
         <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="Padding" Value="20" />
-        <!--<Setter Property="SizeToContent" Value="WidthAndHeight" />-->
         <Setter Property="IsProgressing" Value="{Binding IsProgressing, Mode=OneWay}" />
         <Setter Property="ProgressMessage" Value="{Binding ProgressMessage}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

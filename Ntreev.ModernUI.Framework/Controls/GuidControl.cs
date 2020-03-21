@@ -30,7 +30,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(Guid?), typeof(GuidControl),
-                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertychangedCallback));
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertyChangedCallback));
 
         public static readonly RoutedCommand NewCommand = new RoutedUICommand(Ntreev.ModernUI.Framework.Properties.Resources.Command_NewGuid, nameof(NewCommand), typeof(GuidControl));
 
@@ -107,7 +107,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
         }
 
-        private static void ValuePropertychangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is GuidControl control)
             {

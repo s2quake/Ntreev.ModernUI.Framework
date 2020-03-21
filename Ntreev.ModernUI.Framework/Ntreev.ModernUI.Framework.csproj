@@ -19,14 +19,15 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <Reference Include="System.ComponentModel.Composition" />
+    <!--<Reference Include="System.ComponentModel.Composition" />-->
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
+    <!--<PackageReference Include="System.ValueTuple" Version="4.5.0" />-->
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
+    <!--<PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />-->
   </ItemGroup>
   <ItemGroup>
     <None Remove="Images\**\*.png" />

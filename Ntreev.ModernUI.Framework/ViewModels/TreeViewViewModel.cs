@@ -196,9 +196,9 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         protected virtual void OnSelectionChanged(EventArgs e) => this.SelectionChanged?.Invoke(this, e);
 
-        protected override void OnImportsSatisfied()
+        protected override void OnAfterBuildUp()
         {
-            base.OnImportsSatisfied();
+            base.OnAfterBuildUp();
         }
 
         private bool Filter(string text, string filterExpression)

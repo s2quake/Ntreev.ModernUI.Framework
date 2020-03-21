@@ -40,6 +40,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         }
 
         public ListBoxViewModel(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             this.Items.CollectionChanged += Items_CollectionChanged;
         }
@@ -154,14 +155,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             this.SelectionChanged?.Invoke(this, e);
         }
 
-        protected virtual void OnPartImportsSatisfied()
-        {
-            foreach (var item in this.Items)
-            {
-                this.SatisfyImportsOnce(item);
-            }
-        }
-
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -170,7 +163,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     {
                         foreach (var item in e.NewItems)
                         {
-                            this.SatisfyImportsOnce(item);
+                            
                         }
                     }
                     break;

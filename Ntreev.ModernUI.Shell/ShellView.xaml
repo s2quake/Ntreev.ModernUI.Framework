@@ -116,8 +116,10 @@
                         </nmfc:ModernToolBar>
                     </ToolBarTray>
                     <nmfc:PropertyItemsControl Grid.Row="1">
-                        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" Width="200" HorizontalAlignment="Left" />
-                        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="FilterBox" x:Name="filterBox"  />
+                        <ComboBox nmfc:PropertyItemsControl.Header="ComboBox" x:Name="ComboBox" />
+                        <ComboBox nmfc:PropertyItemsControl.Header="EditableComboBox" x:Name="EditableComboBox" IsEditable="True" />
+                        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" />
+                        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="FilterBox" x:Name="filterBox" />
                         <nmfc:FlagControl nmfc:PropertyItemsControl.Header="FlagControl">
                             <nmfc:FlagControlItem Value="0" Content="None" />
                             <nmfc:FlagControlItem Value="1" Content="A" />
@@ -136,10 +138,10 @@
                             <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
                                             HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
                         </StackPanel>
-                        <Button x:Name="PickColor" nmfc:PropertyItemsControl.Header="ColorPicker" Width="50" HorizontalAlignment="Left" BorderThickness="0" />
+                        <nmfc:ColorButton x:Name="PickColor" nmfc:PropertyItemsControl.Header="ColorPicker" HorizontalAlignment="Left" />
                         <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" ItemsSource="{Binding TreeViewItems}" />
                         <nmfc:GuidControl x:Name="Guid" nmfc:PropertyItemsControl.Header="Guid" />
-                        <TextBox nmfc:PropertyItemsControl.Header="TextBox"  />
+                        <TextBox x:Name="TextBox" nmfc:PropertyItemsControl.Header="TextBox"  />
                         <nmfc:NumericTextBox nmfc:PropertyItemsControl.Header="NumericTextBox" />
                     </nmfc:PropertyItemsControl>
                 </Grid>
@@ -156,7 +158,7 @@
                     <StackPanel nmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
                         <TextBox Text="Find" Width="148" />
                         <Border Width="4" />
-                        <nmfc:IconButton Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
+                        <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
                     </StackPanel>
                     <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
                         <!--<Button Background="{Binding Background, ElementName=PickColor}" Width="50" HorizontalAlignment="Left" BorderThickness="0" />-->

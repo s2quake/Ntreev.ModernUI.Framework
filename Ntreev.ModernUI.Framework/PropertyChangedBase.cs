@@ -17,13 +17,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase, IPartImportsSatisfiedNotification
+    public abstract class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase
     {
         private readonly IServiceProvider serviceProvider;
 
@@ -35,38 +34,22 @@ namespace Ntreev.ModernUI.Framework
         protected PropertyChangedBase(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            if (this.serviceProvider?.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            if (this.serviceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
             {
-                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+                buildUp.BuildUp(this);
+                this.Dispatcher.InvokeAsync(this.OnAfterBuildUp);
             }
         }
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        public virtual IEnumerable<IMenuItem> ContextMenus => MenuItemUtility.GetMenuItems(this, this.serviceProvider ?? AppBootstrapperBase.Current);
+        public virtual IEnumerable<IMenuItem> ContextMenus => MenuItemUtility.GetMenuItems(this, this.serviceProvider);
 
-        public virtual IEnumerable<IToolBarItem> ToolBarMenus => ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider ?? AppBootstrapperBase.Current);
+        public virtual IEnumerable<IToolBarItem> ToolBarMenus => ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
 
-        protected void SatisfyImportsOnce(object attributedPart)
-        {
-            if (this.serviceProvider?.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
-            {
-                compositionService.SatisfyImportsOnce(attributedPart);
-            }
-        }
-
-        protected virtual void OnImportsSatisfied()
+        protected virtual void OnAfterBuildUp()
         {
 
         }
-
-        #region IPartImportsSatisfiedNotification
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            this.OnImportsSatisfied();
-        }
-
-        #endregion
     }
 }

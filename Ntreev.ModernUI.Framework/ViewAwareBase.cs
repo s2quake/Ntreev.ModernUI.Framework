@@ -16,7 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -36,10 +35,10 @@ namespace Ntreev.ModernUI.Framework
 
         protected ViewAwareBase(IServiceProvider serviceProvider)
         {
-            this.serviceProvider = serviceProvider;
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
+            if (this.serviceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
             {
-                this.Dispatcher.InvokeAsync(this.OnImportsSatisfied);
+                buildUp.BuildUp(this);
+                this.Dispatcher.InvokeAsync(this.OnAfterBuildUp);
             }
         }
 
@@ -101,15 +100,7 @@ namespace Ntreev.ModernUI.Framework
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        protected void SatisfyImportsOnce(object attributedPart)
-        {
-            if (this.serviceProvider.GetService(typeof(ICompositionService)) is ICompositionService compositionService)
-            {
-                compositionService.SatisfyImportsOnce(attributedPart);
-            }
-        }
-
-        protected virtual void OnImportsSatisfied()
+        protected virtual void OnAfterBuildUp()
         {
 
         }

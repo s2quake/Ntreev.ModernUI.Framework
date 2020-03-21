@@ -16,31 +16,57 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.Converters
 {
-    public class ColorToBrushConverter : IValueConverter
+    public class ColorToDisplayNameConverter : IValueConverter
     {
+        private readonly static Dictionary<string, string> nameByColor;
+
+        static ColorToDisplayNameConverter()
+        {
+            var properties = typeof(Colors).GetProperties(BindingFlags.Static | BindingFlags.Public);
+
+            nameByColor = new Dictionary<string, string>(properties.Length);
+            foreach (var item in properties)
+            {
+                var color = item.GetValue(null);
+                var text = $"{color}";
+                if (nameByColor.ContainsKey(text) == true)
+                {
+                    nameByColor[text] = $"{nameByColor[text]} or {item.Name}";
+                }
+                else
+                {
+                    nameByColor.Add(text, item.Name);
+                }
+            }
+        }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (null == value)
-            {
-                return null;
-            }
             if (value is Color color)
             {
-                return new SolidColorBrush(color);
+                var text = $"{color}";
+                if (nameByColor.ContainsKey(text) == true)
+                {
+                    return $"{nameByColor[text]} {text}";
+                }
             }
-
-            throw new InvalidOperationException($"Unsupported type [{value.GetType().Name}]");
+            return $"{value}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var brush = (SolidColorBrush)value;
+            return brush.Color;
         }
+
+        public static IReadOnlyDictionary<string, string> Names => nameByColor;
     }
 }

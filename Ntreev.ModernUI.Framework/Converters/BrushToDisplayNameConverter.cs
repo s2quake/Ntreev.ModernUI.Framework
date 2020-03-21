@@ -15,24 +15,32 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Controls;
-using System.Windows.Controls;
+using System;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework.Dialogs.Views
+namespace Ntreev.ModernUI.Framework.Converters
 {
-    /// <summary>
-    /// SelectColorView.xaml에 대한 상호 작용 논리
-    /// </summary>
-    public partial class SelectColorView : UserControl
+    public class BrushToDisplayNameConverter : IValueConverter
     {
-        public SelectColorView()
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            InitializeComponent();
+            if (value is SolidColorBrush brush)
+            {
+                var text = $"{brush.Color}";
+                var names = ColorToDisplayNameConverter.Names;
+                if (names.ContainsKey(text) == true)
+                {
+                    return $"{names[text]} {text}";
+                }
+            }
+            return $"{value}";
         }
 
-        private void CurrentColor_Error(object sender, ErrorEventArgs e)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            this.Select.IsEnabled = e.ErrorContent == null;
+            throw new NotImplementedException();
         }
     }
 }

@@ -53,25 +53,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0" />
             </Grid.ColumnDefinitions>
-            <Popup x:Name="PART_Popup" 
-                   AllowsTransparency="true" 
-                   Grid.ColumnSpan="2" 
-                   Placement="Bottom"
-                   Margin="1"
-                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
+            <Popup x:Name="PART_Popup" AllowsTransparency="True" Grid.ColumnSpan="2" Placement="Bottom" Margin="1"
+                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid, Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
                     <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
                     <Border Background="#0A000000" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
 
-                    <Border Name="DropDownBorder" 
-                            Background="{DynamicResource PopupBackground}" 
-                            BorderBrush="{DynamicResource WindowBorderActive}"
-                            BorderThickness="1"
-                            Margin="0,-1,0,0">
+                    <Border x:Name="DropDownBorder" Background="{DynamicResource PopupBackground}" BorderBrush="{DynamicResource WindowBorderActive}"
+                            BorderThickness="1" Margin="0 -1 0 0">
                         <TreeView x:Name="PART_TreeView" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                  KeyboardNavigation.DirectionalNavigation="Contained"  
-                                  BorderThickness="0" Margin="0" Padding="1" VerticalContentAlignment="Center">
+                                      KeyboardNavigation.DirectionalNavigation="Contained"
+                                      BorderThickness="0" Margin="0" Padding="1" VerticalContentAlignment="Center">
                             <TreeView.Resources>
                                 <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItem_Style}">
                                     <EventSetter Event="Selected" Handler="TreeViewItem_Selected" />
@@ -81,28 +74,30 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </Border>
                 </Grid>
             </Popup>
-            <ToggleButton Grid.ColumnSpan="2"
-                          Background="{TemplateBinding Background}" 
-                          BorderBrush="{TemplateBinding BorderBrush}" 
-                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                          Padding="0,0,0,10" />
-            <Path Name="Arrow" 
-                  Grid.ColumnSpan="2"
-                  Margin="3,1,8,0"
-                  Fill="{TemplateBinding Foreground}"
-                  Data="{DynamicResource DownArrowGeometry}"
-                  HorizontalAlignment="Right"
+            <ToggleButton Grid.ColumnSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0,0,0,10" 
+                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+            <Path Name="Arrow" Grid.ColumnSpan="3" Margin="3 1 6 0" Fill="{TemplateBinding Foreground}"
+                  Data="{DynamicResource DownArrowGeometry}" HorizontalAlignment="Right"
                   VerticalAlignment="Center" IsHitTestVisible="False" />
-            <TextBox x:Name="PART_EditableTextBox" 
+            <TextBox x:Name="PART_EditableTextBox" BorderThickness="0" Padding="2 0 0 1"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                     Margin="{TemplateBinding Padding}"
-                     Padding="2,0,0,1" CaretBrush="{DynamicResource InputText}"
-                     Style="{DynamicResource ComboBox_EditableTextBox_Style}"
+                     Margin="{TemplateBinding Padding}" CaretBrush="{DynamicResource InputText}"
+                     Style="{StaticResource FilterBox_EditableTextBox}"
                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource InputBackgroundHover}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger SourceName="PART_EditableTextBox" Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -114,12 +109,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="Padding" Value="3" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="IsEditable" Value="True" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Height" Value="23" />
         <Setter Property="Template" Value="{StaticResource TreeViewItemSelector_Template}" />
     </Style>
 
