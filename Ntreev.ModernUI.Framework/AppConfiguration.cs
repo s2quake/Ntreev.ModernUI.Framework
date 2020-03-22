@@ -25,6 +25,7 @@ namespace Ntreev.ModernUI.Framework
     sealed class AppConfiguration : ConfigurationBase, IAppConfiguration
     {
         private readonly string filename;
+        private IConfigurationSerializer serializer = new ConfigurationSerializer();
 
         internal AppConfiguration()
         {
@@ -33,8 +34,11 @@ namespace Ntreev.ModernUI.Framework
             this.filename = Path.Combine(path, productName, "app.config");
             try
             {
-                //if (File.Exists(this.filename) == true)
-                //    this.Read(this.filename);
+                if (File.Exists(this.filename) == true)
+                {
+                    using var stream = File.OpenRead(filename);
+                    this.Read(stream, this.serializer);
+                }
             }
             catch
             {
@@ -78,9 +82,18 @@ namespace Ntreev.ModernUI.Framework
             //};
             //var i = (int)ConfigurationBase.ConvertFromConfig(this["decimal"], typeof(int));
             //var c = (Color)ConfigurationBase.ConvertFromConfig(this["wo2w"], typeof(Color));
+
             
-            FileUtility.Prepare(filename);
-            //this.Write(filename);
+            try
+            {
+                FileUtility.Prepare(filename);
+                using var stream = new FileStream(filename, FileMode.Create, FileAccess.Write);
+                this.Write(stream, this.serializer);
+            }
+            catch
+            {
+
+            }
         }
 
         public override string Name => "AppConfigs";

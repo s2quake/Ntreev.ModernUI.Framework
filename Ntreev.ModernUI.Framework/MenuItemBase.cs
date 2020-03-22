@@ -38,7 +38,7 @@ namespace Ntreev.ModernUI.Framework
         protected MenuItemBase(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
-            this.ServiceProvider = serviceProvider;
+
         }
 
         public string DisplayName
@@ -134,8 +134,6 @@ namespace Ntreev.ModernUI.Framework
         {
             this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
-
-        protected IServiceProvider ServiceProvider { get; }
 
         #region ICommand
 

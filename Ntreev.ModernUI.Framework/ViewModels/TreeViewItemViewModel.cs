@@ -36,9 +36,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         private string pattern;
 
         protected TreeViewItemViewModel()
-            : this(null)
         {
-
+            this.Items.CollectionChanged += Items_CollectionChanged;
+            this.ExpandCommand = new DelegateCommand(item =>
+            {
+                this.IsExpanded = !this.IsExpanded;
+            });
         }
 
         protected TreeViewItemViewModel(IServiceProvider serviceProvider)

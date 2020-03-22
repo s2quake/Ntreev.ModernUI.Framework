@@ -30,11 +30,15 @@ namespace Ntreev.ModernUI.Framework
     {
         private bool isProgressing;
         private string progressMessage;
-        private IServiceProvider serviceProvider;
 
         protected ScreenBase()
         {
 
+        }
+
+        protected ScreenBase(IServiceProvider serviceProvider)
+        {
+            this.ServiceProvider = serviceProvider;
         }
 
         public sealed async override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
@@ -144,10 +148,23 @@ namespace Ntreev.ModernUI.Framework
             return await Task.Run(() => this.IsProgressing == false);
         }
 
-        //protected virtual void OnAfterBuildUp()
-        //{
+        protected void BuildUp(object instance)
+        {
+            if (instance == null)
+                throw new ArgumentNullException(nameof(instance));
+            if (this.ServiceProvider == null)
+                throw new InvalidOperationException();
+            if (this.ServiceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
+            {
+                buildUp.BuildUp(this);
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
 
-        //}
+        protected IServiceProvider ServiceProvider { get; }
 
         private void SetInputBindings(UIElement element, IMenuItem menuItem)
         {

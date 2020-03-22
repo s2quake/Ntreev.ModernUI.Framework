@@ -16,7 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Ntreev.Library;
-using Ntreev.Library.Serialization;
 using System;
 
 namespace Ntreev.ModernUI.Framework
@@ -36,21 +35,19 @@ namespace Ntreev.ModernUI.Framework
     {
         public static bool TryGetValue<T>(this IAppConfiguration config, Type section, Type type, string key, out T value)
         {
-            var configItem = new ConfigurationItem(section.Name, type.FullName, key);
+            var configItem = $"{section.Name}.{type.FullName}.{key}";
             if (config.Contains(configItem) == true)
             {
                 try
                 {
                     if (ConfigurationBase.CanSupportType(typeof(T)) == true)
                     {
-                        value = (T)config[configItem];
+                        value = (T)ConfigurationBase.ConvertFromConfig(config[configItem], typeof(T));
                         return true;
                     }
                     else
                     {
-                        var text = (string)config[configItem];
-                        value = XmlSerializerUtility.ReadString<T>(text.Decrypt());
-                        return true;
+                        throw new NotSupportedException($"{typeof(T).Name} does not supported.");
                     }
                 }
                 catch
@@ -65,14 +62,14 @@ namespace Ntreev.ModernUI.Framework
 
         public static void SetValue<T>(this IAppConfiguration config, Type section, Type type, string key, T value)
         {
-            var configItem = new ConfigurationItem(section.FullName, type.FullName, key);
+            var configItem = $"{section.Name}.{type.FullName}.{key}";
             if (ConfigurationBase.CanSupportType(typeof(T)) == true)
             {
                 config[configItem] = value;
             }
             else
             {
-                config[configItem] = XmlSerializerUtility.GetString(value).Encrypt();
+                throw new NotSupportedException($"{typeof(T).Name} does not supported.");
             }
         }
     }

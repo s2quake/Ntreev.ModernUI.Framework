@@ -17,6 +17,7 @@
     <RepositoryUrl>https://github.com/s2quake/Ntreev.ModernUI.Framework</RepositoryUrl>
     <PackageTags>Crema</PackageTags>
     <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="PresentationCore" />

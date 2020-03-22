@@ -28,6 +28,13 @@ namespace Ntreev.ModernUI.Framework
         private bool isModified;
 
         protected DocumentBase()
+            : this(null)
+        {
+            
+        }
+
+        protected DocumentBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             this.CloseCommand = new DelegateCommand(CloseCommand_Execute, CloseCommand_CanExecute);
         }

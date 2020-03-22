@@ -196,11 +196,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         protected virtual void OnSelectionChanged(EventArgs e) => this.SelectionChanged?.Invoke(this, e);
 
-        protected override void OnAfterBuildUp()
-        {
-            base.OnAfterBuildUp();
-        }
-
         private bool Filter(string text, string filterExpression)
         {
             if (this.GlobPattern == true)

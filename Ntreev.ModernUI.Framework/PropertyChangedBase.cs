@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -24,8 +25,6 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class PropertyChangedBase : Caliburn.Micro.PropertyChangedBase
     {
-        private readonly IServiceProvider serviceProvider;
-
         protected PropertyChangedBase()
         {
 
@@ -33,23 +32,31 @@ namespace Ntreev.ModernUI.Framework
 
         protected PropertyChangedBase(IServiceProvider serviceProvider)
         {
-            this.serviceProvider = serviceProvider;
-            if (this.serviceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
-            {
-                buildUp.BuildUp(this);
-                this.Dispatcher.InvokeAsync(this.OnAfterBuildUp);
-            }
+            this.ServiceProvider = serviceProvider;
         }
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        public virtual IEnumerable<IMenuItem> ContextMenus => MenuItemUtility.GetMenuItems(this, this.serviceProvider);
-
-        public virtual IEnumerable<IToolBarItem> ToolBarMenus => ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
-
-        protected virtual void OnAfterBuildUp()
+        public virtual IEnumerable<IMenuItem> ContextMenus
         {
-
+            get
+            {
+                if (this.ServiceProvider != null)
+                    return MenuItemUtility.GetMenuItems(this, this.ServiceProvider);
+                return Enumerable.Empty<IMenuItem>();
+            }
         }
+
+        public virtual IEnumerable<IToolBarItem> ToolBarMenus
+        {
+            get
+            {
+                if (this.ServiceProvider != null)
+                    return ToolBarItemUtility.GetToolBarItems(this, this.ServiceProvider);
+                return Enumerable.Empty<IToolBarItem>();
+            }
+        }
+
+        protected IServiceProvider ServiceProvider { get; }
     }
 }

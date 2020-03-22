@@ -9,6 +9,7 @@
                   Height="550" Width="525" Loaded="Window_Loaded" Style="{StaticResource ModernWindow_Style}">
 
     <mui:ModernWindow.Resources>
+        
         <xcdg:DataGridCollectionViewSource x:Key="source" Source="{Binding ItemsSource}" />
         <Style x:Key="GroupHeaderControlStyle1" TargetType="{x:Type xcdg:GroupHeaderControl}">
             <Setter Property="Background" Value="#FFEBEADB"/>
@@ -161,7 +162,6 @@
                         <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
                     </StackPanel>
                     <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
-                        <!--<Button Background="{Binding Background, ElementName=PickColor}" Width="50" HorizontalAlignment="Left" BorderThickness="0" />-->
                         <nmfc:ColorButton />
                         <Border Width="4" />
                         <ComboBox Width="122" />

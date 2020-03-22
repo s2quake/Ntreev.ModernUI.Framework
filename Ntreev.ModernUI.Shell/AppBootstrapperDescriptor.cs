@@ -34,73 +34,16 @@ namespace Ntreev.ModernUI.Shell
 
         public override Type ModelType => typeof(IShell);
 
-
-        //public object GetService(Type serviceType)
-        //{
-        //    if (serviceType == typeof(IServiceProvider))
-        //        return this;
-
-        //    if (typeof(IEnumerable).IsAssignableFrom(serviceType) && serviceType.GenericTypeArguments.Length == 1)
-        //    {
-        //        var itemType = serviceType.GenericTypeArguments.First();
-        //        var contractName = AttributedModelServices.GetContractName(itemType);
-        //        var items = this.container.GetExportedValues<object>(contractName);
-        //        var listGenericType = typeof(List<>);
-        //        var list = listGenericType.MakeGenericType(itemType);
-        //        var ci = list.GetConstructor(new Type[] { typeof(int) });
-        //        var instance = ci.Invoke(new object[] { items.Count(), }) as IList;
-        //        foreach (var item in items)
-        //        {
-        //            instance.Add(item);
-        //        }
-        //        return instance;
-        //    }
-        //    else
-        //    {
-        //        var contractName = AttributedModelServices.GetContractName(serviceType);
-        //        return this.container.GetExportedValue<object>(contractName);
-        //    }
-        //}
-
         protected override void OnInitialize(IEnumerable<Assembly> assemblies, IEnumerable<Tuple<Type, object>> parts)
         {
-            var catalog = new AggregateCatalog();
-
-            foreach (var item in AssemblySource.Instance)
-            {
-                catalog.Catalogs.Add(new AssemblyCatalog(item));
-            }
-
+            var catalog = this.CreateCatalog(assemblies);
             var container = new CompositionContainer(catalog);
-            var batch = new CompositionBatch();
-
-            //batch.AddExportedValue<IWindowManager>(AppWindowManager.Current);
-            //batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-            //batch.AddExportedValue<IAppConfiguration>(AppConfiguration.Current);
-            //batch.AddExportedValue<IServiceProvider>(this);
-            //batch.AddExportedValue<IBuildUp>(this);
-            batch.AddExportedValue<ICompositionService>(container);
-
-            foreach (var item in parts)
-            {
-                var contractName = AttributedModelServices.GetContractName(item.Item1);
-                var typeIdentity = AttributedModelServices.GetTypeIdentity(item.Item1);
-                batch.AddExport(new Export(contractName, new Dictionary<string, object>
-                {
-                    {
-                        "ExportTypeIdentity",
-                        typeIdentity
-                    }
-                }, () => item.Item2));
-            }
+            var batch = this.CreateBatch(parts);
             container.Compose(batch);
-
-
             this.container = container;
-
         }
 
-        public override object GetInstance(Type service, string key)
+        protected override object GetInstance(Type service, string key)
         {
             var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(service) : key;
             var exports = this.container.GetExportedValues<object>(contract);
@@ -150,12 +93,12 @@ namespace Ntreev.ModernUI.Shell
             return assembliesByName.Values.ToArray();
         }
 
-        public override IEnumerable<object> GetInstances(Type service)
+        protected override IEnumerable<object> GetInstances(Type service)
         {
             return this.container.GetExportedValues<object>(AttributedModelServices.GetContractName(service));
         }
 
-        public override void BuildUp(object instance)
+        protected override void OnBuildUp(object instance)
         {
             this.container.SatisfyImportsOnce(instance);
         }
@@ -165,36 +108,38 @@ namespace Ntreev.ModernUI.Shell
             this.container.Dispose();
         }
 
-
         protected virtual IEnumerable<string> SelectPath()
         {
             yield break;
         }
 
-        //protected override IEnumerable<Tuple<Type, object>> GetParts()
-        //{
-        //    foreach (var item in base.GetParts())
-        //    {
-        //        yield return item;
-        //    }
-        //    yield return new Tuple<Type, object>(typeof(ICompositionService), this.container);
-        //}
+        private ComposablePartCatalog CreateCatalog(IEnumerable<Assembly> assemblies)
+        {
+            var catalog = new AggregateCatalog();
+            foreach (var item in assemblies)
+            {
+                catalog.Catalogs.Add(new AssemblyCatalog(item));
+            }
+            return catalog;
+        }
 
-        //protected override void Exit(object sender, EventArgs e)
-        //{
-        //    AppConfiguration.Current.Write();
-        //    base.OnExit(sender, e);
-        //    this.container.Dispose();
-        //}
-
-        //protected override void PrepareApplication()
-        //{
-        //    base.PrepareApplication();
-        //}
-
-        //protected IEnumerable<(System.Type, object)> GetParts()
-        //{
-        //    yield break;
-        //}
+        private CompositionBatch CreateBatch(IEnumerable<Tuple<Type, object>> parts)
+        {
+            var batch = new CompositionBatch();
+            foreach (var item in parts)
+            {
+                var contractName = AttributedModelServices.GetContractName(item.Item1);
+                var typeIdentity = AttributedModelServices.GetTypeIdentity(item.Item1);
+                batch.AddExport(new Export(contractName, new Dictionary<string, object>
+                {
+                    {
+                        "ExportTypeIdentity",
+                        typeIdentity
+                    }
+                }, () => item.Item2));
+            }
+            batch.AddExportedValue<ICompositionService>(container);
+            return batch;
+        }
     }
 }

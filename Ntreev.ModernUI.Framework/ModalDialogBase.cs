@@ -18,6 +18,7 @@
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,7 +30,6 @@ namespace Ntreev.ModernUI.Framework
     {
         private string progressMessage;
         private bool isProgressing;
-        private readonly IServiceProvider serviceProvider;
 
         protected ModalDialogBase()
         {
@@ -38,17 +38,12 @@ namespace Ntreev.ModernUI.Framework
 
         protected ModalDialogBase(IServiceProvider serviceProvider)
         {
-            this.serviceProvider = serviceProvider;
-            if (this.serviceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
-            {
-                buildUp.BuildUp(this);
-                this.Dispatcher.InvokeAsync(this.OnAfterBuildUp);
-            }
+            this.ServiceProvider = serviceProvider;
         }
 
         public async Task<bool?> ShowDialogAsync()
         {
-            var result = await AppWindowManager.Current.ShowDialogAsync(this);
+            await AppWindowManager.Current.ShowDialogAsync(this);
             return this.DialogResult;
         }
 
@@ -108,7 +103,15 @@ namespace Ntreev.ModernUI.Framework
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        public virtual IEnumerable<IToolBarItem> ToolBarItems => ToolBarItemUtility.GetToolBarItems(this, this.serviceProvider);
+        public virtual IEnumerable<IToolBarItem> ToolBarItems
+        {
+            get
+            {
+                if (this.ServiceProvider != null)
+                    return ToolBarItemUtility.GetToolBarItems(this, this.ServiceProvider);
+                return Enumerable.Empty<IToolBarItem>();
+            }
+        }
 
         protected override void OnViewLoaded(object view)
         {
@@ -120,9 +123,6 @@ namespace Ntreev.ModernUI.Framework
             return base.OnDeactivateAsync(close, cancellationToken);
         }
 
-        protected virtual void OnAfterBuildUp()
-        {
-
-        }
+        protected IServiceProvider ServiceProvider { get; }
     }
 }

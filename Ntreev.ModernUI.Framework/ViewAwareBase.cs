@@ -26,7 +26,6 @@ namespace Ntreev.ModernUI.Framework
         private bool isProgressing;
         private string progressMessage;
         private string displayName;
-        private readonly IServiceProvider serviceProvider;
 
         protected ViewAwareBase()
         {
@@ -35,11 +34,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected ViewAwareBase(IServiceProvider serviceProvider)
         {
-            if (this.serviceProvider.GetService(typeof(IBuildUp)) is IBuildUp buildUp)
-            {
-                buildUp.BuildUp(this);
-                this.Dispatcher.InvokeAsync(this.OnAfterBuildUp);
-            }
+            this.ServiceProvider = serviceProvider;
         }
 
         public void BeginProgress()
@@ -100,9 +95,6 @@ namespace Ntreev.ModernUI.Framework
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
-        protected virtual void OnAfterBuildUp()
-        {
-
-        }
+        protected IServiceProvider ServiceProvider { get; }
     }
 }

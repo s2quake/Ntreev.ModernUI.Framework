@@ -25,13 +25,16 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class AppBootstrapperDescriptorBase
     {
-        public abstract object GetInstance(Type service, string key);
-
-        public abstract IEnumerable<object> GetInstances(Type service);
-
-        public abstract void BuildUp(object instance);
+        private Assembly[] assemblies;
+        private Tuple<Type, object>[] parts;
 
         public abstract Type ModelType { get; }
+
+        protected abstract object GetInstance(Type service, string key);
+
+        protected abstract IEnumerable<object> GetInstances(Type service);
+
+        protected abstract void OnBuildUp(object instance);
 
         protected virtual IEnumerable<Assembly> GetAssemblies()
         {
@@ -51,14 +54,24 @@ namespace Ntreev.ModernUI.Framework
 
         protected abstract void OnDispose();
 
+        internal object Instance(Type service, string key) => this.GetInstance(service, key);
+
+        internal IEnumerable<object> Instances(Type service) => this.GetInstances(service);
+
         internal void Initialize()
         {
-            var parts = this.GetParts();
-            this.OnInitialize(this.Assemblies, parts);
+            this.OnInitialize(this.assemblies, this.parts);
         }
 
         internal void Dispose() => this.OnDispose();
 
-        internal Assembly[] Assemblies => this.GetAssemblies().ToArray();
+        internal void BuildUp(object instance) => this.OnBuildUp(instance);
+
+        internal IEnumerable<Assembly> SelectAssemblies()
+        {
+            this.assemblies = this.GetAssemblies().ToArray();
+            this.parts = this.GetParts().ToArray();
+            return this.assemblies;
+        }
     }
 }

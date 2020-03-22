@@ -31,8 +31,6 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class AppBootstrapperBase : BootstrapperBase, IServiceProvider, IBuildUp
     {
-        //private readonly Type modelType;
-        //private CompositionContainer container;
         private readonly AppBootstrapperDescriptorBase descriptor;
         private readonly Func<object, object> locateForView = ViewModelLocator.LocateForView;
         private readonly Func<Type, DependencyObject, object, Type> locateTypeForModelType = ViewLocator.LocateTypeForModelType;
@@ -52,7 +50,6 @@ namespace Ntreev.ModernUI.Framework
             if (Current != null)
                 throw new InvalidOperationException("AppBootstrapper does not allow multi instance");
             Current = this;
-            //this.modelType = modelType;
             if (this.AutoInitialize == true)
                 this.Initialize();
         }
@@ -69,24 +66,20 @@ namespace Ntreev.ModernUI.Framework
             if (typeof(IEnumerable).IsAssignableFrom(serviceType) && serviceType.GenericTypeArguments.Length == 1)
             {
                 var itemType = serviceType.GenericTypeArguments.First();
-                //var contractName = AttributedModelServices.GetContractName(itemType);
-                //var items = this.container.GetExportedValues<object>(contractName);
-                //var listGenericType = typeof(List<>);
-                //var list = listGenericType.MakeGenericType(itemType);
-                //var ci = list.GetConstructor(new Type[] { typeof(int) });
-                //var instance = ci.Invoke(new object[] { items.Count(), }) as IList;
-                //foreach (var item in items)
-                //{
-                //    instance.Add(item);
-                //}
-                //return instance;
-                return this.descriptor.GetInstances(itemType);
+                var items = this.descriptor.Instances(itemType);
+                var listGenericType = typeof(List<>);
+                var list = listGenericType.MakeGenericType(itemType);
+                var ci = list.GetConstructor(new Type[] { typeof(int) });
+                var instance = ci.Invoke(new object[] { items.Count(), }) as IList;
+                foreach (var item in items)
+                {
+                    instance.Add(item);
+                }
+                return instance;
             }
             else
             {
-                return this.descriptor.GetInstance(serviceType, null);
-                //var contractName = AttributedModelServices.GetContractName(serviceType);
-                //return this.container.GetExportedValue<object>(contractName);
+                return this.descriptor.Instance(serviceType, null);
             }
         }
 
@@ -149,23 +142,22 @@ namespace Ntreev.ModernUI.Framework
             //{
             //    this.container.SatisfyImportsOnce(view);
             //}
-
             return view;
         }
 
         protected override object GetInstance(Type service, string key)
         {
-            return this.descriptor.GetInstance(service, key);
+            return this.descriptor.Instance(service, key);
         }
 
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
-            return this.descriptor.Assemblies;
+            return this.descriptor.SelectAssemblies();
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return this.descriptor.GetInstances(service);
+            return this.descriptor.Instances(service);
         }
 
         protected override void BuildUp(object instance)
@@ -199,16 +191,6 @@ namespace Ntreev.ModernUI.Framework
         {
             base.OnUnhandledException(sender, e);
         }
-
-        //protected virtual IEnumerable<string> SelectPath()
-        //{
-        //    yield break;
-        //}
-
-        //protected virtual IEnumerable<(System.Type, object)> GetParts()
-        //{
-        //    yield break;
-        //}
 
         protected virtual bool IgnoreDisplay => false;
 
