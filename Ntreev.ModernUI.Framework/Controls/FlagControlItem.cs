@@ -146,10 +146,5 @@ namespace Ntreev.ModernUI.Framework.Controls
                 flagItem.RaiseEvent(new RoutedEventArgs(UnselectedEvent));
             }
         }
-
-        private static object IsSelectedPropertyCoerceValueCallback(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
     }
 }

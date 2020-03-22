@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MenuItem_File" xml:space="preserve">
-    <value>_File</value>
+    <value>파일(_F)</value>
   </data>
   <data name="MenuItem_View" xml:space="preserve">
-    <value>_View</value>
+    <value>보기(_V)</value>
   </data>
   <data name="MenuItem_Help" xml:space="preserve">
-    <value>_Help</value>
+    <value>도움말(_H)</value>
   </data>
   <data name="MenuItem_Tool" xml:space="preserve">
-    <value>_Tool</value>
+    <value>도구(_T)</value>
   </data>
   <data name="MenuItem_Quit" xml:space="preserve">
-    <value>_Quit</value>
+    <value>끝내기(_Q)</value>
   </data>
 </root>

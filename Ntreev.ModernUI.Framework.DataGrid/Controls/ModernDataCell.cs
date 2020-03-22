@@ -288,14 +288,14 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 catch (Xceed.Wpf.DataGrid.DataGridException ex)
                 {
                     if (ex.InnerException != null)
-                        AppMessageBox.ShowError(ex.InnerException.Message);
+                        AppMessageBox.ShowErrorAsync(ex.InnerException.Message);
                     else
-                        AppMessageBox.ShowError(ex);
+                        AppMessageBox.ShowErrorAsync(ex);
                     return false;
                 }
                 catch (Exception ex)
                 {
-                    AppMessageBox.ShowError(ex);
+                    AppMessageBox.ShowErrorAsync(ex);
                     return false;
                 }
             }

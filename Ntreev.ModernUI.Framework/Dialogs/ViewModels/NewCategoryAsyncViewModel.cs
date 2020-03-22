@@ -44,7 +44,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             catch (Exception e)
             {
                 this.EndProgress();
-                AppMessageBox.ShowError(e);
+                await AppMessageBox.ShowErrorAsync(e);
             }
         }
 

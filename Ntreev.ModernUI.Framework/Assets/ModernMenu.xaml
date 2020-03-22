@@ -5,6 +5,7 @@
     <nmfc:ModernMenuStyleSelector x:Key="ModernMenu_ItemContainerStyleSelector" Style="{StaticResource IMenuItem_ModernMenuItem_Style}" />
     
     <Style TargetType="{x:Type nmfc:ModernMenu}" BasedOn="{StaticResource {x:Type Menu}}">
+        <Setter Property="Height" Value="25" />
         <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernMenu_ItemContainerStyleSelector}" />
     </Style>
 

@@ -25,24 +25,24 @@ namespace Ntreev.ModernUI.Framework.Views
     [TemplatePart(Name = "PART_Yes", Type = typeof(Button))]
     [TemplatePart(Name = "PART_No", Type = typeof(Button))]
     [TemplatePart(Name = "PART_Cancel", Type = typeof(Button))]
-    public class MessageBoxView : Control
+    public class MessageBoxView1 : Control
     {
         public static readonly DependencyProperty MessageProperty = 
-            DependencyProperty.Register(nameof(Message), typeof(string), typeof(MessageBoxView));
+            DependencyProperty.Register(nameof(Message), typeof(string), typeof(MessageBoxView1));
 
         public static readonly DependencyProperty ImageProperty = 
-            DependencyProperty.Register(nameof(Image), typeof(MessageBoxImage), typeof(MessageBoxView));
+            DependencyProperty.Register(nameof(Image), typeof(MessageBoxImage), typeof(MessageBoxView1));
 
         public static readonly DependencyProperty ButtonProperty = 
-            DependencyProperty.Register(nameof(Button), typeof(MessageBoxButton), typeof(MessageBoxView));
+            DependencyProperty.Register(nameof(Button), typeof(MessageBoxButton), typeof(MessageBoxView1));
 
         public static readonly DependencyProperty ResultProperty = 
-            DependencyProperty.Register(nameof(Result), typeof(MessageBoxResult), typeof(MessageBoxView));
+            DependencyProperty.Register(nameof(Result), typeof(MessageBoxResult), typeof(MessageBoxView1));
 
         public static readonly DependencyProperty ErrorContentProperty =
-            DependencyProperty.Register(nameof(ErrorContent), typeof(object), typeof(MessageBoxView));
+            DependencyProperty.Register(nameof(ErrorContent), typeof(object), typeof(MessageBoxView1));
 
-        public MessageBoxView()
+        public MessageBoxView1()
         {
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, (s, e) =>
             {
@@ -79,32 +79,32 @@ namespace Ntreev.ModernUI.Framework.Views
 
         public string Message
         {
-            get { return (string)this.GetValue(MessageProperty); }
-            set { this.SetValue(MessageProperty, value); }
+            get => (string)this.GetValue(MessageProperty);
+            set => this.SetValue(MessageProperty, value);
         }
 
         public MessageBoxImage Image
         {
-            get { return (MessageBoxImage)this.GetValue(ImageProperty); }
-            set { this.SetValue(ImageProperty, value); }
+            get => (MessageBoxImage)this.GetValue(ImageProperty);
+            set => this.SetValue(ImageProperty, value);
         }
 
         public MessageBoxResult Result
         {
-            get { return (MessageBoxResult)this.GetValue(ResultProperty); }
-            set { this.SetValue(ResultProperty, value); }
+            get => (MessageBoxResult)this.GetValue(ResultProperty);
+            set => this.SetValue(ResultProperty, value);
         }
 
         public MessageBoxButton Button
         {
-            get { return (MessageBoxButton)this.GetValue(ButtonProperty); }
-            set { this.SetValue(ButtonProperty, value); }
+            get => (MessageBoxButton)this.GetValue(ButtonProperty);
+            set => this.SetValue(ButtonProperty, value);
         }
 
         public object ErrorContent
         {
-            get { return (object)this.GetValue(ErrorContentProperty); }
-            set { this.SetValue(ErrorContentProperty, value); }
+            get => (object)this.GetValue(ErrorContentProperty);
+            set => this.SetValue(ErrorContentProperty, value);
         }
 
         private void MessageBoxView_Loaded(object sender, RoutedEventArgs e)

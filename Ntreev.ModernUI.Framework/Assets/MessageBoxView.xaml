@@ -21,7 +21,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:views="clr-namespace:Ntreev.ModernUI.Framework.Views"
                     xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.Properties">
 
-    <Canvas x:Key="Error_Image" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+    <!--<Canvas x:Key="Error_Image" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
         <Path Width="38" Height="38" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="{DynamicResource WindowBorderActive}"
               Data="F1 M 31.6667,19L 44.3333,19L 57,31.6667L 57,44.3333L 44.3333,57L 31.6667,57L 19,44.3333L 19,31.6667L 31.6667,19 Z M 26.4762,45.0454L 30.9546,49.5238L 38,42.4783L 45.0454,49.5238L 49.5237,45.0454L 42.4783,38L 49.5238,30.9546L 45.0454,26.4763L 38,33.5217L 30.9546,26.4762L 26.4762,30.9546L 33.5217,38L 26.4762,45.0454 Z " />
     </Canvas>
@@ -41,7 +41,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
               Data="F1 M 37.2083,49.0833C 39.3945,49.0833 41.1667,50.8555 41.1667,53.0417C 41.1667,55.2278 39.3945,57 37.2083,57C 35.0222,57 33.25,55.2278 33.25,53.0417C 33.25,50.8555 35.0222,49.0833 37.2083,49.0833 Z M 38,17.4167C 44.9956,17.4167 50.6666,21.9416 50.6666,28.5C 50.6666,30.875 49.0833,34.8333 45.9167,36.4167C 42.75,38 41.1667,40.1267 41.1667,42.75L 41.1667,45.9167L 33.25,45.9167L 33.25,43.5417C 33.25,38.1571 38,34.8333 39.5833,33.25C 42.75,30.0833 42.75,29.644 42.75,28.5C 42.75,25.8767 40.6233,23.75 38,23.75C 35.3766,23.75 33.25,25.8767 33.25,28.5L 33.25,30.875L 25.3333,30.875L 25.3333,29.2917C 25.3333,22.7333 31.0044,17.4167 38,17.4167 Z " />
     </Canvas>
 
-    <ControlTemplate x:Key="MessageBoxView_Template" TargetType="{x:Type views:MessageBoxView}">
+    <ControlTemplate x:Key="MessageBoxView_Template" TargetType="{x:Type views:MessageBoxView1}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -116,14 +116,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type views:MessageBoxView}">
+    <Style TargetType="{x:Type views:MessageBoxView1}">
         <Setter Property="Template" Value="{StaticResource MessageBoxView_Template}" />
         <Setter Property="MinWidth" Value="250" />
         <Setter Property="MaxWidth" Value="375" />
         <Setter Property="Message" Value="{Binding Message}" />
         <Setter Property="Image" Value="{Binding Image}" />
         <Setter Property="Button" Value="{Binding Button}" />
-        <Setter Property="Result" Value="{Binding Result, Mode=TwoWay}" />
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

@@ -444,7 +444,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             }
             catch (ModernDataGridUpdateSourceException ex)
             {
-                AppMessageBox.ShowError(ex.Message);
+                AppMessageBox.ShowErrorAsync(ex.Message);
                 ex.Cell.CancelEdit();
             }
         }
@@ -593,7 +593,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                         }
                         catch (Exception ex)
                         {
-                            AppMessageBox.ShowError(ex);
+                            AppMessageBox.ShowErrorAsync(ex);
                         }
                     }
                 }

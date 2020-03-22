@@ -86,7 +86,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Border>
             <Grid>
                 <Border Name="Border" Background="{DynamicResource ButtonBackground}" BorderThickness="1">
-                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Margin="7 3" />
+                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Margin="7 3" HorizontalAlignment="Center" />
                 </Border>
             </Grid>
         </Border>
@@ -202,8 +202,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Popup x:Name="PART_Popup"
                    AllowsTransparency="True"
                    Placement="Right"
-                   VerticalOffset="-3"
-                   HorizontalOffset="-2"
+                   VerticalOffset="-1"
+                   HorizontalOffset="2"
                    IsOpen="{Binding Path=IsSubmenuOpen,RelativeSource={RelativeSource TemplatedParent}}"
                    Focusable="false"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">

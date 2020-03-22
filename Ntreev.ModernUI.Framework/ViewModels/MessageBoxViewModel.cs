@@ -16,7 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
@@ -25,30 +24,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
     {
         private string progressMessage;
         private bool isProgressing;
+        private MessageBoxResult result;
 
         public MessageBoxViewModel()
         {
 
-        }
-
-        public Task OkAsync()
-        {
-            return this.SelectAsync(MessageBoxResult.OK);
-        }
-
-        public Task CancelAsync()
-        {
-            return this.SelectAsync(MessageBoxResult.Cancel);
-        }
-
-        public Task YesAsync()
-        {
-            return this.SelectAsync(MessageBoxResult.Yes);
-        }
-
-        public Task NoAsync()
-        {
-            return this.SelectAsync(MessageBoxResult.No);
         }
 
         public bool OkVisible => this.Button == MessageBoxButton.OK || this.Button == MessageBoxButton.OKCancel;
@@ -61,7 +41,16 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public string Message { get; set; }
 
-        public MessageBoxResult Result { get; private set; }
+        public MessageBoxResult Result
+        {
+            get => this.result;
+            set
+            {
+                this.result = value;
+                //this.NotifyOfPropertyChange(nameof(Result));
+                this.SelectAsync(value);
+            }
+        }
 
         public MessageBoxButton Button { get; set; }
 
@@ -87,7 +76,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        private async Task SelectAsync(MessageBoxResult result)
+        private async void SelectAsync(MessageBoxResult result)
         {
             bool? dialogResult = null;
             this.Result = result;

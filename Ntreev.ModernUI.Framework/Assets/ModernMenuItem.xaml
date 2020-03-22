@@ -14,7 +14,7 @@
 
     <Style x:Key="IMenuItem_ModernMenuItem_Style" TargetType="{x:Type nmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type nmfc:ModernMenuItem}}">
         <Setter Property="Header" Value="{Binding DisplayName}" />
-        <Setter Property="ItemsSource" Value="{Binding ItemsSource}" />
+        <Setter Property="ItemsSource" Value="{Binding MenuItems}" />
         <Setter Property="Command" Value="{Binding Command}" />
         <Setter Property="CommandParameter" Value="{Binding}" />
         <Setter Property="CommandTarget" Value="{Binding RelativeSource={RelativeSource Mode=Self}}" />

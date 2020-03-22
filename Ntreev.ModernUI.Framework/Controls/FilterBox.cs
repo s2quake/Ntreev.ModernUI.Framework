@@ -153,6 +153,11 @@ namespace Ntreev.ModernUI.Framework.Controls
                 if (this.IsDropDownOpen == false)
                     this.IsDropDownOpen = true;
             }
+            else if (e.Key == Key.Down && Keyboard.Modifiers == ModifierKeys.Alt)
+            {
+                if (this.IsDropDownOpen == false)
+                    this.IsDropDownOpen = true;
+            }
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)

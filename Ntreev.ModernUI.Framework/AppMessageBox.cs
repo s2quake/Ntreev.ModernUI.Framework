@@ -18,6 +18,7 @@
 using Ntreev.ModernUI.Framework.Properties;
 using Ntreev.ModernUI.Framework.ViewModels;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Ntreev.ModernUI.Framework
@@ -28,64 +29,64 @@ namespace Ntreev.ModernUI.Framework
     {
         public readonly static MessageSelector DefaultMessageSelector = SelectDefaultMessage;
 
-        public static MessageBoxResult Show(string text)
+        public static Task<MessageBoxResult> ShowAsync(string text)
         {
-            return Show(text, MessageBoxButton.OK, MessageBoxImage.None);
+            return ShowAsync(text, MessageBoxButton.OK, MessageBoxImage.None);
         }
 
-        public static MessageBoxResult Show(string text, string title)
+        public static Task<MessageBoxResult> ShowAsync(string text, string title)
         {
-            return Show(text, title, MessageBoxButton.OK, MessageBoxImage.None);
+            return ShowAsync(text, title, MessageBoxButton.OK, MessageBoxImage.None);
         }
 
-        public static void ShowError(string text)
+        public static Task ShowErrorAsync(string text)
         {
-            Show(text, MessageBoxButton.OK, MessageBoxImage.Error);
+            return ShowAsync(text, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        public static void ShowError(Exception e)
+        public static Task ShowErrorAsync(Exception e)
         {
-            Show(e, MessageBoxButton.OK, MessageBoxImage.Error);
+            return ShowAsync(e, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        public static void ShowError(string format, params object[] args)
+        public static Task ShowErrorAsync(string format, params object[] args)
         {
-            ShowError(string.Format(format, args));
+            return ShowErrorAsync(string.Format(format, args));
         }
 
-        public static void ShowInfo(string text)
+        public static Task ShowInfoAsync(string text)
         {
-            Show(text, MessageBoxButton.OK, MessageBoxImage.Information);
+            return ShowAsync(text, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        public static void ShowInfo(string format, params object[] args)
+        public static Task ShowInfoAsync(string format, params object[] args)
         {
-            ShowInfo(string.Format(format, args));
+            return ShowInfoAsync(string.Format(format, args));
         }
 
-        public static void ShowWarning(string text)
+        public static Task ShowWarningAsync(string text)
         {
-            Show(text, MessageBoxButton.OK, MessageBoxImage.Warning);
+            return ShowAsync(text, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        public static void ShowWarning(string format, params object[] args)
+        public static Task ShowWarningAsync(string format, params object[] args)
         {
-            ShowWarning(string.Format(format, args));
+            return ShowWarningAsync(string.Format(format, args));
         }
 
-        public static bool ShowQuestion(string text)
+        public static async Task<bool> ShowQuestionAsync(string text)
         {
-            return Show(text, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+            return await ShowAsync(text, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
         }
 
-        public static bool ShowQuestion(string format, params object[] args)
+        public static Task<bool> ShowQuestion(string format, params object[] args)
         {
-            return ShowQuestion(string.Format(format, args));
+            return ShowQuestionAsync(string.Format(format, args));
         }
 
-        public static bool? ShowCancelableQuestion(string text)
+        public static async Task<bool?> ShowCancelableQuestionAsync(string text)
         {
-            var result = Show(text, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            var result = await ShowAsync(text, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
                 return true;
             else if (result == MessageBoxResult.No)
@@ -94,50 +95,47 @@ namespace Ntreev.ModernUI.Framework
                 return null;
         }
 
-        public static bool? ShowCancelableQuestion(string format, params object[] args)
+        public static Task<bool?> ShowCancelableQuestionAsync(string format, params object[] args)
         {
-            return ShowCancelableQuestion(string.Format(format, args));
+            return ShowCancelableQuestionAsync(string.Format(format, args));
         }
 
-        public static bool ShowProceed(string text)
+        public static async Task<bool> ShowProceedAsync(string text)
         {
-            return Show(text, MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.OK;
+            return await ShowAsync(text, MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.OK;
         }
 
-        public static bool ShowProceed(string format, params object[] args)
+        public static Task<bool> ShowProceedAsync(string format, params object[] args)
         {
-            return ShowProceed(string.Format(format, args));
+            return ShowProceedAsync(string.Format(format, args));
         }
 
-        public static bool ConfirmDelete()
+        public static Task<bool> ConfirmDeleteAsync()
         {
-            return ShowQuestion(Resources.Message_ConfirmToDelete);
+            return ShowQuestionAsync(Resources.Message_ConfirmToDelete);
         }
 
-        public static bool? ConfirmSaveOnClosing()
+        public static Task<bool?> ConfirmSaveOnClosingAsync()
         {
-            return ShowCancelableQuestion(Resources.Message_ConfirmToSave);
+            return ShowCancelableQuestionAsync(Resources.Message_ConfirmToSave);
         }
 
-        public static bool? ConfirmCreateOnClosing()
+        public static Task<bool?> ConfirmCreateOnClosingAsync()
         {
-            return ShowCancelableQuestion(Resources.Message_ConfirmToCreate);
+            return ShowCancelableQuestionAsync(Resources.Message_ConfirmToCreate);
         }
 
-        public static MessageBoxResult Show(object message, MessageBoxButton button, MessageBoxImage icon)
+        public static Task<MessageBoxResult> ShowAsync(object message, MessageBoxButton button, MessageBoxImage icon)
         {
-            return Show(message, AppInfo.ProductName, button, icon);
+            return ShowAsync(message, AppInfo.ProductName, button, icon);
         }
 
-        public static MessageBoxResult Show(object message, string title, MessageBoxButton button, MessageBoxImage icon)
+        public static async Task<MessageBoxResult> ShowAsync(object message, string title, MessageBoxButton button, MessageBoxImage icon)
         {
-            Application.Current.Dispatcher.VerifyAccess();
-
             var text = (MessageSelector ?? SelectDefaultMessage)(message);
-
             if (AppWindowManager.Current == null)
             {
-                return MessageBox.Show(text, title, button, icon);
+                return await Application.Current.Dispatcher.InvokeAsync(() => MessageBox.Show(text, title, button, icon));
             }
             else
             {
@@ -148,7 +146,7 @@ namespace Ntreev.ModernUI.Framework
                     Button = button,
                     Image = icon
                 };
-                AppWindowManager.Current.ShowDialogAsync(dialog).Wait();
+                await AppWindowManager.Current.ShowDialogAsync(dialog);
                 return dialog.Result;
             }
         }
@@ -162,9 +160,6 @@ namespace Ntreev.ModernUI.Framework
             return message.ToString();
         }
 
-        public static MessageSelector MessageSelector
-        {
-            get; set;
-        }
+        public static MessageSelector MessageSelector { get; set; }
     }
 }

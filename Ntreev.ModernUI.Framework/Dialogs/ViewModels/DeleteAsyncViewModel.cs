@@ -37,12 +37,12 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
                 await this.OnDeleteAsync();
                 this.EndProgress();
                 await this.TryCloseAsync(true);
-                AppMessageBox.Show(Resources.Message_Deleted);
+                await AppMessageBox.ShowAsync(Resources.Message_Deleted);
             }
             catch (Exception e)
             {
                 this.EndProgress();
-                AppMessageBox.ShowError(e);
+                await AppMessageBox.ShowErrorAsync(e);
             }
         }
 

@@ -104,6 +104,10 @@ namespace Ntreev.ModernUI.Framework
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 
+        public IEnumerable<IMenuItem> MenuItems => MenuItemUtility.GetMenuItems(this, this.ServiceProvider);
+
+        public IEnumerable<IToolBarItem> ToolBarItems => ToolBarItemUtility.GetToolBarItems(this, this.ServiceProvider);
+
         protected override void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
@@ -203,7 +207,7 @@ namespace Ntreev.ModernUI.Framework
                 }
             }
 
-            foreach (var item in menuItem.ItemsSource)
+            foreach (var item in menuItem.MenuItems)
             {
                 this.SetInputBindings(element, item);
             }

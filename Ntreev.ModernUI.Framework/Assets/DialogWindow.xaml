@@ -139,7 +139,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="NoResize">
-                            <!--<Setter TargetName="Minimize" Property="Visibility" Value="Collapsed" />-->
                             <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
                         </Trigger>
@@ -156,18 +155,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <Trigger Property="IsProgressing" Value="True">
                             <Setter TargetName="PART_ProgressContent" Property="Visibility" Value="Visible" />
                         </Trigger>
-                        <!--<Trigger Property="ProgressType" Value="Ring">
-                            <Setter TargetName="PART_ProgressContent" Property="Style" Value="{StaticResource ProgressContent_Dialog_ProgressRing_Style}" />
-                        </Trigger>-->
                         <Trigger Property="ProgressType" Value="Bar">
                             <Setter TargetName="PART_ProgressContent" Property="Style" Value="{StaticResource ProgressContent_Dialog_ProgressBar_Style}" />
                         </Trigger>
                         <Trigger Property="ProgressType" Value="None">
                             <Setter TargetName="PART_ProgressContent" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <!--<Trigger Property="ProgressType" Value="Custom">
-                            <Setter TargetName="PART_ProgressContent" Property="Style" Value="{TemplateBinding ProgressStyle}" />
-                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

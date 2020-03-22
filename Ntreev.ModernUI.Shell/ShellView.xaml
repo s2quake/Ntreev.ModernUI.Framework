@@ -3,9 +3,9 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                   xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
-                  xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                   xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
                   xmlns:nmgc="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Controls;assembly=Ntreev.ModernUI.Framework.DataGrid"
+                  xmlns:view="clr-namespace:Ntreev.ModernUI.Shell.ContentView"
                   Height="550" Width="525" Loaded="Window_Loaded" Style="{StaticResource ModernWindow_Style}">
 
     <mui:ModernWindow.Resources>
@@ -90,11 +90,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="File">
-                <MenuItem Header="Open" IsChecked="True" />
-            </MenuItem>
-        </Menu>
+        <view:MenuView />
 
         <TabControl Grid.Row="1" Style="{StaticResource TabControl_Page_Style}">
             <TabItem Header="Base">
@@ -117,18 +113,18 @@
                         </nmfc:ModernToolBar>
                     </ToolBarTray>
                     <nmfc:PropertyItemsControl Grid.Row="1">
-                        <ComboBox nmfc:PropertyItemsControl.Header="ComboBox" x:Name="ComboBox" />
-                        <ComboBox nmfc:PropertyItemsControl.Header="EditableComboBox" x:Name="EditableComboBox" IsEditable="True" />
-                        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="SearchBox" x:Name="searchBox" />
-                        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="FilterBox" x:Name="filterBox" />
-                        <nmfc:FlagControl nmfc:PropertyItemsControl.Header="FlagControl">
+                        <ComboBox nmfc:PropertyItemsControl.Header="_ComboBox" x:Name="ComboBox" />
+                        <ComboBox nmfc:PropertyItemsControl.Header="_EditableComboBox" x:Name="EditableComboBox" IsEditable="True" />
+                        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="_SearchBox" x:Name="searchBox" />
+                        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="_FilterBox" x:Name="filterBox" />
+                        <nmfc:FlagControl nmfc:PropertyItemsControl.Header="_FlagControl">
                             <nmfc:FlagControlItem Value="0" Content="None" />
                             <nmfc:FlagControlItem Value="1" Content="A" />
                             <nmfc:FlagControlItem Value="2" Content="B" />
                             <nmfc:FlagControlItem Value="4" Content="C" />
                             <nmfc:FlagControlItem Value="7" Content="All" />
                         </nmfc:FlagControl>
-                        <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
+                        <nmfc:IconButton x:Name="IconButton" nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
                         <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left"
                                          DropDownTemplate="{StaticResource DropDown_Template}"/>
                         <StackPanel Orientation="Horizontal" nmfc:PropertyItemsControl.Header="IconImage" >
@@ -140,10 +136,10 @@
                                             HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
                         </StackPanel>
                         <nmfc:ColorButton x:Name="PickColor" nmfc:PropertyItemsControl.Header="ColorPicker" HorizontalAlignment="Left" />
-                        <nmfc:TreeViewItemSelector nmfc:PropertyItemsControl.Header="TreeViewItemSelector" ItemsSource="{Binding TreeViewItems}" />
+                        <nmfc:TreeViewItemSelector x:Name="TreeViewItem" nmfc:PropertyItemsControl.Header="TreeViewItemSelector" />
                         <nmfc:GuidControl x:Name="Guid" nmfc:PropertyItemsControl.Header="Guid" />
                         <TextBox x:Name="TextBox" nmfc:PropertyItemsControl.Header="TextBox"  />
-                        <nmfc:NumericTextBox nmfc:PropertyItemsControl.Header="NumericTextBox" />
+                        <nmfc:NumericTextBox x:Name="NumericTextBox" nmfc:PropertyItemsControl.Header="NumericTextBox" />
                     </nmfc:PropertyItemsControl>
                 </Grid>
             </TabItem>
@@ -190,7 +186,7 @@
                                     <xcdg:HierarchicalGroupByControl/>
                                 </DataTemplate>
                                 <DataTemplate>
-                                    <nmgc:ModernColumnManagerRow x:Name="columnManagerRow" />
+                                    <nmgc:ModernColumnManagerRow x:Name="ColumnManagerRow" />
                                 </DataTemplate>
                                 <DataTemplate>
                                     <nmgc:ModernInsertionRow InsertCommand="{Binding InsertCommand}" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />
@@ -200,9 +196,9 @@
                                           HorizontalAlignment="Left" Width="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}"
                                           xcdg:RowSelector.RowSelectorStyle="{DynamicResource DataRowSelector_Style}">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto" />
-                                            <ColumnDefinition Width="auto" />
-                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" Visibility="Hidden" xcdg:GroupLevelIndicatorPane.ShowIndicators="True" />

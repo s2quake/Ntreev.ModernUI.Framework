@@ -24,7 +24,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style x:Key="ModernWindow_Style" TargetType="{x:Type mui:ModernWindow}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="mui:ModernWindow">
+                <ControlTemplate TargetType="{x:Type mui:ModernWindow}">
                     <Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}">
                         <Border.Background>
                             <SolidColorBrush x:Name="WindowBorderBackground" Color="{DynamicResource WindowBackgroundColor}" />

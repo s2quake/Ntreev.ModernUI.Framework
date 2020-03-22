@@ -146,7 +146,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 e.CanExecute = true;
         }
 
-        private void EndEdit_Execute(object sender, ExecutedRoutedEventArgs e)
+        private async void EndEdit_Execute(object sender, ExecutedRoutedEventArgs e)
         {
             var gridContext = DataGridControl.GetDataGridContext(this);
             var cell = this.Cells[gridContext.CurrentColumn];
@@ -158,19 +158,19 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             catch (Xceed.Wpf.DataGrid.DataGridException ex)
             {
                 if (ex.InnerException != null)
-                    AppMessageBox.ShowError(ex.InnerException.Message);
+                    await AppMessageBox.ShowErrorAsync(ex.InnerException.Message);
                 else
-                    AppMessageBox.ShowError(ex);
+                    await AppMessageBox.ShowErrorAsync(ex);
             }
             catch (Exception ex)
             {
-                AppMessageBox.ShowError(ex);
+                await AppMessageBox.ShowErrorAsync(ex);
             }
         }
 
-        private void Delete_Execute(object sender, ExecutedRoutedEventArgs e)
+        private async void Delete_Execute(object sender, ExecutedRoutedEventArgs e)
         {
-            if (AppMessageBox.ConfirmDelete() == false)
+            if (await AppMessageBox.ConfirmDeleteAsync() == false)
                 return;
 
             var gridContext = DataGridControl.GetDataGridContext(this);
@@ -186,7 +186,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 }
                 catch (Exception ex)
                 {
-                    AppMessageBox.ShowError(ex.Message);
+                    await AppMessageBox.ShowErrorAsync(ex.Message);
                 }
             }
         }

@@ -51,7 +51,7 @@ namespace Ntreev.ModernUI.Shell
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            AppMessageBox.Show("123");
+            AppMessageBox.ShowAsync("123");
         }
     }
 }

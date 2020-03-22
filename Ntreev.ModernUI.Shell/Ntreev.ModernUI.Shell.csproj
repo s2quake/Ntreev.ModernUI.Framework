@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library\Ntreev.Library.csproj" />
+    <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library.Random\Ntreev.Library.Random.csproj" />
     <ProjectReference Include="..\Ntreev.ModernUI.Framework\Ntreev.ModernUI.Framework.csproj" />
     <ProjectReference Include="..\Ntreev.ModernUI.Framework.DataGrid\Ntreev.ModernUI.Framework.DataGrid.csproj" />
   </ItemGroup>
@@ -69,5 +70,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MenuItems\HelpMenus\" />
   </ItemGroup>
 </Project>

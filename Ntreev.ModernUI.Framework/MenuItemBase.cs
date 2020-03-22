@@ -18,6 +18,7 @@
 using Ntreev.ModernUI.Framework.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -55,14 +56,13 @@ namespace Ntreev.ModernUI.Framework
 
         public InputGesture InputGesture { get; set; }
 
-        public virtual IEnumerable<IMenuItem> ItemsSource
+        public virtual IEnumerable<IMenuItem> MenuItems
         {
             get
             {
-                foreach (var item in MenuItemUtility.GetMenuItems(this, this.ServiceProvider ?? AppBootstrapperBase.Current))
-                {
-                    yield return item;
-                }
+                if (this.ServiceProvider != null)
+                    return MenuItemUtility.GetMenuItems(this, this.ServiceProvider);
+                return Enumerable.Empty<IMenuItem>();
             }
         }
 

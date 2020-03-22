@@ -104,6 +104,11 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
         }
 
+        protected override void OnPreviewMouseDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseDown(e);
+        }
+
         private static void ItemsSourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ModernMenuItem self)

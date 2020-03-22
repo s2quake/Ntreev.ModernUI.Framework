@@ -30,6 +30,8 @@ namespace Ntreev.ModernUI.Framework
     {
         private string progressMessage;
         private bool isProgressing;
+        private bool? dialogResult;
+        private MessageBoxResult result;
 
         protected ModalDialogBase()
         {
@@ -44,7 +46,7 @@ namespace Ntreev.ModernUI.Framework
         public async Task<bool?> ShowDialogAsync()
         {
             await AppWindowManager.Current.ShowDialogAsync(this);
-            return this.DialogResult;
+            return this.dialogResult;
         }
 
         public void BeginProgress()
@@ -93,13 +95,21 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public override async Task TryCloseAsync(bool? dialogResult = null)
+        public MessageBoxResult Result
         {
-            this.DialogResult = dialogResult;
-            await base.TryCloseAsync(null);
+            get => this.result;
+            set
+            {
+                this.result = value;
+                this.NotifyOfPropertyChange(nameof(Result));
+            }
         }
 
-        public bool? DialogResult { get; set; }
+        public override async Task TryCloseAsync(bool? dialogResult = null)
+        {
+            this.dialogResult = dialogResult;
+            await base.TryCloseAsync(null);
+        }
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
 

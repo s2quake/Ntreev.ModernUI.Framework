@@ -24,7 +24,7 @@ namespace Ntreev.ModernUI.Framework
     {
         string DisplayName { get; }
 
-        IEnumerable<IMenuItem> ItemsSource { get; }
+        IEnumerable<IMenuItem> MenuItems { get; }
 
         ICommand Command { get; }
 

@@ -118,12 +118,12 @@ namespace Ntreev.ModernUI.Framework
             base.OnViewReady(view);
         }
 
-        private void CloseCommand_Execute(object obj)
+        private async  void CloseCommand_Execute(object obj)
         {
             var save = false;
             if (this.IsModified == true)
             {
-                var result = AppMessageBox.ConfirmSaveOnClosing();
+                var result = await AppMessageBox.ConfirmSaveOnClosingAsync();
                 if (result == null)
                     return;
 
