@@ -30,7 +30,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                        Focusable="False">
             <nmfc:TabControlContentControl.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl cal:View.Model="{Binding}" />
+                    <ContentControl cal:View.Model="{Binding}"  />
                 </DataTemplate>
             </nmfc:TabControlContentControl.ItemTemplate>
             <nmfc:TabControlContentControl.ItemsPanel>

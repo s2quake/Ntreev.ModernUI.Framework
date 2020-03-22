@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Ntreev.ModernUI.Shell.Contents.Views.BaseControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400">
+
+    <nmfc:PropertyItemsControl>
+        <TextBox nmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
+        <TextBox nmfc:PropertyItemsControl.Header="Address" />
+        <TextBox nmfc:PropertyItemsControl.Header="UserID"  />
+        <PasswordBox nmfc:PropertyItemsControl.Header="Password" />
+        <StackPanel nmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
+            <TextBox Text="Find" Width="148" />
+            <Border Width="4" />
+            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
+        </StackPanel>
+        <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
+            <nmfc:ColorButton />
+            <Border Width="4" />
+            <ComboBox Width="122" />
+        </StackPanel>
+    </nmfc:PropertyItemsControl>
+
+</UserControl>

@@ -1,23 +1,17 @@
 ﻿using Ntreev.Library.Random;
 using Ntreev.ModernUI.Framework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Data;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Shell
+namespace Ntreev.ModernUI.Shell.Contents.ViewModels
 {
-    [Export(typeof(IShell))]
-    class ShellViewModel : ScreenBase, IShell
+    [Export(typeof(IContent))]
+    class AdvancedControlViewModel : ContentBase, IContent
     {
-        private readonly DataTable table = new DataTable();
-
-        private readonly ICommand insertCommand;
-
         private readonly ObservableCollection<string> comboBox = new ObservableCollection<string>();
         private readonly ObservableCollection<string> editableComboBox = new ObservableCollection<string>();
         private readonly ObservableCollection<string> treeViewItem = new ObservableCollection<string>()
@@ -39,19 +33,8 @@ namespace Ntreev.ModernUI.Shell
         private string selectedEditableComboBox;
         private string selectedTreeViewItem;
 
-        [ImportingConstructor]
-        public ShellViewModel(IServiceProvider serviceProvider)
-            : base(serviceProvider)
+        public AdvancedControlViewModel()
         {
-            this.DisplayName = "Controls";
-            this.table.Columns.Add();
-            this.table.Columns.Add();
-            this.table.Columns.Add();
-
-            this.table.Rows.Add("1", "Value1", "3");
-            this.table.Rows.Add("2", "Value2", "3");
-
-            this.insertCommand = new DelegateCommand((p) => this.Insert(), (p) => CanInsert);
             for (var i = 0; i < RandomUtility.Next(5, 10); i++)
             {
                 this.comboBox.Add(RandomUtility.NextWord());
@@ -64,11 +47,7 @@ namespace Ntreev.ModernUI.Shell
             this.SelectedComboBox = this.ComboBox.Random();
             this.SelectedEditableComboBox = this.EditableComboBox.Random();
             this.SelectedTreeViewItem = this.TreeViewItem.Random();
-        }
-
-        public void Insert()
-        {
-
+            this.DisplayName = "AdvancedControl";
         }
 
         public async Task IconButtonAsync()
@@ -139,26 +118,6 @@ namespace Ntreev.ModernUI.Shell
             {
                 this.numericTextBox = value;
                 this.NotifyOfPropertyChange(nameof(NumericTextBox));
-            }
-        }
-
-        public bool CanInsert => true;
-
-        public ICommand InsertCommand => this.insertCommand;
-
-        public IEnumerable ItemsSource => this.table.DefaultView;
-
-        public IEnumerable Contents
-        {
-            get
-            {
-                if (this.ServiceProvider.GetService(typeof(IEnumerable<IContent>)) is IEnumerable<IContent> contents)
-                {
-                    foreach (var item in contents)
-                    {
-                        yield return item;
-                    }
-                }
             }
         }
     }

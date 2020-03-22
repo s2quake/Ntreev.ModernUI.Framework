@@ -98,6 +98,7 @@ namespace Ntreev.ModernUI.Framework
                         if (window is DialogWindow dialogWindow)
                         {
                             dialogWindow.Dispatcher.InvokeAsync(() => dialogWindow.IsEnsured = true);
+                            //dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
                         }
                     };
                 }

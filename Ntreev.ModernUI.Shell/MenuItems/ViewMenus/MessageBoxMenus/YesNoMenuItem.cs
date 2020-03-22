@@ -9,18 +9,18 @@ namespace Ntreev.ModernUI.Shell.MenuItems.ViewMenus.MessageBoxMenus
 {
     [Export(typeof(IMenuItem))]
     [ParentType(typeof(MessageBoxMenuItem))]
-    class OkMenuItem : MenuItemBase
+    class YesNoMenuItem : MenuItemBase
     {
         [ImportingConstructor]
-        public OkMenuItem(IServiceProvider serviceProvider)
+        public YesNoMenuItem(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
-            this.DisplayName = "_OK";
+            this.DisplayName = "_YesNo";
         }
 
         protected async override void OnExecute(object parameter)
         {
-            await AppMessageBox.ShowAsync("OK", MessageBoxButton.OK, MessageBoxImage.Information);
+            await AppMessageBox.ShowAsync("YesNo", MessageBoxButton.YesNo, MessageBoxImage.Information);
         }
     }
 }

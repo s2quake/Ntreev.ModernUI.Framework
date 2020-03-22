@@ -48,6 +48,9 @@
     <ProjectReference Include="..\Ntreev.ModernUI.Framework.DataGrid\Ntreev.ModernUI.Framework.DataGrid.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Contents\Views\AdvancedControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -73,5 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MenuItems\HelpMenus\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Contents\Views\AdvancedControlView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

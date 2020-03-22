@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Ntreev.ModernUI.Framework.ViewModels
@@ -24,6 +25,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
     {
         private string progressMessage;
         private bool isProgressing;
+        private string message;
         private MessageBoxResult result;
 
         public MessageBoxViewModel()
@@ -31,24 +33,43 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         }
 
-        public bool OkVisible => this.Button == MessageBoxButton.OK || this.Button == MessageBoxButton.OKCancel;
+        public Task OKAsync()
+        {
+            return this.SelectAsync(MessageBoxResult.OK);
+        }
 
-        public bool CancelVisible => this.Button == MessageBoxButton.OKCancel || this.Button == MessageBoxButton.YesNoCancel;
+        public Task CancelAsync()
+        {
+            return this.SelectAsync(MessageBoxResult.Cancel);
+        }
 
-        public bool YesVisible => this.Button == MessageBoxButton.YesNo || this.Button == MessageBoxButton.YesNoCancel;
+        public Task YesAsync()
+        {
+            return this.SelectAsync(MessageBoxResult.Yes);
+        }
 
-        public bool NoVisible => this.Button == MessageBoxButton.YesNo || this.Button == MessageBoxButton.YesNoCancel;
+        public Task NoAsync()
+        {
+            return this.SelectAsync(MessageBoxResult.No);
+        }
 
-        public string Message { get; set; }
+        public string Message
+        {
+            get => this.message;
+            set
+            {
+                this.message = value;
+                this.NotifyOfPropertyChange(nameof(Message));
+            }
+        }
 
         public MessageBoxResult Result
         {
             get => this.result;
-            set
+            private set
             {
                 this.result = value;
-                //this.NotifyOfPropertyChange(nameof(Result));
-                this.SelectAsync(value);
+                this.NotifyOfPropertyChange(nameof(Result));
             }
         }
 
@@ -76,7 +97,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        private async void SelectAsync(MessageBoxResult result)
+        private async Task SelectAsync(MessageBoxResult result)
         {
             bool? dialogResult = null;
             this.Result = result;
