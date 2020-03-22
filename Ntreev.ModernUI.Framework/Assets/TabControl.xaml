@@ -24,7 +24,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters"
                     xmlns:cal="http://www.caliburnproject.org">
 
-    <DataTemplate x:Key="TabControl_Modern_ContentTemplate">
+    <DataTemplate x:Key="TabControl_ItemsSource_ContentTemplate">
         <nmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
                                        SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
                                        Focusable="False">
@@ -135,7 +135,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <Style x:Key="TabControl_Page_Style" TargetType="{x:Type TabControl}">
-        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
         <Setter Property="BorderThickness" Value="0 1 0 0" />
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />

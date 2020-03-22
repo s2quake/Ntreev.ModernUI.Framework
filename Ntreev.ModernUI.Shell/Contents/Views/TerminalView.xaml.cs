@@ -32,7 +32,7 @@ namespace Ntreev.ModernUI.Shell.Contents.Views
         {
             this.Dispatcher.InvokeAsync(() =>
             {
-                if (this.editor.ApplyTemplate() == true)
+                //if (this.editor.ApplyTemplate() == true)
                 {
                     this.editor.Focus();
                     this.editor.AppendLine("안녕하세요.");

@@ -3,11 +3,11 @@
 namespace Ntreev.ModernUI.Shell.Contents.ViewModels
 {
     [Export(typeof(IContent))]
-    class TerminalViewModel : ContentBase, IContent
+    class ListBoxViewModel : ContentBase, IContent
     {
-        public TerminalViewModel()
+        public ListBoxViewModel()
         {
-            this.DisplayName = "Terminal";
+            this.DisplayName = "ListBox";
         }
     }
 }

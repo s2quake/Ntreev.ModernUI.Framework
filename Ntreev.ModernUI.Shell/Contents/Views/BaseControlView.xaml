@@ -8,10 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="400">
 
     <nmfc:PropertyItemsControl>
-        <TextBox nmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
-        <TextBox nmfc:PropertyItemsControl.Header="Address" />
-        <TextBox nmfc:PropertyItemsControl.Header="UserID"  />
-        <PasswordBox nmfc:PropertyItemsControl.Header="Password" />
+        <TextBox x:Name="SettingsName" nmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
+        <TextBox x:Name="Address" nmfc:PropertyItemsControl.Header="Address" />
+        <TextBox x:Name="UserID" nmfc:PropertyItemsControl.Header="UserID"  />
+        <PasswordBox x:Name="Password" nmfc:PropertyItemsControl.Header="Password" />
         <StackPanel nmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
             <TextBox Text="Find" Width="148" />
             <Border Width="4" />

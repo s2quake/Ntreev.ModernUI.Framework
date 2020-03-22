@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Shell.Contents.ViewModels
@@ -33,7 +32,8 @@ namespace Ntreev.ModernUI.Shell.Contents.ViewModels
         private string selectedEditableComboBox;
         private string selectedTreeViewItem;
 
-        public AdvancedControlViewModel()
+        [ImportingConstructor]
+        public AdvancedControlViewModel(IShell shell)
         {
             for (var i = 0; i < RandomUtility.Next(5, 10); i++)
             {
