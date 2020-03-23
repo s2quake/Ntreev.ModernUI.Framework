@@ -107,6 +107,5 @@ namespace Ntreev.ModernUI.Framework
         }
 
         protected IServiceProvider ServiceProvider { get; }
-
     }
 }
