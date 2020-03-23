@@ -23,11 +23,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 {
     public abstract class ListBoxItemViewModel : PropertyChangedBase, ISelectable, ICommand
     {
-        private ICommand defaultCommand;
-
         private ListBoxItemState state = ListBoxItemState.IsVisible;
         private bool caseSensitive;
         private string pattern;
+        private EventHandler canExecuteChanged;
+        private ICommand command;
 
         protected ListBoxItemViewModel()
         {
@@ -54,8 +54,9 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     this.state |= ListBoxItemState.IsSelected;
                 else
                     this.state &= ~ListBoxItemState.IsSelected;
-
+                this.command = null;
                 this.NotifyOfPropertyChange(nameof(this.IsSelected));
+                this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -71,7 +72,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     this.state |= ListBoxItemState.IsVisible;
                 else
                     this.state &= ~ListBoxItemState.IsVisible;
-
                 this.NotifyOfPropertyChange(nameof(this.IsVisible));
             }
         }
@@ -97,10 +97,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             get => this.caseSensitive;
             set
             {
-                if (this.caseSensitive == value)
-                    return;
-                this.caseSensitive = value;
-                this.NotifyOfPropertyChange(nameof(this.CaseSensitive));
+                if (this.caseSensitive != value)
+                {
+                    this.caseSensitive = value;
+                    this.NotifyOfPropertyChange(nameof(this.CaseSensitive));
+                }
             }
         }
 
@@ -109,11 +110,12 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             get => this.pattern ?? string.Empty;
             set
             {
-                if (this.pattern == value)
-                    return;
-                this.pattern = value;
-                this.NotifyOfPropertyChange(nameof(this.Pattern));
-                this.NotifyOfPropertyChange(nameof(this.HasPattern));
+                if (this.pattern != value)
+                {
+                    this.pattern = value;
+                    this.NotifyOfPropertyChange(nameof(this.Pattern));
+                    this.NotifyOfPropertyChange(nameof(this.HasPattern));
+                }
             }
         }
 
@@ -124,61 +126,55 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             get => this.state;
             set
             {
-                if (this.state == value)
-                    return;
-                this.state = value;
-                this.Refresh();
+                if (this.state != value)
+                {
+                    this.state = value;
+                    this.Refresh();
+                }
             }
         }
 
-        private ICommand DefaultCommand
+        protected virtual bool CanExecute(object parameter)
         {
-            get
-            {
-                if (this.defaultCommand == null)
-                {
-                    var query = from item in this.ContextMenus
-                                let attr = Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) as DefaultMenuAttribute
-                                where attr != null
-                                orderby attr.Order
-                                select item;
+            var query = from item in this.ContextMenus
+                        let attr = Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) as DefaultMenuAttribute
+                        where attr != null
+                        orderby attr.Order
+                        where item.Command != null
+                        select item.Command;
 
-                    if (query.Any() == true)
-                    {
-                        this.defaultCommand = query.First().Command;
-                    }
+            foreach (var item in query)
+            {
+                if (item.CanExecute(parameter) == true)
+                {
+                    this.command = item;
+                    return true;
                 }
-                return this.defaultCommand;
             }
+            return false;
+        }
+
+        protected virtual void Execute(object parameter)
+        {
+            this.command?.Execute(parameter);
         }
 
         #region ICommand
 
         event EventHandler ICommand.CanExecuteChanged
         {
-            add
-            {
-                if (this.DefaultCommand != null)
-                    this.DefaultCommand.CanExecuteChanged += value;
-            }
-            remove
-            {
-                if (this.DefaultCommand != null)
-                    this.DefaultCommand.CanExecuteChanged -= value;
-            }
+            add { this.canExecuteChanged += value; }
+            remove { this.canExecuteChanged -= value; }
         }
 
         bool ICommand.CanExecute(object parameter)
         {
-            if (this.DefaultCommand != null)
-                return this.DefaultCommand.CanExecute(parameter);
-            return false;
+            return this.CanExecute(parameter);
         }
 
         void ICommand.Execute(object parameter)
         {
-            if (this.DefaultCommand != null)
-                this.DefaultCommand.Execute(parameter);
+            this.Execute(parameter);
         }
 
         #endregion

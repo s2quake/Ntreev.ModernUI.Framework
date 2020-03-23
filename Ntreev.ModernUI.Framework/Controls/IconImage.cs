@@ -58,7 +58,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
             this.image = this.Template.FindName(PART_Image, this) as Image;
             if (this.image != null)
             {
@@ -97,7 +96,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-
             if (e.Property.Name == nameof(this.Foreground) || e.Property.Name == nameof(this.Background))
             {
                 this.isChanged = true;
@@ -117,8 +115,10 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static void SourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var self = d as IconImage;
-            self.InvalidateMeasure();
+            if (d is IconImage self)
+            {
+                self.InvalidateMeasure();
+            }
         }
 
         private static void StretchPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -128,8 +128,8 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private static byte[] BitmapSourceToArray(BitmapSource bitmapSource)
         {
-            var stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
-            var pixels = new byte[(int)bitmapSource.PixelHeight * stride];
+            var stride = bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
+            var pixels = new byte[bitmapSource.PixelHeight * stride];
             bitmapSource.CopyPixels(pixels, stride, 0);
             return pixels;
         }
@@ -142,19 +142,18 @@ namespace Ntreev.ModernUI.Framework.Controls
             var writableBitmap = new WriteableBitmap(bitmapSource);
             var foregroundColor = Colors.Black;
             var backgroundColor = Colors.White;
-            if (foreground is SolidColorBrush == true)
+            if (foreground is SolidColorBrush foregroundBrush)
             {
-                foregroundColor = (foreground as SolidColorBrush).Color;
+                foregroundColor = foregroundBrush.Color;
             }
 
-            if (background is SolidColorBrush == true)
+            if (background is SolidColorBrush backgroundBrush)
             {
-                backgroundColor = (background as SolidColorBrush).Color;
+                backgroundColor = backgroundBrush.Color;
             }
 
             var pixels = BitmapSourceToArray(writableBitmap);
-
-            for (int i = 0; i < pixels.Length / 4; i++)
+            for (var i = 0; i < pixels.Length / 4; i++)
             {
                 if (pixels[i * 4 + 0] == 0 &&
                     pixels[i * 4 + 1] == 0 &&
@@ -182,9 +181,9 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private void UpdateImage()
         {
-            if (this.Source is BitmapSource == true)
+            if (this.Source is BitmapSource bitmapSource)
             {
-                this.imageSource = ApplyColor(this.Source as BitmapSource, this.Foreground, this.Background);
+                this.imageSource = ApplyColor(bitmapSource, this.Foreground, this.Background);
             }
             else
             {

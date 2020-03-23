@@ -21,8 +21,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ResourceDictionary.MergedDictionaries>
 
-        <!--<ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />-->
-
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="ColorButton.xaml" />
         <ResourceDictionary Source="ComboBox.xaml" />
@@ -40,7 +38,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ResourceDictionary Source="ListBox.xaml" />
         <ResourceDictionary Source="Menu.xaml" />
         <ResourceDictionary Source="MenuItem.xaml" />
-        <ResourceDictionary Source="MessageBoxView.xaml" />
         <ResourceDictionary Source="ModernContextMenu.xaml" />
         <ResourceDictionary Source="ModernExpander.xaml" />
         <ResourceDictionary Source="ModernMenu.xaml" />

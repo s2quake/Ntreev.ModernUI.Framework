@@ -83,66 +83,12 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public static void SatisfyImportsOnce(object instance)
-        {
-            Current.BuildUp(instance);
-        }
-
         protected override void Configure()
         {
             ViewModelLocator.LocateForView = this.LocateForView;
             ViewLocator.LocateTypeForModelType = this.LocateTypeForModelType;
             ViewLocator.LocateForModel = this.LocateForModel;
             this.descriptor.Initialize();
-        }
-
-        private object LocateForView(object view)
-        {
-            object viewModel = this.locateForView(view);
-            if (viewModel != null)
-                return viewModel;
-
-            if (TypeDescriptor.GetAttributes(view)[typeof(ModelAttribute)] is ModelAttribute attr)
-            {
-                if (attr.ModelType.IsInterface == true)
-                    return this.GetInstance(attr.ModelType, null);
-                return TypeDescriptor.CreateInstance(null, attr.ModelType, null, null);
-            }
-
-            return viewModel;
-        }
-
-        private Type LocateTypeForModelType(Type vmType, DependencyObject location, object context)
-        {
-            var attribute = vmType.GetCustomAttributes(typeof(ViewAttribute), true).OfType<ViewAttribute>().FirstOrDefault();
-            if (attribute != null)
-            {
-                return Type.GetType(attribute.ViewTypeName);
-            }
-
-            var viewType = this.locateTypeForModelType(vmType, location, context);
-
-            if (viewType == null)
-            {
-                Type baseType = vmType.BaseType;
-                if (baseType.Name.EndsWith("ViewModel") == true)
-                {
-                    return ViewLocator.LocateTypeForModelType(baseType, location, context);
-                }
-            }
-
-            return viewType;
-        }
-
-        private UIElement LocateForModel(object model, DependencyObject displayLocation, object context)
-        {
-            var view = this.locateForModel(model, displayLocation, context);
-            //throw new NotImplementedException();
-            //if (view != null && view.GetType().GetCustomAttributes<ExportAttribute>(true).Any() == false)
-            //{
-            //    this.container.SatisfyImportsOnce(view);
-            //}
-            return view;
         }
 
         protected override object GetInstance(Type service, string key)
@@ -195,6 +141,55 @@ namespace Ntreev.ModernUI.Framework
         protected virtual bool IgnoreDisplay => false;
 
         protected virtual bool AutoInitialize => true;
+
+        private object LocateForView(object view)
+        {
+            object viewModel = this.locateForView(view);
+            if (viewModel != null)
+                return viewModel;
+
+            if (TypeDescriptor.GetAttributes(view)[typeof(ModelAttribute)] is ModelAttribute attr)
+            {
+                if (attr.ModelType.IsInterface == true)
+                    return this.GetInstance(attr.ModelType, null);
+                return TypeDescriptor.CreateInstance(null, attr.ModelType, null, null);
+            }
+
+            return viewModel;
+        }
+
+        private Type LocateTypeForModelType(Type vmType, DependencyObject location, object context)
+        {
+            var attribute = vmType.GetCustomAttributes(typeof(ViewAttribute), true).OfType<ViewAttribute>().FirstOrDefault();
+            if (attribute != null)
+            {
+                return Type.GetType(attribute.ViewTypeName);
+            }
+
+            var viewType = this.locateTypeForModelType(vmType, location, context);
+
+            if (viewType == null)
+            {
+                Type baseType = vmType.BaseType;
+                if (baseType.Name.EndsWith("ViewModel") == true)
+                {
+                    return ViewLocator.LocateTypeForModelType(baseType, location, context);
+                }
+            }
+
+            return viewType;
+        }
+
+        private UIElement LocateForModel(object model, DependencyObject displayLocation, object context)
+        {
+            var view = this.locateForModel(model, displayLocation, context);
+            //throw new NotImplementedException();
+            //if (view != null && view.GetType().GetCustomAttributes<ExportAttribute>(true).Any() == false)
+            //{
+            //    this.container.SatisfyImportsOnce(view);
+            //}
+            return view;
+        }
 
         #region IBuildUp
 

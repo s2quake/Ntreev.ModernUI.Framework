@@ -124,9 +124,6 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnIsKeyboardFocusWithinChanged(e);
-
-            //if (this.IsDropDownOpen == true)
-            //    this.IsDropDownOpen = false;
         }
 
         private static void IsDropDownOpenPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

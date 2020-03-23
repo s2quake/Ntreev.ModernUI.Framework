@@ -29,11 +29,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
     public abstract class TreeViewItemViewModel : PropertyChangedBase, INotifyPropertyChanged, IComparable, IDisposable, ISelectable, ICommand
     {
         private TreeViewItemViewModel parent;
-        private ICommand defaultCommand;
-
         private TreeViewItemState state = TreeViewItemState.IsVisible;
         private bool caseSensitive;
         private string pattern;
+        private EventHandler canExecuteChanged;
+        private ICommand command;
 
         protected TreeViewItemViewModel()
         {
@@ -134,11 +134,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public void Filter(string pattern, Func<bool, TreeViewItemViewModel> predicate)
-        {
-
-        }
-
         public static TreeViewItemViewModel GetRoot(TreeViewItemViewModel viewModel)
         {
             if (viewModel.Parent == null)
@@ -214,8 +209,9 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     this.state |= TreeViewItemState.IsSelected;
                 else
                     this.state &= ~TreeViewItemState.IsSelected;
-
+                this.command = null;
                 this.NotifyOfPropertyChange(nameof(this.IsSelected));
+                this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -339,37 +335,36 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public ICommand ExpandCommand { get; }
 
-        public virtual ICommand DefaultCommand
-        {
-            get
-            {
-                if (this.defaultCommand == null)
-                {
-                    var query = from item in this.ContextMenus
-                                let attr = Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) as DefaultMenuAttribute
-                                where attr != null
-                                orderby attr.Order
-                                select item;
-
-                    if (query.Any() == true)
-                    {
-                        this.defaultCommand = query.First().Command;
-                    }
-                    else
-                    {
-                        this.defaultCommand = this.ExpandCommand;
-                    }
-                }
-
-                return this.defaultCommand;
-            }
-        }
-
         public event EventHandler Disposed;
 
         protected virtual void OnDisposed(EventArgs e)
         {
             this.Disposed?.Invoke(this, e);
+        }
+
+        protected virtual bool CanExecute(object parameter)
+        {
+            var query = from item in this.ContextMenus
+                        let attr = Attribute.GetCustomAttribute(item.GetType(), typeof(DefaultMenuAttribute), false) as DefaultMenuAttribute
+                        where attr != null
+                        orderby attr.Order
+                        where item.Command != null
+                        select item.Command;
+
+            foreach (var item in query)
+            {
+                if (item.CanExecute(parameter) == true)
+                {
+                    this.command = item;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected virtual void Execute(object parameter)
+        {
+            this.command?.Execute(parameter);
         }
 
         private static IEnumerable<string> CollectDisplayName(TreeViewItemViewModel parent, TreeViewItemViewModel viewModel)
@@ -412,29 +407,18 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         event EventHandler ICommand.CanExecuteChanged
         {
-            add
-            {
-                if (this.DefaultCommand != null)
-                    this.DefaultCommand.CanExecuteChanged += value;
-            }
-            remove
-            {
-                if (this.DefaultCommand != null)
-                    this.DefaultCommand.CanExecuteChanged -= value;
-            }
+            add { this.canExecuteChanged += value; }
+            remove { this.canExecuteChanged -= value; }
         }
 
         bool ICommand.CanExecute(object parameter)
         {
-            if (this.DefaultCommand != null)
-                return this.DefaultCommand.CanExecute(parameter);
-            return false;
+            return this.CanExecute(parameter);
         }
 
         void ICommand.Execute(object parameter)
         {
-            if (this.DefaultCommand != null)
-                this.DefaultCommand.Execute(parameter);
+            this.Execute(parameter);
         }
 
         #endregion
