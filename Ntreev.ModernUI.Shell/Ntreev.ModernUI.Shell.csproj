@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0;net45</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <Version>4.0.2084.0756</Version>
+    <Version>4.0.2086.2039</Version>
     <AssemblyVersion>4.0</AssemblyVersion>
-    <FileVersion>4.0.2084.0756</FileVersion>
+    <FileVersion>4.0.2086.2039</FileVersion>
     <RepositoryType>git</RepositoryType>
     <PackageLicense>https://github.com/s2quake/Ntreev.ModernUI.Framework/blob/master/LICENSE.md</PackageLicense>
     <Copyright>Copyright © Ntreev Soft 2018</Copyright>
