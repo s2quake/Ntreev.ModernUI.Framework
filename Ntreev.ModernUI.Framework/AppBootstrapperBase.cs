@@ -142,6 +142,8 @@ namespace Ntreev.ModernUI.Framework
 
         protected virtual bool AutoInitialize => true;
 
+        protected AppBootstrapperDescriptorBase Descriptor => this.descriptor;
+
         private object LocateForView(object view)
         {
             object viewModel = this.locateForView(view);

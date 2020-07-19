@@ -19,7 +19,7 @@ using System.Windows.Controls.Primitives;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    class TabControlContentControl : Selector
+    public class TabControlContentControl : Selector
     {
         public TabControlContentControl()
         {
