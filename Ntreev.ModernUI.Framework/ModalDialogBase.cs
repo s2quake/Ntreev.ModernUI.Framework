@@ -26,7 +26,7 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class ModalDialogBase : Screen, IModalDialog
+    public abstract class ModalDialogBase : Screen, IModalDialog, IProgressable
     {
         private string progressMessage;
         private bool isProgressing;
