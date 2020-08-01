@@ -111,14 +111,14 @@ namespace Ntreev.ModernUI.Framework
             this.descriptor.BuildUp(instance);
         }
 
-        protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        protected override async void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             base.OnStartup(sender, e);
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement),
                 new FrameworkPropertyMetadata(System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag)));
 
             if (this.IgnoreDisplay == false)
-                this.DisplayRootViewForAsync(this.descriptor.ModelType);
+                await this.DisplayRootViewForAsync(this.descriptor.ModelType).ConfigureAwait(false);
         }
 
         protected override void OnExit(object sender, EventArgs e)

@@ -32,7 +32,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += NewCategoryAsyncViewModel_PropertyChanged;
         }
 
-        public async override Task CreateAsync()
+        public override async Task CreateAsync()
         {
             try
             {

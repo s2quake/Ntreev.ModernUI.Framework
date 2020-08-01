@@ -130,8 +130,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style x:Key="ModernToolBar_ItemContainer_Style" TargetType="{x:Type ContentControl}">
         <Setter Property="Content" Value="{Binding Icon}" />
         <Style.Resources>
-            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
-            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBar_Button_Style}" />
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="IconButton.xaml" />
+                    <ResourceDictionary Source="Button.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+                <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBar_Button_Style}" />
+            </ResourceDictionary>
         </Style.Resources>
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
@@ -192,7 +198,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style TargetType="{x:Type nmfc:ModernToolBar}">
         <Style.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="IconButton.xaml" />
+                </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
+            </ResourceDictionary>
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="BorderThickness" Value="0" />

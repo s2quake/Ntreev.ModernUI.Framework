@@ -22,39 +22,25 @@ using System.Linq;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public static class ToolBarItemUtility
+    public static class ParentItemUtility
     {
-        public static IEnumerable<IToolBarItem> GetToolBarItems(object parent, IEnumerable<IToolBarItem> toolbarItems)
+        public static IEnumerable<T> GetItems<T>(object parent, IEnumerable<T> menuItems)
         {
-            if (toolbarItems is null)
-                throw new ArgumentNullException(nameof(toolbarItems));
-            return toolbarItems.Where(item => Predicate(item, parent)).OrderByAttribute().TopologicalSort();
+            return menuItems.Where(item => Predicate(item, parent)).OrderByAttribute().TopologicalSort();
         }
 
-        public static IEnumerable<IToolBarItem> GetToolBarItems(object parent, IServiceProvider serviceProvider)
-        {
-            if (serviceProvider is null)
-                throw new ArgumentNullException(nameof(serviceProvider));
-            var items = serviceProvider.GetService(typeof(IEnumerable<IToolBarItem>)) as IEnumerable<IToolBarItem>;
-            return GetToolBarItems(parent, items);
-        }
-
-        private static bool Predicate<IToolbarItem>(IToolbarItem item, object parent)
+        private static bool Predicate<T>(T item, object parent)
         {
             var parentType = parent is Type ? parent as Type : parent.GetType();
             var attrs = item.GetType().GetCustomAttributes(typeof(ParentTypeAttribute), true);
-
             foreach (var attr in attrs)
             {
                 var parentTypeAttr = attr as ParentTypeAttribute;
-
                 if (parentTypeAttr.ParentType.IsAssignableFrom(parentType) == true)
                     return true;
-
                 if (parentTypeAttr.ParentType == parentType)
                     return true;
             }
-
             return false;
         }
     }

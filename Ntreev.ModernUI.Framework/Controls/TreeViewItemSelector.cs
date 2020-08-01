@@ -65,7 +65,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
         }
 
-        protected async override void OnDropDownOpened(EventArgs e)
+        protected override async void OnDropDownOpened(EventArgs e)
         {
             base.OnDropDownOpened(e);
             if (this.treeView != null)

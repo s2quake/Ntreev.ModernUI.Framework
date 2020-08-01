@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +27,7 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class ScreenBase : Caliburn.Micro.Screen
+    public abstract class ScreenBase : Caliburn.Micro.Screen, IProgressable
     {
         private bool isProgressing;
         private string progressMessage;
@@ -41,7 +42,7 @@ namespace Ntreev.ModernUI.Framework
             this.ServiceProvider = serviceProvider;
         }
 
-        public sealed async override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        public sealed override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
         {
             if (await this.CloseAsync() == false)
                 return false;

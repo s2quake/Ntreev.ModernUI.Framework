@@ -26,7 +26,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             remove { this.RemoveHandler(ValueChangedEvent, value); }
         }
 
-        protected async override void OnClick()
+        protected override async void OnClick()
         {
             base.OnClick();
             var dialog = new SelectColorViewModel();

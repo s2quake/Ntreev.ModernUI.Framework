@@ -15,61 +15,56 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Properties;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
-namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
+namespace Ntreev.ModernUI.Framework
 {
-    public class DeleteAsyncViewModel : DeleteViewModel
+    public class ProgressAction
     {
-        protected DeleteAsyncViewModel()
+        private readonly IProgressable progressable;
+
+        public ProgressAction(IProgressable progressable)
         {
-            this.PropertyChanged += DeleteAsyncViewModel_PropertyChanged;
+            this.progressable = progressable;
         }
 
-        public override async Task DeleteAsync()
+        public Func<Task> Try { get; set; }
+
+        public Func<Exception, Task> Catch { get; set; }
+
+        public Func<Task> Finally { get; set; }
+
+        public string BeginMessage { get; set; } = string.Empty;
+
+        public string EndMessage { get; set; } = string.Empty;
+
+        public async Task RunAsync()
         {
             try
             {
-                this.BeginProgress(Resources.Message_Deleting);
-                await this.OnDeleteAsync();
-                this.EndProgress();
-                await this.TryCloseAsync(true);
-                await AppMessageBox.ShowAsync(Resources.Message_Deleted);
+                this.progressable.BeginProgress(this.BeginMessage);
+                if (this.Try != null)
+                    await this.Try.Invoke();
             }
             catch (Exception e)
             {
-                this.EndProgress();
                 await AppMessageBox.ShowErrorAsync(e);
+                if (this.Catch != null)
+                    await this.Catch.Invoke(e);
             }
-        }
-
-        protected virtual void VerifyDelete(Action<bool> isValid)
-        {
-            isValid(true);
-        }
-
-        protected virtual Task OnDeleteAsync()
-        {
-            return Task.Delay(1);
-        }
-
-        private void VerifyAction(bool isValid)
-        {
-            this.NotifyOfPropertyChange(nameof(this.CanDelete));
-        }
-
-        private void DeleteAsyncViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(this.DeletionMessage))
+            finally
             {
-                this.VerifyDelete(this.VerifyAction);
-            }
-            else if (e.PropertyName == nameof(this.IsProgressing))
-            {
-                this.NotifyOfPropertyChange(nameof(this.CanDelete));
+                if (this.Finally != null)
+                    await this.Finally.Invoke();
+                this.progressable.EndProgress(this.EndMessage);
             }
         }
     }

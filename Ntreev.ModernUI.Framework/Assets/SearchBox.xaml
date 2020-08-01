@@ -20,6 +20,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="IconButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style x:Key="SearchBox_EditableTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource ComboBoxEditableTextBox}">
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
     </Style>

@@ -19,6 +19,7 @@ using Ntreev.ModernUI.Framework.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -100,7 +101,7 @@ namespace Ntreev.ModernUI.Framework
                         if (uri.StartsWith("/") == true)
                             uri = "pack://application:,,," + uri;
                         else
-                            uri = "pack://application:,,,/" + uri;
+                            uri = $"pack://application:,,,/{this.GetType().Assembly};component/" + uri;
                     }
                     this.icon = new IconImage() { Source = new BitmapImage(new Uri(uri)) };
                 }

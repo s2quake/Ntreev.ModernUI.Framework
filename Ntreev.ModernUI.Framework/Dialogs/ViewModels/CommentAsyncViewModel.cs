@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
             this.PropertyChanged += CommentAsyncViewModel_PropertyChanged;
         }
 
-        public async override Task ConfirmAsync()
+        public override async Task ConfirmAsync()
         {
             try
             {
