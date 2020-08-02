@@ -413,8 +413,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style TargetType="{x:Type xcdg:RowSelector}">
         <Setter Property="AllowDrop" Value="True" />
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Template" Value="{StaticResource RowSelector_Template}" />
@@ -536,7 +536,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <ControlTemplate x:Key="DataRow_Template" TargetType="{x:Type xcdg:DataRow}">
+    <ControlTemplate x:Key="DataRow_Template" TargetType="{x:Type nmgc:ModernDataRow}">
         <Grid x:Name="rootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -577,8 +577,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="True" />
                 </MultiDataTrigger.Conditions>
-                <!--<Setter TargetName="rootBorder" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionBackground}" Property="Border.Background" />
-                <Setter TargetName="rootGrid" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionForeground}" Property="TextElement.Foreground" />-->
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
@@ -597,9 +595,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter TargetName="detailsToggle_Button" Value="{x:Static xcdg:DataGridCommands.ToggleDetailExpansion}" Property="ButtonBase.Command" />
                 <Setter TargetName="detailsToggle" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
-            <!--<Trigger Property="xcdg:ViewBase.IsLastItem" Value="True">
-                <Setter TargetName="bottomBorder" Property="Visibility" Value="Visible" />
-            </Trigger>-->
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -785,6 +780,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type xcdg:ColumnManagerRow}">
+        <Setter Property="AllowSort" Value="False" />
+        <Setter Property="Height" Value="23" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ColumnManagerRowSelector_Style}" />
+        <Setter Property="xcdg:RowSelector.Visible" Value="True" />
+        <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="False" />
+    </Style>
+
     <ControlTemplate x:Key="ModernColumnManagerRow_Template" TargetType="{x:Type nmgc:ModernColumnManagerRow}">
         <Grid Name="rootGrid">
             <Grid.ColumnDefinitions>
@@ -819,18 +826,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmgc:ModernColumnManagerRow}">
-        <Setter Property="AllowSort" Value="False" />
-        <Setter Property="Height" Value="23" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ColumnManagerRowSelector_Style}" />
-        <Setter Property="xcdg:RowSelector.Visible" Value="True" />
-        <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="False" />
+    <Style TargetType="{x:Type nmgc:ModernColumnManagerRow}" BasedOn="{StaticResource {x:Type xcdg:ColumnManagerRow}}">
+        <Setter Property="Template" Value="{DynamicResource ModernColumnManagerRow_Template}" />
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ModernColumnManagerRowSelector_Style}" />
-        <Setter Property="Template" Value="{StaticResource ModernColumnManagerRow_Template}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
@@ -1059,7 +1057,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 </Grid.RowDefinitions>
 
                 <xcdg:RowSelectorPane x:Name="PART_RowSelectorPane" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
-                                      Background="Transparent" Width="{TemplateBinding RowSelectorPaneWidth}" />
+                                      Background="{TemplateBinding Background}" Width="{TemplateBinding RowSelectorPaneWidth}" />
                 <xcdg:SynchronizedScrollViewer x:Name="fixedHeaderScrollViewer" Grid.Column="1" Grid.Row="0"
                                                xcdg:TableViewScrollViewer.SynchronizedScrollViewerPosition="Top"
                                                Focusable="False">
@@ -1180,7 +1178,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ItemScrollingBehavior" Value="Immediate" />
         <Setter Property="SelectionMode" Value="Extended" />
         <Setter Property="SelectionUnit" Value="Cell" />
-        <Setter Property="Template" Value="{StaticResource ModernDataGridControl_Template}" />
+        <Setter Property="Template" Value="{DynamicResource ModernDataGridControl_Template}" />
     </Style>
 
     <xcdg:TypeToVisibilityConverter x:Key="notDetailConfigConverter"

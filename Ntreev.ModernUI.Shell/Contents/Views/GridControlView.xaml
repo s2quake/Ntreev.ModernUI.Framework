@@ -11,75 +11,11 @@
 
     <UserControl.Resources>
 
-        <xcdg:DataGridCollectionViewSource x:Key="source" Source="{Binding ItemsSource}" />
-        
-        <Style x:Key="GroupHeaderControlStyle1" TargetType="{x:Type xcdg:GroupHeaderControl}">
-            <Setter Property="Background" Value="#FFEBEADB"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="xcdg:Cell.SelectionBackground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-            <Setter Property="xcdg:Cell.SelectionForeground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-            <Setter Property="xcdg:Cell.InactiveSelectionBackground" Value="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"/>
-            <Setter Property="xcdg:Cell.InactiveSelectionForeground" Value="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}"/>
-            <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="BorderThickness" Value="0,1,1,0"/>
-            <Setter Property="Padding" Value="2"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False"/>
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type xcdg:GroupHeaderControl}">
-                        <xcdg:PassiveLayoutDecorator Axis="Horizontal">
-                            <DockPanel>
-                                <xcdg:HierarchicalGroupLevelIndicatorPane DockPanel.Dock="Left"/>
-                                <xcdg:GroupLevelIndicatorPane DockPanel.Dock="Left" Indented="False">
-                                    <xcdg:GroupLevelIndicatorPane.GroupLevel>
-                                        <Binding ConverterParameter="-1" Path="(xcdg:GroupLevelIndicatorPane.GroupLevel)" RelativeSource="{RelativeSource TemplatedParent}">
-                                            <Binding.Converter>
-                                                <xcdg:IntAdditionConverter/>
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </xcdg:GroupLevelIndicatorPane.GroupLevel>
-                                </xcdg:GroupLevelIndicatorPane>
-                                <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" FocusVisualStyle="{TemplateBinding FocusVisualStyle}" Focusable="True" Padding="{TemplateBinding Padding}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton Focusable="False" IsChecked="{Binding Group.IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" OverridesDefaultStyle="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                            <ToggleButton.Template>
-                                                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                    <ContentPresenter x:Name="expanderGlyphPresenter" ContentTemplate="{Binding (xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.CollapseGroupGlyph), RelativeSource={RelativeSource Self}}" Content="{x:Null}"/>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="False">
-                                                            <Setter Property="ContentTemplate" TargetName="expanderGlyphPresenter" Value="{Binding (xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph), RelativeSource={RelativeSource Self}}"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </ToggleButton.Template>
-                                        </ToggleButton>
-                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="3,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                    </StackPanel>
-                                </Border>
-                            </DockPanel>
-                        </xcdg:PassiveLayoutDecorator>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="xcdg:DataGridControl.NavigationBehavior" Value="None">
-                                <Setter Property="Focusable" TargetName="mainBorder" Value="False"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding (xcdg:ViewBase.IsLastItem), RelativeSource={RelativeSource Self}}" Value="True">
-                    <Setter Property="BorderThickness" Value="0,1,1,1"/>
-                    <Setter Property="Margin" Value="0,0,0,5"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <!--<xcdg:DataGridCollectionViewSource x:Key="source" Source="{Binding ItemsSource}" />-->
         
     </UserControl.Resources>
 
-    <nmgc:ModernDataGridControl ItemsSource="{Binding Source={StaticResource source}}">
+    <nmgc:ModernDataGridControl ItemsSource="{Binding ItemsSource}">
         <nmgc:ModernDataGridControl.Columns>
             <xcdg:Column FieldName="Column1" Title="Column1" />
             <xcdg:Column FieldName="Column2" Title="Column2" />
