@@ -15,6 +15,7 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Caliburn.Micro;
 using Ntreev.Library.Linq;
 using Ntreev.ModernUI.Framework.Converters;
 using System;
@@ -24,6 +25,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +38,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 using Xceed.Wpf.DataGrid.Export;
+using Xceed.Wpf.DataGrid.Views;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
@@ -352,6 +355,13 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public override void OnApplyTemplate()
         {
+            if (DesignerProperties.GetIsInDesignMode(this) == true)
+            {
+                if (this.View == null)
+                {
+                    this.View = new TableView();
+                }
+            }
             base.OnApplyTemplate();
             this.scrollViewer = (ScrollViewer)this.Template.FindName("PART_ScrollViewer", this);
         }
@@ -559,6 +569,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                     var gridContext = DataGridControl.GetDataGridContext(selector);
                     var gridControl = gridContext.DataGridControl as ModernDataGridControl;
                     var scrollViewer = gridControl.Template.FindName("PART_ScrollViewer", gridControl) as ScrollViewer;
+
 
                     dragViewer = scrollViewer;
                     scrollViewer.DragEnter += ScrollViewer_DragEnter;

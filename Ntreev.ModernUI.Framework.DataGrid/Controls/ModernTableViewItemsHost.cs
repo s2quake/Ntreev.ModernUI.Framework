@@ -38,7 +38,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
     /// 상위 클래스에서 HorizontalOffset 값을 소수점으로 처리하기 때문에 수평 스크롤시 일부 셀의 픽셀 떨림 현상이 발견됨
     /// 소수점 값을 정수형으로 바꾸어 상위 인터페이스를 호출하여 떨림 현상을 방지
     /// </summary>
-    class ModernTableViewItemsHost : TableViewItemsHost, IScrollInfo
+    public class ModernTableViewItemsHost : TableViewItemsHost, IScrollInfo
     {
         private readonly MethodInfo baseSetHorizontalOffset;
 

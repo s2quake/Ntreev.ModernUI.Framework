@@ -26,7 +26,7 @@ using Xceed.Wpf.Toolkit;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
-    class ModernDataCellTextBox : AutoSelectTextBox
+    public class ModernDataCellTextBox : AutoSelectTextBox
     {
         public ModernDataCellTextBox()
         {

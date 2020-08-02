@@ -71,7 +71,7 @@ namespace Ntreev.ModernUI.Framework
                         if (uri.StartsWith("/") == true)
                             uri = "pack://application:,,," + uri;
                         else
-                            uri = "pack://application:,,,/" + uri;
+                            uri = $"pack://application:,,,/{this.GetType().Assembly};component/" + uri;
                     }
                     return new IconButton()
                     {

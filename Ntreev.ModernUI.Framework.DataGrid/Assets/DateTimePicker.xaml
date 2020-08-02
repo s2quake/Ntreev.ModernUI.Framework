@@ -23,6 +23,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:xctt="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/TextBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <nmfv:InverseBooleanConverter x:Key="InverseBoolConverter" />
 
     <DataTemplate x:Key="DefaultWatermark_DataTemplate">

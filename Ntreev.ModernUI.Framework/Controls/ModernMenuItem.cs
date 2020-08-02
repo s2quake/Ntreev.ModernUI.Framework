@@ -113,7 +113,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (d is ModernMenuItem self)
             {
-                self.RefreshItemsSource(e.NewValue as IEnumerable);
+                self.RefreshItemsSource(e.NewValue as IEnumerable ?? new object[] { });
             }
         }
 

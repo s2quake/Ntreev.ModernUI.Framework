@@ -28,20 +28,23 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework"
                     xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Properties">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Xceed.Wpf.DataGrid;component/themes/Controls/TableViewScrollViewer.generic.xaml" />
+        <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/TextBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <nmgv:IndexToForegroundBrushConverter x:Key="indexToForegroundBrushConverter" />
     <nmgv:IndexToBackgroundBrushConverter x:Key="indexToBackgroundBrushConverter" />
-    <!--<xcdg:ThicknessConverter x:Key="thicknessConverter" />-->
     <xcdg:GreaterThanZeroConverter x:Key="greaterThanZeroConverter" />
-    <!--<xcdg:ThicknessConverter x:Key="inverseThicknessConverter" InverseValue="True" />-->
 
     <ControlTemplate x:Key="DataCell_Editable_ComboBox_Template" TargetType="{x:Type ComboBox}">
-        <Grid Name="MainGrid" SnapsToDevicePixels="true">
+        <Grid Name="MainGrid" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0" />
             </Grid.ColumnDefinitions>
             <Popup Name="PART_Popup"
-                   AllowsTransparency="true"
+                   AllowsTransparency="True"
                    Grid.ColumnSpan="2"
                    Placement="Bottom"
                    Margin="1"
@@ -88,7 +91,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <xctk:AutoSelectTextBox x:Name="PART_EditableTextBox" BorderThickness="0" Background="Transparent"
                                     xcdg:DataCell.IsCellFocusScope="True"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
                                     Margin="{TemplateBinding Padding}"
                                     Padding="2,0,0,1"
                                     ContextMenu="{StaticResource TextBox_ContextMenu}"
@@ -101,32 +103,35 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                      Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="HasItems" Value="false">
+            <Trigger Property="HasItems" Value="False">
                 <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
             </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
+            <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}" />
             </Trigger>
-            <Trigger Property="IsMouseOver" Value="true">
+            <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource InputBackgroundHover}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" />
             </Trigger>
-            <Trigger Property="IsFocused" Value="true">
+            <Trigger Property="IsFocused" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />
             </Trigger>
-            <Trigger Property="IsGrouping" Value="true">
-                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            <Trigger Property="IsGrouping" Value="True">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
             </Trigger>
-            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
                 <Setter TargetName="OpaqueRect" 
                         Property="Canvas.Top" 
                         Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}" />
                 <Setter TargetName="OpaqueRect" 
                         Property="Canvas.Left" 
                         Value="{Binding ElementName=DropDownScrollViewer, Path=HorizontalOffset}" />
+            </Trigger>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter TargetName="PART_EditableTextBox" Property="IsReadOnly" Value="True" />
             </Trigger>
             <MultiDataTrigger >
                 <MultiDataTrigger.Conditions>
@@ -780,18 +785,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type xcdg:ColumnManagerRow}">
-        <Setter Property="AllowSort" Value="False" />
-        <Setter Property="Height" Value="23" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ColumnManagerRowSelector_Style}" />
-        <Setter Property="xcdg:RowSelector.Visible" Value="True" />
-        <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="False" />
-    </Style>
-
     <ControlTemplate x:Key="ModernColumnManagerRow_Template" TargetType="{x:Type nmgc:ModernColumnManagerRow}">
         <Grid Name="rootGrid">
             <Grid.ColumnDefinitions>
@@ -826,9 +819,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmgc:ModernColumnManagerRow}" BasedOn="{StaticResource {x:Type xcdg:ColumnManagerRow}}">
-        <Setter Property="Template" Value="{StaticResource ModernColumnManagerRow_Template}" />
+    <Style TargetType="{x:Type nmgc:ModernColumnManagerRow}">
+        <Setter Property="AllowSort" Value="False" />
+        <Setter Property="Height" Value="23" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
+        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ColumnManagerRowSelector_Style}" />
+        <Setter Property="xcdg:RowSelector.Visible" Value="True" />
+        <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="False" />
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ModernColumnManagerRowSelector_Style}" />
+        <Setter Property="Template" Value="{StaticResource ModernColumnManagerRow_Template}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
@@ -836,19 +838,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="invisibleThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Width" Value="8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Grid Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type xcdg:ColumnManagerCell}">
-        <Style.Resources>
-            <Style x:Key="invisibleThumbStyle" TargetType="{x:Type Thumb}" BasedOn="{StaticResource {x:Type Thumb}}">
-                <Setter Property="Width" Value="8" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Thumb">
-                            <Grid Background="Transparent" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </Style.Resources>
         <EventSetter Event="MouseLeftButtonUp" Handler="ColumnManagerCell_MouseLeftButtonUp" />
         <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
@@ -938,10 +939,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style x:Key="FilterableScrollBar_Style" TargetType="{x:Type nmgc:ModernScrollBar}" BasedOn="{StaticResource {x:Type nmgc:ModernScrollBar}}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                <ControlTemplate TargetType="{x:Type nmgc:ModernScrollBar}">
                     <Grid Name="Bg"
                           Background="{TemplateBinding Background}"
-                          SnapsToDevicePixels="true">
+                          SnapsToDevicePixels="True">
                         <Grid.RowDefinitions>
                             <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
                             <RowDefinition Height="0.00001*" />
@@ -956,7 +957,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <Track Grid.Row="1"
                                Name="PART_Track"
                                IsEnabled="{TemplateBinding IsMouseOver}"
-                               IsDirectionReversed="true">
+                               IsDirectionReversed="True">
                             <Track.DecreaseRepeatButton>
                                 <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
                             </Track.DecreaseRepeatButton>
@@ -993,7 +994,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
                             <Grid Name="Bg"
                                   Background="{TemplateBinding Background}"
-                                  SnapsToDevicePixels="true">
+                                  SnapsToDevicePixels="True">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
                                     <ColumnDefinition Width="0.00001*" />
@@ -1078,6 +1079,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Grid>
 
             <nmgc:ModernScrollBar x:Name="PART_HorizontalScrollBar"
+                                  Style="{StaticResource FilterableScrollBar_Style}"
                                   Grid.Column="0"
                                   Grid.Row="1"
                                   Orientation="Horizontal"
@@ -1087,6 +1089,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                   Visibility="{TemplateBinding ScrollViewer.ComputedHorizontalScrollBarVisibility}" />
 
             <nmgc:ModernScrollBar x:Name="PART_VerticalScrollBar"
+                                  Style="{StaticResource FilterableScrollBar_Style}"
                                   Grid.Column="1"
                                   Grid.Row="0"
                                   Orientation="Vertical"
@@ -1114,28 +1117,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmgc:ModernTableViewScrollViewer}" BasedOn="{StaticResource {x:Type xcdg:TableViewScrollViewer}}">
-        <Style.Resources>
-            <Style TargetType="{x:Type nmgc:ModernScrollBar}" BasedOn="{StaticResource FilterableScrollBar_Style}" />
-        </Style.Resources>
+    <Style x:Key="ModernTableViewScrollViewer_Style" TargetType="{x:Type nmgc:ModernTableViewScrollViewer}" BasedOn="{StaticResource {x:Type xcdg:TableViewScrollViewer}}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Template" Value="{StaticResource ModernTableViewScrollViewer_Template}" />
         <Setter Property="ShowRowSelectorPane" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.ShowRowSelectorPane), RelativeSource={RelativeSource Self}}" />
         <Setter Property="RowSelectorPaneWidth" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.RowSelectorPaneWidth), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Template" Value="{StaticResource ModernTableViewScrollViewer_Template}" />
     </Style>
 
     <ControlTemplate x:Key="ModernDataGridControl_Template" TargetType="{x:Type nmgc:ModernDataGridControl}">
         <Grid>
-            <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}">
-
-                <!-- The AdornerDecorator will allow visual cues for Drag & Drop operations. -->
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                 <AdornerDecorator x:Name="PART_DragDropAdornerDecorator">
-                    <!-- The TableViewScrollViewer takes care of laying out the various sections of
-                       a DataGrid in TableView: FixedHeaders, FixedFooters, RowSelectorPane, etc. -->
-                    <nmgc:ModernTableViewScrollViewer x:Name="PART_ScrollViewer" 
-                                                      Padding="{TemplateBinding Padding}">
+                    <nmgc:ModernTableViewScrollViewer x:Name="PART_ScrollViewer" Style="{StaticResource ModernTableViewScrollViewer_Style}" Padding="{TemplateBinding Padding}">
                         <nmgc:ModernTableViewItemsHost />
                     </nmgc:ModernTableViewScrollViewer>
                 </AdornerDecorator>
@@ -1174,40 +1167,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Visible" />
                 <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <!--<Trigger Property="IsVerticalScrollBarOnLeftSide" Value="True">
-                <Setter TargetName="PART_ScrollViewer" Property="Template" Value="{StaticResource LeftVerticalScrollBar_ModernTableViewScrollViewer_Template}" />
-            </Trigger>-->
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
-    <!--<nmgv:TypeToEnumMembersConverter x:Key="typeToEnumMembersConverter" />-->
-
-    <!--<xcdg:CellEditor x:Key="EnumSelector">
-        <xcdg:CellEditor.EditTemplate>
-            <DataTemplate>
-                <ComboBox Margin="0" BorderThickness="0" Padding="0" Background="Transparent" 
-                          Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}"
-                          SelectedItem="{nmgm:EditingContentBinding}" 
-                          ItemsSource="{Binding Path=ParentColumn.(nmgc:ModernDataGridControl.EditorType), RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}, Converter={StaticResource typeToEnumMembersConverter}}" 
-                          DropDownClosed="ComboBox_DropDownClosed"
-                          DropDownOpened="ComboBox_DropDownOpened"
-                          SelectionChanged="ComboBox_SelectionChanged">
-                </ComboBox>
-            </DataTemplate>
-        </xcdg:CellEditor.EditTemplate>
-    </xcdg:CellEditor>-->
-
-    <!--<xcdg:CellEditor x:Key="TextEditor">
-        <xcdg:CellEditor.EditTemplate>
-            <DataTemplate>
-                <TextBox Margin="-2 0" Padding="0" BorderThickness="0" Background="Red" 
-                         Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}"
-                         GotFocus="TextBox_GotFocus"
-                         LostFocus="TextBox_LostFocus"
-                         Text="{Binding EditingContent, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" />
-            </DataTemplate>
-        </xcdg:CellEditor.EditTemplate>
-    </xcdg:CellEditor>-->
 
     <Style TargetType="{x:Type nmgc:ModernDataGridControl}">
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />

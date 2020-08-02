@@ -47,9 +47,13 @@ namespace Ntreev.ModernUI.Framework
         protected AppBootstrapperBase(AppBootstrapperDescriptorBase descriptor)
         {
             this.descriptor = descriptor;
-            if (Current != null)
-                throw new InvalidOperationException("AppBootstrapper does not allow multi instance");
-            Current = this;
+            
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) == false)
+            {
+                if (Current != null)
+                    throw new InvalidOperationException("AppBootstrapper does not allow multi instance");
+                Current = this;
+            }
             if (this.AutoInitialize == true)
                 this.Initialize();
         }

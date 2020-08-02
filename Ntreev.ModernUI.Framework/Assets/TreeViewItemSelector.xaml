@@ -22,6 +22,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
                     xmlns:vm="clr-namespace:Ntreev.ModernUI.Framework.ViewModels">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="FilterBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <HierarchicalDataTemplate DataType="{x:Type vm:CategoryTreeViewItemViewModel}" ItemsSource="{Binding Items}">
         <Grid Margin="2">
             <StackPanel Orientation="Horizontal">
@@ -66,9 +70,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                       KeyboardNavigation.DirectionalNavigation="Contained"
                                       BorderThickness="0" Margin="0" Padding="1" VerticalContentAlignment="Center">
                             <TreeView.Resources>
-                                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItem_Style}">
-                                    <EventSetter Event="Selected" Handler="TreeViewItem_Selected" />
-                                </Style>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="TreeView.xaml" />
+                                    </ResourceDictionary.MergedDictionaries>
+                                    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItem_Style}">
+                                        <EventSetter Event="Selected" Handler="TreeViewItem_Selected" />
+                                    </Style>
+                                </ResourceDictionary>
                             </TreeView.Resources>
                         </TreeView>
                     </Border>

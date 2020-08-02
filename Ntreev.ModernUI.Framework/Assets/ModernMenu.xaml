@@ -11,6 +11,7 @@
     <Style TargetType="{x:Type nmfc:ModernMenu}" BasedOn="{StaticResource {x:Type Menu}}">
         <Setter Property="Height" Value="25" />
         <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ModernMenu_ItemContainerStyleSelector}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
     </Style>
 
 </ResourceDictionary>

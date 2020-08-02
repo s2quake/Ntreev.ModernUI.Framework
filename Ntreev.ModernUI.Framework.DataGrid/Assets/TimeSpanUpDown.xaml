@@ -21,6 +21,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmgc="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Controls"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/TextBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <DataTemplate x:Key="DefaultWatermark_DataTemplate">
         <ContentControl Content="{Binding}" Foreground="Gray" Focusable="False" Margin="0,0,3,0" />
     </DataTemplate>

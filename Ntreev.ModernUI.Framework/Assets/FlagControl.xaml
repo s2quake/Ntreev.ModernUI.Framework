@@ -20,6 +20,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="FilterBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <ControlTemplate x:Key="FlagControlItem_Template" TargetType="{x:Type nmfc:FlagControlItem}">
         <Grid Margin="{TemplateBinding Margin}">
             <Grid.ColumnDefinitions>

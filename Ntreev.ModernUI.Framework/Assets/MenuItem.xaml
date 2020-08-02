@@ -32,7 +32,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style x:Key="MenuItem_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="Header" Value="{Binding DisplayName}" />
-        <Setter Property="ItemsSource" Value="{Binding ItemsSource}" />
+        <Setter Property="ItemsSource" Value="{Binding MenuItems}" />
         <Setter Property="Command" Value="{Binding Command}" />
         <Setter Property="CommandParameter" Value="{Binding}" />
         <Setter Property="CommandTarget" Value="{Binding RelativeSource={RelativeSource Mode=Self}}" />

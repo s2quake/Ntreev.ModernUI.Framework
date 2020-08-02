@@ -31,7 +31,7 @@ using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
-    class ModernSearchedItems : FrameworkElement
+    public class ModernSearchedItems : FrameworkElement
     {
         private const int itemHeight = 6;
 
@@ -88,8 +88,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             base.OnInitialized(e);
 
             var gridContext = ModernDataGridControl.GetDataGridContext(this);
-            var gridControl = gridContext.DataGridControl;
-            gridControl.PropertyChanged += GridControl_PropertyChanged;
+            if (gridContext != null)
+            {
+                var gridControl = gridContext.DataGridControl;
+                gridControl.PropertyChanged += GridControl_PropertyChanged;
+            }
         }
 
         private static void ItemsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
