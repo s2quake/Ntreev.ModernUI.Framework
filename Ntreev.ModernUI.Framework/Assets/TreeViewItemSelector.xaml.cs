@@ -19,13 +19,8 @@ using System.Windows;
 
 namespace Ntreev.ModernUI.Framework.Assets
 {
-    public partial class TreeViewItemSelector : ResourceDictionary
+    partial class TreeViewItemSelector : ResourceDictionary
     {
-        public TreeViewItemSelector()
-        {
-
-        }
-
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
         {
             if (sender is System.Windows.Controls.TreeViewItem treeViewItem && treeViewItem.IsSelected == true)

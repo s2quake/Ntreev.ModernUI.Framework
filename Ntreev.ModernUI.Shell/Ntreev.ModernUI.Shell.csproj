@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MenuItems\HelpMenus\" />
+    <Folder Include="MenuItems\ToolMenus\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Contents\Views\AdvancedControlView.xaml">

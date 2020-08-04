@@ -28,7 +28,7 @@ using System.Windows.Media;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Converters
 {
-    class IndexToForegroundBrushConverter : IValueConverter
+    public class IndexToForegroundBrushConverter : IValueConverter
     {
         private static ComplementaryConverter complementaryConverter = new ComplementaryConverter();
 

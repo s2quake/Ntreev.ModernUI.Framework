@@ -21,9 +21,5 @@ namespace Ntreev.ModernUI.Framework.Assets
 {
     partial class TabControl : ResourceDictionary
     {
-        public TabControl()
-        {
-
-        }
     }
 }

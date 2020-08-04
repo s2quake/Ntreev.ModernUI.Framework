@@ -21,11 +21,6 @@ namespace Ntreev.ModernUI.Framework.Assets
 {
     partial class FilterBox : ResourceDictionary
     {
-        public FilterBox()
-        {
-
-        }
-
         private void IconButton_Click(object sender, RoutedEventArgs e)
         {
             var control = sender as System.Windows.Controls.Control;

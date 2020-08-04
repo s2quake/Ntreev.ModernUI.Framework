@@ -20,13 +20,8 @@ using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework.Assets
 {
-    public partial class ListBox : ResourceDictionary
+    partial class ListBox : ResourceDictionary
     {
-        public ListBox()
-        {
-
-        }
-
         private void ContentPresenter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2 && sender is FrameworkElement fe && fe.DataContext is ICommand command)

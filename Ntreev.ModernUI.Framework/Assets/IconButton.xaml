@@ -110,7 +110,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type Button}}">
+    <Style x:Key="IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Padding" Value="3 3 3 2" />
         <Setter Property="Template" Value="{StaticResource IconButton_DropDown_Template}" />
@@ -129,6 +129,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IconButton_Style}" />
 
     <Style x:Key="ToolBar_IconButton_Style" TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource {x:Type nmfc:IconButton}}">
         <Setter Property="UseLayoutRounding" Value="True" />

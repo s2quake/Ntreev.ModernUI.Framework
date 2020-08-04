@@ -25,7 +25,7 @@ using System.Windows.Controls;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
-    class ModernDataCellContentTemplateSelector : DataTemplateSelector
+    public class ModernDataCellContentTemplateSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {

@@ -21,11 +21,6 @@ namespace Ntreev.ModernUI.Framework.Assets
 {
     partial class ComboBox : ResourceDictionary
     {
-        public ComboBox()
-        {
-
-        }
-
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as System.Windows.Controls.ComboBox;

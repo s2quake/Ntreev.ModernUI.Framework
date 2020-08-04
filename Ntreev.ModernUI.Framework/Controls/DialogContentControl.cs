@@ -54,7 +54,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.Content is DependencyObject)
             {
-                Caliburn.Micro.Bind.SetModel(this.Content as DependencyObject, e.NewValue);
+                Caliburn.Micro.Bind.SetModelWithoutContext(this.Content as DependencyObject, e.NewValue);
             }
         }
     }

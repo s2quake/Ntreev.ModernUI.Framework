@@ -32,12 +32,12 @@ using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
-    class ModernCurrentItemElement : FrameworkElement
+    public class ModernCurrentItemElement : FrameworkElement
     {
         private const int itemHeight = 2;
 
         public static readonly DependencyProperty LineBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(LineBrush), typeof(Brush), typeof(ModernCurrentItemElement),
+            DependencyProperty.Register(nameof(LineBrush), typeof(Brush), typeof(ModernCurrentItemElement),
                 new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Black)));
 
         public static readonly DependencyProperty ScrollBarProperty =
@@ -54,25 +54,21 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public ModernScrollBar ScrollBar
         {
-            get { return (ModernScrollBar)this.GetValue(ScrollBarProperty); }
-            set { this.SetValue(ScrollBarProperty, value); }
+            get => (ModernScrollBar)this.GetValue(ScrollBarProperty);
+            set => this.SetValue(ScrollBarProperty, value);
         }
 
         public Brush LineBrush
         {
-            get { return (Brush)this.GetValue(LineBrushProperty); }
-            set { this.SetValue(LineBrushProperty, value); }
+            get => (Brush)this.GetValue(LineBrushProperty);
+            set => this.SetValue(LineBrushProperty, value);
         }
 
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);
-
             if (this.index < 0 || this.count == 0)
                 return;
-
-            var gridContext = DataGridControl.GetDataGridContext(this);
-            var pen = new Pen(this.LineBrush, 1);
             var rowHeight = this.ActualHeight / this.count;
             var y = (int)((rowHeight * this.index) + (rowHeight - itemHeight) * 0.5);
             dc.DrawRectangle(this.LineBrush, null, new Rect(new Point(0, y), new Point(this.ActualWidth, y + itemHeight)));
@@ -129,7 +125,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var gridContext = ModernDataGridControl.GetDataGridContext(this);
             if (gridContext != null)
             {
-                var gridControl = gridContext.DataGridControl;
                 this.count = gridContext.GetScrollableItems().Count();
                 this.InvalidateVisual();
             }
@@ -141,7 +136,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             if (gridContext != null)
             {
                 var gridControl = gridContext.DataGridControl;
-
                 if (gridControl.GlobalCurrentItem == null)
                 {
                     this.index = -1;

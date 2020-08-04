@@ -28,161 +28,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework"
                     xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Properties">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Xceed.Wpf.DataGrid;component/themes/Controls/TableViewScrollViewer.generic.xaml" />
-        <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/TextBox.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
-
     <nmgv:IndexToForegroundBrushConverter x:Key="indexToForegroundBrushConverter" />
     <nmgv:IndexToBackgroundBrushConverter x:Key="indexToBackgroundBrushConverter" />
-    <xcdg:GreaterThanZeroConverter x:Key="greaterThanZeroConverter" />
-
-    <ControlTemplate x:Key="DataCell_Editable_ComboBox_Template" TargetType="{x:Type ComboBox}">
-        <Grid Name="MainGrid" SnapsToDevicePixels="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0" />
-            </Grid.ColumnDefinitions>
-            <Popup Name="PART_Popup"
-                   AllowsTransparency="True"
-                   Grid.ColumnSpan="2"
-                   Placement="Bottom"
-                   Margin="1"
-                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                    <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
-                    <Border Background="#0A000000" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
-
-                    <Border x:Name="DropDownBorder"
-                            Background="{DynamicResource PopupBackground}"
-                            BorderBrush="{DynamicResource WindowBorderActive}"
-                            BorderThickness="1"
-                            Margin="0,-1,0,0">
-                        <ScrollViewer Name="DropDownScrollViewer">
-                            <Grid RenderOptions.ClearTypeHint="Enabled">
-                                <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                    <Rectangle 
-                                        Name="OpaqueRect"
-                                        Height="{Binding ElementName=DropDownBorder,Path=ActualHeight}" 
-                                        Width="{Binding ElementName=DropDownBorder,Path=ActualWidth}" 
-                                        Fill="{Binding ElementName=DropDownBorder,Path=Background}" />
-                                </Canvas>
-                                <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
-                        </ScrollViewer>
-                    </Border>
-                </Grid>
-            </Popup>
-            <ToggleButton Grid.ColumnSpan="2"
-                          Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
-                          Padding="0,0,0,10" />
-
-            <Path Name="Arrow"
-                  Grid.ColumnSpan="2"
-                  Margin="3,1,8,0"
-                  Fill="{TemplateBinding Foreground}"
-                  Data="{DynamicResource DownArrowGeometry}"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Center" IsHitTestVisible="False" />
-            <xctk:AutoSelectTextBox x:Name="PART_EditableTextBox" BorderThickness="0" Background="Transparent"
-                                    xcdg:DataCell.IsCellFocusScope="True"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    Margin="{TemplateBinding Padding}"
-                                    Padding="2,0,0,1"
-                                    ContextMenu="{StaticResource TextBox_ContextMenu}"
-                                    CaretBrush="{DynamicResource WindowText}"
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
-            </xctk:AutoSelectTextBox>
-            <nmfc:HighlightTextBlock x:Name="htb" Text="{Binding Text, ElementName=PART_EditableTextBox}" 
-                                     Margin="{TemplateBinding Padding}"
-                                     Padding="4,0,0,1"
-                                     Visibility="Collapsed" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="HasItems" Value="False">
-                <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource InputBackgroundHover}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" />
-            </Trigger>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />
-            </Trigger>
-            <Trigger Property="IsGrouping" Value="True">
-                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-            </Trigger>
-            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
-                <Setter TargetName="OpaqueRect" 
-                        Property="Canvas.Top" 
-                        Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}" />
-                <Setter TargetName="OpaqueRect" 
-                        Property="Canvas.Left" 
-                        Value="{Binding ElementName=DropDownScrollViewer, Path=HorizontalOffset}" />
-            </Trigger>
-            <Trigger Property="IsReadOnly" Value="True">
-                <Setter TargetName="PART_EditableTextBox" Property="IsReadOnly" Value="True" />
-            </Trigger>
-            <MultiDataTrigger >
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.(nmgc:ModernDataGridControl.HasSearchText), RelativeSource={RelativeSource Self}}" Value="True" />
-                    <Condition Binding="{Binding IsCurrent, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="True" />
-                    <Condition Binding="{Binding IsBeingEdited, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Hidden" />
-                <Setter TargetName="htb" Property="Visibility" Value="Visible" />
-                <Setter TargetName="htb" Property="Pattern" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.(nmgc:ModernDataGridControl.HasSearchText), RelativeSource={RelativeSource Self}}" />
-                <Setter TargetName="htb" Property="Highlight" Value="{DynamicResource WindowBackground}" />
-                <Setter TargetName="htb" Property="Foreground" Value="{DynamicResource WindowText}" />
-            </MultiDataTrigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <Style TargetType="{x:Type nmgc:NumericTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}">
-        <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource WindowText}" />
-    </Style>
-
-    <Style TargetType="{x:Type nmgc:ModernDataCellTextBox}" BasedOn="{StaticResource {x:Type TextBoxBase}}">
-        <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource WindowText}" />
-    </Style>
-
+    
     <Pen x:Key="ConnectionLinePen" Brush="{DynamicResource WindowText}" Thickness="2" />
-
-    <DataTemplate x:Key="InsertionRowGlyph">
-        <Viewbox>
-            <Grid Margin="5">
-                <Path Width="39.0251" Height="37.9537" Canvas.Left="17" Canvas.Top="17" Stretch="Fill" Fill="{DynamicResource WindowText}" Data="F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z M 17,28L 17,23L 23,23L 23,17L 28,17L 28,23L 34,23L 34,28L 28,28L 28,34L 23,34L 23,28L 17,28 Z " />
-            </Grid>
-        </Viewbox>
-    </DataTemplate>
-
-    <DataTemplate x:Key="EditingRowGlyph">
-        <Viewbox>
-            <Grid Margin="5">
-                <Path Width="34.9788" Height="34.9788" Canvas.Left="21.0463" Canvas.Top="19.9749" Stretch="Fill" Fill="{DynamicResource WindowText}" Data="F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z " />
-            </Grid>
-        </Viewbox>
-    </DataTemplate>
-
-    <DataTemplate x:Key="CurrentItemGlyph">
-        <Viewbox>
-            <Grid Margin="5">
-                <Path Width="20.5832" Height="31.6667" Canvas.Left="30.0833" Canvas.Top="22.1667" Stretch="Fill" Fill="{DynamicResource WindowText}" Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z " />
-            </Grid>
-        </Viewbox>
-    </DataTemplate>
 
     <DataTemplate x:Key="ValidationErrorGlyph">
         <Image Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" />
@@ -223,14 +72,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Path>
     </DataTemplate>
 
-    <Style x:Key="RowSplitterBorder_Style" TargetType="{x:Type Border}">
-        <Setter Property="BorderThickness" Value="0 0 1 1" />
-        <Setter Property="Height" Value="3" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
-    </Style>
-
     <Style x:Key="TableView_Style" TargetType="{x:Type xcdg:TableView}">
         <Setter Property="RowSelectorPaneWidth" Value="50" />
         <Setter Property="AllowDrop" Value="True" />
@@ -258,7 +99,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ContentPresenter Name="expanderGlyphPresenter" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.CollapseGroupGlyph)}" />
         <ControlTemplate.Triggers>
             <Trigger Property="xcdg:DataGridControl.HasExpandedDetails" Value="False">
-                <Setter TargetName="expanderGlyphPresenter" Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" Property="ContentPresenter.ContentTemplate" />
+                <Setter TargetName="expanderGlyphPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" Property="ContentPresenter.ContentTemplate" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -321,12 +162,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Template" Value="{StaticResource GroupLevelIndicatorPane_Template}" />
     </Style>
 
-    <!--열 필터링시 생기는 그룹형태의 한줄의 Row-->
     <Style TargetType="{x:Type xcdg:GroupHeaderControl}">
         <Setter Property="BorderThickness" Value="0 0 1 1" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <!--<Setter Property="Foreground" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToForegroundBrushConverter}}" />-->
-        <Setter Property="Background" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToBackgroundBrushConverter}}" />
+        <Setter Property="Foreground" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToForegroundBrushConverter}}" />
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Group.Level, Converter={StaticResource indexToBackgroundBrushConverter}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type xcdg:GroupHeaderControl}">
@@ -405,9 +245,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundCurrent}" />
                 <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundCurrent}" />
             </Trigger>
-            <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.AllowHeightResize)}" Value="True">
+            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(nmgc:ModernDataGridControl.AllowHeightResize)}" Value="True">
                 <Setter TargetName="PART_RowResizerThumb" Property="Visibility" Value="Visible" />
-            </DataTrigger>
+            </DataTrigger>-->
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -418,54 +258,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Template" Value="{StaticResource RowSelector_Template}" />
-    </Style>
-
-    <Style x:Key="EmptyRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="BorderThickness" Value="0 0 0 1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:RowSelector}">
-                    <Grid>
-                        <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="TitleRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource EmptyRowSelector_Style}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
-                <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="TopBorderRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="BorderThickness" Value="0 1 0 1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:RowSelector}">
-                    <Grid>
-                        <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="HierarchicalGroupByControlRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
-        <Setter Property="BorderThickness" Value="10" />
     </Style>
 
     <Style x:Key="ColumnManagerRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
@@ -500,36 +292,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="ContentTemplate" Value="{x:Null}" />
             </Trigger>
             <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError)}" Value="True">
-                <Setter Property="ContentTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ValidationErrorGlyph)}" />
-                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.DataContextError}" />
+                <Setter Property="ContentTemplate" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ValidationErrorGlyph)}" />
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext.DataContextError}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
-                <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="InsertionRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource {x:Type xcdg:RowSelector}}">
-        <Setter Property="nmgc:ModernDataRow.IsDragOver" Value="False" />
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=(xcdg:ViewBase.IsLastItem)}" Value="True">
-                <Setter Property="BorderThickness" Value="0 1 0 1" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.HasExpandedDetails)}" Value="True">
-                <Setter Property="BorderThickness" Value="0 1 0 1" />
-            </DataTrigger>
-            <!--<DataTrigger Binding="{Binding IsSelected}" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundCurrent}" />
-                <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundCurrent}" />
-            </DataTrigger>-->
-            <Trigger Property="nmgc:ModernDataRow.IsDragOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource WindowBorder}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ModernInsertionRowSelector_Style" TargetType="{x:Type xcdg:RowSelector}" BasedOn="{StaticResource InsertionRowSelector_Style}">
-        <Style.Triggers>
             <DataTrigger Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
@@ -551,7 +316,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" xcdg:TableView.CanScrollHorizontally="False" />
             <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" />
             <Border x:Name="detailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
-                <Button x:Name="detailsToggle_Button" Template="{StaticResource detailsExpanderButtonTemplate}" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
+                <Button x:Name="detailsToggle_Button" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
             </Border>
             <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" Margin="{TemplateBinding Control.BorderThickness}" 
                                  ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMinWidth)}" 
@@ -564,8 +329,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ControlTemplate.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SelectionUnit}" Value="Row" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SelectionUnit}" Value="Row" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
                     <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundCurrent}" />
@@ -574,23 +339,23 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="True" />
                 </MultiDataTrigger.Conditions>
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="False" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HideSelection}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="False" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HideSelection}" Value="True" />
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="rootBorder" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveSelectionBackground}" Property="Border.Background" />
-                <Setter TargetName="rootGrid" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveSelectionForeground}" Property="TextElement.Foreground" />
+                <Setter TargetName="rootBorder" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=InactiveSelectionBackground}" Property="Border.Background" />
+                <Setter TargetName="rootGrid" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=InactiveSelectionForeground}" Property="TextElement.Foreground" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="detailsToggle_Button" Value="{x:Static xcdg:DataGridCommands.ToggleDetailExpansion}" Property="ButtonBase.Command" />
                 <Setter TargetName="detailsToggle" Property="Visibility" Value="Visible" />
@@ -618,27 +383,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type nmgc:ModernInsertionRow}">
-        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <!--<Setter Property="Width" Value="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />-->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type nmgc:ModernInsertionRow}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <nmfc:IconButton x:Name="PART_InsertManyButton" Focusable="False" Grid.Column="0" Command="{TemplateBinding InsertManyCommand}"
-                                         Source="/Ntreev.ModernUI.Framework.DataGrid;component/Images/clipboard.png" />
-                        <nmgc:ModernInsertionButton x:Name="PART_InsertButton" Grid.Column="1" Command="{TemplateBinding InsertCommand}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="{x:Type nmgc:ModernInsertionButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
         <!--<Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
@@ -647,6 +391,25 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Padding" Value="2" />
         <Setter Property="BorderThickness" Value="1 0 1 1" />
         <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <ControlTemplate x:Key="ModernInsertionRow_Template" TargetType="{x:Type nmgc:ModernInsertionRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <nmfc:IconButton x:Name="PART_InsertManyButton" Focusable="False" Grid.Column="0" Command="{TemplateBinding InsertManyCommand}"
+                             Source="/Ntreev.ModernUI.Framework.DataGrid;component/Images/clipboard.png" />
+            <nmgc:ModernInsertionButton x:Name="PART_InsertButton" Grid.Column="1" Command="{TemplateBinding InsertCommand}" />
+        </Grid>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type nmgc:ModernInsertionRow}">
+        <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <!--<Setter Property="Width" Value="{Binding (xcdg:DataGridControl.DataGridContext).(nmgc:ModernColumnManagerRow.ColumnsWidth), RelativeSource={RelativeSource Self}}" />-->
+        <Setter Property="Template" Value="{StaticResource ModernInsertionRow_Template}"/>
     </Style>
 
     <ControlTemplate x:Key="Cell_Template" TargetType="{x:Type xcdg:Cell}">
@@ -677,9 +440,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </MultiTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SelectionUnit, RelativeSource={RelativeSource Self}}"
+                    <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.SelectionUnit, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                Value="Cell" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ParentRow.IsSelected}"
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ParentRow.IsSelected}"
                                Value="True" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
@@ -688,12 +451,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Setter TargetName="InnerBorder" Property="Visibility" Value="Hidden" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
-
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundHover}" />
                 <Setter Property="Foreground" Value="{DynamicResource DataGridCellForegroundHover}" />
             </Trigger>
-
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundSelected}" />
                 <Setter Property="Foreground" Value="{DynamicResource DataGridCellForegroundSelected}" />
@@ -708,12 +469,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
                 <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />
             </Trigger>
-            <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError), RelativeSource={RelativeSource Self}}" Value="True">
+            <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
                 <Setter TargetName="error_Image" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
+    
     <Style TargetType="{x:Type xcdg:Cell}">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="MinHeight" Value="22" />
@@ -723,8 +484,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template" Value="{StaticResource Cell_Template}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError), RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="ToolTip" Value="{Binding Path=(nmgc:ModernDataGridControl.DataContextError), RelativeSource={RelativeSource Self}}" />
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(nmgc:ModernDataGridControl.HasDataContextError)}" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(nmgc:ModernDataGridControl.DataContextError)}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -746,14 +507,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style TargetType="{x:Type nmgc:ModernDataCell}" BasedOn="{StaticResource {x:Type xcdg:Cell}}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="ContentTemplateSelector" Value="{StaticResource ModernDataCell_ContentTemplateSelector}" />
-
         <Style.Triggers>
-            <!--<DataTrigger Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+            <DataTrigger Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Null}">
                 <Setter Property="ContentTemplate" Value="{StaticResource ModernDataCell_ContentTemplate}" />
-            </DataTrigger>-->
+            </DataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Self}}" Value="{x:Null}" />
+                    <Condition Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Null}" />
                     <Condition Binding="{Binding Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.(nmgc:ModernDataGridControl.HasSearchText), RelativeSource={RelativeSource Self}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="ContentTemplate">
@@ -779,7 +539,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    
     <Style TargetType="{x:Type xcdg:ColumnManagerRow}">
         <Setter Property="AllowSort" Value="False" />
         <Setter Property="Height" Value="23" />
@@ -790,7 +550,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ColumnManagerRowSelector_Style}" />
         <Setter Property="xcdg:RowSelector.Visible" Value="True" />
         <Setter Property="nmgc:ModernDataGridControl.AllowHeightResize" Value="False" />
-    </Style>
+    </Style>  
 
     <ControlTemplate x:Key="ModernColumnManagerRow_Template" TargetType="{x:Type nmgc:ModernColumnManagerRow}">
         <Grid Name="rootGrid">
@@ -818,8 +578,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <ControlTemplate.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
-                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="detailsToggle" Property="UIElement.Visibility" Value="Hidden" />
             </MultiDataTrigger>
@@ -830,7 +590,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Template" Value="{DynamicResource ModernColumnManagerRow_Template}" />
         <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ModernColumnManagerRowSelector_Style}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(xcdg:DataGridControl.DataGridContext).(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
                 <Setter Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
             </DataTrigger>
         </Style.Triggers>
@@ -846,6 +606,55 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <ControlTemplate x:Key="ColumnManagerCell_Template" TargetType="{x:Type xcdg:ColumnManagerCell}">
+        <Grid>
+            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{DynamicResource DataGridGridLines}" 
+                                BorderThickness="0 0 0 1" 
+                                Padding ="{TemplateBinding Padding}">
+                <Grid x:Name="containerGrid" Margin="5 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter Grid.Column="0"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    <Path x:Name="SortArrow"
+                          Grid.Column="1"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Width="8" Height="6" Margin="5,0,5,0"
+                          Stretch="Fill" Opacity="0.5" Fill="{TemplateBinding Foreground}"
+                          RenderTransformOrigin="0.5,0.4"
+                          Visibility="Collapsed"
+                          Data="M0,0 L1,0 0.5,1 z" />
+                </Grid>
+            </Border>
+            <Thumb x:Name="PART_ColumnResizerThumb" HorizontalAlignment="Right" Style="{StaticResource invisibleThumbStyle}" />
+            <Border x:Name="verticalGridLineBorder" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 1 0" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ParentColumn.HasFixedWidth}" Value="True">
+                <Setter TargetName="PART_ColumnResizerThumb" Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ParentRow.AllowColumnResize}" Value="False">
+                <Setter TargetName="PART_ColumnResizerThumb" Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ParentColumn.SortDirection}" Value="Ascending">
+                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                <Setter TargetName="SortArrow" Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="180" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ParentColumn.SortDirection}" Value="Descending">
+                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
     <Style TargetType="{x:Type xcdg:ColumnManagerCell}">
         <EventSetter Event="MouseLeftButtonUp" Handler="ColumnManagerCell_MouseLeftButtonUp" />
@@ -854,59 +663,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:ColumnManagerCell}">
-                    <Grid>
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{DynamicResource DataGridGridLines}" 
-                                BorderThickness="0 0 0 1" 
-                                Padding ="{TemplateBinding Padding}">
-                            <Grid x:Name="containerGrid" Margin="5 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Grid.Column="0"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                <Path x:Name="SortArrow"
-                                      Grid.Column="1"
-                                      HorizontalAlignment="Center" VerticalAlignment="Center"
-                                      Width="8" Height="6" Margin="5,0,5,0"
-                                      Stretch="Fill" Opacity="0.5" Fill="{TemplateBinding Foreground}"
-                                      RenderTransformOrigin="0.5,0.4"
-                                      Visibility="Collapsed"
-                                      Data="M0,0 L1,0 0.5,1 z" />
-                            </Grid>
-                        </Border>
-                        <Thumb x:Name="PART_ColumnResizerThumb" HorizontalAlignment="Right" Style="{StaticResource invisibleThumbStyle}" />
-                        <Border x:Name="verticalGridLineBorder" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 1 0" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=ParentColumn.HasFixedWidth, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="PART_ColumnResizerThumb" Property="IsEnabled" Value="False" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=ParentRow.AllowColumnResize, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter TargetName="PART_ColumnResizerThumb" Property="IsEnabled" Value="False" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=ParentColumn.SortDirection, RelativeSource={RelativeSource Self}}" Value="Ascending">
-                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="SortArrow" Property="RenderTransform">
-                                <Setter.Value>
-                                    <RotateTransform Angle="180" />
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=ParentColumn.SortDirection, RelativeSource={RelativeSource Self}}" Value="Descending">
-                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Template" Value="{StaticResource ColumnManagerCell_Template}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundHover}" />
@@ -934,101 +691,85 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style TargetType="{x:Type nmgc:ModernScrollBar}" BasedOn="{StaticResource {x:Type ScrollBar}}" />
 
+    <ControlTemplate x:Key="ModernScrollBar_Vertical_Template" TargetType="{x:Type nmgc:ModernScrollBar}">
+        <Grid Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+                <RowDefinition Height="0.00001*" />
+                <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+            </Grid.RowDefinitions>
+            <RepeatButton Style="{StaticResource ScrollBarButton}"
+                          IsEnabled="{TemplateBinding IsMouseOver}"
+                          Command="{x:Static ScrollBar.LineUpCommand}"
+                          Margin="0,0,0,-1">
+                <Path Width="7" Height="4" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 4 L 3.5 0 L 7 4 Z" />
+            </RepeatButton>
+            <Track Grid.Row="1" Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}" IsDirectionReversed="True">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource ScrollBarThumb}" Padding="4,0" />
+                </Track.Thumb>
+            </Track>
+            <nmgc:ModernSearchedItems Grid.Row="1" LineBrush="{DynamicResource WindowBorderActive}" IsHitTestVisible="False"
+                                      ScrollBar="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
+            <nmgc:ModernCurrentItemElement Grid.Row="1" LineBrush="{DynamicResource WindowText}" IsHitTestVisible="False"
+                                           ScrollBar="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
+            <RepeatButton Style="{StaticResource ScrollBarButton}" Margin="0,-1,0,0"
+                          Grid.Row="2" IsEnabled="{TemplateBinding IsMouseOver}"
+                          Command="{x:Static ScrollBar.LineDownCommand}">
+                <Path Width="7" Height="4" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 0 L 3.5 4 L 7 0 Z" />
+            </RepeatButton>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ModernScrollBar_Horintal_Template"  TargetType="{x:Type ScrollBar}">
+        <Grid Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+                <ColumnDefinition Width="0.00001*" />
+                <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+            </Grid.ColumnDefinitions>
+            <RepeatButton Style="{StaticResource ScrollBarButton}"
+                          IsEnabled="{TemplateBinding IsMouseOver}"
+                          Command="{x:Static ScrollBar.LineLeftCommand}" 
+                          Margin="0,0,-1,0">
+                <Path Width="4" Height="7" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 3.5 L 4 7 L 4 0 Z" />
+            </RepeatButton>
+            <Track Grid.Column="1" Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}" IsDirectionReversed="False">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource ScrollBarThumb}" Padding="0,4" />
+                </Track.Thumb>
+            </Track>
+            <RepeatButton Style="{StaticResource ScrollBarButton}"
+                          Grid.Column="2"
+                          IsEnabled="{TemplateBinding IsMouseOver}"
+                          Command="{x:Static ScrollBar.LineRightCommand}"
+                          Margin="-1,0,0,0">
+                <Path Width="4" Height="7" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 0 L 0 7 L 4 3.5 Z" />
+            </RepeatButton>
+        </Grid>
+    </ControlTemplate>
+
     <Style x:Key="FilterableScrollBar_Style" TargetType="{x:Type nmgc:ModernScrollBar}" BasedOn="{StaticResource {x:Type nmgc:ModernScrollBar}}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type nmgc:ModernScrollBar}">
-                    <Grid Name="Bg"
-                          Background="{TemplateBinding Background}"
-                          SnapsToDevicePixels="True">
-                        <Grid.RowDefinitions>
-                            <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
-                            <RowDefinition Height="0.00001*" />
-                            <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
-                        </Grid.RowDefinitions>
-                        <RepeatButton Style="{StaticResource ScrollBarButton}"
-                                      IsEnabled="{TemplateBinding IsMouseOver}"
-                                      Command="{x:Static ScrollBar.LineUpCommand}"
-                                      Margin="0,0,0,-1">
-                            <Path Width="7" Height="4" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 4 L 3.5 0 L 7 4 Z" />
-                        </RepeatButton>
-                        <Track Grid.Row="1"
-                               Name="PART_Track"
-                               IsEnabled="{TemplateBinding IsMouseOver}"
-                               IsDirectionReversed="True">
-                            <Track.DecreaseRepeatButton>
-                                <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
-                            </Track.DecreaseRepeatButton>
-                            <Track.IncreaseRepeatButton>
-                                <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
-                            </Track.IncreaseRepeatButton>
-                            <Track.Thumb>
-                                <Thumb Style="{StaticResource ScrollBarThumb}" Padding="4,0" />
-                            </Track.Thumb>
-                        </Track>
-                        <nmgc:ModernSearchedItems Grid.Row="1" LineBrush="{DynamicResource WindowBorderActive}" IsHitTestVisible="False"
-                                                  ScrollBar="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
-                        <nmgc:ModernCurrentItemElement Grid.Row="1" LineBrush="{DynamicResource WindowText}" IsHitTestVisible="False"
-                                                       ScrollBar="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
-                        <RepeatButton Style="{StaticResource ScrollBarButton}"
-                                      Grid.Row="2"
-                                      IsEnabled="{TemplateBinding IsMouseOver}"
-                                      Command="{x:Static ScrollBar.LineDownCommand}"
-                                      Margin="0,-1,0,0">
-                            <Path Width="7" Height="4" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 0 L 3.5 4 L 7 0 Z" />
-                        </RepeatButton>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Template" Value="{StaticResource ModernScrollBar_Vertical_Template}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
                 <Setter Property="MinWidth" Value="0" />
                 <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
                 <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid Name="Bg"
-                                  Background="{TemplateBinding Background}"
-                                  SnapsToDevicePixels="True">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
-                                    <ColumnDefinition Width="0.00001*" />
-                                    <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
-                                </Grid.ColumnDefinitions>
-                                <RepeatButton Style="{StaticResource ScrollBarButton}"
-                                              IsEnabled="{TemplateBinding IsMouseOver}"
-                                              Command="{x:Static ScrollBar.LineLeftCommand}" 
-                                              Margin="0,0,-1,0">
-                                    <Path Width="4" Height="7" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 3.5 L 4 7 L 4 0 Z" />
-                                </RepeatButton>
-                                <Track Grid.Column="1"
-                                       Name="PART_Track"
-                                       IsEnabled="{TemplateBinding IsMouseOver}"
-                                       IsDirectionReversed="False">
-                                    <Track.DecreaseRepeatButton>
-                                        <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
-                                    </Track.DecreaseRepeatButton>
-                                    <Track.IncreaseRepeatButton>
-                                        <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
-                                    </Track.IncreaseRepeatButton>
-                                    <Track.Thumb>
-                                        <Thumb Style="{StaticResource ScrollBarThumb}" Padding="0,4" />
-                                    </Track.Thumb>
-                                </Track>
-                                <RepeatButton Style="{StaticResource ScrollBarButton}"
-                                              Grid.Column="2"
-                                              IsEnabled="{TemplateBinding IsMouseOver}"
-                                              Command="{x:Static ScrollBar.LineRightCommand}"
-                                              Margin="-1,0,0,0">
-                                    <Path Width="4" Height="7" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=RepeatButton}}" Data="M 0 0 L 0 7 L 4 3.5 Z" />
-                                </RepeatButton>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Template" Value="{StaticResource ModernScrollBar_Horintal_Template}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -1043,21 +784,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <RowDefinition x:Name="gr1" />
                 <RowDefinition x:Name="gr2" Height="Auto" />
             </Grid.RowDefinitions>
-
             <Grid x:Name="contentGrid" Margin="{TemplateBinding Padding}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <xcdg:RowSelectorPane x:Name="PART_RowSelectorPane" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
-                                      Background="{TemplateBinding Background}" Width="{TemplateBinding RowSelectorPaneWidth}" />
+                                      Background="Red" Width="{TemplateBinding RowSelectorPaneWidth}" />
                 <xcdg:SynchronizedScrollViewer x:Name="fixedHeaderScrollViewer" Grid.Column="1" Grid.Row="0"
                                                xcdg:TableViewScrollViewer.SynchronizedScrollViewerPosition="Top"
                                                Focusable="False">
@@ -1065,7 +803,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                                      Orientation="Vertical"
                                                      HorizontalAlignment="Stretch" />
                 </xcdg:SynchronizedScrollViewer>
-
                 <xcdg:SynchronizedScrollViewer x:Name="fixedFooterScrollViewer" Grid.Column="1" Grid.Row="2"
                                                xcdg:TableViewScrollViewer.SynchronizedScrollViewerPosition="Bottom"
                                                Focusable="False">
@@ -1075,7 +812,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.Column="1" Grid.Row="1"
                                         CanContentScroll="{TemplateBinding CanContentScroll}" />
             </Grid>
-
             <nmgc:ModernScrollBar x:Name="PART_HorizontalScrollBar"
                                   Style="{StaticResource FilterableScrollBar_Style}"
                                   Grid.Column="0"
@@ -1085,7 +821,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                   Value="{TemplateBinding ScrollViewer.HorizontalOffset}"
                                   ViewportSize="{TemplateBinding ScrollViewer.ViewportWidth}"
                                   Visibility="{TemplateBinding ScrollViewer.ComputedHorizontalScrollBarVisibility}" />
-
             <nmgc:ModernScrollBar x:Name="PART_VerticalScrollBar"
                                   Style="{StaticResource FilterableScrollBar_Style}"
                                   Grid.Column="1"
@@ -1095,8 +830,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                   Value="{TemplateBinding ScrollViewer.VerticalOffset}"
                                   ViewportSize="{TemplateBinding ScrollViewer.ViewportHeight}"
                                   Visibility="{TemplateBinding ScrollViewer.ComputedVerticalScrollBarVisibility}" />
-
-            <!-- ScrollTip only displayed when scrolling -->
             <xcdg:ScrollTip Visibility="Collapsed" Content="{x:Null}"
                             ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ScrollTipContentTemplate)}"
                             ContentTemplateSelector="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ScrollTipContentTemplateSelector)}" />
@@ -1117,8 +850,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <Style x:Key="ModernTableViewScrollViewer_Style" TargetType="{x:Type nmgc:ModernTableViewScrollViewer}" BasedOn="{StaticResource {x:Type xcdg:TableViewScrollViewer}}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="ShowRowSelectorPane" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.ShowRowSelectorPane), RelativeSource={RelativeSource Self}}" />
-        <Setter Property="RowSelectorPaneWidth" Value="{Binding Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.RowSelectorPaneWidth), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="ShowRowSelectorPane" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.ShowRowSelectorPane)}" />
+        <Setter Property="RowSelectorPaneWidth" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:TableViewScrollViewer.RowSelectorPaneWidth)}" />
         <Setter Property="Template" Value="{StaticResource ModernTableViewScrollViewer_Template}" />
     </Style>
 
@@ -1126,7 +859,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Grid>
             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                 <AdornerDecorator x:Name="PART_DragDropAdornerDecorator">
-                    <nmgc:ModernTableViewScrollViewer x:Name="PART_ScrollViewer" Style="{StaticResource ModernTableViewScrollViewer_Style}" Padding="{TemplateBinding Padding}">
+                    <nmgc:ModernTableViewScrollViewer x:Name="PART_ScrollViewer" Padding="{TemplateBinding Padding}" Style="{StaticResource ModernTableViewScrollViewer_Style}">
                         <nmgc:ModernTableViewItemsHost />
                     </nmgc:ModernTableViewScrollViewer>
                 </AdornerDecorator>
@@ -1147,20 +880,20 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.IsConnectionStateGlyphEnabled)}" Value="False">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.IsConnectionStateGlyphEnabled)}" Value="False">
                 <Setter TargetName="connectionStateGrid" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Loading">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Loading">
                 <Setter TargetName="connectionStateLoadingContentPresenter" Property="Visibility" Value="Visible" />
                 <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Committing">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Committing">
                 <Setter TargetName="connectionStateLoadingContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Error">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Error">
                 <Setter TargetName="connectionStateLoadingContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Visible" />
                 <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
@@ -1178,187 +911,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ItemScrollingBehavior" Value="Immediate" />
         <Setter Property="SelectionMode" Value="Extended" />
         <Setter Property="SelectionUnit" Value="Cell" />
-        <Setter Property="Template" Value="{DynamicResource ModernDataGridControl_Template}" />
+        <Setter Property="Template" Value="{StaticResource ModernDataGridControl_Template}" />
     </Style>
-
-    <xcdg:TypeToVisibilityConverter x:Key="notDetailConfigConverter"
-                                    Visibility="Visible"
-                                    SetVisibilityWhenTrue="False" />
-
-    <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-
-    <Style x:Key="hierarchicalGroupByControlTreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
-        <Setter Property="IsExpanded" Value="True" />
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="Visibility">
-            <Setter.Value>
-                <PriorityBinding>
-                    <Binding Path="Visible" Converter="{StaticResource booleanToVisibilityConverter}" />
-                </PriorityBinding>
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TreeViewItem}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <!--This ColumnDefinition is required for stair spacing-->
-                            <ColumnDefinition Width="19" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                Padding="{TemplateBinding Control.Padding}"
-                                BorderBrush="{TemplateBinding Border.BorderBrush}"
-                                Background="{TemplateBinding Panel.Background}"
-                                Name="treeViewItemBorder"
-                                SnapsToDevicePixels="True"
-                                Grid.Column="1">
-
-                            <!--Will contain DetailGroupByConrol-->
-
-                            <ContentPresenter Content="{TemplateBinding HeaderedContentControl.Header}"
-                                              ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}"
-                                              ContentSource="Header"
-                                              Name="PART_Header"
-                                              HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-                        </Border>
-                        <ItemsPresenter Name="ItemsHost" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="DataGridContext_HierarchicalGroupByControlNode_Style" TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-                    <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
-                        <Border x:Name="bd" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="1" Padding="5 3" Margin="0,0,10,0" 
-                                Background="{DynamicResource ButtonBackground}">
-                            <TextBlock x:Name="titleTextBlock" Text="{TemplateBinding Title}" />
-                        </Border>
-                        <ItemsPresenter />
-                    </StackPanel>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="True">
-                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
-                            <Setter TargetName="titleTextBlock" Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="Detail_HierarchicalGroupByControlNode_Style" TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControlNode}">
-                    <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
-                        <Border x:Name="bd" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="1" Padding="5 3" Margin="0,0,10,0" 
-                                Background="{DynamicResource ButtonBackground}">
-                            <TextBlock x:Name="titleTextBlock" Text="{TemplateBinding Title}" />
-                        </Border>
-                        <ItemsPresenter />
-                    </StackPanel>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="True">
-                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DataGridHeaderBackgroundSelected}" />
-                            <Setter TargetName="titleTextBlock" Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundSelected}" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <HierarchicalDataTemplate x:Key="dataGridContextTemplate" DataType="{x:Type xcdg:DataGridContext}"
-                              ItemsSource="{Binding Path=DetailConfigurations}">
-
-        <xcdg:HierarchicalGroupByControlNode x:Name="groupByControlNode" Style="{StaticResource DataGridContext_HierarchicalGroupByControlNode_Style}"
-                                             ItemsSource="{Binding Path=GroupLevelDescriptions}"
-                                             Title="{Binding Path=SourceDetailConfiguration.Title}" />
-
-        <!-- Trigger to bind Title to the DataGridContext.DataGridControl.ItemsSourceName if DataGridContext.ParentDataGridContext is null -->
-        <HierarchicalDataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=SourceDetailConfiguration}" Value="{x:Null}">
-                <Setter TargetName="groupByControlNode" Property="Title">
-                    <Setter.Value>
-                        <Binding Path="DataGridControl.ItemsSourceName" />
-                    </Setter.Value>
-                </Setter>
-            </DataTrigger>
-            <!--<DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.IsCurrentContext)}" Value="False">
-                <Setter TargetName="groupByControlNode" Property="Background" Value="{DynamicResource DataGridCellBackgroundInactivated}" />
-            </DataTrigger>-->
-        </HierarchicalDataTemplate.Triggers>
-
-    </HierarchicalDataTemplate>
-
-    <!--<ControlTemplate x:Key="HierarchicalGroupByControl_Template" TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
-        <ControlTemplate.Resources>
-            <Style TargetType="{x:Type TreeView}" />
-        </ControlTemplate.Resources>
-
-        <Grid x:Name="rootGrid">
-            <Grid.ColumnDefinitions>
-                -->
-    <!-- HierarchicalGroupLevelIndicatorPane -->
-    <!--
-                <ColumnDefinition Width="Auto" />
-                -->
-    <!-- GroupLevelIndicatorPane -->
-    <!--
-                <ColumnDefinition Width="Auto" />
-
-                -->
-    <!-- HierarchicalGroupByControl -->
-    <!--
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            -->
-    <!-- The border responsible for the visual outline of the row (gridlines and background)
-              spans the GroupLevelIndicatorPane and CellsHost Panel. Those 2 elements are not children of
-              the Border because we don't want the border to be displayed in the GroupLevelIndicatorPane. -->
-    <!--
-            <Border x:Name="rootBorder"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{DynamicResource DataGridGridLines}"
-                    BorderThickness="0 0 1 1" 
-                    Padding="{TemplateBinding Padding}" />
-
-            <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" />
-
-            -->
-    <!-- GroupLevelIndicatorPane is a placeholder for individual GroupLevelIndicator elements that are added
-                       whenever this Row is part of a group. -->
-    <!--
-            <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            -->
-    <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(xcdg:GroupLevelIndicatorPane.GroupLevel)}" Value="-1">
-                <Setter TargetName="groupLevelIndicatorPane" Property="Visibility" Value="Collapsed" />
-            </DataTrigger>-->
-    <!--
-        </ControlTemplate.Triggers>
-    </ControlTemplate>-->
 
     <Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
@@ -1382,15 +936,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         <Border x:Name="rootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}" Grid.ColumnSpan="2" Grid.Column="1" Padding="{TemplateBinding Padding}">
                         </Border>
-                        <!--<Border x:Name="verticalGridLineBorder" BorderBrush="{Binding (xcdg:DataGridControl.DataGridContext).VerticalGridLineBrush, RelativeSource={RelativeSource Self}}" Grid.ColumnSpan="2" Grid.Column="1" Visibility="Collapsed">
-                            <Border.BorderThickness>
-                                <Binding ConverterParameter="Right" Path="(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness" RelativeSource="{RelativeSource Self}">
-                                    <Binding.Converter>
-                                        <xcdg:ThicknessConverter InverseValue="False" />
-                                    </Binding.Converter>
-                                </Binding>
-                            </Border.BorderThickness>
-                        </Border>-->
                         <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" />
                         <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
                         <xcdg:GroupByControl AllowSort="{TemplateBinding AllowSort}" AllowGroupingModification="{TemplateBinding AllowGroupingModification}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" xcdg:TableView.CanScrollHorizontally="True" ConnectionLinePen="{TemplateBinding ConnectionLinePen}" Grid.Column="2" NoGroupContent="{TemplateBinding NoGroupContent}" />
@@ -1398,31 +943,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Path=(xcdg:GroupLevelIndicatorPane.GroupLevel), RelativeSource={RelativeSource TemplatedParent}}" Value="-1">
                             <Setter Property="Visibility" TargetName="groupLevelIndicatorPane" Value="Collapsed" />
-                            <!--<Setter Property="BorderThickness" TargetName="verticalGridLineBorder">
-                                <Setter.Value>
-                                    <Binding ConverterParameter="Right, Left" Path="(xcdg:DataGridControl.DataGridContext).VerticalGridLineThickness" RelativeSource="{RelativeSource Self}">
-                                        <Binding.Converter>
-                                            <xcdg:ThicknessConverter InverseValue="False" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </Setter.Value>
-                            </Setter>-->
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="BorderThickness" Value="0 0 0 1" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="ConnectionLinePen" Value="{StaticResource ConnectionLinePen}" />
-        <Setter Property="Template" Value="{StaticResource HierarchicalGroupByControl_Template}" />
-        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource HierarchicalGroupByControlRowSelector_Style}" />
-    </Style>-->
 
     <nmgv:GroupByItemToSortDirectionConverter x:Key="groupByItemToSortDirectionConverter" />
 
@@ -1435,35 +961,24 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
             </StackPanel>
         </Border>
-
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="outerBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}" />
-                <!--<Setter TargetName="outerBorder" Property="BorderThickness" Value="1" />
-                <Setter TargetName="outerBorder" Property="Padding" Value="0" />
-                <Setter TargetName="contentPanel" Property="Margin" Value="1,1,-1,-1" />-->
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter TargetName="outerBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}" />
-                <!--<Setter TargetName="outerBorder" Property="BorderThickness" Value="1" />
-                <Setter TargetName="outerBorder" Property="Padding" Value="0" />
-                <Setter TargetName="contentPanel" Property="Margin" Value="1,1,-1,-1" />-->
             </Trigger>
-
-            <!-- The following 2 triggers allow the appropriate Sort Glyph to be displayed
-              depending on the ParentColumn's SortDirection. -->
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Ascending">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Ascending">
                 <Setter TargetName="sortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
-                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
+                        Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
                 <Setter TargetName="sortGlyphPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Descending">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Descending">
                 <Setter TargetName="sortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
-                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.DescendingSortGlyph)}" />
+                        Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.DescendingSortGlyph)}" />
                 <Setter TargetName="sortGlyphPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </ControlTemplate.Triggers>
-
     </ControlTemplate>
 
     <Style TargetType="{x:Type xcdg:GroupByItem}">
@@ -1471,7 +986,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
         <Setter Property="Padding" Value="5 3" />
-        <Setter Property="Template" Value="{StaticResource GroupByItem_Template}" />
+        <!--<Setter Property="Template" Value="{StaticResource GroupByItem_Template}" />-->
     </Style>
 
     <Style TargetType="{x:Type xcdg:GroupByControl}">
