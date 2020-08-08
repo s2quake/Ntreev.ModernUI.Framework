@@ -21,21 +21,16 @@ using System.Windows.Controls;
 
 namespace Ntreev.ModernUI.Framework.Controls
 {
-    class DialogContentControl : ContentControl
+    public class DialogContentPresentor : ContentPresenter
     {
-        public DialogContentControl()
-        {
-            this.DataContextChanged += DialogContentControl_DataContextChanged;
-        }
-
         protected override Size MeasureOverride(Size constraint)
         {
             var size = base.MeasureOverride(constraint);
-            if (this.Content is FrameworkElement)
+            if (this.Content is FrameworkElement fe)
             {
-                var desiredWidth = DialogWindow.GetDesiredWidth(this.Content as FrameworkElement);
-                var desiredHeight = DialogWindow.GetDesiredHeight(this.Content as FrameworkElement);
-                if (this.Parent is DialogWindow window && window.IsEnsured == false)
+                var desiredWidth = DialogWindow.GetDesiredWidth(fe);
+                var desiredHeight = DialogWindow.GetDesiredHeight(fe);
+                //if (this.Parent is DialogWindow window && window.IsEnsured == false)
                 {
                     if (double.IsNaN(desiredWidth) == false)
                     {
@@ -48,14 +43,6 @@ namespace Ntreev.ModernUI.Framework.Controls
                 }
             }
             return size;
-        }
-
-        private void DialogContentControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (this.Content is DependencyObject)
-            {
-                Caliburn.Micro.Bind.SetModelWithoutContext(this.Content as DependencyObject, e.NewValue);
-            }
         }
     }
 }

@@ -39,15 +39,15 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </ControlTemplate.Resources>
                     <StackPanel Orientation="Horizontal">
                         <Grid VerticalAlignment="Top">
-                            <Image x:Name="image" HorizontalAlignment="Right" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" Margin="0 0 2 0" />
-                            <AdornedElementPlaceholder x:Name="adorner" Margin="-1" />
-                            <nmfc:ErrorBlinker x:Name="blinker" Margin="-1" />
+                            <Image x:Name="Image" HorizontalAlignment="Right" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" Margin="0 0 2 0" />
+                            <AdornedElementPlaceholder x:Name="Adorner" Margin="-1" />
+                            <nmfc:ErrorBlinker x:Name="Blinker" Margin="-1" />
                         </Grid>
                     </StackPanel>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding AdornedElement.(Validation.HasError), ElementName=adorner}" Value="True">
-                            <Setter TargetName="blinker" Property="ErrorContent" Value="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=adorner}" />
-                            <Setter TargetName="image" Property="ToolTip" Value="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=adorner}" />
+                        <DataTrigger Binding="{Binding AdornedElement.(Validation.HasError), ElementName=Adorner}" Value="True">
+                            <Setter TargetName="Blinker" Property="ErrorContent" Value="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=Adorner}" />
+                            <Setter TargetName="Image" Property="ToolTip" Value="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=Adorner}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

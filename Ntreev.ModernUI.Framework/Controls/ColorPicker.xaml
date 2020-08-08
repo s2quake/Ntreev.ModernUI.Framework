@@ -67,15 +67,15 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="buttonBorder" BorderThickness="3" Margin="0" Width="40" Height="40"
+                        <Border x:Name="ButtonBorder" BorderThickness="3" Margin="0" Width="40" Height="40"
                                 BorderBrush="Transparent" Background="{TemplateBinding Background}">
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderThickness" Value="0" TargetName="buttonBorder" />
+                                <Setter Property="BorderThickness" Value="0" TargetName="ButtonBorder" />
                             </Trigger>
                             <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                                <Setter Property="BorderThickness" Value="0" TargetName="buttonBorder" />
+                                <Setter Property="BorderThickness" Value="0" TargetName="ButtonBorder" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

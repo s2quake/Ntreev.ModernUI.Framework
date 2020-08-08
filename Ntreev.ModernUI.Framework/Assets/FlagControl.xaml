@@ -31,14 +31,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" />
-            <ContentPresenter x:Name="content" Grid.Column="1" Margin="5 0 0 0" />
+            <ContentPresenter x:Name="Content" Grid.Column="1" Margin="5 0 0 0" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="FlagType" Value="Multiple">
-                <Setter TargetName="content" Property="TextElement.FontStyle" Value="Italic" />
+                <Setter TargetName="Content" Property="TextElement.FontStyle" Value="Italic" />
             </Trigger>
             <Trigger Property="FlagType" Value="All">
-                <Setter TargetName="content" Property="TextElement.FontWeight" Value="Bold" />
+                <Setter TargetName="Content" Property="TextElement.FontWeight" Value="Bold" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

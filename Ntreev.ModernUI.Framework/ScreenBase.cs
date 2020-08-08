@@ -15,6 +15,7 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Ntreev.Library;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,18 +28,19 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class ScreenBase : Caliburn.Micro.Screen, IProgressable
+    public abstract class ScreenBase : Caliburn.Micro.Screen, IProgressable, IPropertyNotifier
     {
         private bool isProgressing;
         private string progressMessage;
 
         protected ScreenBase()
         {
-
+            this.Notifier = new PropertyNotifier(this);
         }
 
         protected ScreenBase(IServiceProvider serviceProvider)
         {
+            this.Notifier = new PropertyNotifier(this);
             this.ServiceProvider = serviceProvider;
         }
 
@@ -64,10 +66,9 @@ namespace Ntreev.ModernUI.Framework
 
         public void BeginProgress(string message)
         {
-            this.isProgressing = true;
-            this.progressMessage = message;
-            this.NotifyOfPropertyChange(nameof(this.IsProgressing));
-            this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
+            this.Notifier.SetField(ref this.isProgressing, true, nameof(IsProgressing));
+            this.Notifier.SetField(ref this.progressMessage, message, nameof(ProgressMessage));
+            this.Notifier.Notify();
         }
 
         public void EndProgress()
@@ -77,10 +78,9 @@ namespace Ntreev.ModernUI.Framework
 
         public void EndProgress(string message)
         {
-            this.isProgressing = false;
-            this.progressMessage = message;
-            this.NotifyOfPropertyChange(nameof(this.IsProgressing));
-            this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
+            this.Notifier.SetField(ref this.isProgressing, false, nameof(IsProgressing));
+            this.Notifier.SetField(ref this.progressMessage, message, nameof(ProgressMessage));
+            this.Notifier.Notify();
         }
 
         public bool IsProgressing
@@ -88,8 +88,8 @@ namespace Ntreev.ModernUI.Framework
             get => this.isProgressing;
             set
             {
-                this.isProgressing = value;
-                this.NotifyOfPropertyChange(nameof(this.IsProgressing));
+                this.Notifier.SetField(ref this.isProgressing, value, nameof(IsProgressing));
+                this.Notifier.Notify();
             }
         }
 
@@ -98,8 +98,8 @@ namespace Ntreev.ModernUI.Framework
             get => this.progressMessage ?? string.Empty;
             set
             {
-                this.progressMessage = value;
-                this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
+                this.Notifier.SetField(ref this.progressMessage, value, nameof(ProgressMessage));
+                this.Notifier.Notify();
             }
         }
 
@@ -168,6 +168,8 @@ namespace Ntreev.ModernUI.Framework
                 throw new InvalidOperationException();
             }
         }
+
+        protected PropertyNotifier Notifier { get; }
 
         protected IServiceProvider ServiceProvider { get; }
 

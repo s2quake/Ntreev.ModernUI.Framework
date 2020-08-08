@@ -23,8 +23,8 @@
     <nmfc:PropertyItemsControl>
         <ComboBox nmfc:PropertyItemsControl.Header="_ComboBox" x:Name="ComboBox" />
         <ComboBox nmfc:PropertyItemsControl.Header="_EditableComboBox" x:Name="EditableComboBox" IsEditable="True" />
-        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="_SearchBox" x:Name="searchBox" />
-        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="_FilterBox" x:Name="filterBox" />
+        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="_SearchBox" x:Name="SearchBox" />
+        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="_FilterBox" x:Name="FilterBox" Margin="-1,0,1,0" />
         <nmfc:FlagControl nmfc:PropertyItemsControl.Header="_FlagControl">
             <nmfc:FlagControlItem Value="0" Content="None" />
             <nmfc:FlagControlItem Value="1" Content="A" />

@@ -44,7 +44,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.filter.Focus();
+            this.Filter.Focus();
         }
     }
 }

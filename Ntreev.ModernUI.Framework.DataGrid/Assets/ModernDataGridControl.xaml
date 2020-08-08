@@ -28,9 +28,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework"
                     xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Properties">
 
-    <nmgv:IndexToForegroundBrushConverter x:Key="indexToForegroundBrushConverter" />
-    <nmgv:IndexToBackgroundBrushConverter x:Key="indexToBackgroundBrushConverter" />
-    
+    <nmgv:IndexToForegroundBrushConverter x:Key="IndexToForegroundBrushConverter" />
+    <nmgv:IndexToBackgroundBrushConverter x:Key="IndexToBackgroundBrushConverter" />
+    <nmfv:ContentToStringConverter x:Key="ContentToStringConverter" />
+
     <Pen x:Key="ConnectionLinePen" Brush="{DynamicResource WindowText}" Thickness="2" />
 
     <DataTemplate x:Key="ValidationErrorGlyph">
@@ -96,16 +97,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <ControlTemplate x:Key="detailsExpanderButtonTemplate" TargetType="{x:Type Button}">
-        <ContentPresenter Name="expanderGlyphPresenter" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.CollapseGroupGlyph)}" />
+        <ContentPresenter Name="ExpanderGlyphPresenter" Content="{x:Null}" ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.CollapseGroupGlyph)}" />
         <ControlTemplate.Triggers>
             <Trigger Property="xcdg:DataGridControl.HasExpandedDetails" Value="False">
-                <Setter TargetName="expanderGlyphPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" Property="ContentPresenter.ContentTemplate" />
+                <Setter TargetName="ExpanderGlyphPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" Property="ContentPresenter.ContentTemplate" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <ControlTemplate x:Key="GroupHeaderControl_ToggleButton_Template" TargetType="{x:Type ToggleButton}">
-        <ContentPresenter x:Name="expanderGlyphPresenter" Content="{x:Null}">
+        <ContentPresenter x:Name="ExpanderGlyphPresenter" Content="{x:Null}">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate>
                     <Border Width="9" Height="9" Background="Transparent">
@@ -117,7 +118,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ContentPresenter>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="False">
-                <Setter TargetName="expanderGlyphPresenter" Property="ContentTemplate">
+                <Setter TargetName="ExpanderGlyphPresenter" Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
                             <Border Width="9" Height="9" Background="Transparent">
@@ -133,11 +134,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ControlTemplate x:Key="GroupLevelIndicatorPane_Template" TargetType="{x:Type xcdg:GroupLevelIndicatorPane}">
         <Grid>
-            <Border x:Name="horizontalBorder"
+            <Border x:Name="HorizontalBorder"
                     Background="{TemplateBinding Background}"
                     BorderBrush="{DynamicResource DataGridGridLines}"
                     BorderThickness="0 0 0 1" />
-            <Border x:Name="verticalBorder"
+            <Border x:Name="VerticalBorder"
                     BorderBrush="{DynamicResource DataGridGridLines}"
                     Padding="{TemplateBinding Padding}"
                     BorderThickness="0 0 1 0">
@@ -149,10 +150,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <MultiTrigger.Conditions>
                     <Condition Property="CurrentIndicatorCount" Value="0" />
                 </MultiTrigger.Conditions>
-                <Setter TargetName="verticalBorder" Property="BorderThickness" Value="0 0 1 0" />
+                <Setter TargetName="VerticalBorder" Property="BorderThickness" Value="0 0 1 0" />
             </MultiTrigger>
             <Trigger Property="ShowVerticalBorder" Value="False">
-                <Setter TargetName="verticalBorder" Property="BorderThickness" Value="0 0 1 0" />
+                <Setter TargetName="VerticalBorder" Property="BorderThickness" Value="0 0 1 0" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -165,8 +166,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style TargetType="{x:Type xcdg:GroupHeaderControl}">
         <Setter Property="BorderThickness" Value="0 0 1 1" />
         <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
-        <Setter Property="Foreground" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource indexToForegroundBrushConverter}}" />
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Group.Level, Converter={StaticResource indexToBackgroundBrushConverter}}" />
+        <Setter Property="Foreground" Value="{Binding Path=Group.Level, RelativeSource={RelativeSource Self}, Converter={StaticResource IndexToForegroundBrushConverter}}" />
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Group.Level, Converter={StaticResource IndexToBackgroundBrushConverter}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type xcdg:GroupHeaderControl}">
@@ -182,7 +183,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     </Binding>
                                 </xcdg:GroupLevelIndicatorPane.GroupLevel>
                             </xcdg:GroupLevelIndicatorPane>
-                            <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" FocusVisualStyle="{TemplateBinding FocusVisualStyle}" Focusable="True" Padding="{TemplateBinding Padding}">
+                            <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" FocusVisualStyle="{TemplateBinding FocusVisualStyle}" Focusable="True" Padding="{TemplateBinding Padding}">
                                 <StackPanel Orientation="Horizontal">
                                     <ToggleButton Focusable="False" IsChecked="{Binding Group.IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" OverridesDefaultStyle="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   Template="{StaticResource GroupHeaderControl_ToggleButton_Template}">
@@ -194,7 +195,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </xcdg:PassiveLayoutDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="xcdg:DataGridControl.NavigationBehavior" Value="None">
-                            <Setter Property="Focusable" TargetName="mainBorder" Value="False" />
+                            <Setter Property="Focusable" TargetName="MainBorder" Value="False" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -202,7 +203,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Setter>
     </Style>
 
-    <Style x:Key="Invisible_Thumb_Style" TargetType="{x:Type Thumb}">
+    <Style x:Key="Thumb_RowResizer_Style" TargetType="{x:Type Thumb}">
         <Setter Property="Height" Value="4" />
         <Setter Property="Template">
             <Setter.Value>
@@ -215,14 +216,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ControlTemplate x:Key="RowSelector_Template" TargetType="{x:Type xcdg:RowSelector}">
         <Grid>
-            <Border x:Name="rootBorder" Background="{TemplateBinding Background}" 
+            <Border x:Name="RootBorder" Background="{TemplateBinding Background}" 
                     BorderBrush="{DynamicResource DataGridGridLines}"
                     BorderThickness="0 0 0 1">
                 <Grid>
                     <Viewbox MaxHeight="16"
                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
-                        <ContentPresenter x:Name="contentPresenter"
+                        <ContentPresenter x:Name="ContentPresenter"
                                           Margin="{TemplateBinding Padding}"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -230,7 +231,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </Viewbox>
                 </Grid>
             </Border>
-            <Thumb x:Name="PART_RowResizerThumb" VerticalAlignment="Bottom" Style="{StaticResource Invisible_Thumb_Style}" Visibility="Collapsed" />
+            <Thumb x:Name="PART_RowResizerThumb" VerticalAlignment="Bottom" Style="{StaticResource Thumb_RowResizer_Style}" Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsPressed" Value="True">
@@ -302,28 +303,28 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <ControlTemplate x:Key="DataRow_Template" TargetType="{x:Type nmgc:ModernDataRow}">
-        <Grid x:Name="rootGrid">
+        <Grid x:Name="RootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Border x:Name="topBorder" Grid.Column="2" Grid.ColumnSpan="2" Margin="0 -1 0 0" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" 
+            <Border x:Name="TopBorder" Grid.Column="2" Grid.ColumnSpan="2" Margin="0 -1 0 0" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" 
                     BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 1 0 0" Padding="{TemplateBinding Control.Padding}" Visibility="Collapsed" />
-            <Border x:Name="rootBorder" Grid.Column="2" Grid.ColumnSpan="2" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" 
+            <Border x:Name="RootBorder" Grid.Column="2" Grid.ColumnSpan="2" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" 
                     BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
             <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" xcdg:TableView.CanScrollHorizontally="False" />
-            <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" />
-            <Border x:Name="detailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
-                <Button x:Name="detailsToggle_Button" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
+            <xcdg:GroupLevelIndicatorPane x:Name="GroupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" />
+            <Border x:Name="DetailsToggle" Grid.Column="2" Visibility="Collapsed" xcdg:TableView.CanScrollHorizontally="False" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 0 1">
+                <Button x:Name="DetailsToggle_Button" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" />
             </Border>
             <xcdg:FixedCellPanel x:Name="PART_CellsHost" Grid.Column="3" Margin="{TemplateBinding Control.BorderThickness}" 
                                  ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMinWidth)}" 
                                  ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMode)}"
                                  FixedCellCount="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.FixedCellCount), Mode=TwoWay}"
                                  FixedColumnDropMarkPen="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.FixedColumnDropMarkPen)}" />
-            <Border x:Name="bottomBorder" BorderThickness="0 0 0 1" xcdg:TableView.CanScrollHorizontally="False" Grid.ColumnSpan="3" 
+            <Border x:Name="BottomBorder" BorderThickness="0 0 0 1" xcdg:TableView.CanScrollHorizontally="False" Grid.ColumnSpan="3" 
                     BorderBrush="{TemplateBinding Control.BorderBrush}" Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
@@ -349,16 +350,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.IsKeyboardFocusWithin}" Value="False" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.HideSelection}" Value="True" />
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="rootBorder" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=InactiveSelectionBackground}" Property="Border.Background" />
-                <Setter TargetName="rootGrid" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=InactiveSelectionForeground}" Property="TextElement.Foreground" />
+                <Setter TargetName="RootBorder" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=InactiveSelectionBackground}" Property="Border.Background" />
+                <Setter TargetName="RootGrid" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=InactiveSelectionForeground}" Property="TextElement.Foreground" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="detailsToggle_Button" Value="{x:Static xcdg:DataGridCommands.ToggleDetailExpansion}" Property="ButtonBase.Command" />
-                <Setter TargetName="detailsToggle" Property="Visibility" Value="Visible" />
+                <Setter TargetName="DetailsToggle_Button" Value="{x:Static xcdg:DataGridCommands.ToggleDetailExpansion}" Property="ButtonBase.Command" />
+                <Setter TargetName="DetailsToggle" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -420,9 +421,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
             </Border>
-            <Image x:Name="error_Image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" HorizontalAlignment="Right" VerticalAlignment="Center" 
+            <Image x:Name="Error_Image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Stretch="None" Margin="5 0" Visibility="Hidden" />
-            <Border x:Name="verticalGridLineBorder"
+            <Border x:Name="VerticalGridLineBorder"
                     BorderBrush="{DynamicResource DataGridGridLines}"
                     BorderThickness="0 0 1 0" />
             <Border x:Name="InnerBorder" BorderThickness="1" BorderBrush="#8597bc" Visibility="Hidden" />
@@ -470,7 +471,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}" />
             </Trigger>
             <DataTrigger Binding="{Binding Path=(nmgc:ModernDataGridControl.HasDataContextError), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
-                <Setter TargetName="error_Image" Property="Visibility" Value="Visible" />
+                <Setter TargetName="Error_Image" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -490,14 +491,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <nmfv:ContentToStringConverter x:Key="contentToStringConverter" />
-
     <DataTemplate x:Key="ModernDataCell_ContentTemplate">
-        <TextBlock x:Name="textBlock" Text="{Binding Converter={StaticResource contentToStringConverter}}" nmfc:TextBlockService.ShowTrimmedText="True">
+        <TextBlock x:Name="TextBlock" Text="{Binding Converter={StaticResource ContentToStringConverter}}" nmfc:TextBlockService.ShowTrimmedText="True">
         </TextBlock>
         <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=(nmfc:TextBlockService.IsTextTrimmed), ElementName=textBlock}" Value="True">
-                <Setter TargetName="textBlock" Property="ToolTip" Value="{Binding Path=Text, ElementName=textBlock}" />
+            <DataTrigger Binding="{Binding Path=(nmfc:TextBlockService.IsTextTrimmed), ElementName=TextBlock}" Value="True">
+                <Setter TargetName="TextBlock" Property="ToolTip" Value="{Binding Path=Text, ElementName=TextBlock}" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -519,12 +518,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <nmfc:HighlightTextBlock x:Name="htb" Text="{Binding Converter={StaticResource contentToStringConverter}}" Highlight="{DynamicResource WindowBorder}"
+                            <nmfc:HighlightTextBlock x:Name="HighlightTextBlock" Text="{Binding Converter={StaticResource ContentToStringConverter}}" Highlight="{DynamicResource WindowBorder}"
                                                      Pattern="{Binding SearchText, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataGridControl}}}" />
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding IsCurrent, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" Value="True">
-                                    <Setter TargetName="htb" Property="Highlight" Value="{DynamicResource WindowBackground}" />
-                                    <Setter TargetName="htb" Property="Foreground" Value="{DynamicResource WindowText}" />
+                                    <Setter TargetName="HighlightTextBlock" Property="Highlight" Value="{DynamicResource WindowBackground}" />
+                                    <Setter TargetName="HighlightTextBlock" Property="Foreground" Value="{DynamicResource WindowText}" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
@@ -553,21 +552,21 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>  
 
     <ControlTemplate x:Key="ModernColumnManagerRow_Template" TargetType="{x:Type nmgc:ModernColumnManagerRow}">
-        <Grid Name="rootGrid">
+        <Grid Name="RootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Border Name="rootBorder" Grid.Column="1" Grid.ColumnSpan="3" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
+            <Border Name="RootBorder" Grid.Column="1" Grid.ColumnSpan="3" xcdg:TableView.CanScrollHorizontally="False" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Padding="{TemplateBinding Control.Padding}" />
             <xcdg:HierarchicalGroupLevelIndicatorPane xcdg:TableView.CanScrollHorizontally="False" Grid.Column="0" Background="{TemplateBinding Control.Background}" />
-            <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" Background="{TemplateBinding Control.Background}" />
-            <ContentPresenter Name="detailsToggle" Grid.Column="2" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" Visibility="Collapsed" 
+            <xcdg:GroupLevelIndicatorPane x:Name="GroupLevelIndicatorPane" xcdg:TableView.CanScrollHorizontally="False" Grid.Column="1" Background="{TemplateBinding Control.Background}" />
+            <ContentPresenter Name="DetailsToggle" Grid.Column="2" VerticalAlignment="Top" Margin="2,4,2,0" OverridesDefaultStyle="True" Focusable="False" Visibility="Collapsed" 
                               xcdg:TableView.CanScrollHorizontally="False" Content="{x:Null}" 
                               ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.ExpandGroupGlyph)}" />
             <Border BorderThickness="0 0 0 1" BorderBrush="{DynamicResource DataGridGridLines}" Grid.Column="2" />
-            <Decorator Name="indentationDecorator" Grid.Column="3">
+            <Decorator Name="IndentationDecorator" Grid.Column="3">
                 <xcdg:FixedCellPanel x:Name="PART_CellsHost" Margin="{TemplateBinding Control.BorderThickness}" 
                                      ColumnStretchMinWidth="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMinWidth)}" 
                                      ColumnStretchMode="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:FixedCellPanel.ColumnStretchMode)}" 
@@ -581,7 +580,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).HasDetails}" Value="True" />
                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).AllowDetailToggle}" Value="True" />
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="detailsToggle" Property="UIElement.Visibility" Value="Hidden" />
+                <Setter TargetName="DetailsToggle" Property="UIElement.Visibility" Value="Hidden" />
             </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -596,7 +595,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="invisibleThumbStyle" TargetType="{x:Type Thumb}">
+    <Style x:Key="Thumb_ColumnResizer_Style" TargetType="{x:Type Thumb}">
         <Setter Property="Width" Value="8" />
         <Setter Property="Template">
             <Setter.Value>
@@ -613,7 +612,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                 BorderBrush="{DynamicResource DataGridGridLines}" 
                                 BorderThickness="0 0 0 1" 
                                 Padding ="{TemplateBinding Padding}">
-                <Grid x:Name="containerGrid" Margin="5 0">
+                <Grid x:Name="ContainerGrid" Margin="5 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -632,8 +631,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                           Data="M0,0 L1,0 0.5,1 z" />
                 </Grid>
             </Border>
-            <Thumb x:Name="PART_ColumnResizerThumb" HorizontalAlignment="Right" Style="{StaticResource invisibleThumbStyle}" />
-            <Border x:Name="verticalGridLineBorder" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 1 0" />
+            <Thumb x:Name="PART_ColumnResizerThumb" HorizontalAlignment="Right" Style="{StaticResource Thumb_ColumnResizer_Style}" />
+            <Border x:Name="VerticalGridLineBorder" BorderBrush="{DynamicResource DataGridGridLines}" BorderThickness="0 0 1 0" />
         </Grid>
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ParentColumn.HasFixedWidth}" Value="True">
@@ -777,14 +776,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <ControlTemplate x:Key="ModernTableViewScrollViewer_Template" TargetType="{x:Type nmgc:ModernTableViewScrollViewer}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="gc1" />
-                <ColumnDefinition x:Name="gc2" Width="Auto" />
+                <ColumnDefinition x:Name="ColumnDefinition1" />
+                <ColumnDefinition x:Name="ColumnDefinition2" Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition x:Name="gr1" />
-                <RowDefinition x:Name="gr2" Height="Auto" />
+                <RowDefinition x:Name="RowDefinition1" />
+                <RowDefinition x:Name="RowDefinition2" Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid x:Name="contentGrid" Margin="{TemplateBinding Padding}">
+            <Grid x:Name="ContentGrid" Margin="{TemplateBinding Padding}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
@@ -795,15 +794,15 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <xcdg:RowSelectorPane x:Name="PART_RowSelectorPane" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
-                                      Background="Red" Width="{TemplateBinding RowSelectorPaneWidth}" />
-                <xcdg:SynchronizedScrollViewer x:Name="fixedHeaderScrollViewer" Grid.Column="1" Grid.Row="0"
+                                      Background="{TemplateBinding Background}" Width="{TemplateBinding RowSelectorPaneWidth}" />
+                <xcdg:SynchronizedScrollViewer x:Name="FixedHeaderScrollViewer" Grid.Column="1" Grid.Row="0"
                                                xcdg:TableViewScrollViewer.SynchronizedScrollViewerPosition="Top"
                                                Focusable="False">
                     <xcdg:TableViewHeaderFooterPanel xcdg:DataGridControl.IsFixedHeadersHost="True"
                                                      Orientation="Vertical"
                                                      HorizontalAlignment="Stretch" />
                 </xcdg:SynchronizedScrollViewer>
-                <xcdg:SynchronizedScrollViewer x:Name="fixedFooterScrollViewer" Grid.Column="1" Grid.Row="2"
+                <xcdg:SynchronizedScrollViewer x:Name="FixedFooterScrollViewer" Grid.Column="1" Grid.Row="2"
                                                xcdg:TableViewScrollViewer.SynchronizedScrollViewerPosition="Bottom"
                                                Focusable="False">
                     <xcdg:TableViewHeaderFooterPanel xcdg:DataGridControl.IsFixedFootersHost="True"
@@ -839,9 +838,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter TargetName="PART_RowSelectorPane" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <DataTrigger Binding="{Binding IsVerticalScrollBarOnLeftSide, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataGridControl}}}" Value="True">
-                <Setter TargetName="gc1" Property="Width" Value="auto" />
-                <Setter TargetName="gc2" Property="Width" Value="*" />
-                <Setter TargetName="contentGrid" Property="Grid.Column" Value="1" />
+                <Setter TargetName="ColumnDefinition1" Property="Width" Value="auto" />
+                <Setter TargetName="ColumnDefinition2" Property="Width" Value="*" />
+                <Setter TargetName="ContentGrid" Property="Grid.Column" Value="1" />
                 <Setter TargetName="PART_HorizontalScrollBar" Property="Grid.Column" Value="1" />
                 <Setter TargetName="PART_VerticalScrollBar" Property="Grid.Column" Value="0" />
             </DataTrigger>
@@ -864,16 +863,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </nmgc:ModernTableViewScrollViewer>
                 </AdornerDecorator>
             </Border>
-            <Grid x:Name="connectionStateGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" Height="30" Width="30">
-                <ContentPresenter x:Name="connectionStateLoadingContentPresenter"
+            <Grid x:Name="ConnectionStateGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" Height="30" Width="30">
+                <ContentPresenter x:Name="ConnectionStateLoadingContentPresenter"
                                   ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ConnectionStateLoadingGlyph)}"
                                   Content="{TemplateBinding ConnectionState}"
                                   Visibility="Collapsed" />
-                <ContentPresenter x:Name="connectionStateCommittingContentPresenter"
+                <ContentPresenter x:Name="ConnectionStateCommittingContentPresenter"
                                   ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ConnectionStateCommittingGlyph)}"
                                   Content="{TemplateBinding ConnectionState}"
                                   Visibility="Collapsed" />
-                <ContentPresenter x:Name="connectionStateErrorContentPresenter"
+                <ContentPresenter x:Name="ConnectionStateErrorContentPresenter"
                                   ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.ConnectionStateErrorGlyph)}"
                                   Content="{TemplateBinding ConnectionState}"
                                   Visibility="Collapsed" />
@@ -881,22 +880,22 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Grid>
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:UIViewBase.IsConnectionStateGlyphEnabled)}" Value="False">
-                <Setter TargetName="connectionStateGrid" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateGrid" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Loading">
-                <Setter TargetName="connectionStateLoadingContentPresenter" Property="Visibility" Value="Visible" />
-                <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateLoadingContentPresenter" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ConnectionStateErrorContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Committing">
-                <Setter TargetName="connectionStateLoadingContentPresenter" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ConnectionStateLoadingContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateErrorContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateCommittingContentPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).DataGridControl.ConnectionState}" Value="Error">
-                <Setter TargetName="connectionStateLoadingContentPresenter" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="connectionStateErrorContentPresenter" Property="Visibility" Value="Visible" />
-                <Setter TargetName="connectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateLoadingContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ConnectionStateErrorContentPresenter" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ConnectionStateCommittingContentPresenter" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -905,7 +904,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="BorderBrush" Value="{DynamicResource SeparatorBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
         <Setter Property="UpdateSourceTrigger" Value="CellEndingEdit" />
         <Setter Property="CellEditorDisplayConditions" Value="CellIsCurrent" />
         <Setter Property="ItemScrollingBehavior" Value="Immediate" />
@@ -927,22 +926,22 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
-                    <Grid x:Name="rootGrid">
+                    <Grid x:Name="RootGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="rootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                        <Border x:Name="RootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}" Grid.ColumnSpan="2" Grid.Column="1" Padding="{TemplateBinding Padding}">
                         </Border>
                         <xcdg:HierarchicalGroupLevelIndicatorPane Grid.Column="0" />
-                        <xcdg:GroupLevelIndicatorPane x:Name="groupLevelIndicatorPane" Grid.Column="1" />
+                        <xcdg:GroupLevelIndicatorPane x:Name="GroupLevelIndicatorPane" Grid.Column="1" />
                         <xcdg:GroupByControl AllowSort="{TemplateBinding AllowSort}" AllowGroupingModification="{TemplateBinding AllowGroupingModification}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" xcdg:TableView.CanScrollHorizontally="True" ConnectionLinePen="{TemplateBinding ConnectionLinePen}" Grid.Column="2" NoGroupContent="{TemplateBinding NoGroupContent}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Path=(xcdg:GroupLevelIndicatorPane.GroupLevel), RelativeSource={RelativeSource TemplatedParent}}" Value="-1">
-                            <Setter Property="Visibility" TargetName="groupLevelIndicatorPane" Value="Collapsed" />
+                            <Setter Property="Visibility" TargetName="GroupLevelIndicatorPane" Value="Collapsed" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -953,38 +952,38 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <nmgv:GroupByItemToSortDirectionConverter x:Key="groupByItemToSortDirectionConverter" />
 
     <ControlTemplate x:Key="GroupByItem_Template" TargetType="{x:Type xcdg:GroupByItem}">
-        <Border x:Name="outerBorder" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
+        <Border x:Name="OuterBorder" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
                 Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}">
-            <StackPanel x:Name="contentPanel" Orientation="Horizontal">
+            <StackPanel x:Name="ContentPanel" Orientation="Horizontal">
                 <TextBlock Text="{Binding Title}" />
-                <ContentPresenter x:Name="sortGlyphPresenter" Content="{x:Null}" Margin="6,0,0,0" Visibility="Hidden"
+                <ContentPresenter x:Name="SortGlyphPresenter" Content="{x:Null}" Margin="6,0,0,0" Visibility="Hidden"
                                  ContentTemplate="{Binding RelativeSource={RelativeSource Self}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
             </StackPanel>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="outerBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}" />
+                <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="outerBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}" />
+                <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}" />
             </Trigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Ascending">
-                <Setter TargetName="sortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
+                <Setter TargetName="SortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
                         Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.AscendingSortGlyph)}" />
-                <Setter TargetName="sortGlyphPresenter" Property="Visibility" Value="Visible" />
+                <Setter TargetName="SortGlyphPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource groupByItemToSortDirectionConverter}}" Value="Descending">
-                <Setter TargetName="sortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
+                <Setter TargetName="SortGlyphPresenter" Property="ContentPresenter.ContentTemplate"
                         Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(xcdg:DataGridControl.DataGridContext).(xcdg:ViewBase.DescendingSortGlyph)}" />
-                <Setter TargetName="sortGlyphPresenter" Property="Visibility" Value="Visible" />
+                <Setter TargetName="SortGlyphPresenter" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style TargetType="{x:Type xcdg:GroupByItem}">
-        <Setter Property="Background" Value="{Binding Path=(nmgc:ModernDataGridControl.GroupIndex), Converter={StaticResource indexToBackgroundBrushConverter}}" />
+        <Setter Property="Background" Value="{Binding Path=(nmgc:ModernDataGridControl.GroupIndex), Converter={StaticResource IndexToBackgroundBrushConverter}}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}" />
         <Setter Property="Padding" Value="5 3" />
         <!--<Setter Property="Template" Value="{StaticResource GroupByItem_Template}" />-->
     </Style>

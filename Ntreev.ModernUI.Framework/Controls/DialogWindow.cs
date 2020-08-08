@@ -149,19 +149,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             base.OnContentChanged(oldContent, newContent);
 
-            if (newContent is DialogContentControl dialogContent)
-            {
-                if (dialogContent.Content is Control control)
-                {
-                    this.ProgressType = GetProgressType(control);
-                    if (this.ProgressType == ProgressType.Custom)
-                    {
-                        this.ProgressStyle = GetProgressStyle(control);
-                    }
-                    this.ResizeMode = GetDesiredResizeMode(control);
-                }
-            }
-            else if (newContent is Control control)
+            if (newContent is Control control)
             {
                 this.ProgressType = GetProgressType(control);
                 if (this.ProgressType == ProgressType.Custom)
@@ -171,20 +159,20 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
         }
 
-        protected override Size MeasureOverride(Size availableSize)
-        {
-            var size = base.MeasureOverride(availableSize);
-            if (this.Content is FrameworkElement)
-            {
-                var desiredWidth = GetDesiredWidth(this.Content as FrameworkElement);
-                var desiredHeight = GetDesiredHeight(this.Content as FrameworkElement);
-                if (double.IsNaN(desiredWidth) == false)
-                    size.Width = desiredWidth;
-                if (double.IsNaN(desiredHeight) == false)
-                    size.Height = desiredHeight;
-            }
-            return size;
-        }
+        //protected override Size MeasureOverride(Size availableSize)
+        //{
+        //    var size = base.MeasureOverride(availableSize);
+        //    if (this.Content is FrameworkElement)
+        //    {
+        //        var desiredWidth = GetDesiredWidth(this.Content as FrameworkElement);
+        //        var desiredHeight = GetDesiredHeight(this.Content as FrameworkElement);
+        //        if (double.IsNaN(desiredWidth) == false)
+        //            size.Width = desiredWidth;
+        //        if (double.IsNaN(desiredHeight) == false)
+        //            size.Height = desiredHeight;
+        //    }
+        //    return size;
+        //}
 
         private static void DesiredWidthPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

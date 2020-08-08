@@ -21,6 +21,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters"
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <nmfv:ComplementaryConverter x:Key="complementaryConverter" />
 
     <SolidColorBrush x:Key="BlackColor" Color="Black" />

@@ -7,68 +7,14 @@
              xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
              xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters;assembly=Ntreev.ModernUI.Framework"
              xmlns:nmgc="clr-namespace:Ntreev.ModernUI.Framework.DataGrid.Controls;assembly=Ntreev.ModernUI.Framework.DataGrid"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" nmfc:DialogWindow.DesiredWidth="500" nmfc:DialogWindow.DesiredHeight="250">
 
 
     <UserControl.Resources>
 
-        <Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}" BasedOn="{StaticResource {x:Type xcdg:HierarchicalGroupByControl}}">
-            <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
-            <!--<Setter Property="Visibility" Value="Collapsed" />-->
-            <Setter Property="BorderThickness" Value="0 0 0 1" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ItemBorder}" />
-        </Style>
-
-        <!--<Style TargetType="{x:Type xcdg:GroupLevelIndicatorPane}" BasedOn="{StaticResource {x:Type xcdg:GroupLevelIndicatorPane}}">
-            -->
-        <!--<Setter Property="Visibility" Value="Collapsed" />-->
-        <!--
-
-        </Style>-->
-
-        <Style TargetType="{x:Type xcdg:ColumnManagerRow}" BasedOn="{StaticResource {x:Type xcdg:ColumnManagerRow}}">
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
-
         <Style TargetType="{x:Type nmgc:ModernDataRow}" BasedOn="{StaticResource {x:Type nmgc:ModernDataRow}}">
             <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
-            <Style.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type xcdg:DataGridControl}}}" Value="True" />
-                        <Condition Binding="{Binding Color}" Value="Transparent" />
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}" />
-                </MultiDataTrigger>
-            </Style.Triggers>
         </Style>
-
-        <DataTemplate x:Key="IsLoaded_ContentTemplate">
-            <CheckBox IsChecked="{Binding Mode=OneWay}" IsEnabled="False" 
-                      Template="{StaticResource EnableEditor_ControlTemplate}"
-                      Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type xcdg:Cell}}}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="LockInfo_ContentTemplate">
-            <nmfc:IconImage Style="{StaticResource LockImage_Style}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="AccessInfo_ContentTemplate">
-            <nmfc:IconImage Style="{StaticResource AccessImage_Style}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type nmgc:ModernDataCell}}}" />
-        </DataTemplate>
-
-        <nmfv:ColorToBrushConverter x:Key="colorToBrushConverter" />
-
-        <DataTemplate x:Key="Color_ContentTemplate">
-            <Border Background="{Binding Converter={StaticResource colorToBrushConverter}}" />
-        </DataTemplate>
-
-        <nmfv:ContentToStringConverter x:Key="contentToStringConverter" />
-
-        <DataTemplate x:Key="DateTime_DataTemplate">
-            <TextBlock Text="{Binding Converter={StaticResource contentToStringConverter}}" />
-        </DataTemplate>
 
     </UserControl.Resources>
 
@@ -78,35 +24,30 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--wpftoolkit 버그로 인해 예외가 발생하여 처음에는 Collapsed로 설정-->
-        <nmgc:ModernDataGridControl x:Name="gridControl" ItemsSource="{Binding ItemsSource}"
-                                    DataContextChanged="GridControl_DataContextChanged">
+        <nmgc:ModernDataGridControl x:Name="GridControl" ItemsSource="{Binding ItemsSource}" ReadOnly="True"
+                                    BorderThickness="1" SelectionUnit="Row" SelectionMode="Single">
             <nmgc:ModernDataGridControl.Columns>
                 <xcdg:Column FieldName="Color"
-                             MaxWidth="30" MinWidth="30"
-                             CellContentTemplate="{StaticResource Color_ContentTemplate}" />
+                             MaxWidth="30" MinWidth="30" />
                 <xcdg:Column FieldName="LockInfo" Title="L"
-                             MaxWidth="30" MinWidth="30"
-                             CellContentTemplate="{StaticResource LockInfo_ContentTemplate}" />
+                             MaxWidth="30" MinWidth="30" />
                 <xcdg:Column FieldName="AccessInfo" Title="S"
-                             MaxWidth="30" MinWidth="30"
-                             CellContentTemplate="{StaticResource AccessInfo_ContentTemplate}" />
+                             MaxWidth="30" MinWidth="30" />
                 <xcdg:Column FieldName="IsLoaded" 
-                             MaxWidth="30" MinWidth="30"
-                             CellContentTemplate="{StaticResource IsLoaded_ContentTemplate}" />
+                             MaxWidth="30" MinWidth="30" />
                 <xcdg:Column FieldName="Name" Title="Name" />
-                <xcdg:Column FieldName="DataBaseInfo.Revision" Title="Revision" />
-                <xcdg:Column FieldName="DataBaseInfo.Comment" Title="Comment" />
-                <xcdg:Column FieldName="DataBaseInfo.CreationInfo.ID" Title="Creator" />
-                <xcdg:Column FieldName="DataBaseInfo.CreationInfo.DateTime" Title="CreatedDateTime" CellContentTemplate="{StaticResource DateTime_DataTemplate}" />
-                <xcdg:Column FieldName="DataBaseInfo.ModificationInfo.ID" Title="Modifier" />
-                <xcdg:Column FieldName="DataBaseInfo.ModificationInfo.DateTime" Title="ModifiedDateTime" CellContentTemplate="{StaticResource DateTime_DataTemplate}" />
+                <xcdg:Column FieldName="Revision" Title="Revision" />
+                <xcdg:Column FieldName="Comment" Title="Comment" />
+                <xcdg:Column FieldName="CreationID" Title="Creator" />
+                <xcdg:Column FieldName="CreationDateTime" Title="CreatedDateTime" />
+                <xcdg:Column FieldName="ModificationID" Title="Modifier" />
+                <xcdg:Column FieldName="ModificationDateTime" Title="ModifiedDateTime" />
             </nmgc:ModernDataGridControl.Columns>
             <nmgc:ModernDataGridControl.View>
                 <xcdg:TableView UseDefaultHeadersFooters="False">
                     <xcdg:TableView.FixedHeaders>
                         <DataTemplate>
-                            <xcdg:HierarchicalGroupByControl/>
+                            <xcdg:HierarchicalGroupByControl />
                         </DataTemplate>
                         <DataTemplate>
                             <nmgc:ModernColumnManagerRow x:Name="ColumnManagerRow" />

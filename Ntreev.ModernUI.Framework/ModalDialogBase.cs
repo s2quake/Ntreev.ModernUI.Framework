@@ -16,6 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
+using Ntreev.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ using System.Windows.Threading;
 
 namespace Ntreev.ModernUI.Framework
 {
-    public abstract class ModalDialogBase : Screen, IModalDialog, IProgressable
+    public abstract class ModalDialogBase : Screen, IModalDialog, IProgressable, IPropertyNotifier
     {
         private string progressMessage;
         private bool isProgressing;
@@ -35,11 +36,12 @@ namespace Ntreev.ModernUI.Framework
 
         protected ModalDialogBase()
         {
-
+            this.Notifier = new PropertyNotifier(this);
         }
 
         protected ModalDialogBase(IServiceProvider serviceProvider)
         {
+            this.Notifier = new PropertyNotifier(this);
             this.ServiceProvider = serviceProvider;
         }
 
@@ -56,10 +58,9 @@ namespace Ntreev.ModernUI.Framework
 
         public void BeginProgress(string message)
         {
-            this.isProgressing = true;
-            this.progressMessage = message;
-            this.NotifyOfPropertyChange(nameof(this.IsProgressing));
-            this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
+            this.Notifier.SetField(ref this.isProgressing, true, nameof(IsProgressing));
+            this.Notifier.SetField(ref this.progressMessage, message, nameof(ProgressMessage));
+            this.Notifier.Notify();
         }
 
         public void EndProgress()
@@ -69,10 +70,9 @@ namespace Ntreev.ModernUI.Framework
 
         public void EndProgress(string message)
         {
-            this.isProgressing = false;
-            this.progressMessage = message;
-            this.NotifyOfPropertyChange(nameof(this.IsProgressing));
-            this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
+            this.Notifier.SetField(ref this.isProgressing, false, nameof(IsProgressing));
+            this.Notifier.SetField(ref this.progressMessage, message, nameof(ProgressMessage));
+            this.Notifier.Notify();
         }
 
         public bool IsProgressing
@@ -80,8 +80,8 @@ namespace Ntreev.ModernUI.Framework
             get => this.isProgressing;
             set
             {
-                this.isProgressing = value;
-                this.NotifyOfPropertyChange(nameof(this.IsProgressing));
+                this.Notifier.SetField(ref this.isProgressing, value, nameof(IsProgressing));
+                this.Notifier.Notify();
             }
         }
 
@@ -90,8 +90,8 @@ namespace Ntreev.ModernUI.Framework
             get => this.progressMessage ?? string.Empty;
             set
             {
-                this.progressMessage = value;
-                this.NotifyOfPropertyChange(nameof(this.ProgressMessage));
+                this.Notifier.SetField(ref this.progressMessage, value, nameof(ProgressMessage));
+                this.Notifier.Notify();
             }
         }
 
@@ -100,15 +100,15 @@ namespace Ntreev.ModernUI.Framework
             get => this.result;
             set
             {
-                this.result = value;
-                this.NotifyOfPropertyChange(nameof(Result));
+                this.Notifier.SetField(ref this.result, value, nameof(ProgressMessage));
+                this.Notifier.Notify();
             }
         }
 
         public override async Task TryCloseAsync(bool? dialogResult = null)
         {
             this.dialogResult = dialogResult;
-            await base.TryCloseAsync(null);
+            await base.TryCloseAsync(dialogResult);
         }
 
         public Dispatcher Dispatcher => Application.Current.Dispatcher;
@@ -123,15 +123,7 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        protected override void OnViewLoaded(object view)
-        {
-            base.OnViewLoaded(view);
-        }
-
-        protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
-        {
-            return base.OnDeactivateAsync(close, cancellationToken);
-        }
+        protected PropertyNotifier Notifier { get; }
 
         protected IServiceProvider ServiceProvider { get; }
     }

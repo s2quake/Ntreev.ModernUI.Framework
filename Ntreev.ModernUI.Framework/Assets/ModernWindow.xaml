@@ -108,7 +108,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     </Grid>
                                 </AdornerDecorator>
                             </Border>
-                            <Border x:Name="activeBorder" BorderBrush="{DynamicResource WindowBorderActive}" BorderThickness="1" Visibility="Hidden" />
+                            <Border x:Name="ActiveBorder" BorderBrush="{DynamicResource WindowBorderActive}" BorderThickness="1" Visibility="Hidden" />
                         </Grid>
                     </Border>
 
@@ -128,7 +128,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="activeBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ActiveBorder" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

@@ -16,9 +16,11 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework
@@ -57,9 +59,12 @@ namespace Ntreev.ModernUI.Framework
             get => this.isModified;
             set
             {
-                this.isModified = value;
-                this.NotifyOfPropertyChange(nameof(this.IsModified));
-                this.NotifyOfPropertyChange(nameof(this.DisplayName));
+                this.Notifier.SetField(ref this.isModified, value, new string[]
+                {
+                    nameof(this.IsModified), 
+                    nameof(this.DisplayName)
+                });
+                this.Notifier.Notify();
             }
         }
 
@@ -71,7 +76,7 @@ namespace Ntreev.ModernUI.Framework
                     return base.DisplayName + "*";
                 return base.DisplayName;
             }
-            set { base.DisplayName = value; }
+            set => base.DisplayName = value;
         }
 
         public event EventHandler Disposed;

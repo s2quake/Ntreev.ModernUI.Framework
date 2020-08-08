@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
              xmlns:nmfp="clr-namespace:Ntreev.ModernUI.Framework.Properties"
              mc:Ignorable="d" MinWidth="250">
 
@@ -107,6 +108,7 @@
         </Style>
 
         <Style x:Key="ContentControlImage_Style" TargetType="{x:Type ContentControl}">
+            <Setter Property="Content" Value="{StaticResource Error_Image}" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Image}" Value="None">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -138,45 +140,6 @@
             </Style.Triggers>
         </Style>
 
-        <!--<ControlTemplate x:Key="MessageBoxView_Template" TargetType="{x:Type views:MessageBoxView1}">
-            
-            <ControlTemplate.Triggers>
-                <Trigger Property="Button" Value="OK">
-                    <Setter TargetName="PART_OK" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="PART_Yes" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="PART_No" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="PART_Cancel" Property="Visibility" Value="Collapsed" />
-                </Trigger>
-                <Trigger Property="Button" Value="OKCancel">
-                    <Setter TargetName="PART_OK" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="PART_Yes" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="PART_No" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="PART_Cancel" Property="Visibility" Value="Visible" />
-                </Trigger>
-                <Trigger Property="Button" Value="YesNoCancel">
-                    <Setter TargetName="PART_OK" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="PART_Yes" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="PART_No" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="PART_Cancel" Property="Visibility" Value="Visible" />
-                </Trigger>
-                <Trigger Property="Button" Value="YesNo">
-                    <Setter TargetName="PART_OK" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="PART_Yes" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="PART_No" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="PART_Cancel" Property="Visibility" Value="Collapsed" />
-                </Trigger>
-                
-            </ControlTemplate.Triggers>
-        </ControlTemplate>-->
-
-        <!--<Style TargetType="{x:Type views:MessageBoxView1}">
-            <Setter Property="Template" Value="{StaticResource MessageBoxView_Template}" />
-            <Setter Property="MinWidth" Value="250" />
-            <Setter Property="MaxWidth" Value="375" />
-            <Setter Property="Message" Value="{Binding Message}" />
-            <Setter Property="Image" Value="{Binding Image}" />
-            <Setter Property="Button" Value="{Binding Button}" />
-        </Style>-->
     </UserControl.Resources>
 
     <Grid>
@@ -185,7 +148,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <DockPanel Margin="10 10 10 0" Grid.Row="0">
-            <Viewbox Width="57" Height="57" x:Name="viewBox">
+            <Viewbox Width="57" Height="57" x:Name="ViewBox">
                 <ContentControl x:Name="Image" Style="{StaticResource ContentControlImage_Style}" />
             </Viewbox>
             <TextBlock Text="{Binding Message}" Margin="5,14" TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Left" />

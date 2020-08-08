@@ -34,9 +34,9 @@ namespace Ntreev.ModernUI.Shell.Contents.Views
             {
                 //if (this.editor.ApplyTemplate() == true)
                 {
-                    this.editor.Focus();
-                    this.editor.AppendLine("안녕하세요.");
-                    this.editor.Prompt = "c:> ";
+                    this.Editor.Focus();
+                    this.Editor.AppendLine("안녕하세요.");
+                    this.Editor.Prompt = "c:> ";
                 }
             });
         }

@@ -73,7 +73,7 @@ namespace Ntreev.ModernUI.Framework
             else
             {
                 window = isDialog == true ? new DialogWindow() : new Window();
-                window.Content = new DialogContentControl() { Content = view, };
+                window.Content = view;
                 window.SetValue(View.IsGeneratedProperty, true);
 
                 var owner = this.InferOwnerOf(window);
@@ -98,7 +98,6 @@ namespace Ntreev.ModernUI.Framework
                         if (window is DialogWindow dialogWindow)
                         {
                             dialogWindow.Dispatcher.InvokeAsync(() => dialogWindow.IsEnsured = true);
-                            //dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
                         }
                     };
                 }

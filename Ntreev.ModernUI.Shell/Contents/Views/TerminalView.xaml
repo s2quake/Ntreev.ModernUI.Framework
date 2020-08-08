@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <nmfc:TerminalControl x:Name="editor" Executed="Editor_Executed" Loaded="Editor_Loaded" />
+    <nmfc:TerminalControl x:Name="Editor" Executed="Editor_Executed" Loaded="Editor_Loaded" />
 
 </UserControl>

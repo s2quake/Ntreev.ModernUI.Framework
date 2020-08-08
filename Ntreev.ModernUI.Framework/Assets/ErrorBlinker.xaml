@@ -34,7 +34,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ErrorBlinker}}}" Value="True">
                             <DataTrigger.EnterActions>
-                                <BeginStoryboard x:Name="blink" Storyboard="{StaticResource ErrorBlinker_Storyboard}" />
+                                <BeginStoryboard x:Name="Blink" Storyboard="{StaticResource ErrorBlinker_Storyboard}" />
                             </DataTrigger.EnterActions>
                         </DataTrigger>
                     </Style.Triggers>
@@ -45,31 +45,31 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <ControlTemplate x:Key="ImageErrorBlinker_ControlTemplate" TargetType="{x:Type nmfc:ErrorBlinker}">
         <Grid>
-            <Rectangle x:Name="rect" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
+            <Rectangle x:Name="Rect" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
                 <Rectangle.Style>
                     <Style TargetType="{x:Type Rectangle}">
                         <Setter Property="Opacity" Value="0" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ErrorBlinker}}}" Value="True">
                                 <DataTrigger.EnterActions>
-                                    <BeginStoryboard x:Name="blink" Storyboard="{StaticResource ErrorBlinker_Storyboard}" />
+                                    <BeginStoryboard x:Name="Blink" Storyboard="{StaticResource ErrorBlinker_Storyboard}" />
                                 </DataTrigger.EnterActions>
                             </DataTrigger>
                             <!--<DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ErrorBlinker}}}" Value="False">
                             <DataTrigger.EnterActions>
-                                <StopStoryboard  BeginStoryboardName="blink" />
+                                <StopStoryboard  BeginStoryboardName="Blink" />
                             </DataTrigger.EnterActions>
                         </DataTrigger>-->
                         </Style.Triggers>
                     </Style>
                 </Rectangle.Style>
             </Rectangle>
-            <Image x:Name="image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" Stretch="None" Margin="0 0 4 0"
+            <Image x:Name="Image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" Stretch="None" Margin="0 0 4 0"
                    ToolTip="{TemplateBinding ErrorContent}" HorizontalAlignment="Right" />
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Opacity, ElementName=rect}" Value="0">
-                <Setter TargetName="image" Property="Visibility" Value="Hidden" />
+            <DataTrigger Binding="{Binding Opacity, ElementName=Rect}" Value="0">
+                <Setter TargetName="Image" Property="Visibility" Value="Hidden" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

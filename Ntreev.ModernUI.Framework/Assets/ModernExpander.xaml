@@ -29,14 +29,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=(nmfc:ProgressUtility.IsProgressing), RelativeSource={RelativeSource AncestorType={x:Type nmfc:ModernExpander}}}" Value="True">
                 <DataTrigger.EnterActions>
-                    <BeginStoryboard Name="opacityAnim">
+                    <BeginStoryboard Name="OpacityAnim">
                         <Storyboard>
                             <DoubleAnimation BeginTime="0:0:0.0" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:0.5" />
                         </Storyboard>
                     </BeginStoryboard>
                 </DataTrigger.EnterActions>
                 <DataTrigger.ExitActions>
-                    <StopStoryboard BeginStoryboardName="opacityAnim" />
+                    <StopStoryboard BeginStoryboardName="OpacityAnim" />
                 </DataTrigger.ExitActions>
             </DataTrigger>
             <Trigger Property="Opacity" Value="0">
@@ -91,7 +91,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <StackPanel Grid.Row="1">
                     <Border x:Name="Content" Grid.Row="1" Padding="1">
                         <Grid>
-                            <ContentPresenter x:Name="contentPresenter" Height="80" />
+                            <ContentPresenter x:Name="ContentPresenter" Height="80" />
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -126,7 +126,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             </Trigger.ExitActions>
                         </Trigger>-->
             <Trigger Property="nmfc:ProgressUtility.IsProgressing" Value="False">
-                <Setter TargetName="contentPresenter" Property="Height" Value="NaN" />
+                <Setter TargetName="ContentPresenter" Property="Height" Value="NaN" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

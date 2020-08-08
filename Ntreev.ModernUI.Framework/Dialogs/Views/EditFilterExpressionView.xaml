@@ -30,7 +30,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="filter" Grid.Row="1" Text="{Binding FilterExpressions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" />
+        <TextBox x:Name="Filter" Grid.Row="1" Text="{Binding FilterExpressions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" />
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="Close" Content="{x:Static p:Resources.Button_OK}" Padding="8 4" Style="{DynamicResource Dialog_Button_Style}" />
         </StackPanel>

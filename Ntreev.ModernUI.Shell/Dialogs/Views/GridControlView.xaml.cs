@@ -23,14 +23,12 @@ namespace Ntreev.ModernUI.Shell.Dialogs.Views
             InitializeComponent();
         }
 
-        private void GridControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (this.OK.IsEnabled == true && e.ChangedButton == MouseButton.Left)
+            {
+                this.OK.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, this.OK));
+            }
         }
     }
 }

@@ -21,10 +21,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
 
     <DataTemplate x:Key="HeaderedContentControl_HeaderTemplate">
-        <Label x:Name="label" Content="{Binding}" Target="{Binding Path=(nmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
+        <Label x:Name="Label" Content="{Binding}" Target="{Binding Path=(nmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Path=(nmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" Value="{x:Null}">
-                <Setter TargetName="label" Property="Target" Value="{Binding Path=Content, RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
+                <Setter TargetName="Label" Property="Target" Value="{Binding Path=Content, RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

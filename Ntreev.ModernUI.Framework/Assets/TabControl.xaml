@@ -59,7 +59,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TabItem}">
                             <Border Background="{TemplateBinding Background}" Margin="0,0,1,0" SnapsToDevicePixels="True" Padding="2">
-                                <ContentPresenter x:Name="header" ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ContentPresenter x:Name="Header" ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
@@ -133,7 +133,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <ControlTemplate x:Key="TabControl_Template" TargetType="{x:Type TabControl}">
-        <Grid x:Name="templateRoot" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+        <Grid x:Name="TemplateRoot" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="ColumnDefinition0"/>
                 <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
@@ -208,7 +208,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="TextElement.Foreground" TargetName="TemplateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -238,7 +238,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TabItem}">
                             <Border Padding="{TemplateBinding Margin}">
-                                <ContentPresenter x:Name="header" ContentSource="Header" 
+                                <ContentPresenter x:Name="Header" ContentSource="Header" 
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
