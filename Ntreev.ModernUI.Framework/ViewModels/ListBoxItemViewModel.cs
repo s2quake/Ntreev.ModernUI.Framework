@@ -80,14 +80,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public object Owner { get; set; }
 
-        public bool IsDebug =>
-#if DEBUG
-                true;
-#else
-                return false;
-#endif
-
-
         public bool CaseSensitive
         {
             get => this.caseSensitive;

@@ -91,14 +91,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             }
         }
 
-        public bool IsDebug =>
-#if DEBUG
-                true;
-#else
-                return false;
-#endif
-
-
         public bool CaseSensitive
         {
             get => this.caseSensitive;
