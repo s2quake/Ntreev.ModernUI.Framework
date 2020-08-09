@@ -37,7 +37,7 @@ namespace Ntreev.ModernUI.Framework.Converters
             var enumFlag = (Enum)Enum.Parse(enumValue.GetType(), this.FlagValue);
             if (enumFlag == null)
                 return false;
-                 
+
             return enumValue.HasFlag(enumFlag);
         }
 
@@ -48,8 +48,8 @@ namespace Ntreev.ModernUI.Framework.Converters
 
         public string FlagValue
         {
-            get { return this.flagValue ?? string.Empty; }
-            set { this.flagValue = value; }
+            get => this.flagValue ?? string.Empty;
+            set => this.flagValue = value;
         }
     }
 }

@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
-    [TemplatePart(Name = "PART_InsertButton", Type = typeof(Button))]
-    [TemplatePart(Name = "PART_InsertManyButton", Type = typeof(Button))]
+    [TemplatePart(Name = PART_InsertButton, Type = typeof(Button))]
+    [TemplatePart(Name = PART_InsertManyButton, Type = typeof(Button))]
     public class ModernInsertionRow : Control
     {
-        private Button insertionButton;
-        private Button insertionManyButton;
+        public const string PART_InsertButton = nameof(PART_InsertButton);
+        public const string PART_InsertManyButton = nameof(PART_InsertManyButton);
 
         public static readonly DependencyProperty InsertCommandProperty =
             DependencyProperty.Register(nameof(InsertCommand), typeof(ICommand), typeof(ModernInsertionRow));
@@ -27,14 +21,9 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             DependencyProperty.Register(nameof(ColumnManagerRow), typeof(ModernColumnManagerRow), typeof(ModernInsertionRow),
                 new UIPropertyMetadata(ColumnManagerRowPropertyChangedCallback));
 
-        
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            this.insertionButton = this.Template.FindName("PART_InsertButton", this) as Button;
-            this.insertionManyButton = this.Template.FindName("PART_InsertManyButton", this) as Button;
         }
 
         public ICommand InsertCommand
@@ -57,8 +46,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         private static void ColumnManagerRowPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            
         }
     }
 }
-

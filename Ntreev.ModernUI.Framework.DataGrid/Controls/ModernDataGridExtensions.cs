@@ -18,8 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
@@ -38,8 +36,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             if (gridContext.CurrentItem == null || gridContext.CurrentColumn == null)
                 return null;
 
-            var row = gridContext.GetContainerFromItem(gridContext.CurrentItem) as ModernDataRow;
-            if (row == null)
+            if (!(gridContext.GetContainerFromItem(gridContext.CurrentItem) is ModernDataRow row))
                 return null;
 
             return row.Cells[gridContext.CurrentColumn] as ModernDataCell;
@@ -87,7 +84,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             }
         }
 
-        public static IEnumerable<string> EnumerateFields(this DataGridContext gridContext, object item, SelectionRange columnRange)
+        public static IEnumerable<string> EnumerateFields(this DataGridContext gridContext, SelectionRange columnRange)
         {
             var startIndex = Math.Min(columnRange.StartIndex, columnRange.EndIndex);
             var endIndex = Math.Max(columnRange.StartIndex, columnRange.EndIndex);
@@ -204,7 +201,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
             if (ignoreChilds == false)
             {
-                
+
             }
 
             if (gridContext.Items.Count <= nextIndex)
@@ -231,7 +228,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
             if (ignoreChilds == false)
             {
-                
+
             }
 
             if (prevIndex < 0)
@@ -262,7 +259,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             {
                 yield return item;
 
-                
+
             }
 
             foreach (var item in gridContext.Footers)
@@ -282,7 +279,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             {
                 yield return new ModernItemInfo() { GridContext = gridContext, Item = item, };
 
-                
+
             }
 
             foreach (var item in gridContext.Footers)

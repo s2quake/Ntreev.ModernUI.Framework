@@ -19,8 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using Xceed.Wpf.DataGrid;
@@ -30,30 +28,20 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
     public class ModernTextClipboardParser
     {
         private readonly DataGridContext gridContext;
-        private ColumnBase[] columns;
-        private object[] targetItems;
-        private List<string[]> rows;
-
-        private string tableName;
-        private string[] columnNames;
-        private PropertyDescriptorCollection props;
-
-        private List<object[]> fieldRows;
+        private readonly string[] columnNames;
+        private readonly PropertyDescriptorCollection props;
 
         public ModernTextClipboardParser(DataGridContext gridContext)
         {
             this.gridContext = gridContext;
-            this.columns = gridContext.Columns.ToArray();
+            this.Columns = gridContext.Columns.ToArray();
 
-
-            var typedList = gridContext.Items.SourceCollection as ITypedList;
-            if (typedList == null)
+            if (!(gridContext.Items.SourceCollection is ITypedList typedList))
             {
                 var source = (gridContext.Items.SourceCollection as CollectionView).SourceCollection;
                 typedList = source as ITypedList;
             }
 
-            this.tableName = typedList.GetListName(null);
             this.props = typedList.GetItemProperties(null);
             this.columnNames = new string[props.Count];
             for (var i = 0; i < props.Count; i++)
@@ -65,45 +53,25 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         public static ModernTextClipboardParser Parse(DataGridContext gridContext)
         {
             var parser = new ModernTextClipboardParser(gridContext);
-            parser.ParseCore(true);
+            parser.ParseCore();
             return parser;
         }
 
-        public ColumnBase[] Columns
-        {
-            get { return this.columns; }
-            set { this.columns = value; }
-        }
+        public ColumnBase[] Columns { get; set; }
 
-        public List<string[]> Rows
-        {
-            get { return this.rows; }
-        }
+        public List<string[]> Rows { get; private set; }
 
-        public object[] TargetItems
-        {
-            get { return this.targetItems; }
-            set { this.targetItems = value; }
-        }
+        public object[] TargetItems { get; set; }
 
-        public void FromString()
-        {
-            this.fieldRows = new List<object[]>(this.rows);
-
-
-
-        }
-
-        public void ParseCore(bool b)
+        public void ParseCore()
         {
             var rows = this.GetLines(Clipboard.GetText());
-
-            var hasHeader = rows.Count > 1 ? this.ExistsHeader(rows[0]) : false;
+            var hasHeader = rows.Count > 1 && this.ExistsHeader(rows[0]);
 
             if (hasHeader == true)
             {
-                var titleToColumn = this.columns.ToDictionary(item => item.Title);
-                var columns = new List<ColumnBase>(this.columns.Length);
+                var titleToColumn = this.Columns.ToDictionary(item => item.Title);
+                var columns = new List<ColumnBase>(this.Columns.Length);
                 foreach (var item in rows[0])
                 {
                     var column = titleToColumn[item];
@@ -113,7 +81,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                     }
                     columns.Add(column);
                 }
-                this.columns = columns.ToArray();
+                this.Columns = columns.ToArray();
                 rows.RemoveAt(0);
             }
             else
@@ -131,15 +99,15 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                     }
                     columns.Add(column);
                 }
-                this.columns = columns.ToArray();
+                this.Columns = columns.ToArray();
             }
 
-            this.rows = rows;
+            this.Rows = rows;
         }
 
         private bool ExistsHeader(string[] fields)
         {
-            var titleToColumn = this.columns.ToDictionary(item => item.Title);
+            var titleToColumn = this.Columns.ToDictionary(item => item.Title);
 
             foreach (var item in fields)
             {
@@ -194,7 +162,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 if (text.First() == '\"' && text.Last() == '\"')
                 {
                     text = text.Substring(1);
-                    text = text.Substring(0, text.Length - 1);
+                    text = text[0..^1];
                 }
                 text = text.Replace("\"\"", "\"");
             }
@@ -213,8 +181,8 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         public void SelectRange()
         {
             var columnIndex = this.gridContext.VisibleColumns.IndexOf(this.gridContext.CurrentColumn);
-            var itemRange = new SelectionRange(this.gridContext.CurrentItemIndex, this.gridContext.CurrentItemIndex + this.rows.Count - 1);
-            var columnRange = new SelectionRange(columnIndex, columnIndex + this.columns.Length - 1);
+            var itemRange = new SelectionRange(this.gridContext.CurrentItemIndex, this.gridContext.CurrentItemIndex + this.Rows.Count - 1);
+            var columnRange = new SelectionRange(columnIndex, columnIndex + this.Columns.Length - 1);
             this.gridContext.SelectedCellRanges.Clear();
             this.gridContext.SelectedCellRanges.Add(new SelectionCellRange(itemRange, columnRange));
         }

@@ -16,11 +16,9 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Framework
@@ -32,7 +30,7 @@ namespace Ntreev.ModernUI.Framework
         protected DocumentBase()
             : this(null)
         {
-            
+
         }
 
         protected DocumentBase(IServiceProvider serviceProvider)
@@ -61,7 +59,7 @@ namespace Ntreev.ModernUI.Framework
             {
                 this.Notifier.SetField(ref this.isModified, value, new string[]
                 {
-                    nameof(this.IsModified), 
+                    nameof(this.IsModified),
                     nameof(this.DisplayName)
                 });
                 this.Notifier.Notify();
@@ -123,7 +121,7 @@ namespace Ntreev.ModernUI.Framework
             base.OnViewReady(view);
         }
 
-        private async  void CloseCommand_Execute(object obj)
+        private async void CloseCommand_Execute(object obj)
         {
             var save = false;
             if (this.IsModified == true)

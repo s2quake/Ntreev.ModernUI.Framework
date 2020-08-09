@@ -15,14 +15,8 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Controls;
 using Ntreev.ModernUI.Framework.DataGrid.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
@@ -51,20 +45,20 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Markup
 
         public object TargetNullValue
         {
-            get { return this.binding.TargetNullValue; }
-            set { this.binding.TargetNullValue = value; }
+            get => this.binding.TargetNullValue;
+            set => this.binding.TargetNullValue = value;
         }
 
         public IValueConverter Converter
         {
-            get { return this.binding.Converter; }
-            set { this.binding.Converter = value; }
+            get => this.binding.Converter;
+            set => this.binding.Converter = value;
         }
 
         public string StringFormat
         {
-            get { return this.binding.StringFormat; }
-            set { this.binding.StringFormat = value; }
+            get => this.binding.StringFormat;
+            set => this.binding.StringFormat = value;
         }
     }
 }

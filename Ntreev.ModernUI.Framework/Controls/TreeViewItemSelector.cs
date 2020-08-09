@@ -159,10 +159,7 @@ namespace Ntreev.ModernUI.Framework.Controls
                 this.Target = item;
             }
 
-            public string Path
-            {
-                get { return TreeViewItemViewModel.BuildPath(this); }
-            }
+            public string Path => TreeViewItemViewModel.BuildPath(this);
 
             public override string DisplayName
             {

@@ -24,21 +24,21 @@ using System.Windows.Markup;
 
 namespace Ntreev.ModernUI.Framework.Markup
 {
-    [MarkupExtensionReturnType(typeof(Visibility))]
-    public class VisibilityBindingExtension : MarkupExtension
+    [MarkupExtensionReturnType(typeof(DateTime))]
+    public class DateTimeBindingExtension : MarkupExtension
     {
-        private readonly BooleanToVisibilityConverter converter;
+        private readonly ContentToStringConverter converter;
         private readonly Binding binding;
 
-        public VisibilityBindingExtension()
+        public DateTimeBindingExtension()
             : this(null)
         {
 
         }
 
-        public VisibilityBindingExtension(string path)
+        public DateTimeBindingExtension(string path)
         {
-            this.converter = new BooleanToVisibilityConverter();
+            this.converter = new ContentToStringConverter();
             this.binding = new Binding()
             {
                 Converter = converter,
@@ -58,18 +58,6 @@ namespace Ntreev.ModernUI.Framework.Markup
         {
             get => this.binding.Path;
             set => this.binding.Path = value;
-        }
-
-        public bool Inverse
-        {
-            get => this.converter.IsInversed;
-            set => this.converter.IsInversed = value;
-        }
-
-        public bool IsHidden
-        {
-            get => this.converter.IsHidden;
-            set => this.converter.IsHidden = value;
         }
 
         public string ElementName

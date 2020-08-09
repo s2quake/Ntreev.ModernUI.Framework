@@ -19,9 +19,15 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class UndoBase : IUndo
     {
-        public void Redo() => this.OnRedo();
+        public void Redo()
+        {
+            this.OnRedo();
+        }
 
-        public void Undo() => this.OnUndo();
+        public void Undo()
+        {
+            this.OnUndo();
+        }
 
         protected abstract void OnRedo();
 

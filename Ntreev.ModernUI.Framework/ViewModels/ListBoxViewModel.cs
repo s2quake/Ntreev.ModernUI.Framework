@@ -36,7 +36,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
         public ListBoxViewModel()
             : this(null)
         {
-            
+
         }
 
         public ListBoxViewModel(IServiceProvider serviceProvider)
@@ -163,7 +163,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                     {
                         foreach (var item in e.NewItems)
                         {
-                            
+
                         }
                     }
                     break;

@@ -15,20 +15,15 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Caliburn.Micro;
 using Ntreev.Library.Linq;
 using Ntreev.ModernUI.Framework.Converters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,7 +32,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
-using Xceed.Wpf.DataGrid.Export;
 using Xceed.Wpf.DataGrid.Views;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
@@ -102,12 +96,9 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         private static readonly List<Color> colors = new List<Color>();
 
-        private ScrollViewer scrollViewer;
         private DataGridContext selectedGridContext;
         private SelectionRange selectedColumnRange;
         private SelectionRange selectedItemRange;
-        private SelectedFlags selectedFlags;
-
         private DataGridContext currentContext;
 
         private static Point dragPoint;
@@ -286,38 +277,32 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             this.NextMatchedItem(false);
         }
 
-        public SelectedFlags SelectedFlags
-        {
-            get { return this.selectedFlags; }
-        }
+        public SelectedFlags SelectedFlags { get; private set; }
 
         public string SearchText
         {
-            get { return (string)this.GetValue(SearchTextProperty); }
-            set { this.SetValue(SearchTextProperty, value); }
+            get => (string)this.GetValue(SearchTextProperty);
+            set => this.SetValue(SearchTextProperty, value);
         }
 
-        public bool HasSearchText
-        {
-            get { return (bool)this.GetValue(HasSearchTextProperty); }
-        }
+        public bool HasSearchText => (bool)this.GetValue(HasSearchTextProperty);
 
         public bool IsVerticalScrollBarOnLeftSide
         {
-            get { return (bool)this.GetValue(IsVerticalScrollBarOnLeftSideProperty); }
-            set { this.SetValue(IsVerticalScrollBarOnLeftSideProperty, value); }
+            get => (bool)this.GetValue(IsVerticalScrollBarOnLeftSideProperty);
+            set => this.SetValue(IsVerticalScrollBarOnLeftSideProperty, value);
         }
 
         public bool AllowRowDrag
         {
-            get { return (bool)this.GetValue(AllowRowDragProperty); }
-            set { this.SetValue(AllowRowDragProperty, value); }
+            get => (bool)this.GetValue(AllowRowDragProperty);
+            set => this.SetValue(AllowRowDragProperty, value);
         }
 
         public void Select(DataGridContext gridContext, object item)
         {
             this.ClearSelection();
-            this.selectedFlags = SelectedFlags.Row;
+            this.SelectedFlags = SelectedFlags.Row;
             this.selectedItemRange = new SelectionRange(gridContext.Items.IndexOf(item));
             this.selectedGridContext = gridContext;
             this.selectedGridContext.SelectedCellRanges.Add(new SelectionCellRange(this.selectedItemRange.StartIndex, 0, this.selectedItemRange.EndIndex, gridContext.VisibleColumns.Count - 1));
@@ -334,7 +319,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
             this.ClearSelection();
             this.SelectionUnit = SelectionUnit.Cell;
-            this.selectedFlags = SelectedFlags.Row | Controls.SelectedFlags.Multiple;
+            this.SelectedFlags = SelectedFlags.Row | Controls.SelectedFlags.Multiple;
             this.selectedItemRange.EndIndex = gridContext.Items.IndexOf(item);
             this.selectedGridContext = gridContext;
             this.selectedGridContext.SelectedCellRanges.Add(new SelectionCellRange(this.selectedItemRange.StartIndex, 0, this.selectedItemRange.EndIndex, gridContext.VisibleColumns.Count - 1));
@@ -346,7 +331,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             if (this.selectedGridContext != gridContext)
                 return;
 
-            this.selectedFlags |= (SelectedFlags.Row | SelectedFlags.Multiple);
+            this.SelectedFlags |= (SelectedFlags.Row | SelectedFlags.Multiple);
             this.selectedItemRange = new SelectionRange(gridContext.Items.IndexOf(item));
             this.selectedGridContext = gridContext;
             this.selectedGridContext.SelectedCellRanges.Add(new SelectionCellRange(this.selectedItemRange.StartIndex, 0, this.selectedItemRange.EndIndex, gridContext.VisibleColumns.Count - 1));
@@ -363,7 +348,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 }
             }
             base.OnApplyTemplate();
-            this.scrollViewer = (ScrollViewer)this.Template.FindName("PART_ScrollViewer", this);
         }
 
         protected override void OnDeleteExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -912,7 +896,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             return null;
         }
 
-        internal bool Match(DataGridContext gridContext, object item, string fieldName)
+        internal bool Match(DataGridContext _, object item, string fieldName)
         {
             if (this.contentToStringConverter == null)
             {
@@ -940,7 +924,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             {
                 if (this.selectedGridContext != null)
                 {
-                    this.selectedFlags = SelectedFlags.None;
+                    this.SelectedFlags = SelectedFlags.None;
                     this.selectedGridContext.SelectedCellRanges.Clear();
                     this.selectedGridContext.SelectedItemRanges.Clear();
                 }
@@ -949,7 +933,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
                 if (this.selectedGridContext.Items.Count > 0)
                 {
-                    this.selectedFlags = SelectedFlags.All;
+                    this.SelectedFlags = SelectedFlags.All;
                     this.selectedGridContext.SelectedCellRanges.Add(new SelectionCellRange(0, 0, this.selectedGridContext.Items.Count - 1, this.selectedGridContext.Columns.Count - 1));
                     if (this.selectedGridContext.CurrentItem == null)
                         this.selectedGridContext.CurrentItem = this.selectedGridContext.Items.GetItemAt(0);
@@ -971,7 +955,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var index = column.ParentColumn.VisiblePosition;
 
             this.ClearSelection();
-            this.selectedFlags = SelectedFlags.Column;
+            this.SelectedFlags = SelectedFlags.Column;
             this.selectedItemRange = new SelectionRange(gridContext.CurrentItemIndex);
             this.selectedColumnRange = new SelectionRange(index);
             this.selectedGridContext = gridContext;
@@ -992,7 +976,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 return;
 
             this.ClearSelection();
-            this.selectedFlags = SelectedFlags.Column;
+            this.SelectedFlags = SelectedFlags.Column;
             this.selectedColumnRange.EndIndex = column.ParentColumn.VisiblePosition;
             this.selectedGridContext = gridContext;
             this.selectedGridContext.SelectedCellRanges.Add(new SelectionCellRange(0, this.selectedColumnRange.StartIndex, gridContext.Items.Count - 1, this.selectedColumnRange.EndIndex));
@@ -1005,7 +989,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             if (this.selectedGridContext != gridContext)
                 return;
 
-            this.selectedFlags |= SelectedFlags.Column;
+            this.SelectedFlags |= SelectedFlags.Column;
             this.NavigationBehavior = NavigationBehavior.None;
             var index = column.ParentColumn.VisiblePosition;
             this.selectedColumnRange = new SelectionRange(index);
@@ -1021,7 +1005,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             if (this.selectedGridContext != gridContext)
                 return;
 
-            this.selectedFlags |= SelectedFlags.Column;
+            this.SelectedFlags |= SelectedFlags.Column;
             this.SelectionUnit = SelectionUnit.Cell;
             this.selectedColumnRange.EndIndex = column.ParentColumn.VisiblePosition;
             this.selectedGridContext = gridContext;
@@ -1040,7 +1024,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var row = cell.DataContext;
 
             //this.ClearSelection();
-            this.selectedFlags = SelectedFlags.Cell | SelectedFlags.Multiple;
+            this.SelectedFlags = SelectedFlags.Cell | SelectedFlags.Multiple;
             this.selectedItemRange.EndIndex = gridContext.Items.IndexOf(cell.DataContext);
             this.selectedColumnRange.EndIndex = gridContext.Columns[cell.FieldName].VisiblePosition;
             this.selectedGridContext = gridContext;
@@ -1059,7 +1043,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             var row = cell.DataContext;
 
             this.ClearSelection();
-            this.selectedFlags = SelectedFlags.Cell;
+            this.SelectedFlags = SelectedFlags.Cell;
             this.selectedItemRange = new SelectionRange(gridContext.Items.IndexOf(row));
             this.selectedColumnRange = new SelectionRange(column.VisiblePosition);
             this.selectedGridContext = gridContext;
@@ -1075,7 +1059,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             //this.NavigationBehavior = NavigationBehavior.None;
             var column = gridContext.Columns[cell.FieldName];
             var row = cell.DataContext;
-            this.selectedFlags |= SelectedFlags.Cell;
+            this.SelectedFlags |= SelectedFlags.Cell;
             this.selectedItemRange = new SelectionRange(gridContext.Items.IndexOf(row));
             this.selectedColumnRange = new SelectionRange(column.VisiblePosition);
             this.selectedItemRange.EndIndex = gridContext.Items.IndexOf(cell.DataContext);
@@ -1094,7 +1078,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         {
             if (this.selectedGridContext != null)
             {
-                this.selectedFlags = SelectedFlags.None;
+                this.SelectedFlags = SelectedFlags.None;
                 this.selectedGridContext.SelectedCellRanges.Clear();
                 this.selectedGridContext.SelectedItemRanges.Clear();
             }

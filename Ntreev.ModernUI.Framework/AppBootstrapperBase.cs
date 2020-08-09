@@ -47,7 +47,7 @@ namespace Ntreev.ModernUI.Framework
         protected AppBootstrapperBase(AppBootstrapperDescriptorBase descriptor)
         {
             this.descriptor = descriptor;
-            
+
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) == false)
             {
                 if (Current != null)

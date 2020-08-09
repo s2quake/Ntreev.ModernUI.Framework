@@ -46,7 +46,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         static ModernContextMenu()
         {
-            
+
         }
 
         public ModernContextMenu()

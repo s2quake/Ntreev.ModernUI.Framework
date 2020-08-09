@@ -16,14 +16,8 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Xceed.Wpf.DataGrid;
 
@@ -52,31 +46,19 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             selector.SetValue(IsDragOverProperty, value);
         }
 
-        public ModernDataGridControl GridControl
-        {
-            get { return (ModernDataGridControl)this.GridContext.DataGridControl; }
-        }
+        public ModernDataGridControl GridControl => (ModernDataGridControl)this.GridContext.DataGridControl;
 
-        public DataGridContext GridContext
-        {
-            get { return (DataGridContext)this.GetValue(DataGridControl.DataGridContextProperty); }
-        }
+        public DataGridContext GridContext => (DataGridContext)this.GetValue(DataGridControl.DataGridContextProperty);
 
         public bool IsDragOver
         {
-            get { return (bool)this.GetValue(IsDragOverProperty); }
-            set { this.SetValue(IsDragOverProperty, value); }
+            get => (bool)this.GetValue(IsDragOverProperty);
+            set => this.SetValue(IsDragOverProperty, value);
         }
 
-        public bool HasDataContextError
-        {
-            get { return ModernDataGridControl.GetHasDataContextError(this); }
-        }
+        public bool HasDataContextError => ModernDataGridControl.GetHasDataContextError(this);
 
-        public object DataContextError
-        {
-            get { return ModernDataGridControl.GetDataContextError(this); }
-        }
+        public object DataContextError => ModernDataGridControl.GetDataContextError(this);
 
         protected override void OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {

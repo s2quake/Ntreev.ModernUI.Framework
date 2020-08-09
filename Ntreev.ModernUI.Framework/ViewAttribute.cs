@@ -39,7 +39,7 @@ namespace Ntreev.ModernUI.Framework
 
         internal Type ViewType
         {
-            get 
+            get
             {
                 if (this.viewType == null)
                 {

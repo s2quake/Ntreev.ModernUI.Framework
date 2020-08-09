@@ -63,26 +63,26 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (consoleColor.HasValue == false)
                 return ForegroundKey;
-            switch (consoleColor.Value)
+            return consoleColor.Value switch
             {
-                case ConsoleColor.Black: return BlackForegroundKey;
-                case ConsoleColor.DarkBlue: return DarkBlueForegroundKey;
-                case ConsoleColor.DarkGreen: return DarkGreenForegroundKey;
-                case ConsoleColor.DarkCyan: return DarkCyanForegroundKey;
-                case ConsoleColor.DarkRed: return DarkRedForegroundKey;
-                case ConsoleColor.DarkMagenta: return DarkMagentaForegroundKey;
-                case ConsoleColor.DarkYellow: return DarkYellowForegroundKey;
-                case ConsoleColor.Gray: return GrayForegroundKey;
-                case ConsoleColor.DarkGray: return DarkGrayForegroundKey;
-                case ConsoleColor.Blue: return BlueForegroundKey;
-                case ConsoleColor.Green: return GreenForegroundKey;
-                case ConsoleColor.Cyan: return CyanForegroundKey;
-                case ConsoleColor.Red: return RedForegroundKey;
-                case ConsoleColor.Magenta: return MagentaForegroundKey;
-                case ConsoleColor.Yellow: return YellowForegroundKey;
-                case ConsoleColor.White: return WhiteForegroundKey;
-            }
-            throw new NotImplementedException();
+                ConsoleColor.Black => BlackForegroundKey,
+                ConsoleColor.DarkBlue => DarkBlueForegroundKey,
+                ConsoleColor.DarkGreen => DarkGreenForegroundKey,
+                ConsoleColor.DarkCyan => DarkCyanForegroundKey,
+                ConsoleColor.DarkRed => DarkRedForegroundKey,
+                ConsoleColor.DarkMagenta => DarkMagentaForegroundKey,
+                ConsoleColor.DarkYellow => DarkYellowForegroundKey,
+                ConsoleColor.Gray => GrayForegroundKey,
+                ConsoleColor.DarkGray => DarkGrayForegroundKey,
+                ConsoleColor.Blue => BlueForegroundKey,
+                ConsoleColor.Green => GreenForegroundKey,
+                ConsoleColor.Cyan => CyanForegroundKey,
+                ConsoleColor.Red => RedForegroundKey,
+                ConsoleColor.Magenta => MagentaForegroundKey,
+                ConsoleColor.Yellow => YellowForegroundKey,
+                ConsoleColor.White => WhiteForegroundKey,
+                _ => throw new NotImplementedException(),
+            };
         }
 
         public static ComponentResourceKey FindBackgroundKey(ConsoleColor? consoleColor)

@@ -16,20 +16,10 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
-using Xceed.Wpf.DataGrid.Views;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
@@ -49,29 +39,17 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public object EditingContent
         {
-            get { return (object)GetValue(EditingContentProperty); }
-            set { SetValue(EditingContentProperty, value); }
+            get => (object)GetValue(EditingContentProperty);
+            set => SetValue(EditingContentProperty, value);
         }
 
-        public bool HasDataContextError
-        {
-            get { return ModernDataGridControl.GetHasDataContextError(this); }
-        }
+        public bool HasDataContextError => ModernDataGridControl.GetHasDataContextError(this);
 
-        public object DataContextError
-        {
-            get { return ModernDataGridControl.GetDataContextError(this); }
-        }
+        public object DataContextError => ModernDataGridControl.GetDataContextError(this);
 
-        public ModernDataGridControl GridControl
-        {
-            get { return (ModernDataGridControl)this.GridContext.DataGridControl; }
-        }
+        public ModernDataGridControl GridControl => (ModernDataGridControl)this.GridContext.DataGridControl;
 
-        public DataGridContext GridContext
-        {
-            get { return (DataGridContext)this.GetValue(DataGridControl.DataGridContextProperty); }
-        }
+        public DataGridContext GridContext => (DataGridContext)this.GetValue(DataGridControl.DataGridContextProperty);
 
         public override void OnApplyTemplate()
         {

@@ -16,10 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -42,8 +38,8 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public TimeSpan? InternalValue
         {
-            get { return (TimeSpan?)this.GetValue(InternalValueProperty); }
-            set { this.SetValue(InternalValueProperty, value); }
+            get => (TimeSpan?)this.GetValue(InternalValueProperty);
+            set => this.SetValue(InternalValueProperty, value);
         }
 
         protected override void OnTextChanged(string previousValue, string currentValue)

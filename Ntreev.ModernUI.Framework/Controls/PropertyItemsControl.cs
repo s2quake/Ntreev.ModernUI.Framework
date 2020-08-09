@@ -98,10 +98,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             base.OnApplyTemplate();
         }
 
-        public double HeaderActualWidth
-        {
-            get { return (double)this.GetValue(HeaderActualWidthPropertyKey.DependencyProperty); }
-        }
+        public double HeaderActualWidth => (double)this.GetValue(HeaderActualWidthPropertyKey.DependencyProperty);
 
         [TypeConverter(typeof(GridLengthConverter))]
         public GridLength HeaderWidth

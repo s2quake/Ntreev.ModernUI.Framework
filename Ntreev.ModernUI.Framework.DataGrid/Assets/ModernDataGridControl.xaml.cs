@@ -15,14 +15,9 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Controls;
 using Ntreev.ModernUI.Framework.DataGrid.Controls;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -89,15 +84,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Assets
         private void Control_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
-        }
-
-        private void Control_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            var control = sender as HierarchicalGroupByItem;
-            var description = control.DataContext as GroupLevelDescription;
-            var gridContext = DataGridControl.GetDataGridContext(control);
-            var index = gridContext.GroupLevelDescriptions.IndexOf(description);
-            control.Background = new SolidColorBrush(Controls.ModernDataGridControl.GetColor(index)) { Opacity = 0.1f, };
         }
 
         private void GroupLevelIndicator_IsLoaded(object sender, RoutedEventArgs e)

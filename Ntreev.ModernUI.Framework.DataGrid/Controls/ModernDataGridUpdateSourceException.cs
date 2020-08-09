@@ -16,10 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
@@ -33,9 +29,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             this.cell = cell;
         }
 
-        public ModernDataCell Cell
-        {
-            get { return this.cell; }
-        }
+        public ModernDataCell Cell => this.cell;
     }
 }

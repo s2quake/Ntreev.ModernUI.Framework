@@ -16,18 +16,12 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
-using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
@@ -53,14 +47,14 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public ModernScrollBar ScrollBar
         {
-            get { return (ModernScrollBar)this.GetValue(ScrollBarProperty); }
-            set { this.SetValue(ScrollBarProperty, value); }
+            get => (ModernScrollBar)this.GetValue(ScrollBarProperty);
+            set => this.SetValue(ScrollBarProperty, value);
         }
 
         public Brush LineBrush
         {
-            get { return (Brush)this.GetValue(LineBrushProperty); }
-            set { this.SetValue(LineBrushProperty, value); }
+            get => (Brush)this.GetValue(LineBrushProperty);
+            set => this.SetValue(LineBrushProperty, value);
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -70,12 +64,8 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             if (this.filteredItems.Any() == false)
                 return;
 
-            var gridContext = Xceed.Wpf.DataGrid.DataGridControl.GetDataGridContext(this);
-            var pen = new Pen(this.LineBrush, 1);
-
             var rowHeight = this.ActualHeight / this.count;
             var rowWidth = (int)(this.ActualWidth * 0.4);
-
             foreach (var item in this.filteredItems)
             {
                 var y = (int)((rowHeight * item) + (rowHeight - itemHeight) * 0.5);
@@ -93,17 +83,6 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 var gridControl = gridContext.DataGridControl;
                 gridControl.PropertyChanged += GridControl_PropertyChanged;
             }
-        }
-
-        private static void ItemsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var self = d as ModernSearchedItems;
-            if (e.NewValue is INotifyCollectionChanged == true)
-            {
-                (e.NewValue as INotifyCollectionChanged).CollectionChanged += self.ModernFilteredItems_CollectionChanged;
-            }
-
-            self.InvalidateVisual();
         }
 
         private void ModernFilteredItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

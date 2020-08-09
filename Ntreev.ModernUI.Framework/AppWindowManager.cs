@@ -33,9 +33,21 @@ namespace Ntreev.ModernUI.Framework
 
         }
 
-        public override Task<bool?> ShowDialogAsync(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        public override async Task<bool?> ShowDialogAsync(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
-            return base.ShowDialogAsync(rootModel, context, settings);
+            if (Application.Current.Dispatcher.CheckAccess() == true)
+            {
+                return await base.ShowDialogAsync(rootModel, context, settings);
+            }
+            else
+            {
+                return await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    var task = base.ShowDialogAsync(rootModel, context, settings);
+                    task.Wait();
+                    return task.Result;
+                });
+            }
         }
 
         public static AppWindowManager Current { get; } = new AppWindowManager();
@@ -115,12 +127,10 @@ namespace Ntreev.ModernUI.Framework
         protected override async Task<Window> CreateWindowAsync(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
         {
             var window = await base.CreateWindowAsync(rootModel, isDialog, context, settings);
-
             if (window.Owner != null)
             {
                 window.ShowInTaskbar = false;
             }
-
             if (isDialog == true)
             {
                 if (rootModel is IModalDialog == true)
@@ -131,7 +141,6 @@ namespace Ntreev.ModernUI.Framework
                         window.Title = ((IModalDialog)rootModel).DisplayName;
                 }
             }
-
             return window;
         }
 

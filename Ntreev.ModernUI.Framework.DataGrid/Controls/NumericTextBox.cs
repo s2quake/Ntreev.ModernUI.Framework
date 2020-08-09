@@ -15,14 +15,8 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Xceed.Wpf.Toolkit;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
@@ -33,8 +27,8 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public NumberStyles NumberStyles
         {
-            get { return (NumberStyles)this.GetValue(NumberStylesProperty); }
-            set { this.SetValue(NumberStylesProperty, value); }
+            get => (NumberStyles)this.GetValue(NumberStylesProperty);
+            set => this.SetValue(NumberStylesProperty, value);
         }
     }
 }

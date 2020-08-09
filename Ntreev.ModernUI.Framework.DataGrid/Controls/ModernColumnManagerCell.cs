@@ -15,16 +15,10 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 
 namespace Ntreev.ModernUI.Framework.DataGrid.Controls
@@ -57,21 +51,20 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         public bool IsCurrentColumn
         {
-            get { return (bool)GetValue(IsCurrentColumnProperty); }
-            set { SetValue(IsCurrentColumnProperty, value); }
+            get => (bool)GetValue(IsCurrentColumnProperty);
+            set => SetValue(IsCurrentColumnProperty, value);
         }
 
         public bool HasSelected
         {
-            get { return (bool)GetValue(HasSelectedProperty); }
-            set { SetValue(HasSelectedProperty, value); }
+            get => (bool)GetValue(HasSelectedProperty);
+            set => SetValue(HasSelectedProperty, value);
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
 
-            var index = this.ParentColumn.VisiblePosition;
             var gridContext = ModernDataGridControl.GetDataGridContext(this);
             var gridControl = gridContext.DataGridControl as ModernDataGridControl;
 

@@ -112,13 +112,7 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        public static string StartupPath
-        {
-            get
-            {
-                return System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-            }
-        }
+        public static string StartupPath => System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
         public static string GetUserAppDataPath()
         {

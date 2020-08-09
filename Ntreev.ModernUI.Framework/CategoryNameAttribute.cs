@@ -26,7 +26,7 @@ namespace Ntreev.ModernUI.Framework
         public CategoryNameAttribute(string categoryName)
             : base(categoryName)
         {
-            
+
         }
 
         public static string GetCategory(object obj)

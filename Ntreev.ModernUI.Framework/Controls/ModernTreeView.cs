@@ -28,7 +28,7 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public ModernTreeView()
         {
-            
+
         }
 
         public bool HasScrollViewer

@@ -101,11 +101,20 @@ namespace Ntreev.ModernUI.Framework
 
         }
 
-        protected virtual bool OnCanExecute(object parameter) => true;
+        protected virtual bool OnCanExecute(object parameter)
+        {
+            return true;
+        }
 
-        protected void InvokeCanExecuteChangedEvent() => this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
+        protected void InvokeCanExecuteChangedEvent()
+        {
+            this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
 
-        protected void InvokeCanExecuteChangedEvent(object sender, EventArgs e) => this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
+        protected void InvokeCanExecuteChangedEvent(object sender, EventArgs e)
+        {
+            this.canExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         #region ICommand
 
@@ -138,7 +147,10 @@ namespace Ntreev.ModernUI.Framework
             }
         }
 
-        void ICommand.Execute(object parameter) => this.OnExecute(parameter);
+        void ICommand.Execute(object parameter)
+        {
+            this.OnExecute(parameter);
+        }
 
         #endregion
     }

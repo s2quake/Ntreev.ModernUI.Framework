@@ -15,13 +15,9 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Xceed.Wpf.DataGrid;
 
@@ -30,8 +26,8 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
     class DomainRowsFromClipboard
     {
         private readonly DataGridContext gridContext;
+        private readonly List<string> keys = new List<string>();
         private ColumnBase[] columns;
-        private List<string> keys = new List<string>();
 
         public DomainRowsFromClipboard(DataGridContext gridContext)
         {
@@ -43,7 +39,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
         {
             var fieldsList = this.GetLines(Clipboard.GetText());
 
-            bool hasHeader = fieldsList.Count > 1 ? this.ExistsHeader(fieldsList[0]) : false;
+            bool hasHeader = fieldsList.Count > 1 && this.ExistsHeader(fieldsList[0]);
 
             if (hasHeader == true)
             {
@@ -100,7 +96,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
             var maxColumns = valuesArray.Max(item => item.Length);
 
-            for (int i = 0; i < valuesArray.Count; i++)
+            for (var i = 0; i < valuesArray.Count; i++)
             {
                 var values = valuesArray[i];
 
@@ -122,7 +118,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 if (text.First() == '\"' && text.Last() == '\"')
                 {
                     text = text.Substring(1);
-                    text = text.Substring(0, text.Length - 1);
+                    text = text[0..^1];
                 }
                 text = text.Replace("\"\"", "\"");
             }

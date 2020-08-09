@@ -36,10 +36,7 @@ namespace Ntreev.ModernUI.Framework
             this.typeName = type.AssemblyQualifiedName;
         }
 
-        public string ParentTypeName
-        {
-            get { return this.typeName; }
-        }
+        public string ParentTypeName => this.typeName;
 
         internal Type ParentType
         {

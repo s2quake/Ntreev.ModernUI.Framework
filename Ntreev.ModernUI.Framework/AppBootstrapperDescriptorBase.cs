@@ -54,18 +54,30 @@ namespace Ntreev.ModernUI.Framework
 
         protected abstract void OnDispose();
 
-        internal object Instance(Type service, string key) => this.GetInstance(service, key);
+        internal object Instance(Type service, string key)
+        {
+            return this.GetInstance(service, key);
+        }
 
-        internal IEnumerable<object> Instances(Type service) => this.GetInstances(service);
+        internal IEnumerable<object> Instances(Type service)
+        {
+            return this.GetInstances(service);
+        }
 
         internal void Initialize()
         {
             this.OnInitialize(this.assemblies, this.parts);
         }
 
-        internal void Dispose() => this.OnDispose();
+        internal void Dispose()
+        {
+            this.OnDispose();
+        }
 
-        internal void BuildUp(object instance) => this.OnBuildUp(instance);
+        internal void BuildUp(object instance)
+        {
+            this.OnBuildUp(instance);
+        }
 
         internal IEnumerable<Assembly> SelectAssemblies()
         {

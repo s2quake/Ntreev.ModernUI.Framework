@@ -16,10 +16,6 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
@@ -46,8 +42,8 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Markup
 
         public object TargetNullValue
         {
-            get { return this.binding.TargetNullValue; }
-            set { this.binding.TargetNullValue = value; }
+            get => this.binding.TargetNullValue;
+            set => this.binding.TargetNullValue = value;
         }
     }
 }

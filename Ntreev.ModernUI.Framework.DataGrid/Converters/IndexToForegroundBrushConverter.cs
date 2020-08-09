@@ -15,14 +15,9 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Controls;
 using Ntreev.ModernUI.Framework.Converters;
 using Ntreev.ModernUI.Framework.DataGrid.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -30,11 +25,11 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Converters
 {
     public class IndexToForegroundBrushConverter : IValueConverter
     {
-        private static ComplementaryConverter complementaryConverter = new ComplementaryConverter();
+        private static readonly ComplementaryConverter complementaryConverter = new ComplementaryConverter();
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var index = value is int ? (int)value : 0;
+            var index = value is int i ? i : 0;
             var color = ModernDataGridControl.GetColor(index);
             var complementaryColor = (Color)complementaryConverter.Convert(color, typeof(Color), parameter, culture);
             return new SolidColorBrush(complementaryColor);

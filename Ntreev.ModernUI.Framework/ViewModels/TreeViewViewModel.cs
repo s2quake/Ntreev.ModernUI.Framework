@@ -194,7 +194,10 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public event EventHandler SelectionChanged;
 
-        protected virtual void OnSelectionChanged(EventArgs e) => this.SelectionChanged?.Invoke(this, e);
+        protected virtual void OnSelectionChanged(EventArgs e)
+        {
+            this.SelectionChanged?.Invoke(this, e);
+        }
 
         private bool Filter(string text, string filterExpression)
         {

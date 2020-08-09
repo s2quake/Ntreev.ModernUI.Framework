@@ -152,7 +152,10 @@ namespace Ntreev.ModernUI.Framework
 
         public event EventHandler Changed;
 
-        protected virtual void OnChanged(EventArgs e) => this.Changed?.Invoke(this, e);
+        protected virtual void OnChanged(EventArgs e)
+        {
+            this.Changed?.Invoke(this, e);
+        }
 
         private void ValidateBeginTransaction(string name)
         {
