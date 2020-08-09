@@ -70,7 +70,6 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private readonly ObservableCollection<object> selectedItems = new ObservableCollection<object>();
         private Popup popup;
-        private TextBox textBox;
 
         private bool isContainerUpdating;
         private bool isValueUpdating;
@@ -154,7 +153,6 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
 
             this.popup = this.Template.FindName("PART_Popup", this) as Popup;
-            this.textBox = this.Template.FindName("PART_EditableTextBox", this) as TextBox;
 
             if (this.popup != null)
             {

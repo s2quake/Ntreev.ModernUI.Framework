@@ -27,10 +27,10 @@ namespace Ntreev.ModernUI.Framework.Converters
         {
             if (value == null)
                 return value;
-            if (value is float)
-                return ((float)value).ToString("R");
-            if (value is double)
-                return ((double)value).ToString("R");
+            if (value is float @float)
+                return @float.ToString("R");
+            if (value is double @double)
+                return @double.ToString("R");
             if (value is DateTime dateTime)
             {
                 if (dateTime == DateTime.MinValue)

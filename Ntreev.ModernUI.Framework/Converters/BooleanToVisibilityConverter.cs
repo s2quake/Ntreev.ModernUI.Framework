@@ -21,7 +21,7 @@ namespace Ntreev.ModernUI.Framework.Converters
     {
         protected override bool Convert(object value, object parameter)
         {
-            return value == null ? false : (bool)value;
+            return value != null && (bool)value;
         }
     }
 }

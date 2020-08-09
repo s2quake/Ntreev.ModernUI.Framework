@@ -36,9 +36,6 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.RegisterAttached(nameof(ProgressType), typeof(ProgressType), typeof(DialogWindow),
                 new UIPropertyMetadata(ProgressType.Ring));
 
-        private static readonly DependencyProperty ProgressTypeInternalProperty =
-            DependencyProperty.RegisterAttached("ProgressTypeInternal", typeof(ProgressType), typeof(DialogWindow));
-
         public static readonly DependencyProperty ProgressMessageProperty =
             DependencyProperty.Register("ProgressMessage", typeof(string), typeof(DialogWindow), new PropertyMetadata(string.Empty));
 
@@ -57,18 +54,13 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.RegisterAttached(DesiredResizeMode, typeof(ResizeMode), typeof(DialogWindow),
                 new FrameworkPropertyMetadata(ResizeMode.NoResize));
 
-        private ProgressContent progressContent;
-
         public DialogWindow()
         {
-
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            this.progressContent = this.Template.FindName("PART_ProgressContent", this) as ProgressContent;
         }
 
         public static Style GetProgressStyle(Control control)

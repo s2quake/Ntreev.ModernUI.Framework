@@ -30,7 +30,7 @@ namespace Ntreev.ModernUI.Framework.Converters
                 return (value as ICollection).Count > 0;
 
             var enumerable = value as IEnumerable;
-            foreach (var item in enumerable)
+            foreach (var _ in enumerable)
             {
                 return true;
             }

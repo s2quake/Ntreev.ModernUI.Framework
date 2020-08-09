@@ -79,7 +79,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
             var result = query.Concat(items)
                               .Distinct()
-                              .Where(item => categoryOnly == true ? NameValidator.VerifyCategoryPath(item) : true)
+                              .Where(item => categoryOnly != true || NameValidator.VerifyCategoryPath(item))
                               .OrderBy(item => item)
                               .ToArray();
 
@@ -87,7 +87,7 @@ namespace Ntreev.ModernUI.Framework.ViewModels
                 return result;
             return new string[] { PathUtility.Separator, };
 
-            IEnumerable<string> QueryParents(string path)
+            static IEnumerable<string> QueryParents(string path)
             {
                 return EnumerableUtility.Ancestors(path, item =>
                 {

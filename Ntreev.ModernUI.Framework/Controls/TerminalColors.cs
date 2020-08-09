@@ -89,26 +89,26 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (consoleColor.HasValue == false)
                 return BackgroundKey;
-            switch (consoleColor.Value)
+            return consoleColor.Value switch
             {
-                case ConsoleColor.Black: return BlackBackgroundKey;
-                case ConsoleColor.DarkBlue: return DarkBlueBackgroundKey;
-                case ConsoleColor.DarkGreen: return DarkGreenBackgroundKey;
-                case ConsoleColor.DarkCyan: return DarkCyanBackgroundKey;
-                case ConsoleColor.DarkRed: return DarkRedBackgroundKey;
-                case ConsoleColor.DarkMagenta: return DarkMagentaBackgroundKey;
-                case ConsoleColor.DarkYellow: return DarkYellowBackgroundKey;
-                case ConsoleColor.Gray: return GrayBackgroundKey;
-                case ConsoleColor.DarkGray: return DarkGrayBackgroundKey;
-                case ConsoleColor.Blue: return BlueBackgroundKey;
-                case ConsoleColor.Green: return GreenBackgroundKey;
-                case ConsoleColor.Cyan: return CyanBackgroundKey;
-                case ConsoleColor.Red: return RedBackgroundKey;
-                case ConsoleColor.Magenta: return MagentaBackgroundKey;
-                case ConsoleColor.Yellow: return YellowBackgroundKey;
-                case ConsoleColor.White: return WhiteBackgroundKey;
-            }
-            throw new NotImplementedException();
+                ConsoleColor.Black => BlackBackgroundKey,
+                ConsoleColor.DarkBlue => DarkBlueBackgroundKey,
+                ConsoleColor.DarkGreen => DarkGreenBackgroundKey,
+                ConsoleColor.DarkCyan => DarkCyanBackgroundKey,
+                ConsoleColor.DarkRed => DarkRedBackgroundKey,
+                ConsoleColor.DarkMagenta => DarkMagentaBackgroundKey,
+                ConsoleColor.DarkYellow => DarkYellowBackgroundKey,
+                ConsoleColor.Gray => GrayBackgroundKey,
+                ConsoleColor.DarkGray => DarkGrayBackgroundKey,
+                ConsoleColor.Blue => BlueBackgroundKey,
+                ConsoleColor.Green => GreenBackgroundKey,
+                ConsoleColor.Cyan => CyanBackgroundKey,
+                ConsoleColor.Red => RedBackgroundKey,
+                ConsoleColor.Magenta => MagentaBackgroundKey,
+                ConsoleColor.Yellow => YellowBackgroundKey,
+                ConsoleColor.White => WhiteBackgroundKey,
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }

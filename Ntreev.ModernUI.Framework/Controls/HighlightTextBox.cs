@@ -89,7 +89,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
             else
             {
-                int index = -1;
+                int index;
                 while ((index = text.IndexOf(filter)) >= 0)
                 {
                     var t = text.Remove(index);

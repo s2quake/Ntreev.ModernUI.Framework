@@ -161,10 +161,6 @@ namespace Ntreev.ModernUI.Framework.ViewModels
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        foreach (var item in e.NewItems)
-                        {
-
-                        }
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:

@@ -44,7 +44,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 
         protected override void OnTextChanged(string previousValue, string currentValue)
         {
-            if (TimeSpan.TryParse(currentValue, out TimeSpan s) == false)
+            if (TimeSpan.TryParse(currentValue, out _) == false)
                 return;
             base.OnTextChanged(previousValue, currentValue);
         }

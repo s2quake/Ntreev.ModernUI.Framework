@@ -26,7 +26,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var index = value is int ? (int)value : 0;
+            var index = value is int @int ? @int : 0;
             return new SolidColorBrush(ModernDataGridControl.GetColor(index));
         }
 
