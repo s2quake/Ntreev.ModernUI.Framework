@@ -492,8 +492,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </Style>
 
     <DataTemplate x:Key="ModernDataCell_ContentTemplate">
-        <TextBlock x:Name="TextBlock" Text="{Binding Converter={StaticResource ContentToStringConverter}}" nmfc:TextBlockService.ShowTrimmedText="True">
-        </TextBlock>
+        <TextBlock x:Name="TextBlock" Text="{Binding Converter={StaticResource ContentToStringConverter}}" nmfc:TextBlockService.ShowTrimmedText="True"/>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Path=(nmfc:TextBlockService.IsTextTrimmed), ElementName=TextBlock}" Value="True">
                 <Setter TargetName="TextBlock" Property="ToolTip" Value="{Binding Path=Text, ElementName=TextBlock}" />
@@ -507,9 +506,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="ContentTemplateSelector" Value="{StaticResource ModernDataCell_ContentTemplateSelector}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Null}">
-                <Setter Property="ContentTemplate" Value="{StaticResource ModernDataCell_ContentTemplate}" />
-            </DataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentColumn.CellContentTemplate, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Null}" />
