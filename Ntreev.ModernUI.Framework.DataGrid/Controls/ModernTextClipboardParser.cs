@@ -162,7 +162,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 if (text.First() == '\"' && text.Last() == '\"')
                 {
                     text = text.Substring(1);
-                    text = text[0..^1];
+                    text = text.Substring(0, text.Length - 1);
                 }
                 text = text.Replace("\"\"", "\"");
             }
