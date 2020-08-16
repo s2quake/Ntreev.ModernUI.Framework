@@ -4,6 +4,7 @@ bin/
 obj/
 packages/
 /.vs
+/.vscode
 *.user
 /*.bat
 /Ntreev.ModernUI.Shell.sln.cremaresx
