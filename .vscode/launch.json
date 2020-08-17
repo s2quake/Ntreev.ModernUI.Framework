@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Ntreev.ModernUI.Shell/bin/Debug/netcoreapp3.0/Ntreev.ModernUI.Shell.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/Ntreev.ModernUI.Shell/Ntreev.ModernUI.Shell.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Ntreev.ModernUI.Shell",
             "console": "internalConsole",

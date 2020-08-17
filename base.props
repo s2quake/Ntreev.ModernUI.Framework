@@ -14,6 +14,9 @@
     <PackageTags>Crema</PackageTags>
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\bin\$(Configuration)\$(TargetFramework)\$(AssemblyName)</OutputPath>
+    <IntermediateOutputPath>..\obj\$(Configuration)\$(TargetFramework)\$(AssemblyName)</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Images\**\*.png" />
