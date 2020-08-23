@@ -38,13 +38,11 @@ namespace Ntreev.ModernUI.Framework.ViewModels
 
         public TreeViewViewModel()
         {
-
         }
 
         public TreeViewViewModel(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
-
         }
 
         public void ExpandAll()

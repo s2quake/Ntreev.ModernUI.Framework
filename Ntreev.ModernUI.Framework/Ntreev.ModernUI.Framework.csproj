@@ -2,17 +2,23 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <Import Project="..\base.props" />
   <ItemGroup>
+    <None Remove="Fonts\NanumGothicCoding-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.105-alpha" />
     <PackageReference Include="Caliburn.Micro.Core" Version="4.0.105-alpha" />
     <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp3.'))" >
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp3.'))">
     <PackageReference Include="MahApps.Metro" Version="2.1.1" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))" >
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <PackageReference Include="MahApps.Metro" Version="1.6.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library\Ntreev.Library.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\NanumGothicCoding-Bold.ttf" />
   </ItemGroup>
 </Project>
