@@ -21,14 +21,12 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     class ModernDataGridUpdateSourceException : Exception
     {
-        private readonly ModernDataCell cell;
-
         public ModernDataGridUpdateSourceException(ModernDataCell cell, Exception innerException)
             : base(innerException.Message, innerException)
         {
-            this.cell = cell;
+            this.Cell = cell;
         }
 
-        public ModernDataCell Cell => this.cell;
+        public ModernDataCell Cell { get; private set; }
     }
 }

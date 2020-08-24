@@ -31,7 +31,6 @@ namespace Ntreev.ModernUI.Framework
 {
     public abstract class AppBootstrapperBase : BootstrapperBase, IServiceProvider, IBuildUp
     {
-        private readonly AppBootstrapperDescriptorBase descriptor;
         private readonly Func<object, object> locateForView = ViewModelLocator.LocateForView;
         private readonly Func<Type, DependencyObject, object, Type> locateTypeForModelType = ViewLocator.LocateTypeForModelType;
         private readonly Func<object, DependencyObject, object, UIElement> locateForModel = ViewLocator.LocateForModel;
@@ -46,7 +45,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected AppBootstrapperBase(AppBootstrapperDescriptorBase descriptor)
         {
-            this.descriptor = descriptor;
+            this.Descriptor = descriptor;
 
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) == false)
             {
@@ -70,7 +69,7 @@ namespace Ntreev.ModernUI.Framework
             if (typeof(IEnumerable).IsAssignableFrom(serviceType) && serviceType.GenericTypeArguments.Length == 1)
             {
                 var itemType = serviceType.GenericTypeArguments.First();
-                var items = this.descriptor.Instances(itemType);
+                var items = this.Descriptor.Instances(itemType);
                 var listGenericType = typeof(List<>);
                 var list = listGenericType.MakeGenericType(itemType);
                 var ci = list.GetConstructor(new Type[] { typeof(int) });
@@ -83,7 +82,7 @@ namespace Ntreev.ModernUI.Framework
             }
             else
             {
-                return this.descriptor.Instance(serviceType, null);
+                return this.Descriptor.Instance(serviceType, null);
             }
         }
 
@@ -92,27 +91,27 @@ namespace Ntreev.ModernUI.Framework
             ViewModelLocator.LocateForView = this.LocateForView;
             ViewLocator.LocateTypeForModelType = this.LocateTypeForModelType;
             ViewLocator.LocateForModel = this.LocateForModel;
-            this.descriptor.Initialize();
+            this.Descriptor.Initialize();
         }
 
         protected override object GetInstance(Type service, string key)
         {
-            return this.descriptor.Instance(service, key);
+            return this.Descriptor.Instance(service, key);
         }
 
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
-            return this.descriptor.SelectAssemblies();
+            return this.Descriptor.SelectAssemblies();
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return this.descriptor.Instances(service);
+            return this.Descriptor.Instances(service);
         }
 
         protected override void BuildUp(object instance)
         {
-            this.descriptor.BuildUp(instance);
+            this.Descriptor.BuildUp(instance);
         }
 
         protected override async void OnStartup(object sender, System.Windows.StartupEventArgs e)
@@ -122,14 +121,14 @@ namespace Ntreev.ModernUI.Framework
                 new FrameworkPropertyMetadata(System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag)));
 
             if (this.IgnoreDisplay == false)
-                await this.DisplayRootViewForAsync(this.descriptor.ModelType).ConfigureAwait(false);
+                await this.DisplayRootViewForAsync(this.Descriptor.ModelType).ConfigureAwait(false);
         }
 
         protected override void OnExit(object sender, EventArgs e)
         {
             AppConfiguration.Current.Write();
             base.OnExit(sender, e);
-            this.descriptor.Dispose();
+            this.Descriptor.Dispose();
         }
 
         protected override void PrepareApplication()
@@ -146,7 +145,7 @@ namespace Ntreev.ModernUI.Framework
 
         protected virtual bool AutoInitialize => true;
 
-        protected AppBootstrapperDescriptorBase Descriptor => this.descriptor;
+        protected AppBootstrapperDescriptorBase Descriptor { get; private set; }
 
         private object LocateForView(object view)
         {

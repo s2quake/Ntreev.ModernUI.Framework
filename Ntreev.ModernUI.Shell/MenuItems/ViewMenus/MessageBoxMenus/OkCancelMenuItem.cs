@@ -1,8 +1,7 @@
-﻿using Ntreev.Library;
-using Ntreev.ModernUI.Framework;
+﻿using Ntreev.ModernUI.Framework;
+using Ntreev.ModernUI.Shell.Properties;
 using System;
 using System.ComponentModel.Composition;
-using Ntreev.ModernUI.Shell.Properties;
 using System.Windows;
 
 namespace Ntreev.ModernUI.Shell.MenuItems.ViewMenus.MessageBoxMenus

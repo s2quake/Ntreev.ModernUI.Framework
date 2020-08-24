@@ -21,7 +21,10 @@ namespace Ntreev.ModernUI.Shell.MenuItems.FileMenus
             this.InputGesture = new KeyGesture(Key.F4, ModifierKeys.Alt);
         }
 
-        protected override bool OnCanExecute(object parameter) => true;
+        protected override bool OnCanExecute(object parameter)
+        {
+            return true;
+        }
 
         protected override void OnExecute(object parameter)
         {

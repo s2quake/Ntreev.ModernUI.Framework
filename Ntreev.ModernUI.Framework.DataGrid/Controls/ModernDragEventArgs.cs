@@ -21,21 +21,17 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public sealed class ModernDragEventArgs : RoutedEventArgs
     {
-        private readonly IDataObject data;
-        private readonly object item;
-        private readonly object gridContext;
-
         public ModernDragEventArgs(IDataObject data, object item, object gridContext)
         {
-            this.data = data;
-            this.item = item;
-            this.gridContext = gridContext;
+            this.Data = data;
+            this.Item = item;
+            this.GridContext = gridContext;
         }
 
-        public IDataObject Data => this.data;
+        public IDataObject Data { get; private set; }
 
-        public object Item => this.item;
+        public object Item { get; private set; }
 
-        public object GridContext => this.gridContext;
+        public object GridContext { get; private set; }
     }
 }

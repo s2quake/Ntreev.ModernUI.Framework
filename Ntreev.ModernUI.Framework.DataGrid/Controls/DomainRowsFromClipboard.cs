@@ -25,13 +25,10 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     class DomainRowsFromClipboard
     {
-        private readonly DataGridContext gridContext;
-        private readonly List<string> keys = new List<string>();
         private ColumnBase[] columns;
 
         public DomainRowsFromClipboard(DataGridContext gridContext)
         {
-            this.gridContext = gridContext;
             this.columns = gridContext.Columns.ToArray();
         }
 

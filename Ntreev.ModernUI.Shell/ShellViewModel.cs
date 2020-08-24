@@ -1,14 +1,9 @@
-﻿using Ntreev.Library.Random;
-using Ntreev.ModernUI.Framework;
+﻿using Ntreev.ModernUI.Framework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Ntreev.ModernUI.Shell
 {
