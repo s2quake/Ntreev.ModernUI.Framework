@@ -29,11 +29,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <Setter Property="Margin" Value="0" />
             </Style>
         </Style.Resources>
-        <Style.Triggers>
-            <!--<Trigger Property="IsReadOnly" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
-            </Trigger>-->
-        </Style.Triggers>
     </Style>
 
     <ControlTemplate x:Key="TerminalControl_Template" TargetType="{x:Type nmfc:TerminalControl}">
@@ -46,10 +41,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <Style TargetType="{x:Type nmfc:TerminalControl}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static nmfc:TerminalColors.ForegroundKey}}" />
         <Setter Property="Background" Value="{DynamicResource {x:Static nmfc:TerminalColors.BackgroundKey}}" />
-        <!--<Setter Property="OutputForeground" Value="{DynamicResource {x:Static nmfc:TerminalColors.ForegroundKey}}" />
-        <Setter Property="OutputBackground" Value="{DynamicResource {x:Static nmfc:TerminalColors.BackgroundKey}}" />-->
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="FontFamily" Value="굴림체" />
         <Setter Property="Template" Value="{StaticResource TerminalControl_Template}" />
     </Style>
 

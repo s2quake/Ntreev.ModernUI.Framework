@@ -71,7 +71,6 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public TerminalControl()
         {
-
         }
 
         public event RoutedEventHandler Executed
@@ -104,7 +103,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             this.refStack++;
             try
             {
-                var commandText = this.CommandText;
+                var commandText = this.Command;
                 var args = new RoutedEventArgs(ExecutedEvent);
                 this.SetValue(TextPropertyKey, commandText);
                 if (this.histories.Contains(this.Text) == false)
@@ -149,16 +148,24 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         public void MoveToFirst()
         {
-            var contentStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
-            if (contentStart == null)
-                this.textBox.CaretPosition = this.promptBlock.ContentEnd;
-            else
-                this.textBox.CaretPosition = contentStart;
+            this.CursorPosition = 0;
         }
 
         public void MoveToLast()
         {
-            this.textBox.CaretPosition = this.promptBlock.Inlines.LastInline.ContentEnd;
+            this.CursorPosition = this.Command.Length;
+        }
+
+        public void MoveLeft()
+        {
+            if (this.CursorPosition > 0)
+                this.CursorPosition--;
+        }
+
+        public void MoveRight()
+        {
+            if (this.CursorPosition < this.Command.Length)
+                this.CursorPosition++;
         }
 
         public void Reset()
@@ -197,6 +204,79 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             get => (string)this.GetValue(PromptProperty);
             set => this.SetValue(PromptProperty, value);
+        }
+
+        public string Command
+        {
+            get
+            {
+                var prompt = this.Prompt;
+                var pointer = this.promptBlock.ContentStart;
+                var line = string.Empty;
+                while (pointer != null)
+                {
+                    if (pointer.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                    {
+                        var text = pointer.GetTextInRun(LogicalDirection.Forward);
+                        line += text;
+                    }
+                    pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                }
+                return line.Substring(prompt.Length);
+            }
+            set
+            {
+                this.refStack++;
+                try
+                {
+                    this.promptBlock.Inlines.Clear();
+                    this.promptBlock.Inlines.AddRange(this.GetPrompt(this.Prompt));
+                    this.promptBlock.Inlines.Add(new Run() { Text = value });
+                    this.SetCursorPosition(0);
+                }
+                finally
+                {
+                    this.refStack--;
+                }
+            }
+        }
+
+        public int CursorPosition
+        {
+            get
+            {
+                var caretPosition = this.textBox.CaretPosition;
+                if (caretPosition.CompareTo(this.promptBlock.ContentStart) < 0)
+                {
+                    return -1;
+                }
+                else
+                {
+                    var prompt = this.Prompt;
+                    var position = caretPosition;
+                    var line = string.Empty;
+                    while (position != null && position.IsAtLineStartPosition == false)
+                    {
+                        if (position.GetPointerContext(LogicalDirection.Backward) == TextPointerContext.Text)
+                        {
+                            var text = position.GetTextInRun(LogicalDirection.Backward);
+                            var length = position.GetTextRunLength(LogicalDirection.Backward);
+                            line = text.Substring(0, length) + line;
+                        }
+                        position = position.GetNextContextPosition(LogicalDirection.Backward);
+                    }
+                    if (line.Length < prompt.Length)
+                        return -1;
+                    return line.Length - prompt.Length;
+                }
+            }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
+
+                this.SetCursorPosition(value);
+            }
         }
 
         public Brush OutputForeground
@@ -243,7 +323,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.historyIndex + 1 < this.histories.Count)
             {
-                this.inputText = this.CommandText = this.histories[this.historyIndex + 1];
+                this.inputText = this.Command = this.histories[this.historyIndex + 1];
                 this.MoveToLast();
                 this.historyIndex++;
             }
@@ -253,13 +333,13 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (this.historyIndex > 0)
             {
-                this.inputText = this.CommandText = this.histories[this.historyIndex - 1];
+                this.inputText = this.Command = this.histories[this.historyIndex - 1];
                 this.MoveToLast();
                 this.historyIndex--;
             }
             else if (this.histories.Count == 1)
             {
-                this.inputText = this.CommandText = this.histories[0];
+                this.inputText = this.Command = this.histories[0];
                 this.MoveToLast();
                 this.historyIndex = 0;
             }
@@ -488,7 +568,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             if (this.refStack > 0)
                 return;
 
-            this.inputText = this.CommandText;
+            this.inputText = this.Command;
             this.completion = string.Empty;
         }
 
@@ -510,9 +590,14 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
             else if (e.Key == Key.Escape && Keyboard.Modifiers == ModifierKeys.None)
             {
-                if (this.textBox.IsReadOnly == true)
+                if (this.CursorPosition < 0)
                 {
-                    this.MoveToFirst();
+                    this.MoveToLast();
+                    e.Handled = true;
+                }
+                else if (this.Command != string.Empty)
+                {
+                    this.Command = string.Empty;
                     e.Handled = true;
                 }
             }
@@ -534,6 +619,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 if (Keyboard.Modifiers == ModifierKeys.None)
                 {
+
                     e.Handled = true;
                     this.NextCompletion();
                 }
@@ -545,16 +631,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
             else if (e.Key == Key.Back && Keyboard.Modifiers == ModifierKeys.None)
             {
-                var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
-                var commandEnd = this.promptBlock.Inlines.FirstInline.ContentEnd.GetPositionAtOffset(this.Prompt.Length);
-                if (this.textBox.CaretPosition.CompareTo(commandStart) <= 0)
-                {
-                    e.Handled = true;
-                }
-                else if (commandEnd != null && this.textBox.CaretPosition.CompareTo(commandEnd) <= 0)
-                {
-                    e.Handled = true;
-                }
+                e.Handled = this.CursorPosition <= 0;
             }
             else if (e.Key == Key.Up && Keyboard.Modifiers == ModifierKeys.None)
             {
@@ -576,24 +653,15 @@ namespace Ntreev.ModernUI.Framework.Controls
 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (this.promptBlock.Inlines.FirstInline != null)
+            var selection = this.textBox.Selection;
+            var pointer = this.GetPointer(0);
+            if (pointer != null && (selection.Start.CompareTo(pointer) < 0 || selection.End.CompareTo(pointer) < 0))
             {
-                var commandStart = this.promptBlock.Inlines.FirstInline.ContentStart.GetPositionAtOffset(this.Prompt.Length);
-                if (commandStart != null)
-                {
-                    if (this.textBox.Selection.Start.CompareTo(commandStart) < 0 || this.textBox.Selection.End.CompareTo(commandStart) < 0)
-                    {
-                        this.textBox.IsReadOnly = true;
-                    }
-                    else
-                    {
-                        this.textBox.IsReadOnly = false;
-                    }
-                }
-                else
-                {
-                    this.textBox.IsReadOnly = false;
-                }
+                this.textBox.IsReadOnly = true;
+            }
+            else
+            {
+                this.textBox.IsReadOnly = false;
             }
         }
 
@@ -651,33 +719,37 @@ namespace Ntreev.ModernUI.Framework.Controls
             }
         }
 
-        private string CommandText
+        private TextPointer GetPointer(int cursorPosition)
         {
-            get
+            var prompt = this.Prompt;
+            var pointer = this.promptBlock.ContentStart;
+            var contentStart = this.promptBlock.ContentStart;
+            var position = prompt.Length + cursorPosition;
+            while (pointer != null)
             {
-                var text = string.Empty;
-                foreach (var item in this.promptBlock.Inlines)
+                if (pointer.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
                 {
-                    if (item is Run run)
+                    var length = pointer.GetTextRunLength(LogicalDirection.Forward);
+                    if (position <= length)
                     {
-                        text += run.Text;
+                        return pointer.GetPositionAtOffset(position, LogicalDirection.Forward);
                     }
+                    position -= length;
                 }
-                return text.Substring(this.Prompt.Length);
+                pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
             }
-            set
+            return null;
+        }
+
+        private void SetCursorPosition(int cursorPosition)
+        {
+            if (this.GetPointer(cursorPosition) is TextPointer pointer)
             {
-                this.refStack++;
-                try
-                {
-                    this.promptBlock.Inlines.Clear();
-                    this.promptBlock.Inlines.AddRange(this.GetPrompt(this.Prompt));
-                    this.promptBlock.Inlines.Add(new Run() { Text = value });
-                }
-                finally
-                {
-                    this.refStack--;
-                }
+                this.textBox.CaretPosition = pointer;
+            }
+            else
+            {
+                throw new NotImplementedException();
             }
         }
     }

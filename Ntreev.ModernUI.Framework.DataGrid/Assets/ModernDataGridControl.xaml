@@ -918,6 +918,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ConnectionLineOffset" Value="0" />
         <Setter Property="ConnectionLineAlignment" Value="CenterToCenter" />
         <Setter Property="xcdg:RowSelector.Visible" Value="True" />
+        <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource ModernColumnManagerRowSelector_Style}" />
         <Setter Property="xcdg:TableView.CanScrollHorizontally" Value="False" />
         <Setter Property="Template">
             <Setter.Value>

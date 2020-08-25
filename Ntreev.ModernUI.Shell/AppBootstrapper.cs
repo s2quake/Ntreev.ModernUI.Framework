@@ -7,7 +7,7 @@ namespace Ntreev.ModernUI.Shell
         public AppBootstrapper()
             : base(new AppBootstrapperDescriptor())
         {
-            
+
         }
     }
 }

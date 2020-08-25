@@ -21,22 +21,18 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ValueChangingEventArgs : RoutedEventArgs
     {
-        private readonly object item;
-        private readonly string columnName;
-        private readonly object value;
-
         public ValueChangingEventArgs(object item, string columnName, object value)
         {
-            this.item = item;
-            this.columnName = columnName;
-            this.value = value;
+            this.Item = item;
+            this.ColumnName = columnName;
+            this.Value = value;
         }
 
-        public object Item => this.item;
+        public object Item { get; private set; }
 
-        public string ColumnName => this.columnName;
+        public string ColumnName { get; private set; }
 
-        public object Value => this.value;
+        public object Value { get; private set; }
 
         public bool Cancel
         {

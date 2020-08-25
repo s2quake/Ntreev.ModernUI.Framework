@@ -22,21 +22,20 @@ namespace Ntreev.ModernUI.Framework
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class ParentTypeAttribute : Attribute
     {
-        private readonly string typeName;
         private Type type;
 
         public ParentTypeAttribute(string typeName)
         {
-            this.typeName = typeName;
+            this.ParentTypeName = typeName;
         }
 
         public ParentTypeAttribute(Type type)
         {
             this.type = type;
-            this.typeName = type.AssemblyQualifiedName;
+            this.ParentTypeName = type.AssemblyQualifiedName;
         }
 
-        public string ParentTypeName => this.typeName;
+        public string ParentTypeName { get; private set; }
 
         internal Type ParentType
         {
@@ -44,7 +43,7 @@ namespace Ntreev.ModernUI.Framework
             {
                 if (this.type == null)
                 {
-                    this.type = Type.GetType(this.typeName);
+                    this.type = Type.GetType(this.ParentTypeName);
                 }
                 return this.type;
             }

@@ -21,14 +21,12 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
 {
     public class ItemDeletingEventArgs : RoutedEventArgs
     {
-        private readonly object item;
-
         public ItemDeletingEventArgs(object item)
         {
-            this.item = item;
+            this.Item = item;
         }
 
-        public object Item => this.item;
+        public object Item { get; private set; }
 
         public bool Cancel
         {
