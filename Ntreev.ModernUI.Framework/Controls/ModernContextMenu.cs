@@ -117,6 +117,14 @@ namespace Ntreev.ModernUI.Framework.Controls
             {
                 s2.Visibility = Visibility.Collapsed;
             }
+
+            foreach (var item in this.MenuItems)
+            {
+                if (item is DependencyObject dependencyObject)
+                {
+                    Caliburn.Micro.Bind.SetModelWithoutContext(dependencyObject, this.DataContext);
+                }
+            }
         }
 
         protected override void OnClosed(RoutedEventArgs e)

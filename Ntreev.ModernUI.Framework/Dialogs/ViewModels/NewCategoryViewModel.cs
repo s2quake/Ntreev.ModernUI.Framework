@@ -93,7 +93,7 @@ namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
 
         public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
         {
-            return await this.Dispatcher.InvokeAsync(() => this.CanCreate);
+            return await this.Dispatcher.InvokeAsync(() => this.IsProgressing == false);
         }
 
         protected virtual bool VerifyName(string categoryName)
