@@ -20,6 +20,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -33,32 +34,18 @@ namespace Ntreev.ModernUI.Framework.Controls
     [DefaultProperty(nameof(MenuItems))]
     public class ModernContextMenu : ContextMenu
     {
-        private static readonly DependencyPropertyKey MenuItemsPropertyKey =
-            DependencyProperty.RegisterReadOnly(nameof(MenuItems), typeof(IList), typeof(ModernContextMenu),
-                new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
-
         public new static DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ModernContextMenu),
                 new FrameworkPropertyMetadata(ItemsSourcePropertyChangedCallback));
 
         private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
 
-        static ModernContextMenu()
-        {
-
-        }
-
         public ModernContextMenu()
         {
-            this.SetValue(MenuItemsPropertyKey, this.menuItems);
+            this.menuItems.CollectionChanged += MenuItems_CollectionChanged;
         }
 
-        public IList MenuItems
-        {
-            get => (IList)this.GetValue(MenuItemsProperty);
-            private set => this.SetValue(MenuItemsPropertyKey, value);
-        }
+        public IList MenuItems => this.menuItems;
 
         public new IEnumerable ItemsSource
         {
@@ -69,7 +56,7 @@ namespace Ntreev.ModernUI.Framework.Controls
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            this.RefreshItemsSource(Enumerable.Empty<object>());
+            this.RefreshItemsSource(this.ItemsSource ?? Enumerable.Empty<object>());
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)
@@ -118,13 +105,13 @@ namespace Ntreev.ModernUI.Framework.Controls
                 s2.Visibility = Visibility.Collapsed;
             }
 
-            foreach (var item in this.MenuItems)
-            {
-                if (item is DependencyObject dependencyObject)
-                {
-                    Caliburn.Micro.Bind.SetModelWithoutContext(dependencyObject, this.DataContext);
-                }
-            }
+            //foreach (var item in this.MenuItems)
+            //{
+            //    if (item is DependencyObject dependencyObject)
+            //    {
+            //        Caliburn.Micro.Bind.SetModelWithoutContext(dependencyObject, this.DataContext);
+            //    }
+            //}
         }
 
         protected override void OnClosed(RoutedEventArgs e)
@@ -149,12 +136,56 @@ namespace Ntreev.ModernUI.Framework.Controls
         {
             if (d is ModernContextMenu self)
             {
-                self.RefreshItemsSource((e.NewValue as IEnumerable) ?? new object[] { });
+                self.RefreshItemsSource(e.NewValue as IEnumerable);
+            }
+        }
+
+        private void MenuItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(this) == true)
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (var item in e.NewItems)
+                    {
+                        base.Items.Add(item);
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var item in e.OldItems)
+                    {
+                        base.Items.Remove(item);
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Replace)
+                {
+                    for (var i = 0; i < e.OldItems.Count; i++)
+                    {
+                        var oldItem = e.OldItems[i];
+                        var newItem = e.NewItems[i];
+                        var index = base.Items.IndexOf(oldItem);
+                        base.Items[index] = newItem;
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Move)
+                {
+                    var item = base.Items[e.OldStartingIndex];
+                    base.Items.RemoveAt(e.OldStartingIndex);
+                    base.Items.Insert(e.NewStartingIndex, item);
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Reset)
+                {
+                    base.Items.Clear();
+                }
             }
         }
 
         private void RefreshItemsSource(IEnumerable items)
         {
+            if (DesignerProperties.GetIsInDesignMode(this) == true)
+                return;
+
             var list = new List<object>();
             foreach (var item in this.MenuItems)
             {

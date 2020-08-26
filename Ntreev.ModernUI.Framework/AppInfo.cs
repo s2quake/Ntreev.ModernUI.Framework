@@ -23,83 +23,23 @@ namespace Ntreev.ModernUI.Framework
 {
     public class AppInfo
     {
-        private static string productName;
         public static string ProductName
         {
             get
             {
-                if (productName == null)
-                {
-                    string text = string.Empty;
-                    Assembly assembly = Assembly.GetEntryAssembly();
-                    if (assembly == null)
-                    {
-                        assembly = Assembly.GetCallingAssembly();
-                    }
-                    AssemblyProductAttribute[] array = (AssemblyProductAttribute[])assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), true);
-                    if (array != null && array.Length > 0)
-                    {
-                        text = array[0].Product;
-                    }
-                    if ((text == null || text.Length == 0) && assembly.EntryPoint != null)
-                    {
-                        text = assembly.EntryPoint.DeclaringType.Namespace;
-                        if (text != null)
-                        {
-                            int num = text.LastIndexOf('.');
-                            if (num >= 0 && num < text.Length - 1)
-                            {
-                                text = text.Substring(num + 1);
-                            }
-                        }
-                        if (text == null || text.Length == 0)
-                        {
-                            text = assembly.EntryPoint.DeclaringType.FullName;
-                        }
-                    }
-                    productName = text;
-                }
-                return productName;
+                var assembly = Assembly.GetEntryAssembly();
+                var info = FileVersionInfo.GetVersionInfo(assembly.Location);
+                return info.ProductName;
             }
         }
 
-        private static string compnayName;
         public static string CompanyName
         {
             get
             {
-                if (compnayName == null)
-                {
-                    string text = string.Empty;
-                    Assembly assembly = Assembly.GetEntryAssembly();
-                    if (assembly == null)
-                    {
-                        assembly = Assembly.GetCallingAssembly();
-                    }
-                    AssemblyCompanyAttribute[] array = (AssemblyCompanyAttribute[])assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), true);
-                    if (array != null && array.Length > 0)
-                    {
-                        text = array[0].Company;
-                    }
-                    if ((text == null || text.Length == 0) && assembly.EntryPoint != null)
-                    {
-                        text = assembly.EntryPoint.DeclaringType.Namespace;
-                        if (text != null)
-                        {
-                            int num = text.LastIndexOf('.');
-                            if (num >= 0 && num < text.Length - 1)
-                            {
-                                text = text.Substring(num + 1);
-                            }
-                        }
-                        if (text == null || text.Length == 0)
-                        {
-                            text = assembly.EntryPoint.DeclaringType.FullName;
-                        }
-                    }
-                    compnayName = text;
-                }
-                return compnayName;
+                var assembly = Assembly.GetEntryAssembly();
+                var info = FileVersionInfo.GetVersionInfo(assembly.Location);
+                return info.CompanyName;
             }
         }
 
@@ -107,8 +47,9 @@ namespace Ntreev.ModernUI.Framework
         {
             get
             {
-                Assembly assembly = Assembly.GetEntryAssembly();
-                return assembly.GetName().Version.ToString();
+                var assembly = Assembly.GetEntryAssembly();
+                var info = FileVersionInfo.GetVersionInfo(assembly.Location);
+                return info.ProductVersion;
             }
         }
 
