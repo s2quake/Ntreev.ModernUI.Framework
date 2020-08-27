@@ -1,12 +1,12 @@
-﻿using Ntreev.Library.Random;
-using Ntreev.ModernUI.Framework;
+using JSSoft.Library.Random;
+using JSSoft.ModernUI.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
-namespace Ntreev.ModernUI.Shell.Contents.ViewModels
+namespace JSSoft.ModernUI.Shell.Contents.ViewModels
 {
     [Export(typeof(IContent))]
     class AdvancedControlViewModel : ContentBase, IContent

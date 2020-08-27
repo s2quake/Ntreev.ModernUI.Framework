@@ -1,11 +1,11 @@
-﻿using Ntreev.ModernUI.Framework;
+using JSSoft.ModernUI.Framework;
 using System;
 using System.Collections;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ntreev.ModernUI.Shell.Dialogs.ViewModels
+namespace JSSoft.ModernUI.Shell.Dialogs.ViewModels
 {
     class GridControlViewModel : ModalDialogBase
     {

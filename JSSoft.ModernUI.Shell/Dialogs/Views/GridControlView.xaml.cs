@@ -1,11 +1,11 @@
-ï»¿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Shell.Dialogs.Views
+namespace JSSoft.ModernUI.Shell.Dialogs.Views
 {
     /// <summary>
-    /// GridControlView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// GridControlView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class GridControlView : UserControl
     {

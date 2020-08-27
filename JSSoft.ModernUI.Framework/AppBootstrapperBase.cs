@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -16,7 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
-using Ntreev.ModernUI.Framework.Controls;
+using JSSoft.ModernUI.Framework.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Ntreev.ModernUI.Framework
+namespace JSSoft.ModernUI.Framework
 {
     public abstract class AppBootstrapperBase : BootstrapperBase, IServiceProvider, IBuildUp
     {

@@ -1,11 +1,11 @@
-﻿using Ntreev.ModernUI.Framework;
+using JSSoft.ModernUI.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 
-namespace Ntreev.ModernUI.Shell
+namespace JSSoft.ModernUI.Shell
 {
     [Export(typeof(IShell))]
     class ShellViewModel : ScreenBase, IShell

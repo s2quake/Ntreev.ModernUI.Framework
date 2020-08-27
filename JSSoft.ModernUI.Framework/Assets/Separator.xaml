@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,7 +18,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Ntreev.ModernUI.Framework.Assets">
+                    xmlns:local="clr-namespace:JSSoft.ModernUI.Framework.Assets">
 
     <Style TargetType="{x:Type Separator}">
         <Setter Property="Background" Value="{DynamicResource SeparatorBackground}" />

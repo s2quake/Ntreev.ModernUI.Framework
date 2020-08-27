@@ -1,9 +1,9 @@
-ï»¿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Shell.ContentView
+namespace JSSoft.ModernUI.Shell.ContentView
 {
     /// <summary>
-    /// MenuView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// MenuView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class MenuView : UserControl
     {

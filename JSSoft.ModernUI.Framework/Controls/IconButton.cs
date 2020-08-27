@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -22,7 +22,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     [TemplatePart(Name = PART_Popup, Type = typeof(Popup))]
     public class IconButton : Button

@@ -1,4 +1,4 @@
-﻿namespace Ntreev.ModernUI.Shell
+namespace JSSoft.ModernUI.Shell
 {
     public interface IContent
     {

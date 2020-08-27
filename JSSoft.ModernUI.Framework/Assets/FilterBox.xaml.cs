@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -17,14 +17,14 @@
 
 using System.Windows;
 
-namespace Ntreev.ModernUI.Framework.Assets
+namespace JSSoft.ModernUI.Framework.Assets
 {
     partial class FilterBox : ResourceDictionary
     {
         private void IconButton_Click(object sender, RoutedEventArgs e)
         {
             var control = sender as System.Windows.Controls.Control;
-            var filterBox = control.Tag as Ntreev.ModernUI.Framework.Controls.FilterBox;
+            var filterBox = control.Tag as JSSoft.ModernUI.Framework.Controls.FilterBox;
             if (filterBox.IsDropDownOpen == true)
             {
                 filterBox.IsDropDownOpen = false;

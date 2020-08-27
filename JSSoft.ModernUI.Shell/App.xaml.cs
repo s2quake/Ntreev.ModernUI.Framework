@@ -1,9 +1,9 @@
-ï»¿using System.Windows;
+using System.Windows;
 
-namespace Ntreev.ModernUI.Shell
+namespace JSSoft.ModernUI.Shell
 {
     /// <summary>
-    /// App.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// App.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class App : Application
     {

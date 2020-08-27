@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -28,7 +28,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(FlagControlItem))]
     [TemplatePart(Name = "PART_EditableTextBox", Type = typeof(TextBox))]

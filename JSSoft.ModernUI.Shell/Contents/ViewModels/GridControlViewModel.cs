@@ -1,10 +1,10 @@
-﻿using Ntreev.ModernUI.Framework;
+using JSSoft.ModernUI.Framework;
 using System.Collections;
 using System.ComponentModel.Composition;
 using System.Data;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Shell.Contents.ViewModels
+namespace JSSoft.ModernUI.Shell.Contents.ViewModels
 {
     [Export(typeof(IContent))]
     class GridControlViewModel : ContentBase, IContent

@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,10 +18,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
-                    xmlns:p="clr-namespace:Ntreev.ModernUI.Framework.Properties">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls"
+                    xmlns:p="clr-namespace:JSSoft.ModernUI.Framework.Properties">
 
-    <ControlTemplate x:Key="ProgressContent_Template" TargetType="{x:Type nmfc:ProgressContent}">
+    <ControlTemplate x:Key="ProgressContent_Template" TargetType="{x:Type jmfc:ProgressContent}">
         <Grid>
             <Border Background="{TemplateBinding Background}" 
                     BorderBrush="{TemplateBinding BorderBrush}"
@@ -47,27 +47,27 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </ControlTemplate>
 
     <DataTemplate x:Key="ProgressTemplate_ProgressRing">
-        <nmfc:ProgressRing Margin="0 10" Background="{DynamicResource WindowBackground}" />
+        <jmfc:ProgressRing Margin="0 10" Background="{DynamicResource WindowBackground}" />
     </DataTemplate>
 
     <DataTemplate x:Key="ProgressTemplate_ProgressBar">
         <ProgressBar IsIndeterminate="True" Margin="0 10" Background="{DynamicResource WindowBackground}" />
     </DataTemplate>
 
-    <Style x:Key="ProgressContent_Style" TargetType="{x:Type nmfc:ProgressContent}">
+    <Style x:Key="ProgressContent_Style" TargetType="{x:Type jmfc:ProgressContent}">
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Template" Value="{StaticResource ProgressContent_Template}" />
     </Style>
 
-    <Style x:Key="ProgressContent_ProgressRing_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}">
+    <Style x:Key="ProgressContent_ProgressRing_Style" TargetType="{x:Type jmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}">
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressRing}" />
     </Style>
 
-    <Style x:Key="ProgressContent_ProgressBar_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}">
+    <Style x:Key="ProgressContent_ProgressBar_Style" TargetType="{x:Type jmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_Style}">
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressBar}" />
     </Style>
 
-    <Style x:Key="ProgressContent_Dialog_ProgressRing_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressRing_Style}">
+    <Style x:Key="ProgressContent_Dialog_ProgressRing_Style" TargetType="{x:Type jmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressRing_Style}">
         <Setter Property="Visibility" Value="Visible" />
         <Setter Property="Message" Value="{Binding ProgressMessage}" />
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressRing}" />
@@ -78,7 +78,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ProgressContent_Dialog_ProgressBar_Style" TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressBar_Style}">
+    <Style x:Key="ProgressContent_Dialog_ProgressBar_Style" TargetType="{x:Type jmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressBar_Style}">
         <Setter Property="Visibility" Value="Visible" />
         <Setter Property="Message" Value="{Binding ProgressMessage}" />
         <Setter Property="ProgressTemplate" Value="{StaticResource ProgressTemplate_ProgressBar}" />
@@ -89,7 +89,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type nmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressRing_Style}">
+    <Style TargetType="{x:Type jmfc:ProgressContent}" BasedOn="{StaticResource ProgressContent_ProgressRing_Style}">
         <Setter Property="Focusable" Value="False" />
     </Style>
 

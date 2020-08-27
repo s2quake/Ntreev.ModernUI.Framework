@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,13 +18,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
-    <ControlTemplate x:Key="IconImage_Template" TargetType="{x:Type nmfc:IconImage}">
+    <ControlTemplate x:Key="IconImage_Template" TargetType="{x:Type jmfc:IconImage}">
         <Image x:Name="PART_Image" Focusable="False" />
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:IconImage}">
+    <Style TargetType="{x:Type jmfc:IconImage}">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Template" Value="{StaticResource IconImage_Template}" />

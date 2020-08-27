@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,10 +18,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <ContextMenu x:Key="GuidControl_TextBox_ContextMenu">
-        <MenuItem Command="{x:Static nmfc:GuidControl.NewCommand}" />
+        <MenuItem Command="{x:Static jmfc:GuidControl.NewCommand}" />
         <Separator />
         <MenuItem Command="ApplicationCommands.Copy" />
         <MenuItem Command="ApplicationCommands.Cut" />
@@ -32,7 +32,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ContextMenu" Value="{StaticResource GuidControl_TextBox_ContextMenu}" />
     </Style>
 
-    <ControlTemplate x:Key="GuidControl_Template" TargetType="{x:Type nmfc:GuidControl}">
+    <ControlTemplate x:Key="GuidControl_Template" TargetType="{x:Type jmfc:GuidControl}">
         <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
                 Padding="{TemplateBinding Margin}">
             <Grid SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
@@ -61,7 +61,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:GuidControl}">
+    <Style TargetType="{x:Type jmfc:GuidControl}">
         <Setter Property="Foreground" Value="{DynamicResource InputText}" />
         <Setter Property="Background" Value="{DynamicResource InputBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource InputBorder}" />

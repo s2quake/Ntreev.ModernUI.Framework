@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework
+namespace JSSoft.ModernUI.Framework
 {
     public interface IMenuItem
     {

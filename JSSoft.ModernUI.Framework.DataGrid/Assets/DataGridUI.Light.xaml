@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -21,7 +21,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Ntreev.ModernUI.Framework;component/Assets/ModernUI.Light.xaml" />
+        <ResourceDictionary Source="/JSSoft.ModernUI.Framework;component/Assets/ModernUI.Light.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="DataGridHeaderBackgroundCurrent" Color="{DynamicResource AccentColor}" Opacity="0.5" />

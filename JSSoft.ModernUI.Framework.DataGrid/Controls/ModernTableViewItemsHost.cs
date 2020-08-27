@@ -1,4 +1,4 @@
-ï»¿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -19,12 +19,12 @@ using System.Reflection;
 using System.Windows.Controls.Primitives;
 using Xceed.Wpf.DataGrid.Views;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Controls
+namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     /// <summary>
-    /// êµ¬í˜„ ì˜ë„
-    /// ìƒìœ„ í´ë˜ìŠ¤ì—ì„œ HorizontalOffset ê°’ì„ ì†Œìˆ˜ì ìœ¼ë¡œ ì²˜ë¦¬í•˜ê¸° ë•Œë¬¸ì— ìˆ˜í‰ ìŠ¤í¬ë¡¤ì‹œ ì¼ë¶€ ì…€ì˜ í”½ì…€ ë–¨ë¦¼ í˜„ìƒì´ ë°œê²¬ë¨
-    /// ì†Œìˆ˜ì  ê°’ì„ ì •ìˆ˜í˜•ìœ¼ë¡œ ë°”ê¾¸ì–´ ìƒìœ„ ì¸í„°í˜ì´ìŠ¤ë¥¼ í˜¸ì¶œí•˜ì—¬ ë–¨ë¦¼ í˜„ìƒì„ ë°©ì§€
+    /// ±¸Çö ÀÇµµ
+    /// »óÀ§ Å¬·¡½º¿¡¼­ HorizontalOffset °ªÀ» ¼Ò¼öÁ¡À¸·Î Ã³¸®ÇÏ±â ¶§¹®¿¡ ¼öÆò ½ºÅ©·Ñ½Ã ÀÏºÎ ¼¿ÀÇ ÇÈ¼¿ ¶³¸² Çö»óÀÌ ¹ß°ßµÊ
+    /// ¼Ò¼öÁ¡ °ªÀ» Á¤¼öÇüÀ¸·Î ¹Ù²Ù¾î »óÀ§ ÀÎÅÍÆäÀÌ½º¸¦ È£ÃâÇÏ¿© ¶³¸² Çö»óÀ» ¹æÁö
     /// </summary>
     public class ModernTableViewItemsHost : TableViewItemsHost, IScrollInfo
     {

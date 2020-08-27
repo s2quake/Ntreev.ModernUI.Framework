@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -19,7 +19,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Ntreev.ModernUI.Framework.ViewModels
+namespace JSSoft.ModernUI.Framework.ViewModels
 {
     public class CheckableTreeViewItemViewModel : TreeViewItemViewModel
     {

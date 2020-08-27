@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -17,7 +17,7 @@
 
 using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Framework.Dialogs.Views
+namespace JSSoft.ModernUI.Framework.Dialogs.Views
 {
     partial class CommentView : UserControl
     {

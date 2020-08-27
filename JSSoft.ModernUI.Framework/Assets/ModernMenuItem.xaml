@@ -1,18 +1,18 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
-                    xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls"
+                    xmlns:jmfv="clr-namespace:JSSoft.ModernUI.Framework.Converters">
 
-    <nmfv:InputGestureToStringConverter x:Key="InputGestureToStringConverter" />
+    <jmfv:InputGestureToStringConverter x:Key="InputGestureToStringConverter" />
 
-    <Style TargetType="{x:Type nmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+    <Style TargetType="{x:Type jmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="MinWidth" Value="60" />
     </Style>
 
-    <Style x:Key="IMenuItem_ModernMenuItem_Style" TargetType="{x:Type nmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type nmfc:ModernMenuItem}}">
+    <Style x:Key="IMenuItem_ModernMenuItem_Style" TargetType="{x:Type jmfc:ModernMenuItem}" BasedOn="{StaticResource {x:Type jmfc:ModernMenuItem}}">
         <Setter Property="Header" Value="{Binding DisplayName}" />
         <Setter Property="ItemsSource" Value="{Binding MenuItems}" />
         <Setter Property="Command" Value="{Binding Command}" />

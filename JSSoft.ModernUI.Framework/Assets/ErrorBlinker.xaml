@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,21 +18,21 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfv="clr-namespace:JSSoft.ModernUI.Framework.Converters"
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <Storyboard x:Key="ErrorBlinker_Storyboard">
         <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" RepeatBehavior="5x"
                          AutoReverse="True" Duration="0:0:0.2" />
     </Storyboard>
 
-    <ControlTemplate x:Key="ErrorBlinker_Template" TargetType="{x:Type nmfc:ErrorBlinker}">
+    <ControlTemplate x:Key="ErrorBlinker_Template" TargetType="{x:Type jmfc:ErrorBlinker}">
         <Rectangle Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
             <Rectangle.Style>
                 <Style TargetType="{x:Type Rectangle}">
                     <Setter Property="Opacity" Value="0" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ErrorBlinker}}}" Value="True">
+                        <DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type jmfc:ErrorBlinker}}}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard x:Name="Blink" Storyboard="{StaticResource ErrorBlinker_Storyboard}" />
                             </DataTrigger.EnterActions>
@@ -43,19 +43,19 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Rectangle>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="ImageErrorBlinker_ControlTemplate" TargetType="{x:Type nmfc:ErrorBlinker}">
+    <ControlTemplate x:Key="ImageErrorBlinker_ControlTemplate" TargetType="{x:Type jmfc:ErrorBlinker}">
         <Grid>
             <Rectangle x:Name="Rect" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
                 <Rectangle.Style>
                     <Style TargetType="{x:Type Rectangle}">
                         <Setter Property="Opacity" Value="0" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ErrorBlinker}}}" Value="True">
+                            <DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type jmfc:ErrorBlinker}}}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard x:Name="Blink" Storyboard="{StaticResource ErrorBlinker_Storyboard}" />
                                 </DataTrigger.EnterActions>
                             </DataTrigger>
-                            <!--<DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type nmfc:ErrorBlinker}}}" Value="False">
+                            <!--<DataTrigger Binding="{Binding HasError, RelativeSource={RelativeSource AncestorType={x:Type jmfc:ErrorBlinker}}}" Value="False">
                             <DataTrigger.EnterActions>
                                 <StopStoryboard  BeginStoryboardName="Blink" />
                             </DataTrigger.EnterActions>
@@ -64,7 +64,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </Style>
                 </Rectangle.Style>
             </Rectangle>
-            <Image x:Name="Image" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" Stretch="None" Margin="0 0 4 0"
+            <Image x:Name="Image" Source="/JSSoft.ModernUI.Framework;component/Images/exclamation.png" Stretch="None" Margin="0 0 4 0"
                    ToolTip="{TemplateBinding ErrorContent}" HorizontalAlignment="Right" />
         </Grid>
         <ControlTemplate.Triggers>
@@ -74,13 +74,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:ErrorBlinker}">
+    <Style TargetType="{x:Type jmfc:ErrorBlinker}">
         <Setter Property="BorderBrush" Value="#FFdc000c" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template" Value="{StaticResource ErrorBlinker_Template}" />
     </Style>
 
-    <Style x:Key="ImageErrorBlinker_Style" TargetType="{x:Type nmfc:ErrorBlinker}" BasedOn="{StaticResource {x:Type nmfc:ErrorBlinker}}">
+    <Style x:Key="ImageErrorBlinker_Style" TargetType="{x:Type jmfc:ErrorBlinker}" BasedOn="{StaticResource {x:Type jmfc:ErrorBlinker}}">
         <Setter Property="Template" Value="{StaticResource ImageErrorBlinker_ControlTemplate}" />
     </Style>
 

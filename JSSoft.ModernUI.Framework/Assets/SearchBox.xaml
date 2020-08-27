@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,7 +18,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="IconButton.xaml" />
@@ -28,9 +28,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
     </Style>
 
-    <ControlTemplate x:Key="SearchBox_Template" TargetType="{x:Type nmfc:SearchBox}">
+    <ControlTemplate x:Key="SearchBox_Template" TargetType="{x:Type jmfc:SearchBox}">
         <ControlTemplate.Resources>
-            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ComboBox_IconButton_Style}" />
+            <Style TargetType="{x:Type jmfc:IconButton}" BasedOn="{StaticResource ComboBox_IconButton_Style}" />
         </ControlTemplate.Resources>
         <Grid x:Name="MainGrid" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
@@ -40,11 +40,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Border Grid.ColumnSpan="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0 0 0 10" />
-            <nmfc:IconButton Grid.Column="1" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" 
+            <jmfc:IconButton Grid.Column="1" Source="/JSSoft.ModernUI.Framework;component/Images/arrow_up.png" 
                                  Command="{TemplateBinding PrevCommand}" />
-            <nmfc:IconButton Grid.Column="2" Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" 
+            <jmfc:IconButton Grid.Column="2" Source="/JSSoft.ModernUI.Framework;component/Images/arrow_down.png" 
                                  Command="{TemplateBinding NextCommand}" />
-            <nmfc:IconButton Grid.Column="3" Source="/Ntreev.ModernUI.Framework;component/Images/close.png" 
+            <jmfc:IconButton Grid.Column="3" Source="/JSSoft.ModernUI.Framework;component/Images/close.png" 
                                  Command="{TemplateBinding CloseCommand}" />
             <TextBlock x:Name="Watermark" Text="{TemplateBinding Comment}" Padding="2 0 0 1" Visibility="Hidden"
                            Margin="{TemplateBinding Padding}" Foreground="{DynamicResource InputTextDisabled}" />
@@ -78,7 +78,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:SearchBox}">
+    <Style TargetType="{x:Type jmfc:SearchBox}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Foreground" Value="{DynamicResource InputText}" />
         <Setter Property="Background" Value="{DynamicResource InputBackground}" />

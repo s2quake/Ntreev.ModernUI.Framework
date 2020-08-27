@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -19,7 +19,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     public class IconToggleButton : ToggleButton
     {

@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -19,7 +19,7 @@ using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace Ntreev.ModernUI.Framework.Dialogs.ViewModels
+namespace JSSoft.ModernUI.Framework.Dialogs.ViewModels
 {
     public class CommentAsyncViewModel : CommentViewModel
     {

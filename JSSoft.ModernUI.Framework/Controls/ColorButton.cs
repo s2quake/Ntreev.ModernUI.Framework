@@ -1,9 +1,9 @@
-﻿using Ntreev.ModernUI.Framework.Dialogs.ViewModels;
+using JSSoft.ModernUI.Framework.Dialogs.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     public class ColorButton : Button
     {

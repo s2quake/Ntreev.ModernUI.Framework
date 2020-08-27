@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -15,14 +15,14 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Controls;
+using JSSoft.ModernUI.Framework.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace Ntreev.ModernUI.Framework
+namespace JSSoft.ModernUI.Framework
 {
     public abstract class MenuItemBase : PropertyChangedBase, IMenuItem, ICommand
     {

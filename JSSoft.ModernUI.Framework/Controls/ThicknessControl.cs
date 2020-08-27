@@ -1,8 +1,8 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     [TemplatePart(Name = PART_Left, Type = typeof(TextBox))]
     [TemplatePart(Name = PART_Top, Type = typeof(TextBox))]

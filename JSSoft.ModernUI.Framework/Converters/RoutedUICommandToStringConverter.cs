@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -22,7 +22,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework.Converters
+namespace JSSoft.ModernUI.Framework.Converters
 {
     public class RoutedUICommandToStringConverter : IValueConverter
     {

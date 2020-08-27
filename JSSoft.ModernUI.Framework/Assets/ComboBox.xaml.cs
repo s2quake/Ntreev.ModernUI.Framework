@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -17,7 +17,7 @@
 
 using System.Windows;
 
-namespace Ntreev.ModernUI.Framework.Assets
+namespace JSSoft.ModernUI.Framework.Assets
 {
     partial class ComboBox : ResourceDictionary
     {

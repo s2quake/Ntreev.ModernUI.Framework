@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -21,7 +21,7 @@ using System.Linq;
 using System.Windows;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Controls
+namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     class DomainRowsFromClipboard
     {
@@ -120,7 +120,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 text = text.Replace("\"\"", "\"");
             }
             // 160 to 32
-            return text.Replace(' ', ' ');
+            return text.Replace('?', ' ');
         }
     }
 }

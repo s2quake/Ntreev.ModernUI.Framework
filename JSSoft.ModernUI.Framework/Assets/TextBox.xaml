@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,7 +18,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <ContextMenu x:Key="TextBox_ContextMenu">
         <MenuItem Command="ApplicationCommands.Copy" />
@@ -39,9 +39,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     </ControlTemplate.Resources>
                     <StackPanel Orientation="Horizontal">
                         <Grid VerticalAlignment="Top">
-                            <Image x:Name="Image" HorizontalAlignment="Right" Source="/Ntreev.ModernUI.Framework;component/Images/exclamation.png" Margin="0 0 2 0" />
+                            <Image x:Name="Image" HorizontalAlignment="Right" Source="/JSSoft.ModernUI.Framework;component/Images/exclamation.png" Margin="0 0 2 0" />
                             <AdornedElementPlaceholder x:Name="Adorner" Margin="-1" />
-                            <nmfc:ErrorBlinker x:Name="Blinker" Margin="-1" />
+                            <jmfc:ErrorBlinker x:Name="Blinker" Margin="-1" />
                         </Grid>
                     </StackPanel>
                     <ControlTemplate.Triggers>
@@ -59,9 +59,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ContextMenu" Value="{StaticResource TextBox_ContextMenu}" />
     </Style>
 
-    <Style TargetType="{x:Type nmfc:HighlightTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}" />
+    <Style TargetType="{x:Type jmfc:HighlightTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}" />
 
-    <Style TargetType="{x:Type nmfc:HighlightTextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Style TargetType="{x:Type jmfc:HighlightTextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="Highlight" Value="{DynamicResource WindowBorder}" />
     </Style>
 

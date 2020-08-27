@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -21,7 +21,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     [TemplatePart(Name = PART_EditableTextBox, Type = typeof(TextBox))]
     public class GuidControl : Control
@@ -32,7 +32,7 @@ namespace Ntreev.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Value), typeof(Guid?), typeof(GuidControl),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertyChangedCallback));
 
-        public static readonly RoutedCommand NewCommand = new RoutedUICommand(Ntreev.ModernUI.Framework.Properties.Resources.Command_NewGuid, nameof(NewCommand), typeof(GuidControl));
+        public static readonly RoutedCommand NewCommand = new RoutedUICommand(JSSoft.ModernUI.Framework.Properties.Resources.Command_NewGuid, nameof(NewCommand), typeof(GuidControl));
 
         public static readonly RoutedEvent ValueChangedEvent =
             EventManager.RegisterRoutedEvent(nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidControl));

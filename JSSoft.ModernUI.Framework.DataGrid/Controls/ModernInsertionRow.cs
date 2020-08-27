@@ -1,8 +1,8 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Controls
+namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     [TemplatePart(Name = PART_InsertButton, Type = typeof(Button))]
     [TemplatePart(Name = PART_InsertManyButton, Type = typeof(Button))]

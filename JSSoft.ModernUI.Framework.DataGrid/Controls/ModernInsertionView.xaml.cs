@@ -1,4 +1,4 @@
-ï»¿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -17,10 +17,10 @@
 
 using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Controls
+namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     /// <summary>
-    /// ModernInsertionView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// ModernInsertionView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class ModernInsertionView : UserControl
     {

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Ntreev.ModernUI.Shell.Contents.Views.AdvancedControlView"
+<UserControl x:Class="JSSoft.ModernUI.Shell.Contents.Views.AdvancedControlView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
+             xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls;assembly=JSSoft.ModernUI.Framework"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
 
@@ -20,34 +20,34 @@
 
     </UserControl.Resources>
 
-    <nmfc:PropertyItemsControl>
-        <ComboBox nmfc:PropertyItemsControl.Header="_ComboBox" x:Name="ComboBox" />
-        <ComboBox nmfc:PropertyItemsControl.Header="_EditableComboBox" x:Name="EditableComboBox" IsEditable="True" />
-        <nmfc:SearchBox nmfc:PropertyItemsControl.Header="_SearchBox" x:Name="SearchBox" />
-        <nmfc:FilterBox nmfc:PropertyItemsControl.Header="_FilterBox" x:Name="FilterBox" Margin="-1,0,1,0" />
-        <nmfc:FlagControl nmfc:PropertyItemsControl.Header="_FlagControl">
-            <nmfc:FlagControlItem Value="0" Content="None" />
-            <nmfc:FlagControlItem Value="1" Content="A" />
-            <nmfc:FlagControlItem Value="2" Content="B" />
-            <nmfc:FlagControlItem Value="4" Content="C" />
-            <nmfc:FlagControlItem Value="7" Content="All" />
-        </nmfc:FlagControl>
-        <nmfc:IconButton x:Name="IconButton" nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
-        <nmfc:IconButton nmfc:PropertyItemsControl.Header="IconButton" Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left"
+    <jmfc:PropertyItemsControl>
+        <ComboBox jmfc:PropertyItemsControl.Header="_ComboBox" x:Name="ComboBox" />
+        <ComboBox jmfc:PropertyItemsControl.Header="_EditableComboBox" x:Name="EditableComboBox" IsEditable="True" />
+        <jmfc:SearchBox jmfc:PropertyItemsControl.Header="_SearchBox" x:Name="SearchBox" />
+        <jmfc:FilterBox jmfc:PropertyItemsControl.Header="_FilterBox" x:Name="FilterBox" Margin="-1,0,1,0" />
+        <jmfc:FlagControl jmfc:PropertyItemsControl.Header="_FlagControl">
+            <jmfc:FlagControlItem Value="0" Content="None" />
+            <jmfc:FlagControlItem Value="1" Content="A" />
+            <jmfc:FlagControlItem Value="2" Content="B" />
+            <jmfc:FlagControlItem Value="4" Content="C" />
+            <jmfc:FlagControlItem Value="7" Content="All" />
+        </jmfc:FlagControl>
+        <jmfc:IconButton x:Name="IconButton" jmfc:PropertyItemsControl.Header="IconButton" Source="/JSSoft.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left" />
+        <jmfc:IconButton jmfc:PropertyItemsControl.Header="IconButton" Source="/JSSoft.ModernUI.Framework;component/Images/magnify.png" HorizontalAlignment="Left"
                          DropDownTemplate="{StaticResource DropDown_Template}"/>
-        <StackPanel Orientation="Horizontal" nmfc:PropertyItemsControl.Header="IconImage" >
-            <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
+        <StackPanel Orientation="Horizontal" jmfc:PropertyItemsControl.Header="IconImage" >
+            <jmfc:IconImage Width="24" Height="24" Source="/JSSoft.ModernUI.Framework;component/Images/folder_c.png"
                             HorizontalAlignment="Left" />
-            <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
+            <jmfc:IconImage Width="24" Height="24" Source="/JSSoft.ModernUI.Framework;component/Images/folder_c.png"
                             HorizontalAlignment="Left" Background="{DynamicResource Accent}" />
-            <nmfc:IconImage Width="24" Height="24" Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png"
+            <jmfc:IconImage Width="24" Height="24" Source="/JSSoft.ModernUI.Framework;component/Images/folder_c.png"
                             HorizontalAlignment="Left" Foreground="{DynamicResource Accent}" />
         </StackPanel>
-        <nmfc:ColorButton x:Name="PickColor" nmfc:PropertyItemsControl.Header="ColorPicker" HorizontalAlignment="Left" />
-        <nmfc:TreeViewItemSelector x:Name="TreeViewItem" nmfc:PropertyItemsControl.Header="TreeViewItemSelector" />
-        <nmfc:GuidControl x:Name="Guid" nmfc:PropertyItemsControl.Header="Guid" />
-        <TextBox x:Name="TextBox" nmfc:PropertyItemsControl.Header="TextBox"  />
-        <nmfc:NumericTextBox x:Name="NumericTextBox" nmfc:PropertyItemsControl.Header="NumericTextBox" />
-    </nmfc:PropertyItemsControl>
+        <jmfc:ColorButton x:Name="PickColor" jmfc:PropertyItemsControl.Header="ColorPicker" HorizontalAlignment="Left" />
+        <jmfc:TreeViewItemSelector x:Name="TreeViewItem" jmfc:PropertyItemsControl.Header="TreeViewItemSelector" />
+        <jmfc:GuidControl x:Name="Guid" jmfc:PropertyItemsControl.Header="Guid" />
+        <TextBox x:Name="TextBox" jmfc:PropertyItemsControl.Header="TextBox"  />
+        <jmfc:NumericTextBox x:Name="NumericTextBox" jmfc:PropertyItemsControl.Header="NumericTextBox" />
+    </jmfc:PropertyItemsControl>
     
 </UserControl>

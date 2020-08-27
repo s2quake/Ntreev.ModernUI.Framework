@@ -1,27 +1,27 @@
-﻿<UserControl x:Class="Ntreev.ModernUI.Shell.Contents.Views.BaseControlView"
+<UserControl x:Class="JSSoft.ModernUI.Shell.Contents.Views.BaseControlView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
+             xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls;assembly=JSSoft.ModernUI.Framework"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
 
-    <nmfc:PropertyItemsControl>
-        <TextBox x:Name="SettingsName" nmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
-        <TextBox x:Name="Address" nmfc:PropertyItemsControl.Header="Address" />
-        <TextBox x:Name="UserID" nmfc:PropertyItemsControl.Header="UserID"  />
-        <PasswordBox x:Name="Password" nmfc:PropertyItemsControl.Header="Password" />
-        <StackPanel nmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
+    <jmfc:PropertyItemsControl>
+        <TextBox x:Name="SettingsName" jmfc:PropertyItemsControl.Header="Name" Width="176" HorizontalAlignment="Left" />
+        <TextBox x:Name="Address" jmfc:PropertyItemsControl.Header="Address" />
+        <TextBox x:Name="UserID" jmfc:PropertyItemsControl.Header="UserID"  />
+        <PasswordBox x:Name="Password" jmfc:PropertyItemsControl.Header="Password" />
+        <StackPanel jmfc:PropertyItemsControl.Header="Find" Orientation="Horizontal">
             <TextBox Text="Find" Width="148" />
             <Border Width="4" />
-            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
+            <jmfc:IconButton Source="/JSSoft.ModernUI.Framework;component/Images/magnify.png" />
         </StackPanel>
-        <StackPanel nmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
-            <nmfc:ColorButton />
+        <StackPanel jmfc:PropertyItemsControl.Header="Theme" Orientation="Horizontal">
+            <jmfc:ColorButton />
             <Border Width="4" />
             <ComboBox Width="122" />
         </StackPanel>
-    </nmfc:PropertyItemsControl>
+    </jmfc:PropertyItemsControl>
 
 </UserControl>

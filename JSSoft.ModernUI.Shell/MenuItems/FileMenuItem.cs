@@ -1,10 +1,10 @@
-﻿using Ntreev.Library;
-using Ntreev.ModernUI.Framework;
-using Ntreev.ModernUI.Shell.Properties;
+using JSSoft.Library;
+using JSSoft.ModernUI.Framework;
+using JSSoft.ModernUI.Shell.Properties;
 using System;
 using System.ComponentModel.Composition;
 
-namespace Ntreev.ModernUI.Shell.MenuItems
+namespace JSSoft.ModernUI.Shell.MenuItems
 {
     [Export(typeof(IMenuItem))]
     [ParentType(typeof(IShell))]

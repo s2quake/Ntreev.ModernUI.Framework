@@ -1,10 +1,10 @@
-ï»¿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Shell.Contents.Views
+namespace JSSoft.ModernUI.Shell.Contents.Views
 {
     /// <summary>
-    /// TerminalView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// TerminalView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class TerminalView : UserControl
     {
@@ -25,7 +25,7 @@ namespace Ntreev.ModernUI.Shell.Contents.Views
                 //if (this.editor.ApplyTemplate() == true)
                 {
                     this.Editor.Focus();
-                    this.Editor.AppendLine("ì•ˆë…•í•˜ì„¸ìš”.");
+                    this.Editor.AppendLine("¾È³çÇÏ¼¼¿ä.");
                     this.Editor.Prompt = "c:> ";
                 }
             });

@@ -1,4 +1,4 @@
-﻿namespace Ntreev.ModernUI.Framework.Controls
+namespace JSSoft.ModernUI.Framework.Controls
 {
     public enum NumericType
     {

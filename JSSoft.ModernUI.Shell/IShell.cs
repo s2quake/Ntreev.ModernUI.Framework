@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace Ntreev.ModernUI.Shell
+namespace JSSoft.ModernUI.Shell
 {
     public interface IShell
     {

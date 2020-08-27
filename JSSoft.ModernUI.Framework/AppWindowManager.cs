@@ -1,4 +1,4 @@
-ï»¿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -16,7 +16,7 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
-using Ntreev.ModernUI.Framework.Controls;
+using JSSoft.ModernUI.Framework.Controls;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,7 +24,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Framework
+namespace JSSoft.ModernUI.Framework
 {
     public sealed class AppWindowManager : WindowManager
     {
@@ -145,7 +145,7 @@ namespace Ntreev.ModernUI.Framework
         }
 
         /// <summary>
-        /// Loaded ì´ë²¤íŠ¸ ì´í›„ì— í•œë²ˆ ChromeWorkerë¼ëŠ” ë¶€ë¶„ì—ì„œ í¬ê¸° ë³€ê²½ì´ ì¼ì–´ë‚˜ê¸° ë•Œë¬¸ì— ìœˆë„ìš° ìœ„ì¹˜ë¥¼ ë‹¤ì‹œ ê³„ì‚°í•¨
+        /// Loaded ÀÌº¥Æ® ÀÌÈÄ¿¡ ÇÑ¹ø ChromeWorker¶ó´Â ºÎºĞ¿¡¼­ Å©±â º¯°æÀÌ ÀÏ¾î³ª±â ¶§¹®¿¡ À©µµ¿ì À§Ä¡¸¦ ´Ù½Ã °è»êÇÔ
         /// </summary>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {

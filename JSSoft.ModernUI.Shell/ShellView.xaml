@@ -1,8 +1,8 @@
-﻿<mui:ModernWindow x:Class="Ntreev.ModernUI.Shell.ShellView"
+<mui:ModernWindow x:Class="JSSoft.ModernUI.Shell.ShellView"
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-                  xmlns:view="clr-namespace:Ntreev.ModernUI.Shell.ContentView"
+                  xmlns:view="clr-namespace:JSSoft.ModernUI.Shell.ContentView"
                   Height="550" Width="525" Style="{StaticResource ModernWindow_Style}">
 
     <mui:ModernWindow.Resources>

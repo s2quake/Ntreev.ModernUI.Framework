@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,16 +18,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Ntreev.ModernUI.Framework.Assets"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:local="clr-namespace:JSSoft.ModernUI.Framework.Assets"
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
-    <Style TargetType="{x:Type nmfc:ModernTreeView}" BasedOn="{StaticResource {x:Type TreeView}}">
+    <Style TargetType="{x:Type jmfc:ModernTreeView}" BasedOn="{StaticResource {x:Type TreeView}}">
         <Setter Property="ItemContainerStyle" Value="{StaticResource TreeViewItem_Style}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
-        <Setter Property="nmfc:TreeViewUtility.SelectedItemBindingPath" Value="SelectedItem" />
+        <Setter Property="jmfc:TreeViewUtility.SelectedItemBindingPath" Value="SelectedItem" />
     </Style>
     
 </ResourceDictionary>

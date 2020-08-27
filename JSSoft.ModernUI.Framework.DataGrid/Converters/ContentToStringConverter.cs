@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -19,7 +19,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Converters
+namespace JSSoft.ModernUI.Framework.DataGrid.Converters
 {
     public class ContentToStringConverter : IValueConverter
     {

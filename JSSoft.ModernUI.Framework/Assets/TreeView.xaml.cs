@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -20,7 +20,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace Ntreev.ModernUI.Framework.Assets
+namespace JSSoft.ModernUI.Framework.Assets
 {
     public partial class TreeView : ResourceDictionary
     {

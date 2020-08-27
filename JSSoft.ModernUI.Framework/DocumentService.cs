@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Ntreev.ModernUI.Framework
+namespace JSSoft.ModernUI.Framework
 {
     public abstract class DocumentServiceBase<T> : Conductor<T>.Collection.OneActive, IDocumentService where T : class, IDocument
     {

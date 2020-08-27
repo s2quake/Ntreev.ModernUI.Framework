@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,13 +18,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="FilterBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="FlagControlItem_Template" TargetType="{x:Type nmfc:FlagControlItem}">
+    <ControlTemplate x:Key="FlagControlItem_Template" TargetType="{x:Type jmfc:FlagControlItem}">
         <Grid Margin="{TemplateBinding Margin}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -43,12 +43,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:FlagControlItem}">
+    <Style TargetType="{x:Type jmfc:FlagControlItem}">
         <Setter Property="Margin" Value="3 2" />
         <Setter Property="Template" Value="{StaticResource FlagControlItem_Template}" />
     </Style>
 
-    <ControlTemplate x:Key="FlagControl_Template" TargetType="{x:Type nmfc:FlagControl}">
+    <ControlTemplate x:Key="FlagControl_Template" TargetType="{x:Type jmfc:FlagControl}">
         <Grid Name="MainGrid" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -114,7 +114,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="Editable_FlagControl_Template" TargetType="{x:Type nmfc:FlagControl}">
+    <ControlTemplate x:Key="Editable_FlagControl_Template" TargetType="{x:Type jmfc:FlagControl}">
         <Grid Name="MainGrid" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -186,7 +186,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:FlagControl}">
+    <Style TargetType="{x:Type jmfc:FlagControl}">
         <Setter Property="Foreground" Value="{DynamicResource InputText}" />
         <Setter Property="Background" Value="{DynamicResource InputBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource InputBorder}" />

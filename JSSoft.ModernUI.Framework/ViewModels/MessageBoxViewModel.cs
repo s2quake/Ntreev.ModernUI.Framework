@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -19,7 +19,7 @@ using Caliburn.Micro;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Ntreev.ModernUI.Framework.ViewModels
+namespace JSSoft.ModernUI.Framework.ViewModels
 {
     class MessageBoxViewModel : Screen, IModalDialog
     {

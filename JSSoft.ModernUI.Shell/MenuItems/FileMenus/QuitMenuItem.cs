@@ -1,12 +1,12 @@
-﻿using Ntreev.Library;
-using Ntreev.ModernUI.Framework;
-using Ntreev.ModernUI.Shell.Properties;
+using JSSoft.Library;
+using JSSoft.ModernUI.Framework;
+using JSSoft.ModernUI.Shell.Properties;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Ntreev.ModernUI.Shell.MenuItems.FileMenus
+namespace JSSoft.ModernUI.Shell.MenuItems.FileMenus
 {
     [Export(typeof(IMenuItem))]
     [ParentType(typeof(MessageBoxMenuItem))]

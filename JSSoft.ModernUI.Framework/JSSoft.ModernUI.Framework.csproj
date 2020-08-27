@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.105-alpha" />
@@ -12,6 +12,6 @@
     <PackageReference Include="MahApps.Metro" Version="1.6.5" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ntreev.Library\Ntreev.Library\Ntreev.Library.csproj" />
+    <ProjectReference Include="..\..\JSSoft.Library\JSSoft.Library\JSSoft.Library.csproj" />
   </ItemGroup>
 </Project>

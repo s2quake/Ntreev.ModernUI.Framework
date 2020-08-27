@@ -1,8 +1,8 @@
-﻿using Ntreev.ModernUI.Framework;
+using JSSoft.ModernUI.Framework;
 using System;
 using System.ComponentModel.Composition;
 
-namespace Ntreev.ModernUI.Shell.MenuItems.ViewMenus
+namespace JSSoft.ModernUI.Shell.MenuItems.ViewMenus
 {
     [Export(typeof(IMenuItem))]
     [ParentType(typeof(ViewMenuItem))]

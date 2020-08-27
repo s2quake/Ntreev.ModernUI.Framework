@@ -1,6 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <Style x:Key="ToolBarThumb_Style" TargetType="{x:Type Thumb}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
@@ -86,7 +86,7 @@
                     <ResourceDictionary Source="IconButton.xaml" />
                     <ResourceDictionary Source="Button.xaml" />
                 </ResourceDictionary.MergedDictionaries>
-                <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
+                <Style TargetType="{x:Type jmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBar_Button_Style}" />
             </ResourceDictionary>
         </Style.Resources>
@@ -97,7 +97,7 @@
         </Style.Triggers>
     </Style>
 
-    <nmfc:ModernToolBarStyleSelector x:Key="ToolBarStyleSelector" Style="{StaticResource ToolBar_ItemContainer_Style}" />
+    <jmfc:ModernToolBarStyleSelector x:Key="ToolBarStyleSelector" Style="{StaticResource ToolBar_ItemContainer_Style}" />
 
     <Style TargetType="{x:Type ToolBar}">
         <Style.Resources>
@@ -105,7 +105,7 @@
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="IconButton.xaml" />
                 </ResourceDictionary.MergedDictionaries>
-                <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
+                <Style TargetType="{x:Type jmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
             </ResourceDictionary>
         </Style.Resources>
         <Setter Property="Background" Value="{StaticResource WindowBackground}" />

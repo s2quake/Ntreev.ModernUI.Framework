@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -18,12 +18,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ====================================================================================================================-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls">
 
     <DataTemplate x:Key="HeaderedContentControl_HeaderTemplate">
-        <Label x:Name="Label" Content="{Binding}" Target="{Binding Path=(nmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
+        <Label x:Name="Label" Content="{Binding}" Target="{Binding Path=(jmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
         <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=(nmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" Value="{x:Null}">
+            <DataTrigger Binding="{Binding Path=(jmfc:PropertyItemsControl.Target), RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" Value="{x:Null}">
                 <Setter TargetName="Label" Property="Target" Value="{Binding Path=Content, RelativeSource={RelativeSource AncestorType={x:Type HeaderedContentControl}}}" />
             </DataTrigger>
         </DataTemplate.Triggers>
@@ -33,7 +33,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Border Padding="{TemplateBinding Padding}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding HeaderActualWidth, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
+                    <ColumnDefinition Width="{Binding HeaderActualWidth, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" />
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
@@ -67,23 +67,23 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </ControlTemplate>
 
     <Style x:Key="PropertyItemsControl_ItemContainerStyle" TargetType="{x:Type HeaderedContentControl}">
-        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template" Value="{StaticResource HeaderedContentControl_Horizontal_Template}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource HeaderedContentControl_HeaderTemplate}" />
-        <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
-        <Setter Property="ContentTemplateSelector" Value="{Binding ContentTemplateSelector, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" />
+        <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" />
+        <Setter Property="ContentTemplateSelector" Value="{Binding ContentTemplateSelector, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" />
         <Setter Property="Margin" Value="2" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=Orientation, RelativeSource={RelativeSource AncestorType={x:Type nmfc:PropertyItemsControl}}}" Value="Vertical">
+            <DataTrigger Binding="{Binding Path=Orientation, RelativeSource={RelativeSource AncestorType={x:Type jmfc:PropertyItemsControl}}}" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource HeaderedContentControl_Vertical_Template}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type nmfc:PropertyItemsControl}">
+    <Style TargetType="{x:Type jmfc:PropertyItemsControl}">
         <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

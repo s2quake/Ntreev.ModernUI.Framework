@@ -1,10 +1,10 @@
-ï»¿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Shell.Contents.Views
+namespace JSSoft.ModernUI.Shell.Contents.Views
 {
     /// <summary>
-    /// AdvancedControlView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// AdvancedControlView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class AdvancedControlView : UserControl
     {

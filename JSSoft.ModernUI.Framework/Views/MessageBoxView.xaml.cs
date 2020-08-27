@@ -1,9 +1,9 @@
-ï»¿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Framework.Views
+namespace JSSoft.ModernUI.Framework.Views
 {
     /// <summary>
-    /// MessageBoxView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// MessageBoxView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class MessageBoxView : UserControl
     {

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 
-namespace Ntreev.ModernUI.Shell.Contents.ViewModels
+namespace JSSoft.ModernUI.Shell.Contents.ViewModels
 {
     [Export(typeof(IContent))]
     class BaseControlViewModel : ContentBase, IContent

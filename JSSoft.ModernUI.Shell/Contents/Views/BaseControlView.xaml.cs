@@ -1,9 +1,9 @@
-ï»¿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Shell.Contents.Views
+namespace JSSoft.ModernUI.Shell.Contents.Views
 {
     /// <summary>
-    /// BaseControlView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// BaseControlView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class BaseControlView : UserControl
     {

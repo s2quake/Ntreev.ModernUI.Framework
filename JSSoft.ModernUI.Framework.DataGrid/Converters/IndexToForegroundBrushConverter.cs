@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -15,13 +15,13 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.ModernUI.Framework.Converters;
-using Ntreev.ModernUI.Framework.DataGrid.Controls;
+using JSSoft.ModernUI.Framework.Converters;
+using JSSoft.ModernUI.Framework.DataGrid.Controls;
 using System;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Converters
+namespace JSSoft.ModernUI.Framework.DataGrid.Converters
 {
     public class IndexToForegroundBrushConverter : IValueConverter
     {

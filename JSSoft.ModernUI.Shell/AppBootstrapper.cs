@@ -1,6 +1,6 @@
-﻿using Ntreev.ModernUI.Framework;
+using JSSoft.ModernUI.Framework;
 
-namespace Ntreev.ModernUI.Shell
+namespace JSSoft.ModernUI.Shell
 {
     public class AppBootstrapper : AppBootstrapperBase
     {

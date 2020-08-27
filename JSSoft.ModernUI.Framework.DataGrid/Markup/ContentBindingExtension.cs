@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -21,7 +21,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Markup
+namespace JSSoft.ModernUI.Framework.DataGrid.Markup
 {
     [MarkupExtensionReturnType(typeof(object))]
     public class ContentBindingExtension : MarkupExtension

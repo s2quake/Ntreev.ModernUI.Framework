@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Ntreev.ModernUI.Shell.ContentView.ToolBarView"
+<UserControl x:Class="JSSoft.ModernUI.Shell.ContentView.ToolBarView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls;assembly=Ntreev.ModernUI.Framework"
+             xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls;assembly=JSSoft.ModernUI.Framework"
              mc:Ignorable="d" d:DesignWidth="800">
 
     <UserControl.Resources>
@@ -21,16 +21,16 @@
 
     <ToolBarTray>
         <ToolBar IsOverflowOpen="False" ToolBarTray.IsLocked="True">
-            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_down.png" />
-            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/arrow_up.png" />
+            <jmfc:IconButton Source="/JSSoft.ModernUI.Framework;component/Images/arrow_down.png" />
+            <jmfc:IconButton Source="/JSSoft.ModernUI.Framework;component/Images/arrow_up.png" />
             <Separator />
-            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/undo.png"
+            <jmfc:IconButton Source="/JSSoft.ModernUI.Framework;component/Images/undo.png"
                              DropDownTemplate="{StaticResource DropDown_Template}" />
-            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/redo.png" />
+            <jmfc:IconButton Source="/JSSoft.ModernUI.Framework;component/Images/redo.png" />
         </ToolBar>
-        <nmfc:ModernToolBar>
-            <nmfc:IconButton Source="/Ntreev.ModernUI.Framework;component/Images/magnify.png" />
-        </nmfc:ModernToolBar>
+        <jmfc:ModernToolBar>
+            <jmfc:IconButton Source="/JSSoft.ModernUI.Framework;component/Images/magnify.png" />
+        </jmfc:ModernToolBar>
     </ToolBarTray>
     
 </UserControl>

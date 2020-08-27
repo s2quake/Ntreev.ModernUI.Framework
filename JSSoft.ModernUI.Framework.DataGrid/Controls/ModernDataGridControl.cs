@@ -1,4 +1,4 @@
-Ôªø//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -15,8 +15,8 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ntreev.Library.Linq;
-using Ntreev.ModernUI.Framework.Converters;
+using JSSoft.Library.Linq;
+using JSSoft.ModernUI.Framework.Converters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,10 +34,10 @@ using System.Windows.Media;
 using Xceed.Wpf.DataGrid;
 using Xceed.Wpf.DataGrid.Views;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Controls
+namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     /// <summary>
-    /// ModernDataGridControl.xamlÏóê ÎåÄÌïú ÏÉÅÌò∏ ÏûëÏö© ÎÖºÎ¶¨
+    /// ModernDataGridControl.xamlø° ¥Î«— ªÛ»£ ¿€øÎ ≥Ì∏Æ
     /// </summary>
     public class ModernDataGridControl : DataGridControl
     {

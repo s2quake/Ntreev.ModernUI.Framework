@@ -1,4 +1,4 @@
-ï»¿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -23,7 +23,7 @@ using System.Windows;
 using System.Windows.Data;
 using Xceed.Wpf.DataGrid;
 
-namespace Ntreev.ModernUI.Framework.DataGrid.Controls
+namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernTextClipboardParser
     {
@@ -77,7 +77,7 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                     var column = titleToColumn[item];
                     if (column.ReadOnly == true)
                     {
-                        throw new Exception(string.Format("'{0}'ì€(ëŠ”) ì½ê¸° ì „ìš©ì…ë‹ˆë‹¤.", column.Title));
+                        throw new Exception(string.Format("'{0}'Àº(´Â) ÀĞ±â Àü¿ëÀÔ´Ï´Ù.", column.Title));
                     }
                     columns.Add(column);
                 }
@@ -88,14 +88,14 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
             {
                 var index = this.gridContext.VisibleColumns.IndexOf(this.gridContext.CurrentColumn);
                 if (index + rows[0].Length > this.gridContext.VisibleColumns.Count)
-                    throw new Exception("ë¶™ì—¬ë„£ê¸° ëŒ€ìƒ ì—´ì˜ ë²”ìœ„ê°€ ì´ˆê³¼ë˜ì—ˆìŠµë‹ˆë‹¤.");
+                    throw new Exception("ºÙ¿©³Ö±â ´ë»ó ¿­ÀÇ ¹üÀ§°¡ ÃÊ°úµÇ¾ú½À´Ï´Ù.");
                 var columns = new List<ColumnBase>();
                 for (var i = 0; i < rows[0].Length; i++)
                 {
                     var column = this.gridContext.VisibleColumns[i + index];
                     if (column.ReadOnly == true)
                     {
-                        throw new Exception(string.Format("'{0}'ì€(ëŠ”) ì½ê¸° ì „ìš©ì…ë‹ˆë‹¤.", column.Title));
+                        throw new Exception(string.Format("'{0}'Àº(´Â) ÀĞ±â Àü¿ëÀÔ´Ï´Ù.", column.Title));
                     }
                     columns.Add(column);
                 }
@@ -167,14 +167,14 @@ namespace Ntreev.ModernUI.Framework.DataGrid.Controls
                 text = text.Replace("\"\"", "\"");
             }
             // 160 to 32
-            return text.Replace('Â ', ' ');
+            return text.Replace('?', ' ');
         }
 
         public void ValidateRowRange()
         {
             if (this.gridContext.CurrentItemIndex + this.Rows.Count > this.gridContext.Items.Count)
             {
-                throw new Exception("ë¶™ì—¬ë„£ê¸° ëŒ€ìƒ í–‰ì˜ ë²”ìœ„ê°€ ì´ˆê³¼ë˜ì—ˆìŠµë‹ˆë‹¤.");
+                throw new Exception("ºÙ¿©³Ö±â ´ë»ó ÇàÀÇ ¹üÀ§°¡ ÃÊ°úµÇ¾ú½À´Ï´Ù.");
             }
         }
 

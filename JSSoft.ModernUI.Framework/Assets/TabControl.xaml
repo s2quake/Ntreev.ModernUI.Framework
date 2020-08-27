@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -16,27 +16,27 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ====================================================================================================================-->
-<ResourceDictionary x:Class="Ntreev.ModernUI.Framework.Assets.TabControl"
+<ResourceDictionary x:Class="JSSoft.ModernUI.Framework.Assets.TabControl"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls"
                     xmlns:cal="http://www.caliburnproject.org">
 
     <DataTemplate x:Key="TabControl_ItemsSource_ContentTemplate">
-        <nmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
+        <jmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
                                        SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
                                        Focusable="False">
-            <nmfc:TabControlContentControl.ItemTemplate>
+            <jmfc:TabControlContentControl.ItemTemplate>
                 <DataTemplate>
                     <ContentControl cal:View.Model="{Binding}"  />
                 </DataTemplate>
-            </nmfc:TabControlContentControl.ItemTemplate>
-            <nmfc:TabControlContentControl.ItemsPanel>
+            </jmfc:TabControlContentControl.ItemTemplate>
+            <jmfc:TabControlContentControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid />
                 </ItemsPanelTemplate>
-            </nmfc:TabControlContentControl.ItemsPanel>
-            <nmfc:TabControlContentControl.ItemContainerStyle>
+            </jmfc:TabControlContentControl.ItemsPanel>
+            <jmfc:TabControlContentControl.ItemContainerStyle>
                 <Style TargetType="{x:Type ContentPresenter}">
                     <Setter Property="Visibility" Value="Hidden" />
                     <Style.Triggers>
@@ -45,8 +45,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </nmfc:TabControlContentControl.ItemContainerStyle>
-        </nmfc:TabControlContentControl>
+            </jmfc:TabControlContentControl.ItemContainerStyle>
+        </jmfc:TabControlContentControl>
     </DataTemplate>
 
     <Style x:Key="TabControl_ChildTab_Style" TargetType="{x:Type TabControl}">
@@ -159,12 +159,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <ScrollContentPresenter Grid.Column="0" Content="{TemplateBinding ScrollViewer.Content}" />
-                                        <nmfc:IconRepeatButton x:Name="LeftButton" Grid.Column="1" Command="ScrollBar.LineLeftCommand" 
+                                        <jmfc:IconRepeatButton x:Name="LeftButton" Grid.Column="1" Command="ScrollBar.LineLeftCommand" 
                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                                      Source="/Ntreev.ModernUI.Framework;component/Images/arrow_left.png" />
-                                        <nmfc:IconRepeatButton x:Name="RightButton" Grid.Column="2" Command="ScrollBar.LineRightCommand" 
+                                                      Source="/JSSoft.ModernUI.Framework;component/Images/arrow_left.png" />
+                                        <jmfc:IconRepeatButton x:Name="RightButton" Grid.Column="2" Command="ScrollBar.LineRightCommand" 
                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                                      Source="/Ntreev.ModernUI.Framework;component/Images/arrow_right.png" />
+                                                      Source="/JSSoft.ModernUI.Framework;component/Images/arrow_right.png" />
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -303,20 +303,20 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <nmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
+                    <jmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
                                                    SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
                                                    Focusable="False">
-                        <nmfc:TabControlContentControl.ItemTemplate>
+                        <jmfc:TabControlContentControl.ItemTemplate>
                             <DataTemplate>
                                 <ContentControl cal:View.Model="{Binding}" />
                             </DataTemplate>
-                        </nmfc:TabControlContentControl.ItemTemplate>
-                        <nmfc:TabControlContentControl.ItemsPanel>
+                        </jmfc:TabControlContentControl.ItemTemplate>
+                        <jmfc:TabControlContentControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <Grid />
                             </ItemsPanelTemplate>
-                        </nmfc:TabControlContentControl.ItemsPanel>
-                        <nmfc:TabControlContentControl.ItemContainerStyle>
+                        </jmfc:TabControlContentControl.ItemsPanel>
+                        <jmfc:TabControlContentControl.ItemContainerStyle>
                             <Style TargetType="{x:Type ContentPresenter}">
                                 <Setter Property="Visibility" Value="Hidden" />
                                 <Style.Triggers>
@@ -325,8 +325,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </nmfc:TabControlContentControl.ItemContainerStyle>
-                    </nmfc:TabControlContentControl>
+                        </jmfc:TabControlContentControl.ItemContainerStyle>
+                    </jmfc:TabControlContentControl>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -371,20 +371,20 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <nmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
+                    <jmfc:TabControlContentControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" 
                                                    SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
                                                    Focusable="False">
-                        <nmfc:TabControlContentControl.ItemTemplate>
+                        <jmfc:TabControlContentControl.ItemTemplate>
                             <DataTemplate>
                                 <ContentControl cal:View.Model="{Binding}" />
                             </DataTemplate>
-                        </nmfc:TabControlContentControl.ItemTemplate>
-                        <nmfc:TabControlContentControl.ItemsPanel>
+                        </jmfc:TabControlContentControl.ItemTemplate>
+                        <jmfc:TabControlContentControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <Grid />
                             </ItemsPanelTemplate>
-                        </nmfc:TabControlContentControl.ItemsPanel>
-                        <nmfc:TabControlContentControl.ItemContainerStyle>
+                        </jmfc:TabControlContentControl.ItemsPanel>
+                        <jmfc:TabControlContentControl.ItemContainerStyle>
                             <Style TargetType="{x:Type ContentPresenter}">
                                 <Setter Property="Visibility" Value="Hidden" />
                                 <Style.Triggers>
@@ -393,8 +393,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </nmfc:TabControlContentControl.ItemContainerStyle>
-                    </nmfc:TabControlContentControl>
+                        </jmfc:TabControlContentControl.ItemContainerStyle>
+                    </jmfc:TabControlContentControl>
                 </DataTemplate>
             </Setter.Value>
         </Setter>

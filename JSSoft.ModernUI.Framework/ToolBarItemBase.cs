@@ -1,4 +1,4 @@
-﻿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -16,12 +16,12 @@
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Caliburn.Micro;
-using Ntreev.ModernUI.Framework.Controls;
+using JSSoft.ModernUI.Framework.Controls;
 using System;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace Ntreev.ModernUI.Framework
+namespace JSSoft.ModernUI.Framework
 {
     public abstract class ToolBarItemBase : PropertyChangedBase, IToolBarItem, ICommand
     {

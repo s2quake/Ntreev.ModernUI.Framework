@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -16,11 +16,11 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ====================================================================================================================-->
-<ResourceDictionary x:Class="Ntreev.ModernUI.Framework.Assets.TreeViewItemSelector"
+<ResourceDictionary x:Class="JSSoft.ModernUI.Framework.Assets.TreeViewItemSelector"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
-                    xmlns:vm="clr-namespace:Ntreev.ModernUI.Framework.ViewModels">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls"
+                    xmlns:vm="clr-namespace:JSSoft.ModernUI.Framework.ViewModels">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="FilterBox.xaml" />
@@ -29,14 +29,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <HierarchicalDataTemplate DataType="{x:Type vm:CategoryTreeViewItemViewModel}" ItemsSource="{Binding Items}">
         <Grid Margin="2">
             <StackPanel Orientation="Horizontal">
-                <nmfc:IconImage x:Name="_folderImage" Foreground="{DynamicResource WindowText}" Background="{DynamicResource WindowBackground}"
-                                Source="/Ntreev.ModernUI.Framework;component/Images/folder_c.png" Margin="0 0 4 0" />
+                <jmfc:IconImage x:Name="_folderImage" Foreground="{DynamicResource WindowText}" Background="{DynamicResource WindowBackground}"
+                                Source="/JSSoft.ModernUI.Framework;component/Images/folder_c.png" Margin="0 0 4 0" />
                 <TextBlock Text="{Binding DisplayName}" />
             </StackPanel>
         </Grid>
         <HierarchicalDataTemplate.Triggers>
             <DataTrigger Binding="{Binding IsExpanded}" Value="True">
-                <Setter Property="Source" TargetName="_folderImage" Value="/Ntreev.ModernUI.Framework;component/Images/folder_o.png" />
+                <Setter Property="Source" TargetName="_folderImage" Value="/JSSoft.ModernUI.Framework;component/Images/folder_o.png" />
             </DataTrigger>
         </HierarchicalDataTemplate.Triggers>
     </HierarchicalDataTemplate>
@@ -44,14 +44,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <HierarchicalDataTemplate DataType="{x:Type vm:ItemTreeViewItemViewModel}" ItemsSource="{Binding Items}">
         <Grid Margin="2">
             <StackPanel Orientation="Horizontal">
-                <nmfc:IconImage Foreground="{DynamicResource WindowText}" Background="{DynamicResource WindowBackground}"
-                                Source="/Ntreev.ModernUI.Framework;component/Images/document.png" Margin="0 0 4 0" />
+                <jmfc:IconImage Foreground="{DynamicResource WindowText}" Background="{DynamicResource WindowBackground}"
+                                Source="/JSSoft.ModernUI.Framework;component/Images/document.png" Margin="0 0 4 0" />
                 <TextBlock Text="{Binding DisplayName}" />
             </StackPanel>
         </Grid>
     </HierarchicalDataTemplate>
 
-    <ControlTemplate x:Key="TreeViewItemSelector_Template" TargetType="{x:Type nmfc:TreeViewItemSelector}">
+    <ControlTemplate x:Key="TreeViewItemSelector_Template" TargetType="{x:Type jmfc:TreeViewItemSelector}">
         <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -111,7 +111,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:TreeViewItemSelector}">
+    <Style TargetType="{x:Type jmfc:TreeViewItemSelector}">
         <Setter Property="Foreground" Value="{DynamicResource InputText}" />
         <Setter Property="Background" Value="{DynamicResource InputBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource InputBorder}" />

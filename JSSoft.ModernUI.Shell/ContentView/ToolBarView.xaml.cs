@@ -1,10 +1,10 @@
-ï»¿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Shell.ContentView
+namespace JSSoft.ModernUI.Shell.ContentView
 {
     /// <summary>
-    /// ToolBarView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// ToolBarView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class ToolBarView : UserControl
     {

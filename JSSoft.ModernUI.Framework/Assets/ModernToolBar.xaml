@@ -1,4 +1,4 @@
-﻿<!--===================================================================================================================
+<!--===================================================================================================================
 Released under the MIT License.
     
 Copyright (c) 2018 Ntreev Soft co., Ltd.
@@ -19,11 +19,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:cal="http://www.caliburnproject.org"
-                    xmlns:nmfc="clr-namespace:Ntreev.ModernUI.Framework.Controls"
-                    xmlns:nmfv="clr-namespace:Ntreev.ModernUI.Framework.Converters">
+                    xmlns:jmfc="clr-namespace:JSSoft.ModernUI.Framework.Controls"
+                    xmlns:jmfv="clr-namespace:JSSoft.ModernUI.Framework.Converters">
 
-    <nmfv:RoutedUICommandToStringConverter x:Key="commandToTooltipConverter" />
-    <nmfv:DisplayNameInputGestureToStringConverter x:Key="DisplayNameInputGestureToStringConverter" />
+    <jmfv:RoutedUICommandToStringConverter x:Key="commandToTooltipConverter" />
+    <jmfv:DisplayNameInputGestureToStringConverter x:Key="DisplayNameInputGestureToStringConverter" />
 
     <Style x:Key="{x:Static ToolBar.SeparatorStyleKey}" TargetType="{x:Type Separator}">
         <Setter Property="Background" Value="{DynamicResource SeparatorBackground}" />
@@ -135,7 +135,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     <ResourceDictionary Source="IconButton.xaml" />
                     <ResourceDictionary Source="Button.xaml" />
                 </ResourceDictionary.MergedDictionaries>
-                <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
+                <Style TargetType="{x:Type jmfc:IconButton}" BasedOn="{StaticResource IToolBarItem_IconButton_Style}" />
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBar_Button_Style}" />
             </ResourceDictionary>
         </Style.Resources>
@@ -146,9 +146,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </Style.Triggers>
     </Style>
 
-    <nmfc:ModernToolBarStyleSelector x:Key="ModernToolBarStyleSelector" Style="{StaticResource ModernToolBar_ItemContainer_Style}" />
+    <jmfc:ModernToolBarStyleSelector x:Key="ModernToolBarStyleSelector" Style="{StaticResource ModernToolBar_ItemContainer_Style}" />
 
-    <ControlTemplate x:Key="ModernToolBar_Template" TargetType="{x:Type nmfc:ModernToolBar}">
+    <ControlTemplate x:Key="ModernToolBar_Template" TargetType="{x:Type jmfc:ModernToolBar}">
         <Border x:Name="Border" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
                 BorderThickness="{TemplateBinding BorderThickness}">
             <DockPanel>
@@ -196,13 +196,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type nmfc:ModernToolBar}">
+    <Style TargetType="{x:Type jmfc:ModernToolBar}">
         <Style.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="IconButton.xaml" />
                 </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type nmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
+            <Style TargetType="{x:Type jmfc:IconButton}" BasedOn="{StaticResource ToolBar_IconButton_Style}" />
             </ResourceDictionary>
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />

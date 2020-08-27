@@ -1,4 +1,4 @@
-ï»¿//Released under the MIT License.
+//Released under the MIT License.
 //
 //Copyright (c) 2018 Ntreev Soft co., Ltd.
 //
@@ -18,10 +18,10 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Ntreev.ModernUI.Framework.Dialogs.Views
+namespace JSSoft.ModernUI.Framework.Dialogs.Views
 {
     /// <summary>
-    /// EditFilterExpressionView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// EditFilterExpressionView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class EditFilterExpressionView : UserControl
     {

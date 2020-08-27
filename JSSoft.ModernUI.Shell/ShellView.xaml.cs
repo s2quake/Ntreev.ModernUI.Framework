@@ -1,9 +1,9 @@
-ï»¿using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Controls;
 
-namespace Ntreev.ModernUI.Shell
+namespace JSSoft.ModernUI.Shell
 {
     /// <summary>
-    /// ShellView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
+    /// ShellView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
     /// </summary>
     public partial class ShellView : ModernWindow
     {
