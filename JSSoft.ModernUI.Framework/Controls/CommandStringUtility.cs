@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -74,7 +74,7 @@ namespace JSSoft.ModernUI.Framework.Controls
         }
 
         /// <summary>
-        /// a=1, a="123", a='123' °ú °°Àº ¹®ÀÚ¿­À» Å°¿Í °ªÀ¸·Î ºĞ¸®ÇÏ´Â ¸Ş¼Òµå
+        /// a=1, a="123", a='123' ê³¼ ê°™ì€ ë¬¸ìì—´ì„ í‚¤ì™€ ê°’ìœ¼ë¡œ ë¶„ë¦¬í•˜ëŠ” ë©”ì†Œë“œ
         /// </summary>
         public static bool TryGetKeyValue(string text, out string key, out string value)
         {

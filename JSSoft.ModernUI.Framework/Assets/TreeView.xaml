@@ -1,4 +1,4 @@
-<!-- Released under the MIT License.
+﻿<!-- Released under the MIT License.
 
 Copyright (c) 2018 Ntreev Soft co., Ltd.
 Copyright (c) 2020 Jeesu Choi
@@ -156,7 +156,7 @@ Namespaces and files starting with "Ntreev" have been renamed to "JSSoft". -->
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
         <Setter Property="Template">
             <Setter.Value>
-                <!--��ũ�Ѻ� ���ִ°��� Ư¡--> 
+                <!--占쏙옙크占싼븝옙低?占쏙옙占쌍는곤옙占쏙옙 특징--> 
                 <ControlTemplate TargetType="{x:Type TreeView}">
                     <Border Name="Border"
                             BorderBrush="{TemplateBinding BorderBrush}"

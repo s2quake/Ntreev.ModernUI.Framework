@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -24,7 +24,7 @@ using System.Windows.Controls;
 namespace JSSoft.ModernUI.Shell.Contents.Views
 {
     /// <summary>
-    /// TerminalView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
+    /// TerminalView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
     /// </summary>
     public partial class TerminalView : UserControl
     {
@@ -45,7 +45,7 @@ namespace JSSoft.ModernUI.Shell.Contents.Views
                 //if (this.editor.ApplyTemplate() == true)
                 {
                     this.Editor.Focus();
-                    this.Editor.AppendLine("¾È³çÇÏ¼¼¿ä.");
+                    this.Editor.AppendLine("ì•ˆë…•í•˜ì„¸ìš”.");
                     this.Editor.Prompt = "c:> ";
                 }
             });

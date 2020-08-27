@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -40,7 +40,7 @@ using Xceed.Wpf.DataGrid.Views;
 namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     /// <summary>
-    /// ModernDataGridControl.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
+    /// ModernDataGridControl.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
     /// </summary>
     public class ModernDataGridControl : DataGridControl
     {

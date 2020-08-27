@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -80,7 +80,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
                     var column = titleToColumn[item];
                     if (column.ReadOnly == true)
                     {
-                        throw new Exception(string.Format("'{0}'Àº(´Â) ÀĞ±â Àü¿ëÀÔ´Ï´Ù.", column.Title));
+                        throw new Exception(string.Format("'{0}'ì€(ëŠ”) ì½ê¸° ì „ìš©ì…ë‹ˆë‹¤.", column.Title));
                     }
                     columns.Add(column);
                 }
@@ -91,14 +91,14 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
             {
                 var index = this.gridContext.VisibleColumns.IndexOf(this.gridContext.CurrentColumn);
                 if (index + rows[0].Length > this.gridContext.VisibleColumns.Count)
-                    throw new Exception("ºÙ¿©³Ö±â ´ë»ó ¿­ÀÇ ¹üÀ§°¡ ÃÊ°úµÇ¾ú½À´Ï´Ù.");
+                    throw new Exception("ë¶™ì—¬ë„£ê¸° ëŒ€ìƒ ì—´ì˜ ë²”ìœ„ê°€ ì´ˆê³¼ë˜ì—ˆìŠµë‹ˆë‹¤.");
                 var columns = new List<ColumnBase>();
                 for (var i = 0; i < rows[0].Length; i++)
                 {
                     var column = this.gridContext.VisibleColumns[i + index];
                     if (column.ReadOnly == true)
                     {
-                        throw new Exception(string.Format("'{0}'Àº(´Â) ÀĞ±â Àü¿ëÀÔ´Ï´Ù.", column.Title));
+                        throw new Exception(string.Format("'{0}'ì€(ëŠ”) ì½ê¸° ì „ìš©ì…ë‹ˆë‹¤.", column.Title));
                     }
                     columns.Add(column);
                 }
@@ -177,7 +177,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
         {
             if (this.gridContext.CurrentItemIndex + this.Rows.Count > this.gridContext.Items.Count)
             {
-                throw new Exception("ºÙ¿©³Ö±â ´ë»ó ÇàÀÇ ¹üÀ§°¡ ÃÊ°úµÇ¾ú½À´Ï´Ù.");
+                throw new Exception("ë¶™ì—¬ë„£ê¸° ëŒ€ìƒ í–‰ì˜ ë²”ìœ„ê°€ ì´ˆê³¼ë˜ì—ˆìŠµë‹ˆë‹¤.");
             }
         }
 

@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -29,7 +29,7 @@ using System.Windows.Media;
 namespace JSSoft.ModernUI.Framework.Controls
 {
     /// <summary>
-    /// PropertyItemsControl.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
+    /// PropertyItemsControl.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(HeaderedContentControl))]
     public class PropertyItemsControl : ItemsControl

@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -23,7 +23,7 @@ using System.Windows;
 namespace JSSoft.ModernUI.Shell
 {
     /// <summary>
-    /// App.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
+    /// App.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
     /// </summary>
     public partial class App : Application
     {

@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -149,7 +149,7 @@ namespace JSSoft.ModernUI.Framework
         }
 
         /// <summary>
-        /// Loaded ÀÌº¥Æ® ÀÌÈÄ¿¡ ÇÑ¹ø ChromeWorker¶ó´Â ºÎºĞ¿¡¼­ Å©±â º¯°æÀÌ ÀÏ¾î³ª±â ¶§¹®¿¡ À©µµ¿ì À§Ä¡¸¦ ´Ù½Ã °è»êÇÔ
+        /// Loaded ì´ë²¤íŠ¸ ì´í›„ì— í•œë²ˆ ChromeWorkerë¼ëŠ” ë¶€ë¶„ì—ì„œ í¬ê¸° ë³€ê²½ì´ ì¼ì–´ë‚˜ê¸° ë•Œë¬¸ì— ìœˆë„ìš° ìœ„ì¹˜ë¥¼ ë‹¤ì‹œ ê³„ì‚°í•¨
         /// </summary>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {

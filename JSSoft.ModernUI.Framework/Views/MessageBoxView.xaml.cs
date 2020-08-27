@@ -1,4 +1,4 @@
-// Released under the MIT License.
+ï»¿// Released under the MIT License.
 // 
 // Copyright (c) 2018 Ntreev Soft co., Ltd.
 // Copyright (c) 2020 Jeesu Choi
@@ -24,7 +24,7 @@ using System.Windows.Controls;
 namespace JSSoft.ModernUI.Framework.Views
 {
     /// <summary>
-    /// MessageBoxView.xaml¿¡ ´ëÇÑ »óÈ£ ÀÛ¿ë ³í¸®
+    /// MessageBoxView.xamlì— ëŒ€í•œ ìƒí˜¸ ì‘ìš© ë…¼ë¦¬
     /// </summary>
     public partial class MessageBoxView : UserControl
     {
