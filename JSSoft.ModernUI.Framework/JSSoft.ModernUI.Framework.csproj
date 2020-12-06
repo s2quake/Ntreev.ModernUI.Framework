@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro" Version="4.0.105-alpha" />
-    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.105-alpha" />
-    <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp3.'))">
+    <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.136-rc" />
     <PackageReference Include="MahApps.Metro" Version="2.1.1" />
   </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp3.'))">
+    <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
+  </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <PackageReference Include="MahApps.Metro" Version="1.6.5" />
+    <PackageReference Include="ModernUI.WPF" Version="1.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\JSSoft.Library\JSSoft.Library\JSSoft.Library.csproj" />

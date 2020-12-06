@@ -23,3 +23,7 @@
 .vscode/
 bin/
 obj/
+logs/
+packages/
+*.bat
+*.user
