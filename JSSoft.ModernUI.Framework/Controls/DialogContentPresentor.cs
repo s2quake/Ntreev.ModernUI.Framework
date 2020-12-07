@@ -34,16 +34,13 @@ namespace JSSoft.ModernUI.Framework.Controls
             {
                 var desiredWidth = DialogWindow.GetDesiredWidth(fe);
                 var desiredHeight = DialogWindow.GetDesiredHeight(fe);
-                //if (this.Parent is DialogWindow window && window.IsEnsured == false)
+                if (double.IsNaN(desiredWidth) == false)
                 {
-                    if (double.IsNaN(desiredWidth) == false)
-                    {
-                        size.Width = Math.Min(constraint.Width, desiredWidth);
-                    }
-                    if (double.IsNaN(desiredHeight) == false)
-                    {
-                        size.Height = Math.Min(constraint.Height, desiredHeight);
-                    }
+                    size.Width = Math.Min(constraint.Width, desiredWidth);
+                }
+                if (double.IsNaN(desiredHeight) == false)
+                {
+                    size.Height = Math.Min(constraint.Height, desiredHeight);
                 }
             }
             return size;

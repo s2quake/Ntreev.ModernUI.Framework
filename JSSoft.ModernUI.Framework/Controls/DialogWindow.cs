@@ -155,21 +155,6 @@ namespace JSSoft.ModernUI.Framework.Controls
             }
         }
 
-        //protected override Size MeasureOverride(Size availableSize)
-        //{
-        //    var size = base.MeasureOverride(availableSize);
-        //    if (this.Content is FrameworkElement)
-        //    {
-        //        var desiredWidth = GetDesiredWidth(this.Content as FrameworkElement);
-        //        var desiredHeight = GetDesiredHeight(this.Content as FrameworkElement);
-        //        if (double.IsNaN(desiredWidth) == false)
-        //            size.Width = desiredWidth;
-        //        if (double.IsNaN(desiredHeight) == false)
-        //            size.Height = desiredHeight;
-        //    }
-        //    return size;
-        //}
-
         private static void DesiredWidthPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(d) == true)

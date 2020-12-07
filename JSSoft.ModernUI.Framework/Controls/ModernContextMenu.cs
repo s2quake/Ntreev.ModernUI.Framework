@@ -140,7 +140,7 @@ namespace JSSoft.ModernUI.Framework.Controls
         {
             if (d is ModernContextMenu self)
             {
-                self.RefreshItemsSource(e.NewValue as IEnumerable);
+                self.RefreshItemsSource(e.NewValue as IEnumerable ?? Enumerable.Empty<object>());
             }
         }
 

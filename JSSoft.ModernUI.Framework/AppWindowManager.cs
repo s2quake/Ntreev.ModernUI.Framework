@@ -113,7 +113,14 @@ namespace JSSoft.ModernUI.Framework
                         }
                         if (window is DialogWindow dialogWindow)
                         {
-                            dialogWindow.Dispatcher.InvokeAsync(() => dialogWindow.IsEnsured = true);
+                            dialogWindow.Dispatcher.InvokeAsync(() =>
+                            {
+                                if (dialogWindow.Content is FrameworkElement fe)
+                                {
+                                    dialogWindow.ResizeMode = DialogWindow.GetDesiredResizeMode(fe);
+                                }
+                                dialogWindow.IsEnsured = true;
+                            });
                         }
                     };
                 }
@@ -228,7 +235,6 @@ namespace JSSoft.ModernUI.Framework
                 }
                 catch
                 {
-
                 }
             }
         }
