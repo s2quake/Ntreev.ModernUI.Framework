@@ -46,7 +46,7 @@ Namespaces and files starting with "Ntreev" have been renamed to "JSSoft". -->
     <IntermediateOutputPath>$(RootPath)obj\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName)</IntermediateOutputPath>
 	  <DelaySign>true</DelaySign>
 	  <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)JSSoft.ModernUI.Framework.snk</AssemblyOriginatorKeyFile>
-	  <SignAssembly>true</SignAssembly>
+	  <SignAssembly Condition="'$(Configuration)' == 'Release'">true</SignAssembly>
 	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
