@@ -20,6 +20,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 Namespaces and files starting with "Ntreev" have been renamed to "JSSoft". -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
     <Version>5.0.0</Version>
@@ -39,13 +40,6 @@ Namespaces and files starting with "Ntreev" have been renamed to "JSSoft". -->
     <LangVersion>latest</LangVersion>
     <RootPath Condition="'$(SolutionDir)' != ''">$(SolutionDir)</RootPath>
     <RootPath Condition="'$(SolutionDir)' == ''">$(MSBuildStartupDirectory)\</RootPath>
-    <ConfigurationType Condition="'$(Configuration)' == ''">Debug</ConfigurationType>
-    <ConfigurationType Condition="'$(Configuration)' != ''">$(Configuration)</ConfigurationType>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <BaseOutputPath>$(RootPath)bin\$(MSBuildProjectName)</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(RootPath)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <OutputPath>$(RootPath)bin\$(ConfigurationType)\$(TargetFramework)\$(MSBuildProjectName)</OutputPath>
-    <IntermediateOutputPath>$(RootPath)obj\$(ConfigurationType)\$(TargetFramework)\$(MSBuildProjectName)</IntermediateOutputPath>
 	  <DelaySign>true</DelaySign>
 	  <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)JSSoft.ModernUI.Framework.snk</AssemblyOriginatorKeyFile>
 	  <SignAssembly Condition="'$(Configuration)' == 'Release'">true</SignAssembly>
