@@ -39,7 +39,7 @@ Namespaces and files starting with "Ntreev" have been renamed to "JSSoft". -->
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
     <RootPath Condition="'$(SolutionDir)' != ''">$(SolutionDir)</RootPath>
-    <RootPath Condition="'$(SolutionDir)' == ''">$(MSBuildStartupDirectory)\</RootPath>
+    <RootPath Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)\</RootPath>
 	  <DelaySign>true</DelaySign>
 	  <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)JSSoft.ModernUI.Framework.snk</AssemblyOriginatorKeyFile>
 	  <SignAssembly Condition="'$(Configuration)' == 'Release'">true</SignAssembly>
