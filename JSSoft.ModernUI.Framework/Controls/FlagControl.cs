@@ -72,7 +72,7 @@ namespace JSSoft.ModernUI.Framework.Controls
         public static readonly RoutedEvent SelectionChangedEvent =
             EventManager.RegisterRoutedEvent(nameof(SelectionChanged), RoutingStrategy.Bubble, typeof(SelectionChangedEventHandler), typeof(FlagControl));
 
-        private readonly ObservableCollection<object> selectedItems = new ObservableCollection<object>();
+        private readonly ObservableCollection<object> selectedItems = new();
         private Popup popup;
 
         private bool isContainerUpdating;
@@ -589,7 +589,7 @@ namespace JSSoft.ModernUI.Framework.Controls
                 {
                     var matches = Regex.Matches(newText, pattern);
 
-                    Dictionary<string, long> values = new Dictionary<string, long>(this.Items.Count);
+                    Dictionary<string, long> values = new(this.Items.Count);
 
                     foreach (var item in this.Items)
                     {

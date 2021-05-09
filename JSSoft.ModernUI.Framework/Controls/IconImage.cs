@@ -43,7 +43,7 @@ namespace JSSoft.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(IconImage),
                 new FrameworkPropertyMetadata(Stretch.None, StretchPropertyChangedCallback));
 
-        private static readonly Dictionary<string, WriteableBitmap> items = new Dictionary<string, WriteableBitmap>();
+        private static readonly Dictionary<string, WriteableBitmap> items = new();
 
         private Image image;
         private WriteableBitmap imageSource;
