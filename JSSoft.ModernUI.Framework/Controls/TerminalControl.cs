@@ -55,8 +55,8 @@ namespace JSSoft.ModernUI.Framework.Controls
 
         private RichTextBox textBox;
 
-        private readonly List<string> histories = new List<string>();
-        private readonly List<string> completions = new List<string>();
+        private readonly List<string> histories = new();
+        private readonly List<string> completions = new();
         private int historyIndex;
 
         private Paragraph promptBlock;

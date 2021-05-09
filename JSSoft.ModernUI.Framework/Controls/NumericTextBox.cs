@@ -37,7 +37,7 @@ namespace JSSoft.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(Value), typeof(decimal), typeof(NumericTextBox),
                 new FrameworkPropertyMetadata(ValuePropertyChangedCallback, ValuePropertyCoerceValueCallback));
 
-        private static readonly Dictionary<NumericType, Func<string, decimal?>> parserByType = new Dictionary<NumericType, Func<string, decimal?>>()
+        private static readonly Dictionary<NumericType, Func<string, decimal?>> parserByType = new()
         {
             { NumericType.Int8, (text) => { if (sbyte.TryParse(text, out var v) == true) return v; return null; } },
             { NumericType.UInt8, (text) => { if (byte.TryParse(text, out var v) == true) return v; return null; } },

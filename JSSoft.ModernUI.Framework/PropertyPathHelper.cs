@@ -37,7 +37,7 @@ namespace JSSoft.ModernUI.Framework
             return dummy.GetValue(DummyObject.ValueProperty);
         }
 
-        private static readonly DummyObject dummy = new DummyObject();
+        private static readonly DummyObject dummy = new();
 
         #region class
 

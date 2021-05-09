@@ -39,7 +39,7 @@ namespace JSSoft.ModernUI.Framework.Controls
 
         public static readonly DependencyProperty IsValidProperty = IsValidPropertyKey.DependencyProperty;
 
-        private static readonly Dictionary<PasswordBox, PasswordBox> targetToSource = new Dictionary<PasswordBox, PasswordBox>();
+        private static readonly Dictionary<PasswordBox, PasswordBox> targetToSource = new();
 
         public static PasswordBox GetValidationTarget(PasswordBox d)
         {

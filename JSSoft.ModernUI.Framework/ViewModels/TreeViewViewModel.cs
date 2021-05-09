@@ -32,8 +32,8 @@ namespace JSSoft.ModernUI.Framework.ViewModels
 {
     public class TreeViewViewModel : ViewModelBase, ISelector
     {
-        private readonly List<TreeViewItemViewModel> expandedItems = new List<TreeViewItemViewModel>();
-        private readonly List<TreeViewItemViewModel> visibleItems = new List<TreeViewItemViewModel>();
+        private readonly List<TreeViewItemViewModel> expandedItems = new();
+        private readonly List<TreeViewItemViewModel> visibleItems = new();
         private TreeViewItemViewModel selectedItem;
         private string filterExpression;
         private bool caseSensitive;

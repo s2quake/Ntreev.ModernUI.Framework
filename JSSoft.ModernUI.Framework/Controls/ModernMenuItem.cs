@@ -48,7 +48,7 @@ namespace JSSoft.ModernUI.Framework.Controls
             DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ModernMenuItem),
                 new FrameworkPropertyMetadata(ItemsSourcePropertyChangedCallback));
 
-        private readonly ObservableCollection<object> menuItems = new ObservableCollection<object>();
+        private readonly ObservableCollection<object> menuItems = new();
 
         static ModernMenuItem()
         {

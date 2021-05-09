@@ -27,7 +27,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     public class ModernTextClipboardExporter : ClipboardExporterBase
     {
-        private readonly StringBuilder sb = new StringBuilder();
+        private readonly StringBuilder sb = new();
         private bool isFistColumn;
         private int indent;
 

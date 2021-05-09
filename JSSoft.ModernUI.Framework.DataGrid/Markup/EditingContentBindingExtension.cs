@@ -30,7 +30,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Markup
     [MarkupExtensionReturnType(typeof(object))]
     public class EditingContentBindingExtension : MarkupExtension
     {
-        private readonly Binding binding = new Binding();
+        private readonly Binding binding = new();
 
         public EditingContentBindingExtension()
         {

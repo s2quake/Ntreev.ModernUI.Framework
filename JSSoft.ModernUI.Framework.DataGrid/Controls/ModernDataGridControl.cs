@@ -97,7 +97,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
             EventManager.RegisterRoutedEvent(nameof(RowDrop), RoutingStrategy.Bubble,
                 typeof(ModernDragEventHandler), typeof(ModernDataGridControl));
 
-        private static readonly List<Color> colors = new List<Color>();
+        private static readonly List<Color> colors = new();
 
         private DataGridContext selectedGridContext;
         private SelectionRange selectedColumnRange;

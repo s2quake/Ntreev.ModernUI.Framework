@@ -28,8 +28,8 @@ namespace JSSoft.ModernUI.Framework
 {
     public abstract class UndoServiceBase : Caliburn.Micro.PropertyChangedBase, IUndoService
     {
-        private readonly ObservableCollection<IUndo> undoItems = new ObservableCollection<IUndo>();
-        private readonly ObservableCollection<IUndo> redoItems = new ObservableCollection<IUndo>();
+        private readonly ObservableCollection<IUndo> undoItems = new();
+        private readonly ObservableCollection<IUndo> redoItems = new();
         private readonly ReadOnlyObservableCollection<IUndo> undoItemsReadOnly;
         private readonly ReadOnlyObservableCollection<IUndo> redoItemsReadOnly;
         private BatchAction transaction;

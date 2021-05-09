@@ -25,25 +25,25 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     public static class ModernDataGridCommands
     {
-        public static readonly RoutedCommand InsertItem = new RoutedCommand(nameof(InsertItem), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand InsertItem = new(nameof(InsertItem), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand CopyWithHeaders = new RoutedCommand(nameof(CopyWithHeaders), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand CopyWithHeaders = new(nameof(CopyWithHeaders), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand SelectInsertion = new RoutedCommand(nameof(SelectInsertion), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand SelectInsertion = new(nameof(SelectInsertion), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand MoveToNextItem = new RoutedCommand(nameof(MoveToNextItem), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand MoveToNextItem = new(nameof(MoveToNextItem), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand MoveToPrevItem = new RoutedCommand(nameof(MoveToPrevItem), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand MoveToPrevItem = new(nameof(MoveToPrevItem), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand MoveToNextColumn = new RoutedCommand(nameof(MoveToNextColumn), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand MoveToNextColumn = new(nameof(MoveToNextColumn), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand MoveToPrevColumn = new RoutedCommand(nameof(MoveToPrevColumn), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand MoveToPrevColumn = new(nameof(MoveToPrevColumn), typeof(ModernDataGridCommands));
 
         public static readonly RoutedCommand NextMatchedItem = new RoutedUICommand(Resources.Command_NextSearchedItem, nameof(NextMatchedItem), typeof(ModernDataGridCommands));
 
         public static readonly RoutedCommand PrevMatchedItem = new RoutedUICommand(Resources.Command_PrevSearchedItem, nameof(PrevMatchedItem), typeof(ModernDataGridCommands));
 
-        public static readonly RoutedCommand NewLine = new RoutedCommand(nameof(NewLine), typeof(ModernDataGridCommands));
+        public static readonly RoutedCommand NewLine = new(nameof(NewLine), typeof(ModernDataGridCommands));
 
         static ModernDataGridCommands()
         {

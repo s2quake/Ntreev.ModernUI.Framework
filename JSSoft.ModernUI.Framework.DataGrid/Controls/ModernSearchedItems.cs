@@ -40,7 +40,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
             DependencyProperty.Register(nameof(ScrollBar), typeof(ModernScrollBar), typeof(ModernSearchedItems),
                 new FrameworkPropertyMetadata(null, ScrollBarPropertyChangedCallback));
 
-        private readonly ObservableCollection<int> filteredItems = new ObservableCollection<int>();
+        private readonly ObservableCollection<int> filteredItems = new();
         private int count;
 
         public ModernSearchedItems()

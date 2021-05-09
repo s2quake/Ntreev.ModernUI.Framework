@@ -40,7 +40,7 @@ namespace JSSoft.ModernUI.Framework.Controls
                 new UIPropertyMetadata(false));
         public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
 
-        private static readonly HashSet<TextBlock> textBlocks = new HashSet<TextBlock>();
+        private static readonly HashSet<TextBlock> textBlocks = new();
 
         private static void ShowTrimmedTextPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

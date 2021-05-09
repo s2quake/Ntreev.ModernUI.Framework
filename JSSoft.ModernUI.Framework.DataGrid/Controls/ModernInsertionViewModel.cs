@@ -25,7 +25,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
 {
     class ModernInsertionViewModel : ModalDialogBase
     {
-        private readonly List<object> itemsSource = new List<object>();
+        private readonly List<object> itemsSource = new();
 
         public ModernInsertionViewModel()
         {

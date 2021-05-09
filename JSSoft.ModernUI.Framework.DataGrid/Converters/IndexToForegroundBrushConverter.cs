@@ -28,7 +28,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Converters
 {
     public class IndexToForegroundBrushConverter : IValueConverter
     {
-        private static readonly ComplementaryConverter complementaryConverter = new ComplementaryConverter();
+        private static readonly ComplementaryConverter complementaryConverter = new();
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

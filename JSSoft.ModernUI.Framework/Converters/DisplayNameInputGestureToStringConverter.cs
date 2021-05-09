@@ -27,7 +27,7 @@ namespace JSSoft.ModernUI.Framework.Converters
 {
     public class DisplayNameInputGestureToStringConverter : IMultiValueConverter
     {
-        private readonly InputGestureToStringConverter inputGestureToStringConverter = new InputGestureToStringConverter();
+        private readonly InputGestureToStringConverter inputGestureToStringConverter = new();
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

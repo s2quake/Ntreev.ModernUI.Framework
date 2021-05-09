@@ -30,7 +30,7 @@ namespace JSSoft.ModernUI.Framework.ViewModels
 {
     public class ListBoxViewModel<T> : ViewModelBase, ISelector where T : ListBoxItemViewModel
     {
-        private readonly List<T> visibleItems = new List<T>();
+        private readonly List<T> visibleItems = new();
         private T selectedItem;
         private string filterExpression;
         private bool caseSensitive;
