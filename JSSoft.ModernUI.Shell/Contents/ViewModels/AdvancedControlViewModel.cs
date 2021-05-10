@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using JSSoft.Library.Random;
 using JSSoft.ModernUI.Framework;
 using System;
@@ -31,9 +32,9 @@ namespace JSSoft.ModernUI.Shell.Contents.ViewModels
     [Export(typeof(IContent))]
     class AdvancedControlViewModel : ContentBase, IContent
     {
-        private readonly ObservableCollection<string> comboBox = new ObservableCollection<string>();
-        private readonly ObservableCollection<string> editableComboBox = new ObservableCollection<string>();
-        private readonly ObservableCollection<string> treeViewItem = new ObservableCollection<string>()
+        private readonly ObservableCollection<string> comboBox = new();
+        private readonly ObservableCollection<string> editableComboBox = new();
+        private readonly ObservableCollection<string> treeViewItem = new()
         {
             "/",
             "/Root/",

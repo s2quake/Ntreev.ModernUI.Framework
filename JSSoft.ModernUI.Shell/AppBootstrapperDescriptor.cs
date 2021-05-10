@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using Caliburn.Micro;
 using JSSoft.Library.Linq;
 using JSSoft.ModernUI.Framework;

@@ -431,7 +431,7 @@ namespace JSSoft.ModernUI.Framework.Controls
             {
                 for (var i = 0; i < this.ItemContainerGenerator.Items.Count; i++)
                 {
-                    if (!(this.ItemContainerGenerator.ContainerFromIndex(i) is FlagControlItem item))
+                    if (this.ItemContainerGenerator.ContainerFromIndex(i) is not FlagControlItem item)
                         continue;
 
                     if (this.Value.HasValue == true)

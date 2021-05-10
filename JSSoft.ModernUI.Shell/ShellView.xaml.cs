@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace JSSoft.ModernUI.Shell

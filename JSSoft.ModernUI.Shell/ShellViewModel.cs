@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using JSSoft.ModernUI.Framework;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace JSSoft.ModernUI.Shell
     [Export(typeof(IShell))]
     class ShellViewModel : ScreenBase, IShell
     {
-        private readonly ObservableCollection<IContent> contents = new ObservableCollection<IContent>();
+        private readonly ObservableCollection<IContent> contents = new();
         private IContent selectedContent;
 
         [ImportingConstructor]

@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
             if (gridContext.CurrentItem == null || gridContext.CurrentColumn == null)
                 return null;
 
-            if (!(gridContext.GetContainerFromItem(gridContext.CurrentItem) is ModernDataRow row))
+            if (gridContext.GetContainerFromItem(gridContext.CurrentItem) is not ModernDataRow row)
                 return null;
 
             return row.Cells[gridContext.CurrentColumn] as ModernDataCell;

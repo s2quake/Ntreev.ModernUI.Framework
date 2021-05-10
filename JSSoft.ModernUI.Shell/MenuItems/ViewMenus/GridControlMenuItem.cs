@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using JSSoft.ModernUI.Framework;
 using JSSoft.ModernUI.Shell.Dialogs.ViewModels;
 using System;

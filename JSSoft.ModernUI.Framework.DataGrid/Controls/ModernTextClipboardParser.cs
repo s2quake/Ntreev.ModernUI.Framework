@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +40,7 @@ namespace JSSoft.ModernUI.Framework.DataGrid.Controls
             this.gridContext = gridContext;
             this.Columns = gridContext.Columns.ToArray();
 
-            if (!(gridContext.Items.SourceCollection is ITypedList typedList))
+            if (gridContext.Items.SourceCollection is not ITypedList typedList)
             {
                 var source = (gridContext.Items.SourceCollection as CollectionView).SourceCollection;
                 typedList = source as ITypedList;

@@ -18,6 +18,7 @@
 // 
 // Forked from https://github.com/NtreevSoft/Ntreev.ModernUI.Framework
 // Namespaces and files starting with "Ntreev" have been renamed to "JSSoft".
+
 using JSSoft.ModernUI.Framework;
 using System;
 using System.Collections;
@@ -29,7 +30,7 @@ namespace JSSoft.ModernUI.Shell.Dialogs.ViewModels
 {
     class GridControlViewModel : ModalDialogBase
     {
-        private readonly DataTable table = new DataTable();
+        private readonly DataTable table = new();
 
         public GridControlViewModel()
         {
