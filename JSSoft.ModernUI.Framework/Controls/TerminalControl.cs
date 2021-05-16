@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -44,6 +45,10 @@ namespace JSSoft.ModernUI.Framework.Controls
             DependencyProperty.RegisterReadOnly(nameof(Text), typeof(string), typeof(TerminalControl),
                 new FrameworkPropertyMetadata(string.Empty));
         public readonly static DependencyProperty TextProperty = TextPropertyKey.DependencyProperty;
+
+        public readonly static DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TerminalControl),
+                new FrameworkPropertyMetadata(IsReadOnlyPropertyChangedCallback));
 
         public readonly static DependencyProperty OutputForegroundProperty =
             DependencyProperty.Register(nameof(OutputForeground), typeof(Brush), typeof(TerminalControl),
@@ -99,6 +104,10 @@ namespace JSSoft.ModernUI.Framework.Controls
                 this.textBox.TextChanged += TextBox_TextChanged;
                 this.textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
                 this.textBox.SelectionChanged += TextBox_SelectionChanged;
+                BindingOperations.SetBinding(this, IsReadOnlyProperty, new Binding(nameof(RichTextBox.IsReadOnly))
+                {
+                    Source = this.Text
+                });
             }
         }
 
@@ -281,6 +290,12 @@ namespace JSSoft.ModernUI.Framework.Controls
 
                 this.SetCursorPosition(value);
             }
+        }
+
+        public bool IsReadOnly
+        {
+            get => (bool)this.GetValue(IsReadOnlyProperty);
+            set => this.SetValue(IsReadOnlyProperty, value);
         }
 
         public Brush OutputForeground
@@ -549,6 +564,14 @@ namespace JSSoft.ModernUI.Framework.Controls
         private static object PromptPropertyCoerceValueCallback(DependencyObject d, object baseValue)
         {
             return baseValue ?? string.Empty;
+        }
+
+        private static void IsReadOnlyPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TerminalControl self && self.textBox != null)
+            {
+                self.textBox.IsReadOnly = (bool)e.NewValue;
+            }
         }
 
         private static void OutputForegroundPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
